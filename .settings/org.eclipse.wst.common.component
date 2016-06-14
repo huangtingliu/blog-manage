@@ -7,7 +7,7 @@
         <dependent-module archiveName="framework-0.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/framework/framework">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <property name="context-root" value="blog-core"/>
         <property name="java-output-path" value="/blog-core/WebRoot/WEB-INF/classes"/>
+        <property name="context-root" value="blog-manage"/>
     </wb-module>
 </project-modules>
