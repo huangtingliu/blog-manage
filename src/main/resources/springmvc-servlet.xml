@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-4.3.xsd
+	http://www.springframework.org/schema/mvc
+	http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+	">
+	<!-- 导入文件 -->
+	<import resource="classpath*:/datasource.xml" />
+	<import resource="classpath*:/interceptor.xml" />
+
+	<!-- 自动扫描注解 -->
+	<context:component-scan base-package="com.huangtl.*.service"></context:component-scan>
+	<context:component-scan base-package="com.huangtl.*.controller"></context:component-scan>
+	<context:component-scan base-package="com.huangtl.*.test"></context:component-scan>
+	<!-- 注解驱动：不配置无法访问注解的配置资源，会出现404错误 -->
+	<mvc:annotation-driven />
+	<!-- 
+		<mvc:annotation-driven />会解析所有带注解的资源
+		而没有注解的会使用默认的<mvc:default-servlet-handler/>解析 
+	-->
+	<!-- <mvc:default-servlet-handler/>  --> 
+	
+	<!-- 视图解析器 -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+		id="internalResourceViewResolver">
+		<!-- 前缀 -->
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<!-- 后缀 -->
+		<property name="suffix" value=".jsp" />
+	</bean>
+	
+	<!-- 定义初始方法 -->
+	<bean id="initial" class="com.huangtl.framework.init.Initial" init-method="init"></bean>
+	
+	<!-- 配置资源文件访问路径，访问这里的mapping就可以映射到location目录,但是会被拦截器拦截 -->
+	<mvc:resources location="/WEB-INF/res/" mapping="#{initial.resRoot}/**"></mvc:resources>
+	
+	<!-- bean -->
+	<bean class="com.huangtl.framework.utils.SpringContextUtil"></bean>
+</beans>

@@ -1,0 +1,15 @@
+一、请求规范，统一入口BaseController类控制
+1.前台拥有跳转页面的请求对应service及方法命名规范，
+	前台请求路径：${ctxPath}/base/x1/x2，这里的x1,x2首字母必须小写
+	对应service类名为x1Service,对应方法名为x2
+	类名首字母大写,即将x1的首字母改为大写
+	例：若x1是"user",x2是"login",则类名为UserService,方法命名login
+2.ajax请求规范
+	前台请求路径：${ctxPath}/base/ajax/x1/x2，这里的x1,x2首字母必须小写
+	其他同上
+3.页面跳转
+	前台请求路径：${ctxPath}/base/page/x,这里的x就是页面路径
+	如：目录是jsp/login.jsp,则x为login  
+二、service代码规范
+	统一返回自定义封装类RequestDataBean，其中包括resultData返回值、page返回页、request、response等
+	统一参数RequestDataBean
