@@ -1,8 +1,0 @@
-一、junit-springmvc-servlet.xml
-1.junit测试使用
-2.与springmvc-servlet.xml相比少了初始化方法配置，因为获取不到ServletContext导致junit报错
-	<!-- 定义初始方法 -->
-	<bean id="initial" class="com.huangtl.blog.init.Initial" init-method="init"></bean>
-	<!-- 配置资源文件访问路径，访问这里的mapping就可以映射到location目录,但是会被拦截器拦截 -->
-	<mvc:resources location="/WEB-INF/res/" mapping="#{initial.resRoot}/**"></mvc:resources>
-3.修改springmvc-servlet.xml文件时同步修改junit-springmvc-servlet.xml
