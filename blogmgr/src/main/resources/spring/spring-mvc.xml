@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+	
+	<!-- <mvc:resources location="/,classpath:/META-INF/" mapping="/framework/**" /> -->
+
+	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"></bean>
+
+	<!-- 注意：FreeMarker与SpringMVC集成时，其配置一定要放在SpringMVC的配置之前 -->
+	<!-- 否则：在访问"/getUser"时服务器就会报告[HTTP Status 404 - /WEB-INF/jsp/myfree.jsp] -->
+	<bean id="freemarkerConfig"
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+		<!-- 指定FreeMarker模板文件目录 -->
+		<property name="templateLoaderPath" value="/WEB-INF/app/" />
+		<!-- 编码设置 -->
+		<property name="freemarkerSettings">
+			<props>
+				<prop key="defaultEncoding">UTF-8</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="freeMarkerViewResolver"
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+		<property name="prefix" value="" />
+		<property name="suffix" value=".ftl" />
+		<property name="contentType" value="text/html; charset=UTF-8" />
+	</bean>
+
+	<bean
+		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"></bean>
+
+	<bean
+		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<bean
+					class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
+				<bean
+					class="org.springframework.http.converter.ByteArrayHttpMessageConverter"></bean>
+				<bean
+					class="org.springframework.http.converter.StringHttpMessageConverter">
+					<property name="writeAcceptCharset" value="false"></property>
+				</bean>
+				<bean
+					class="org.springframework.http.converter.support.AllEncompassingFormHttpMessageConverter"></bean>
+			</list>
+		</property>
+		<property name="customArgumentResolvers">
+			<list>
+				<bean
+					class="com.huangtl.blogmgr.core.extend.spring.JsonParamArgumentResolver"></bean>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 拦截器 -->
+	<!-- <mvc:interceptors> -->
+	<!-- 多数据源切换拦截器 -->
+	<!-- <bean class="org.pld.core.interceptor.DataSourceDispatchInteceptor"> 
+		<property name="rule"> <map> <entry key="/pld/blog/*" value="blogDataSource"></entry> 
+		</map> </property> </bean> </mvc:interceptors> -->
+
+	<!-- 导入模块控制器 -->
+	<context:component-scan base-package="com.huangtl.blogmgr.action"></context:component-scan>
+
+</beans>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
+
+	<bean id="pldProperty" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="ignoreResourceNotFound" value="true"></property>
+		<property name="fileEncoding" value="utf-8"></property>
+		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE"></property>
+		<property name="locations">
+			<list>
+				<value>jdbc.properties</value>
+				<value>system.properties</value>
+			</list>
+		</property>
+	</bean>	
+	
+	<!-- db setting
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">  
+	    <property name="dataSource" ref="multipleDataSource" />  
+	</bean> 
+	
+	<tx:advice id="commonTranscation" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="get*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="find*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="query*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="read*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="search*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="select*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="is*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="*" propagation="REQUIRED" rollback-for="Exception"/>
+		</tx:attributes>
+	</tx:advice>
+	
+	<aop:config>
+		<aop:advisor advice-ref="commonTranscation"  pointcut="execution(public * org.pld.*.service.impl..*.*(..))"/>
+		<aop:advisor advice-ref="commonTranscation" pointcut="execution(* org.snaker.engine..*.*(..))"/>
+	</aop:config>
+	
+	<bean id="myBatisSqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactory"/>
+	</bean>
+	<bean id="myBatisDao" abstract="true">
+		<property name="sqlSessionTemplate" ref="myBatisSqlSessionTemplate"></property>
+	</bean> -->
+	
+	<!-- 多数据源支持
+	<bean id="multipleDataSource" class="org.pld.core.support.MultipleDataSource">
+		<property name="defaultTargetDataSource" ref="blogDataSource"></property>
+		<property name="targetDataSources">
+			<map>
+				 <entry key="wxDataSource" value-ref="wxDataSource"></entry> 
+				<entry key="blogDataSource" value-ref="blogDataSource"></entry>
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="multipleDataSource"></property>
+		<property name="configLocation" value="/WEB-INF/mybatis.xml"></property>
+		<property name="mapperLocations">
+			<list>
+				<value>classpath:org/pld/wx/model/mapper/*.xml</value>
+				<value>classpath:org/pld/blog/domain/mapper/*.xml</value>
+			</list>
+		</property>
+	</bean>-->
+	
+	<!-- redis 
+	<bean id="redisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">  
+        <property name="maxIdle" value="${redis.maxIdle}" />  
+        <property name="maxWaitMillis" value="${redis.maxWait}"></property>
+        <property name="testOnBorrow" value="${redis.testOnBorrow}" />  
+    </bean>  
+    
+     <bean id="redisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+     	<property name="hostName" value="${redis.host}"></property>
+     	<property name="port" value="${redis.port}"></property>
+     	<property name="poolConfig" ref="redisPoolConfig"></property>
+     </bean>
+      
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">  
+        <property name="connectionFactory"   ref="redisConnectionFactory" />  
+    </bean>
+    
+    <bean id="redisDao" abstract="true">
+		<property name="redisTemplate" ref="redisTemplate"></property>
+	</bean>--><!-- /redis -->
+    
+	<!-- 导入模块bean -->
+	
+</beans>

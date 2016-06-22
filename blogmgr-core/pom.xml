@@ -10,7 +10,6 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<velocity.version>1.7</velocity.version>
 	</properties>
 
 	<dependencies>
@@ -95,15 +94,11 @@
 		</dependency>
 		<!-- 模板引擎 -->
 		<dependency>
-			<groupId>org.apache.velocity</groupId>
-			<artifactId>velocity</artifactId>
-			<version>${velocity.version}</version>
+		    <groupId>org.freemarker</groupId>
+		    <artifactId>freemarker</artifactId>
+		    <version>2.3.23</version>
 		</dependency>
-		<dependency>
-			<groupId>org.apache.velocity</groupId>
-			<artifactId>velocity-tools</artifactId>
-			<version>2.0</version>
-		</dependency>
+
 		<dependency>	<!-- jquery4j -->
 			<groupId>org.jsoup</groupId>
 			<artifactId>jsoup</artifactId>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	
+<!-- 类型别名是为 Java 类型命名的一个短的名字。它只和 XML 配置有关，存在的意义仅在于用来减少类完全限定名的冗余
+	<typeAliases>
+	  <package name="vsm_demo.model"/>
+	</typeAliases>
+ -->
+ 
+<!-- 在此定义不能完成声明
+	<typeHandlers>
+		<typeHandler jdbcType="VARCHAR" javaType="java.util.List" handler="vsm_demo.type.mybatis.typehandler.ListTypeHandler"/>
+		<typeHandler jdbcType="VARCHAR" javaType="vsm_demo.model.PhoneNumber" handler="vsm_demo.type.mybatis.typehandler.PhoneNumberTypeHandler"/>
+	</typeHandlers> 
+ -->
+ 	
+	<!-- 映射文件 
+	<mappers>
+	   <mapper resource="org/pld/wx/model/mapper/wxUser.xml"/> 只能加载单个文件
+	</mappers> 
+	-->
+
+</configuration>
