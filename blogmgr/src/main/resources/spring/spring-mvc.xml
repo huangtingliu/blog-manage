@@ -15,7 +15,7 @@
 	<bean id="freemarkerConfig"
 		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
 		<!-- 指定FreeMarker模板文件目录 -->
-		<property name="templateLoaderPath" value="/WEB-INF/app/" />
+		<property name="templateLoaderPath" value="/WEB-INF/ftl/" />
 		<!-- 编码设置 -->
 		<property name="freemarkerSettings">
 			<props>
