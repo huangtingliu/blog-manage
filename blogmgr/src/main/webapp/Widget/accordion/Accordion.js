@@ -1,7 +1,7 @@
-Ext.define('Extend.accordion.Accordion', {
+Ext.define('Widget.accordion.Accordion', {
     extend: 'Ext.panel.Panel',
     requires: [
-        'Ext.layout.container.Accordion'
+        'Accordion'
     ],
     xtype: 'layout-accordion',
     layout: 'accordion',
@@ -9,7 +9,7 @@ Ext.define('Extend.accordion.Accordion', {
         bodyPadding: 10
     },
     
-    changeRenderer: function(val) {
+   changeRenderer: function(val) {
         if (val > 0) {
             return '<span style="color:green;">' + val + '</span>';
         } else if(val < 0) {

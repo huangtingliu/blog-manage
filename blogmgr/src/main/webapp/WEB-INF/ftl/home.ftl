@@ -9,9 +9,9 @@
 	<script type="text/javascript" src="framework/Ext/bootstrap.js"></script>
 	<script type="text/javascript" src="framework/Ext/ext-theme-neptune/ext-theme-neptune.js"></script>
 	<script type="text/javascript" src="framework/Ext/ext-locale-zh_CN.js"></script> 
-	<script type="text/javascript" src="BlogMgr/view/login/Login.js?a=1"></script> 
+	<!--awesome fonts-->
+	<link rel="stylesheet" type="text/css" href="plugin/awesome/css/font-awesome.min.css">
+	<script type="text/javascript" src="app/Application.js?a=1"></script>  
 </head>
-<body>
-	login
-</body>
+<body></body>
 </html>

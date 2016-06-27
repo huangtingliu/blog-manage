@@ -1,4 +1,4 @@
-Ext.define('Extend.layout.DefaultLayout',{
+Ext.define('Widget.layout.DefaultLayout',{
  	layout: 'border',  
     defaults: { // defaults are applied to items, not the container
 	    split: false,

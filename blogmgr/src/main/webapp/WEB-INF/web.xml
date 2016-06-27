@@ -62,7 +62,7 @@
   </session-config>
 
   <welcome-file-list>
-    <welcome-file>home.html</welcome-file>
+    <welcome-file>welcom.html</welcome-file>
   </welcome-file-list> 
 
    <error-page>

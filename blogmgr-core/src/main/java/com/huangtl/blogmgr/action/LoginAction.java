@@ -6,7 +6,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/")
-public class LoginController {
+public class LoginAction {
 	
 	@RequestMapping("login.htm")
 	private ModelAndView taskListPage() {
