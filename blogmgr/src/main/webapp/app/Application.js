@@ -1,11 +1,14 @@
+Ext.Loader.setPath('BlogMgr', 'app');
+
 Ext.require(['Widget.tabs.ReorderableTabs',
-		     'Widget.grids.MenuGrid']);
+		     'Widget.grids.MenuGrid','BlogMgr.view.index.Index']);
 
 Ext.application({
 			name : 'BlogMgr',
 			appFolder : 'app',
 			paths : {
 				'Ext' : 'framework/Ext'
+				
 			},
 			stores:[
 				'BlogMgr.store.home.MenuStore'
@@ -14,6 +17,7 @@ Ext.application({
 				Ext.setGlyphFontFamily('FontAwesome');
 			},
 			launch : function(profile) {
+			
 				// 附加额外的属性
 				Ext.applyIf(BlogMgr, {
 					url : function(url, param) {
@@ -25,7 +29,7 @@ Ext.application({
 						return result;
 					}
 				});
-
+				
 				Ext.create('Ext.container.Viewport', {
 							layout : 'border',
 							items : [{
@@ -44,11 +48,7 @@ Ext.application({
 									        title: '首页',
 									        closable:false,
 									        glyph: 0xf299,
-									        loader:{
-									        	url:'home/index.htm',
-									        	renderer: 'html',
-									        	autoLoad:true
-									        }
+									        xtype:'tabindex'
 									    }]
 									}, {
 										id : 'home-navigation',
