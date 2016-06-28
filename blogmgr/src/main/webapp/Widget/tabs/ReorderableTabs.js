@@ -1,12 +1,13 @@
 Ext.define('Widget.tabs.ReorderableTabs', {
     extend: 'Ext.tab.Panel',
-    requires: [
+    uses: [
         'Ext.ux.TabReorderer',
-        'Widget.tabs.controller.ReorderableTabsCtrl'
+        'Widget.tabs.controller.ReorderableTabsCtrl',
+        'Ext.ux.TabCloseMenu'
     ],
     alias: ['widget.reorderable-tabs'],
     controller: 'reorderable-tabs',
-    plugins: 'tabreorderer',
+    plugins: ['tabreorderer','tabclosemenu'],
     defaults: {
         bodyPadding: 10,
         scrollable: true,

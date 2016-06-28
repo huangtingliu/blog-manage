@@ -4,6 +4,7 @@ Ext.define('Widget.grids.controller.MenuGridCtrl',{
     init: function() {},
     onClickRow: function(row,record,tr,rowIndex,e) {
         this.onLink({
+        	code:record.get('code'),
         	icon:record.get('icon'),
         	title:record.get('name'),
         	url:record.get('url')
@@ -12,7 +13,7 @@ Ext.define('Widget.grids.controller.MenuGridCtrl',{
     onLink:function(menu){
     	var tabPanel = Ext.getCmp('home-center');
     	if(Ext.isObject(tabPanel)){
-	    	tabPanel.controller.onAddTab('1',menu.title,menu.url);
+	    	tabPanel.controller.onAddTab(menu.code,menu.title,menu.url);
     	}
     }
     

@@ -35,7 +35,6 @@ Ext.application({
 									}, {
 										id : 'home-center',
 										region : 'center',
-										frame : false,
 										xtype : 'reorderable-tabs'
 									}, {
 										id : 'home-navigation',
