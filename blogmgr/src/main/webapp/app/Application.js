@@ -10,6 +10,9 @@ Ext.application({
 			stores:[
 				'BlogMgr.store.home.MenuStore'
 			],
+			init:function(){
+				Ext.setGlyphFontFamily('FontAwesome');
+			},
 			launch : function(profile) {
 				// 附加额外的属性
 				Ext.applyIf(BlogMgr, {
@@ -35,7 +38,17 @@ Ext.application({
 									}, {
 										id : 'home-center',
 										region : 'center',
-										xtype : 'reorderable-tabs'
+										xtype : 'reorderable-tabs',
+										items: [{
+									    	id:'tab-index',
+									        title: '首页',
+									        closable:false,
+									        glyph: 0xf299,
+									        loader:{
+									        	url:'home/index.htm',
+									        	autoLoad:true
+									        }
+									    }]
 									}, {
 										id : 'home-navigation',
 										region : 'west',

@@ -12,7 +12,7 @@ Ext.define('Widget.grids.MenuGrid', {
 				hideable : false,
 				width : '90%',
 				renderer:function(val,cell,model){
-					return '<a class="fa '+model.get('icon')+'">&nbsp;'+val+'</a>';
+					return '<a><i class="fa '+model.get('icon')+'"></i>&nbsp;'+val+'</a>';
 				}
 	}],
 	listeners:{
