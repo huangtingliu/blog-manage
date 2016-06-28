@@ -46,6 +46,7 @@ Ext.application({
 									        glyph: 0xf299,
 									        loader:{
 									        	url:'home/index.htm',
+									        	renderer: 'html',
 									        	autoLoad:true
 									        }
 									    }]
