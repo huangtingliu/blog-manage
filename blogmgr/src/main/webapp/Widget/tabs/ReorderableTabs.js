@@ -16,6 +16,7 @@ Ext.define('Widget.tabs.ReorderableTabs', {
     items: [{
     	id:'tab-index',
         title: '首页',
-        closable:false
+        closable:false,
+        glyph: 'xf299@FontAwesome'
     }]
 });  

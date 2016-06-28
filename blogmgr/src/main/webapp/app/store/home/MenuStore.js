@@ -7,22 +7,22 @@ Ext.define('BlogMgr.store.home.MenuStore',{
 	data : [{
 						code:'A001',
 						name : '用户管理',
-						icon : 'icon-user',
+						icon : 'fa-user',
 						url : 'userMgrIndex'
 					}, {
 						code:'A002',
 						name : '配置',
-						icon : 'icon-cog',
+						icon : 'fa-cog',
 						url : 'configIndex'
 					}, {
 						code:'A003',
 						name : 'Homer',
-						icon : 'icon-home',
+						icon : 'fa-home',
 						url : 'userMgrIndex'
 					}, {
 						code:'A004',
 						name : 'Marge',
-						icon : 'icon-road',
+						icon : 'fa-road',
 						url : 'mgrIndex'
 					}]
 });
