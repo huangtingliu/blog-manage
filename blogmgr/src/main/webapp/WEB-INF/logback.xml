@@ -43,9 +43,13 @@
 	</appender> 
 	<!-- %n%-4r [%d{yyyy-MM-dd HH:mm:ss} %X{productionMode}] - %X{method} %X{requestURIWithQueryString} [ip=%X{remoteAddr}, ref=%X{referrer}, ua=%X{userAgent}, sid=%X{cookie.JSESSIONID}]%n  %-5level %logger{35} - %m%n -->
 <!-- level: trace,debug,info,warn,error -->
-	<logger name="com.huangtl.blogmgr" level="debug"></logger>
+	<logger name="com.huangtl.blogmgr.service" level="debug"></logger>
+	<logger name="com.huangtl.blogmgr.action" level="debug"></logger>
+	<logger name="com.huangtl.blogmgr.dao" level="debug"></logger>
+	<logger name="com.huangtl.blogmgr.model" level="debug"></logger>
+	
 	<root>
-		<level value="warn" />
+		<level value="error" />
 		<appender-ref ref="STDERR" />
 		<appender-ref ref="STDOUT" />
 	</root>

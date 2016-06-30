@@ -4,8 +4,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
 
-import com.alibaba.fastjson.JSON;
-
 
 /**
  * 分页对象<p>
@@ -176,17 +174,13 @@ public class Page<T> {
 		}
 	}
 	
-	public String toJson(){
-		return JSON.toJSONString(this);
+	public Map<String, String> getSorts() {
+		return sorts;
 	}
 	
-	/**
-	 * 转DataTablePage
-	 * @return
-	 */
-	public DataTablePage<T> toDataTablePage(Integer draw){
-		draw = draw==null?0:draw;
-		DataTablePage<T> p = new DataTablePage<T>(draw, this.getTotalRecNum(),this.getTotalRecNum() , this.getPageContent());
-		return p;
+	
+	public static void main(String[] args) {
+		System.out.println(0xf299);
 	}
+	
 }

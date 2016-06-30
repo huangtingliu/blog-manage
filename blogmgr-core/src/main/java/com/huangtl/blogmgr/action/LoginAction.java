@@ -6,7 +6,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/")
-public class LoginAction {
+public class LoginAction extends BlogMgrAction {
 	
 	@RequestMapping("login.htm")
 	private ModelAndView taskListPage() {

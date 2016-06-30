@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huangtl.blogmgr.model.blog.Menu">
+
+	<resultMap id="map" type="com.huangtl.blogmgr.model.blog.Menu" >
+		<id property="fId" column="mu_Id"/>
+		<result property="fName" column="mu_Name"/>
+		<result property="fParentId" column="mu_ParentId" javaType="String" jdbcType="VARCHAR"/>
+		<result property="fIcon" column="mu_Icon"/>
+		<result property="fLink" column="mu_Link"/>
+		<result property="fOrder" column="mu_Order"/>
+		<result property="fDescr" column="mu_Descr"/>
+		<result property="fGlyph" column="mu_Glyph"/>
+		<result property="fExpand" column="mu_Expand"/>
+	</resultMap>
+	
+	<sql id="where">
+		 <where>
+		 		1=1
+			<if test="menuId !=null ">
+				and mu_Id = #{menuId}
+			</if>
+			<if test="parentId != null">
+				and mu_ParentId = #{parentId}
+			</if>
+		</where>
+	</sql>
+	
+	<sql id="order">
+		<if test="sorts != null and sorts.size() != 0">
+			order by 
+			<foreach collection="sorts" separator="," index="key" item="val">
+				${key} ${val}
+			</foreach>
+		</if>
+	</sql>
+	
+	<insert id="insert" parameterType="com.huangtl.blogmgr.model.blog.Menu">
+		insert into mgr_menu(
+			mu_Id,mu_Name,mu_ParentId,mu_Icon,mu_Link,mu_Order,mu_Descr,mu_Glyph,mu_Expand
+		) values(
+			#{fId},#{fName},#{fParentId},#{fIcon},#{fLink},#{fOrder},#{fDescr},#{fGlyph},#{fExpand}
+		);
+	</insert>
+	
+
+	<select id="selectList" resultMap="map" parameterType="map">
+		select mu_Id,mu_Name,mu_ParentId,mu_Icon,mu_Link,mu_Glyph,mu_Expand
+		from mgr_menu
+		<include refid="where"/>
+		order by mu_Order
+	</select>
+	
+	<select id="selectCount"  resultType="long" parameterType="map">
+	  select count(mu_Id) from mgr_menu
+		<include refid="where"/>
+	</select>
+	
+	<select id="selectPaging" resultMap="map" parameterType="map">
+		select id,name,superiorUnit,type,url,icon,code,sort,usability,visibility
+		from mgr_menu
+		<include refid="where"/>
+		<include refid="order"/>
+		limit #{startIndex},#{pageSize}
+	</select>
+	
+	
+	<delete id="delete" parameterType="map">
+		delete from mgr_menu
+		<include refid="where"/>
+	</delete>
+	
+	
+	<delete id="deleteBatch" parameterType="list">
+		delete from mgr_menu where mu_Id in 
+		<foreach collection="list" open="(" item="id" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+	
+	<update id="update">
+		
+	</update>
+	
+	
+</mapper>

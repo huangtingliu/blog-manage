@@ -1,14 +1,15 @@
 Ext.Loader.setPath('BlogMgr', 'app');
 
 Ext.require(['Widget.tabs.ReorderableTabs',
-		     'Widget.grids.MenuGrid','BlogMgr.view.index.Index']);
+		     'Widget.grids.MenuGrid',
+		     'BlogMgr.view.index.Index'
+		     ]);
 
 Ext.application({
 			name : 'BlogMgr',
 			appFolder : 'app',
 			paths : {
 				'Ext' : 'framework/Ext'
-				
 			},
 			stores:[
 				'BlogMgr.store.home.MenuStore'
@@ -47,8 +48,17 @@ Ext.application({
 									    	id:'tab-index',
 									        title: '首页',
 									        closable:false,
-									        glyph: 0xf299,
-									        xtype:'tabindex'
+									        glyph: 62105,
+									        loader:{
+									        	url:'home/index.htm',
+									        	autoLoad:true,
+									        	scripts:true,
+									        	renderer : function(loader, response, active) {
+													loader.getTarget().update(response.responseText, true);
+													return true;
+												}
+									        }
+									        //xtype:'tabindex'
 									    }]
 									}, {
 										id : 'home-navigation',

@@ -13,13 +13,13 @@
 		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE"></property>
 		<property name="locations">
 			<list>
-				<value>jdbc.properties</value>
-				<value>system.properties</value>
+				<value>/WEB-INF/jdbc.properties</value>
+				<value>/WEB-INF/system.properties</value>
 			</list>
 		</property>
 	</bean>	
 	
-	<!-- db setting
+	
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">  
 	    <property name="dataSource" ref="multipleDataSource" />  
 	</bean> 
@@ -38,8 +38,8 @@
 	</tx:advice>
 	
 	<aop:config>
-		<aop:advisor advice-ref="commonTranscation"  pointcut="execution(public * org.pld.*.service.impl..*.*(..))"/>
-		<aop:advisor advice-ref="commonTranscation" pointcut="execution(* org.snaker.engine..*.*(..))"/>
+		<aop:advisor advice-ref="commonTranscation"  pointcut="execution(* com.huangtl.blogmgr.service.impl..*.*(..))"/>
+		<!-- <aop:advisor advice-ref="commonTranscation" pointcut="execution(* org.snaker.engine..*.*(..))"/> -->
 	</aop:config>
 	
 	<bean id="myBatisSqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
@@ -47,17 +47,28 @@
 	</bean>
 	<bean id="myBatisDao" abstract="true">
 		<property name="sqlSessionTemplate" ref="myBatisSqlSessionTemplate"></property>
-	</bean> -->
+	</bean> 
 	
-	<!-- 多数据源支持
-	<bean id="multipleDataSource" class="org.pld.core.support.MultipleDataSource">
+	<!-- 多库数据源 -->
+	<bean id="multipleDataSource" class="com.huangtl.blogmgr.core.extend.spring.MultipleDataSource">
 		<property name="defaultTargetDataSource" ref="blogDataSource"></property>
 		<property name="targetDataSources">
 			<map>
-				 <entry key="wxDataSource" value-ref="wxDataSource"></entry> 
 				<entry key="blogDataSource" value-ref="blogDataSource"></entry>
 			</map>
 		</property>
+	</bean>
+	
+	<!-- 博客数据源 -->
+	<bean id="blogDataSource"  class="org.logicalcobwebs.proxool.ProxoolDataSource">
+		<property name="driver" value="${blog.mysql.driver}"></property>
+		<property name="alias" value="pld-blog"></property>
+		<property name="driverUrl" value="${blog.mysql.url}"></property>
+		<property name="password" value="${blog.mysql.password}"></property>
+		<property name="user" value="${blog.mysql.username}"></property>
+		<property name="minimumConnectionCount" value="${jdbc.minConnectionCount}"></property>
+		<property name="maximumConnectionCount" value="${jdbc.maxConnectionCount}"></property>
+		<property name="maximumActiveTime" value="${jdbc.maxActiveTime}"></property>		
 	</bean>
 	
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -65,11 +76,11 @@
 		<property name="configLocation" value="/WEB-INF/mybatis.xml"></property>
 		<property name="mapperLocations">
 			<list>
-				<value>classpath:org/pld/wx/model/mapper/*.xml</value>
-				<value>classpath:org/pld/blog/domain/mapper/*.xml</value>
+				<!-- <value>classpath:org/pld/wx/model/mapper/*.xml</value> -->
+				<value>classpath:com/huangtl/blogmgr/dao/mapper/*.xml</value>
 			</list>
 		</property>
-	</bean>-->
+	</bean>
 	
 	<!-- redis 
 	<bean id="redisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">  
@@ -79,7 +90,7 @@
     </bean>  
     
      <bean id="redisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
-     	<property name="hostName" value="${redis.host}"></property>
+     	<prop2erty name="hostName" value="${redis.host}"></property>
      	<property name="port" value="${redis.port}"></property>
      	<property name="poolConfig" ref="redisPoolConfig"></property>
      </bean>
@@ -93,5 +104,5 @@
 	</bean>--><!-- /redis -->
     
 	<!-- 导入模块bean -->
-	
+	<import resource="./blgmgr.xml"/>
 </beans>

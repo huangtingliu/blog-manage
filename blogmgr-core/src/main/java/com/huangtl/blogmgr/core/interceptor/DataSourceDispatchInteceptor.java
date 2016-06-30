@@ -16,7 +16,7 @@ import com.huangtl.blogmgr.core.extend.spring.MultipleDataSource;
 
 
 /**
- * 多数据源切换拦截器
+ * 多数据源切换拦截器,根据url路径来切换不同的数据源
  * @author PraiseLord
  * @date 2016年3月15日
  */

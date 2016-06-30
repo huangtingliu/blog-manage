@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	
+	<!-- 菜单管理 -->
+	<bean id="menuService" class="com.huangtl.blogmgr.service.impl.MenuServiceImpl">
+		<property name="menuDao" ref="menuDao"></property>
+	</bean>
+	<bean id="menuDao" class="com.huangtl.blogmgr.dao.impl.MenuDaoImpl" parent="myBatisDao"></bean>
+
+</beans>

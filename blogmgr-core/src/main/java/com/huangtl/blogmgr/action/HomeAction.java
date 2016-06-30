@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 @RequestMapping("/")
-public class HomeAction {
+public class HomeAction extends BlogMgrAction {
 	
 	/**
 	 * 主页面
