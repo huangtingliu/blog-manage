@@ -5,24 +5,24 @@ Ext.define('BlogMgr.store.home.MenuStore',{
 	extend:'Ext.data.Store',
 	model:'BlogMgr.model.home.Menu',
 	data : [{
-						code:'A001',
-						name : '用户管理',
-						icon : 'fa-user',
-						url : 'userMgrIndex'
+						fId:'A001',
+						fName : '用户管理',
+						fIcon : 'fa-user',
+						fLink : 'userMgrIndex'
 					}, {
-						code:'A002',
-						name : '配置',
-						icon : 'fa-cog',
-						url : 'configIndex'
+						fId:'A002',
+						fName : '配置',
+						fIcon : 'fa-cog',
+						fLink : 'configIndex'
 					}, {
-						code:'A003',
-						name : 'Homer',
-						icon : 'fa-home',
-						url : 'userMgrIndex'
+						fId:'A003',
+						fName : 'Homer',
+						fIcon : 'fa-home',
+						fLink : 'userMgrIndex'
 					}, {
-						code:'A004',
-						name : 'Marge',
-						icon : 'fa-road',
-						url : 'mgrIndex'
+						fId:'A004',
+						fName : 'Marge',
+						fIcon : 'fa-road',
+						fLink : 'mgrIndex'
 					}]
 });

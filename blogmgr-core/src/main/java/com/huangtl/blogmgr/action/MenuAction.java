@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.huangtl.blogmgr.dao.param.MenuParam;
 import com.huangtl.blogmgr.dao.param.WhereParam;
 import com.huangtl.blogmgr.model.blog.Menu;
+import com.huangtl.blogmgr.model.common.Message;
 import com.huangtl.blogmgr.service.MenuService;
 
 /**
@@ -33,8 +34,10 @@ public class MenuAction extends BlogMgrAction {
 	private Object menuSearch(String menuId,String parentId) {
 		WhereParam param = new MenuParam()
 						  .idEqual(menuId)
-						  .parentIdEqual("");
+						  .parentIdEqual(parentId);
 		List<Menu> menus = this.menuService.getDao().selectList(param);
-		return menus;
+		Message msg = Message.success("success");
+		msg.setData(menus);
+		return msg;
 	}
 }

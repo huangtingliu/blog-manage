@@ -1,13 +1,15 @@
 Ext.define('BlogMgr.model.home.Menu',{
 	extend:'Ext.data.Model',
 	 fields: [
-	    {name: 'code', type: 'string'},
-        {name: 'name',  type: 'string'},
-        {name: 'icon',   type: 'string'},
-        {name: 'url', type: 'string'}
+	    {name: 'fId', type: 'string'},
+        {name: 'fName',  type: 'string'},
+        {name: 'fIcon',   type: 'string'},
+        {name: 'fLink', type: 'string'},
+        {name: 'fGlyph', type: 'int'},
+         {name: 'fExpand', type: 'int'}
     ],
     validators: {
-        name: 'presence',
-        code: 'presence'
+        fId: 'presence',
+        fName: 'presence'
     }
 });

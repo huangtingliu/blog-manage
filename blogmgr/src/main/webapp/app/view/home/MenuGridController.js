@@ -1,13 +1,13 @@
-Ext.define('Widget.grids.controller.MenuGridCtrl',{
+Ext.define('BlogMgr.view.home.MenuGridController',{
 	extend: 'Ext.app.ViewController',
     alias: 'controller.menugrid',
     init: function() {},
     onClickRow: function(row,record,tr,rowIndex,e) {
         this.onLink({
-        	code:record.get('code'),
-        	icon:record.get('icon'),
-        	title:record.get('name'),
-        	url:record.get('url')
+        	code:record.get('fId'),
+        	icon:record.get('fIcon'),
+        	title:record.get('fName'),
+        	url:record.get('fLink')
         });
     },
     onLink:function(menu){

@@ -1,10 +1,6 @@
 Ext.Loader.setPath('BlogMgr', 'app');
-
 Ext.require(['Widget.tabs.ReorderableTabs',
-		     'Widget.grids.MenuGrid',
-		     'BlogMgr.view.index.Index'
-		     ]);
-
+		     'BlogMgr.view.home.Navigator']);
 Ext.application({
 			name : 'BlogMgr',
 			appFolder : 'app',
@@ -34,6 +30,7 @@ Ext.application({
 				Ext.create('Ext.container.Viewport', {
 							layout : 'border',
 							items : [{
+									   id : 'home-header',
 										region: 'north',
 									    xtype: 'component',
 									    cls: 'appBanner',
@@ -48,40 +45,16 @@ Ext.application({
 									    	id:'tab-index',
 									        title: '首页',
 									        closable:false,
-									        glyph: 62105,
-									        loader:{
-									        	url:'home/index.htm',
-									        	autoLoad:true,
-									        	scripts:true,
-									        	renderer : function(loader, response, active) {
-													loader.getTarget().update(response.responseText, true);
-													return true;
-												}
-									        }
-									        //xtype:'tabindex'
+									        glyph: 62105
 									    }]
 									}, {
-										id : 'home-navigation',
 										region : 'west',
-										title : '导航',
 										width : 250,
 										split : true,
 										collapsible : true,
 										scrollable : true,
 										frame : true,
-										layout : 'accordion',
-										defaults: {
-									        bodyPadding: 10
-									    },
-										items : [{
-											title : '博客管理',
-											xtype : 'menugrid',
-											store : 'BlogMgr.store.home.MenuStore'
-										}, {
-											title : '系统管理'
-										}, {
-											title : '其他管理'
-										}]
+										xtype:'navigator'
 									}]
 						});
 

@@ -1,4 +1,4 @@
-Ext.define('Widget.tabs.controller.ReorderableTabsCtrl', {
+Ext.define('Widget.tabs.controller.ReorderableTabsController', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.reorderable-tabs',
     onAddTab: function(id,title,url) {	//附加一个tab

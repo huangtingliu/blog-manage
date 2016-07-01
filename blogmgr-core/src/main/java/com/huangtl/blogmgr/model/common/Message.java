@@ -1,8 +1,6 @@
 package com.huangtl.blogmgr.model.common;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.naming.OperationNotSupportedException;
 import com.alibaba.fastjson.JSON;
@@ -22,7 +20,7 @@ public class Message implements Serializable {
 	private  String title;				//消息标题
 	private final MessageType type;		//消息类型
 	private String content;				//消息内容
-	private Map<String, Object> data;	//返回结果
+	private Object data;	//返回结果
 	
 	private static final String title_msg = "操作提示";
 	private static final String info_msg = "";
@@ -55,14 +53,6 @@ public class Message implements Serializable {
 			public void setContent(String content) throws OperationNotSupportedException {
 				throw new OperationNotSupportedException(modify_reject_msg);
 			}
-			@Override
-			public void setData(Map<String, Object> data) throws OperationNotSupportedException {
-				throw new OperationNotSupportedException(modify_reject_msg);
-			}
-			@Override
-			public Message pushData(String key, Object value) throws OperationNotSupportedException {
-				throw new OperationNotSupportedException(modify_reject_msg);
-			}
 		};
 		SUCCESS = new Message(title_msg, MessageType.success, success_msg){
 			private static final long serialVersionUID = 4235292389960576772L;
@@ -72,14 +62,6 @@ public class Message implements Serializable {
 			}
 			@Override
 			public void setContent(String content) throws OperationNotSupportedException {
-				throw new OperationNotSupportedException(modify_reject_msg);
-			}
-			@Override
-			public void setData(Map<String, Object> data) throws OperationNotSupportedException {
-				throw new OperationNotSupportedException(modify_reject_msg);
-			}
-			@Override
-			public Message pushData(String key, Object value) throws OperationNotSupportedException {
 				throw new OperationNotSupportedException(modify_reject_msg);
 			}
 		};
@@ -93,14 +75,7 @@ public class Message implements Serializable {
 			public void setContent(String content) throws OperationNotSupportedException {
 				throw new OperationNotSupportedException(modify_reject_msg);
 			}
-			@Override
-			public void setData(Map<String, Object> data) throws OperationNotSupportedException {
-				throw new OperationNotSupportedException(modify_reject_msg);
-			}
-			@Override
-			public Message pushData(String key, Object value) throws OperationNotSupportedException {
-				throw new OperationNotSupportedException(modify_reject_msg);
-			}
+			
 		};
 		WARN = new Message(title_msg, MessageType.warn, warn_msg){
 			private static final long serialVersionUID = 6091253788900790488L;
@@ -110,14 +85,6 @@ public class Message implements Serializable {
 			}
 			@Override
 			public void setContent(String content) throws OperationNotSupportedException {
-				throw new OperationNotSupportedException(modify_reject_msg);
-			}
-			@Override
-			public void setData(Map<String, Object> data) throws OperationNotSupportedException {
-				throw new OperationNotSupportedException(modify_reject_msg);
-			}
-			@Override
-			public Message pushData(String key, Object value) throws OperationNotSupportedException {
 				throw new OperationNotSupportedException(modify_reject_msg);
 			}
 		};
@@ -130,14 +97,6 @@ public class Message implements Serializable {
 			}
 			@Override
 			public void setContent(String content) throws OperationNotSupportedException {
-				throw new OperationNotSupportedException(modify_reject_msg);
-			}
-			@Override
-			public void setData(Map<String, Object> data) throws OperationNotSupportedException {
-				throw new OperationNotSupportedException(modify_reject_msg);
-			}
-			@Override
-			public Message pushData(String key, Object value) throws OperationNotSupportedException {
 				throw new OperationNotSupportedException(modify_reject_msg);
 			}
 		};
@@ -257,17 +216,7 @@ public class Message implements Serializable {
 		if(isError()){throw new ServiceOperateFailException(this);}
 	}
 	
-	/**
-	 * 注入返回结果值
-	 * @param key
-	 * @param value
-	 * @return
-	 */
-	public Message pushData(String key,Object value) throws OperationNotSupportedException{
-		if(data==null){data = new HashMap<String, Object>();}
-		data.put(key, value);
-		return this;
-	}
+	
 	
 	/**
 	 * 转成json字符
@@ -286,7 +235,7 @@ public class Message implements Serializable {
 	public String getContent() {
 		return content;
 	}
-	public Map<String, Object> getData() {
+	public Object getData() {
 		return data;
 	}
 	/**
@@ -294,7 +243,7 @@ public class Message implements Serializable {
 	 * @param data
 	 * @throws OperationNotSupportedException 如果对象为ERROR/INFO/SUCCESS..修改对象时将抛出
 	 */
-	public void setData(Map<String, Object> data)throws OperationNotSupportedException {
+	public void setData(Object data) {
 		this.data = data;
 	}
 	/**
