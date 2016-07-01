@@ -1,22 +1,21 @@
 Ext.define('Widget.tabs.controller.ReorderableTabsController', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.reorderable-tabs',
-    onAddTab: function(id,title,url) {	//附加一个tab
+    onAddTab: function(config) {	//附加一个tab
         var tabPanel = this.getView();
-        var tab = tabPanel.child("#"+id);
-        
+        var tab = tabPanel.child("#"+config.id);
+       
         if(!Ext.isEmpty(tab)){	//该tab已经存在了
         }else{	//添加一个新的tab
         	tab = tabPanel.add({
-	        	title: title,
-	        	id:id,
-	            html: ''
+	        	id:config.id,
+	        	title: config.title,
+	        	glyph:config.glyph
        	    });
         }
         tabPanel.setActiveTab(tab);
     },
     onClick:function(){
-    	console.info('tab click');
     },
 	onRightClick:function(){
 		

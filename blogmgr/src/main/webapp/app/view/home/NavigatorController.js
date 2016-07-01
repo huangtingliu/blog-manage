@@ -5,17 +5,13 @@ Ext.define('BlogMgr.view.home.NavigatorController',{
 	extend: 'Ext.app.ViewController',
     alias: 'controller.navigator',
 	refreshView:function(records){	//根据所传过来的数据重新，刷新视图
+		if(Ext.isEmpty(records)){return;}
 		var view = this.getView();
 		Ext.each(records,function(menu){
 			view.add({
-				data:{
-					fId:menu.get('fId'),
-					fName:menu.get('fName'),
-					fLink:menu.get('fLink')
-				},
+				itemId:menu.get('fId'),
 				title:menu.get('fName'),
-				xtype : 'menugrid',
-				store : 'BlogMgr.store.home.MenuStore'
+				xtype : 'menugrid'
 			});
 		});
 	}

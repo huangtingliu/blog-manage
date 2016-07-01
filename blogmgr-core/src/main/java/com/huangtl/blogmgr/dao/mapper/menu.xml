@@ -7,7 +7,7 @@
 	<resultMap id="map" type="com.huangtl.blogmgr.model.blog.Menu" >
 		<id property="fId" column="mu_Id"/>
 		<result property="fName" column="mu_Name"/>
-		<result property="fParentId" column="mu_ParentId" javaType="String" jdbcType="VARCHAR"/>
+		<result property="fParentId" column="mu_ParentId" />
 		<result property="fIcon" column="mu_Icon"/>
 		<result property="fLink" column="mu_Link"/>
 		<result property="fOrder" column="mu_Order"/>

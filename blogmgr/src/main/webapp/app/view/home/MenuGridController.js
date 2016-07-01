@@ -4,16 +4,18 @@ Ext.define('BlogMgr.view.home.MenuGridController',{
     init: function() {},
     onClickRow: function(row,record,tr,rowIndex,e) {
         this.onLink({
-        	code:record.get('fId'),
+        	id:record.get('fId'),
         	icon:record.get('fIcon'),
         	title:record.get('fName'),
-        	url:record.get('fLink')
+        	url:record.get('fLink'),
+        	glyph:record.get('fGlyph')
         });
     },
-    onLink:function(menu){
+    onLink:function(item){
     	var tabPanel = Ext.getCmp('home-center');
+    	//TODO  tabPanel可能不存在
     	if(Ext.isObject(tabPanel)){
-	    	tabPanel.controller.onAddTab(menu.code,menu.title,menu.url);
+	    	tabPanel.controller.onAddTab(item);
     	}
     }
     

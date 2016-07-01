@@ -2,22 +2,16 @@
  * 导航栏view model
  */
 Ext.define('BlogMgr.view.home.NavigatorModel', {
+		    uses:['BlogMgr.store.home.MenuDataProxy'],
 			extend : 'Ext.app.ViewModel',
 			alias : 'viewmodel.navigator',
 			stores : {
 				rootMenu:{	//顶级菜单数据
 					model : 'BlogMgr.model.home.Menu',
 					proxy : {
-						type : 'ajax',
-						url : '/blogmgr/menu/menus.data',
+						type:'menu_proxy',
 						extraParams:{
 							parentId:''
-						},
-						reader : {
-							type : 'json',
-							successProperty:'success',
-							rootProperty:'data',
-							messageProperty :'content'
 						}
 					},
 					listeners:{

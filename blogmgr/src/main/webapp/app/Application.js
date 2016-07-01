@@ -1,15 +1,13 @@
 Ext.Loader.setPath('BlogMgr', 'app');
 Ext.require(['Widget.tabs.ReorderableTabs',
 		     'BlogMgr.view.home.Navigator']);
+		     
 Ext.application({
 			name : 'BlogMgr',
 			appFolder : 'app',
 			paths : {
 				'Ext' : 'framework/Ext'
 			},
-			stores:[
-				'BlogMgr.store.home.MenuStore'
-			],
 			init:function(){
 				Ext.setGlyphFontFamily('FontAwesome');
 			},
@@ -45,7 +43,7 @@ Ext.application({
 									    	id:'tab-index',
 									        title: '首页',
 									        closable:false,
-									        glyph: 62105
+									        glyph: 0xf015
 									    }]
 									}, {
 										region : 'west',
