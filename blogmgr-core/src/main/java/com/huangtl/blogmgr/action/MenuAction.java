@@ -43,7 +43,7 @@ public class MenuAction extends BlogMgrAction {
 	
 	public static void main(String[] args) {
 		Menu menu = new Menu();
-		System.out.println(0xf013     );
+		System.out.println(0xf1fe   );
 		System.out.println(menu.newId());
 		
 	}
