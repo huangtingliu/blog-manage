@@ -14,6 +14,7 @@ Ext.application({
 			},
 			init : function() {
 				Ext.setGlyphFontFamily('FontAwesome');
+				
 			},
 			launch : function(profile) {
 				// 附加额外的属性

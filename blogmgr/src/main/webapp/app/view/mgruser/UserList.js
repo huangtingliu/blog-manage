@@ -4,22 +4,24 @@
 
 Ext.define('BlogMgr.view.mgruser.UserList', {
 			uses : ['Widget.button.TransparentButton',
+					'BlogMgr.view.mgruser.UserListModel',
 					'BlogMgr.view.mgruser.UserListController'],
 			extend : 'Ext.panel.Panel',
-			alias : ['widget.mgruser-list'],
-			height : '100%',
-			width : '100%',
+			alias : ['widget.mgruserlist'],
+			layout:'fit',
 			items : {
 				xtype : 'grid',
 				store : Ext.getStore('s_mgruserlist'),
-				controller : 'mgruser-list',
+				controller:'mgruserlist',
+				viewModel : {
+					type : 'mgruserlist'
+				},
 				columnLines : true,
 				height : '100%',
 				width : '100%',
 				selModel : {
 					mode : "SINGLE", // "SINGLE"/"SIMPLE"/"MULTI"
-					checkOnly : true
-					// 只能通过checkbox选择
+					checkOnly : true // 只能通过checkbox选择
 				},
 				viewConfig : {
 					stripeRows : true, // 奇偶行不同底色

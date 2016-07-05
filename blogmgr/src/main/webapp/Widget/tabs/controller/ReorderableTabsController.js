@@ -12,8 +12,6 @@ Ext.define('Widget.tabs.controller.ReorderableTabsController', {
 	        	title: config.title,
 	        	glyph:config.glyph,
 	        	layout:'fit',
-	        	height : '100%',
-	        	width : '100%',
 	        	items:Ext.create('BlogMgr.view.mgruser.UserList')
        	    });
         }
