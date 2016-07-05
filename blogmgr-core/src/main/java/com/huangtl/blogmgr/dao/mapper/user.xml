@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huangtl.blogmgr.model.blog.User">
+	<resultMap id="map" type="com.huangtl.blogmgr.model.blog.User" >
+		<id property="fId" column="ui_Id"/>
+		<result property="fName" column="ui_Name"/>
+		<result property="fAccount" column="ui_Account" />
+		<result property="fPassword" column="ui_Password"/>
+		<result property="fStatus" column="dic_Status"/>
+		<result property="fPinYin" column="ui_PinYin"/>
+		<result property="fDescr" column="ui_Descr"/>
+		<result property="fCreater" column="ui_Creater"/>
+		<result property="fCreateDate" column="ui_CreateDate"/>
+		<result property="fEditor" column="ui_Editor"/>
+		<result property="fEditDate" column="ui_EditDate"/>
+	</resultMap>
+	
+	<sql id="where">
+		 <where>
+		 		1=1
+			<if test="userId !=null ">
+				and ui_Id = #{userId}
+			</if>
+			<if test="userName != null">
+				and ui_PinYin = like #{userName}
+			</if>
+			<if test="status != null">
+				and dic_Status = like #{status}
+			</if>
+		</where>
+	</sql>
+	
+	<sql id="order">
+		<if test="sorts != null and sorts.size() != 0">
+			order by 
+			<foreach collection="sorts" separator="," index="key" item="val">
+				${key} ${val}
+			</foreach>
+		</if>
+	</sql>
+	
+	<insert id="insert" parameterType="com.huangtl.blogmgr.model.blog.Menu">
+		insert into mgr_userinfo(
+			ui_Id,ui_Name,ui_Account,ui_Password,dic_Status,ui_PinYin,ui_Descr,ui_Creater,ui_CreateDate,ui_Editor,ui_EditDate
+		) values(
+			#{fId},#{fName},#{fAccount},#{fPassword},#{fStatus},#{fPinYin},#{fDescr},#{fCreater},#{fCreateDate},
+			#{fEditor},#{fEditDate}
+		);
+	</insert>
+	
+	<update id="update" parameterType="map">
+		update mgr_userinfo 
+		<trim prefix="set" suffixOverrides=",">
+			<if test="fName !=null">ui_Name = #{fName},</if>
+			<if test="fPassword !=null">ui_Password = #{fPassword},</if>
+			<if test="fStatus !=null">dic_Status = #{fStatus},</if>
+			<if test="fPinYin !=null">ui_PinYin = #{fPinYin},</if>
+			<if test="fDescr !=null">ui_Descr = #{fDescr},</if>
+			<if test="fEditor !=null">ui_Editor = #{fEditor},</if>
+			<if test="fEditDate !=null">ui_EditDate = #{fEditDate},</if>
+		</trim>
+		<include refid="where"/>
+	</update>
+
+	<select id="selectList" resultMap="map" parameterType="map">
+		select 
+			ui_Id,ui_Name,ui_Account,dic_Status,ui_Creater,ui_CreateDate
+		from mgr_userinfo
+		<include refid="where"/>
+	</select>
+	
+	<select id="selectCount"  resultType="long" parameterType="map">
+	  select count(ui_Id) from mgr_userinfo
+		<include refid="where"/>
+	</select>
+	
+	<select id="selectPaging" resultMap="map" parameterType="map">
+		select ui_Id,ui_Name,ui_Account,dic_Status,ui_Creater,ui_CreateDate
+		from mgr_userinfo
+		<include refid="where"/>
+		<include refid="order"/>
+		limit #{startIndex},#{pageSize}
+	</select>
+	
+	
+	<delete id="delete" parameterType="map">
+		delete from mgr_userinfo
+		<include refid="where"/>
+	</delete>
+	
+	
+	<delete id="deleteBatch" parameterType="list">
+		delete from mgr_userinfo where ui_Id in 
+		<foreach collection="list" open="(" item="id" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+	
+</mapper>

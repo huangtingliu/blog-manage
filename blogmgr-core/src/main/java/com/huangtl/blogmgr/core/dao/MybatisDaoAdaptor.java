@@ -4,6 +4,7 @@ package com.huangtl.blogmgr.core.dao;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.commons.collections4.CollectionUtils;
@@ -104,6 +105,7 @@ public abstract class MybatisDaoAdaptor<T> implements MybatisDao<T> {
 	 */
 	@Override
 	public int selectPaging(WhereParam param, Page<T> page) {
+		if (param==null ) {param = WhereParam.instance();}
 		page.setTotalRecNum(selectCount(param));
 		param.put("startIndex", page.getStartIndex()-1);
 		param.put("endIndex", page.getEndIndex()-1);

@@ -9,7 +9,7 @@ public class User extends ObjectValue {
 	private String fId;				//
 	private String fName;			//名称
 	private String fAccount;		//登录账号
-	private String Password;		//密码
+	private String fPassword;		//密码
 	private String fStatus;			//状态
 	private String fPinYin;			//拼音
 	private String fDescr;			//备注
@@ -17,6 +17,9 @@ public class User extends ObjectValue {
 	private Date fCreateDate;		//创建日期
 	private String fEditor;			//修改人
 	private Date fEditDate;			//修改日期
+	
+	
+	
 	public String getfId() {
 		return fId;
 	}
@@ -35,17 +38,21 @@ public class User extends ObjectValue {
 	public void setfAccount(String fAccount) {
 		this.fAccount = fAccount;
 	}
-	public String getPassword() {
-		return Password;
+	public String getfPassword() {
+		return fPassword;
 	}
-	public void setPassword(String password) {
-		Password = password;
+	public void setfPassword(String fPassword) {
+		this.fPassword = fPassword;
 	}
 	public String getfStatus() {
 		return fStatus;
 	}
 	public void setfStatus(String fStatus) {
 		this.fStatus = fStatus;
+	}
+	public String getStatusName(){
+		//TODO
+		return "";
 	}
 	public String getfPinYin() {
 		return fPinYin;
@@ -62,6 +69,10 @@ public class User extends ObjectValue {
 	public String getfCreater() {
 		return fCreater;
 	}
+	public String getCreaterName(){
+		//TODO
+		return "";
+	}
 	public void setfCreater(String fCreater) {
 		this.fCreater = fCreater;
 	}
@@ -70,6 +81,10 @@ public class User extends ObjectValue {
 	}
 	public void setfCreateDate(Date fCreateDate) {
 		this.fCreateDate = fCreateDate;
+	}
+	public String getCreateDate(){
+		//TODO
+		return "";
 	}
 	public String getfEditor() {
 		return fEditor;

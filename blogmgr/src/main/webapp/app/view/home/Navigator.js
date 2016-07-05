@@ -12,6 +12,7 @@ Ext.define('BlogMgr.view.home.Navigator', {
 			controller : 'navigator',
 			title : '导航',
 			glyph : 0xf0c9,
+			
 			layout : {
 				type : 'accordion',
 				animate : true

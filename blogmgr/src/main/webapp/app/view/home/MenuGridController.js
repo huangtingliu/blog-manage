@@ -1,3 +1,6 @@
+/**
+ * 导航栏菜单控制器
+ */
 Ext.define('BlogMgr.view.home.MenuGridController',{
 	extend: 'Ext.app.ViewController',
     alias: 'controller.menugrid',

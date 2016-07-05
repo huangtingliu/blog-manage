@@ -1,7 +1,7 @@
 Ext.define('BlogMgr.view.home.MenuGrid', {
 			uses : ['BlogMgr.view.home.MenuGridController',
-					'BlogMgr.model.home.Menu',
-					'BlogMgr.store.home.MenuDataProxy'],
+					'BlogMgr.model.Menu',
+					'BlogMgr.store.MenuDataProxy'],
 			extend : 'Ext.grid.Panel',
 			alias : ['widget.menugrid'],
 			title : '导航菜单',
@@ -12,7 +12,7 @@ Ext.define('BlogMgr.view.home.MenuGrid', {
 				this.store = {
 					autoLoad : true,
 					autoLoadDelay : 0,
-					model : 'BlogMgr.model.home.Menu',
+					model : 'BlogMgr.model.Menu',
 					proxy : {
 						type : 'menu_proxy',
 						extraParams : {

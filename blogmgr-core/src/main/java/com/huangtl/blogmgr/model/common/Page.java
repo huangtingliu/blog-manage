@@ -20,7 +20,7 @@ public class Page<T> {
 	
 	private int pageNo;    //当前页号
     private int pageSize;  //每页几条
-    private long totalRecNum;  //共有多少条记录
+    private long total;  //共有多少条记录
     private Collection<T> pageContent; //该页的数据(记录明细)
     private int buttonNum;	//页面按钮的数量
     private Map<String, String> sorts;	
@@ -37,7 +37,7 @@ public class Page<T> {
 		 this.pageNo=(pageNo==null || pageNo<=0)?1:pageNo;
 		 this.pageSize = (pageSize==null || pageSize<=0)?15:pageSize;
 		 this.buttonNum = (buttonNum==null || buttonNum<=0)?5:buttonNum;
-		 totalRecNum = 0l;
+		 total = 0l;
 	}
 	public Page(Long startIndex,Integer pageSize){
 		this.pageSize = (pageSize==null || pageSize<=0)?15:pageSize;
@@ -67,7 +67,7 @@ public class Page<T> {
 	 * 是否有下一页
 	 */
 	public Boolean isNextPage() {
-		return pageNo<getTotalPageNum()?true:false;
+		return pageNo<getPageTotal()?true:false;
 	}
 
 	/**
@@ -80,19 +80,19 @@ public class Page<T> {
 	/**
 	 * 共有几条记录
 	 */
-	public long getTotalRecNum() {
-		return totalRecNum;
+	public long getTotal() {
+		return total;
 	}
 	public void setTotalRecNum(Long totalRecNum) {
 		
-		this.totalRecNum = totalRecNum==null?0:totalRecNum;
+		this.total = totalRecNum==null?0:totalRecNum;
 	}
 	
 	/**
 	 * 共多少页
 	 */
-	public int getTotalPageNum() {
-		return totalRecNum%pageSize>0?(int)(totalRecNum/pageSize+1):(int)(totalRecNum/pageSize);
+	public int getPageTotal() {
+		return total%pageSize>0?(int)(total/pageSize+1):(int)(total/pageSize);
 	}
 
 	/**
@@ -129,7 +129,7 @@ public class Page<T> {
 	 */
 	public int getEndIndex()
 	{
-		return (pageSize*pageNo>this.totalRecNum)? (int)(this.totalRecNum):(pageSize*pageNo);
+		return (pageSize*pageNo>this.total)? (int)(this.total):(pageSize*pageNo);
 	}
 
 	/**
@@ -147,12 +147,12 @@ public class Page<T> {
 	 * 按钮的开始数字
 	 */
 	public int getButtonStartNum() {
-		if(this.getTotalPageNum()<this.buttonNum)
+		if(this.getPageTotal()<this.buttonNum)
 			return 1;
 		int temp =this.buttonNum/2;
-		if(this.getTotalPageNum()-this.pageNo<temp)
+		if(this.getPageTotal()-this.pageNo<temp)
 		{
-			return this.getTotalPageNum()-this.buttonNum+1;
+			return this.getPageTotal()-this.buttonNum+1;
 		}else{
 			return this.pageNo <= temp+1?1:this.pageNo-temp;
 		}
@@ -163,12 +163,12 @@ public class Page<T> {
 	 */
 	public int getButtonEndNum() {
 		
-		if(this.getTotalPageNum()<this.buttonNum)
-			return this.getTotalPageNum();
+		if(this.getPageTotal()<this.buttonNum)
+			return this.getPageTotal();
 			
 		int temp =this.buttonNum/2;
 		if(this.pageNo > temp+1)
-		return (this.pageNo+temp)>this.getTotalPageNum()?this.getTotalPageNum():this.pageNo+temp;
+		return (this.pageNo+temp)>this.getPageTotal()?this.getPageTotal():this.pageNo+temp;
 		else{
 			return this.buttonNum;
 		}
@@ -178,9 +178,5 @@ public class Page<T> {
 		return sorts;
 	}
 	
-	
-	public static void main(String[] args) {
-		System.out.println(0xf299);
-	}
 	
 }

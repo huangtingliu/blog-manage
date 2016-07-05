@@ -1,4 +1,7 @@
-Ext.define('BlogMgr.model.home.Menu',{
+/**
+ * 导航栏菜单
+ */
+Ext.define('BlogMgr.model.Menu',{
 	extend:'Ext.data.Model',
 	 fields: [
 	    {name: 'fId', type: 'string'},

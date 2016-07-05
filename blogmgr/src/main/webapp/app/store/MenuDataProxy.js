@@ -1,14 +1,12 @@
 /**
  * 菜单ajax数据代理
  */
-Ext.define('BlogMgr.store.home.MenuDataProxy', {
-			uses : ['BlogMgr.model.home.Menu'],
+Ext.define('BlogMgr.store.MenuDataProxy', {
 			extend : 'Ext.data.proxy.Ajax',
 			alias: 'proxy.menu_proxy',
-			model : 'BlogMgr.model.home.Menu',
+			model : 'BlogMgr.model.Menu',
 			url : '/blogmgr/menu/menus.data',
 			constructor:function(config){
-				//console.info(arguments);
 				this.callParent(arguments);
 			},
 			reader : {
@@ -17,5 +15,4 @@ Ext.define('BlogMgr.store.home.MenuDataProxy', {
 				rootProperty : 'data',
 				messageProperty : 'content'
 			}
-			
 		});

@@ -16,4 +16,11 @@ public abstract class WhereParam extends HashMap<String, Object> {
 		return super.put(key, value);
 	}
 	
+	/**
+	 * 创建一个空白的查询参数
+	 */
+	public static WhereParam instance(){
+		return new WhereParam() {
+		};
+	}
 }
