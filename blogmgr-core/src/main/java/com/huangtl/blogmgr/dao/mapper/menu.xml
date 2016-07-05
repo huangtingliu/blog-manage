@@ -9,7 +9,8 @@
 		<result property="fName" column="mu_Name"/>
 		<result property="fParentId" column="mu_ParentId" />
 		<result property="fIcon" column="mu_Icon"/>
-		<result property="fLink" column="mu_Link"/>
+		<result property="fViewClass" column="mu_ViewClass"/>
+		<result property="fUrl" column="mu_Url"/>
 		<result property="fOrder" column="mu_Order"/>
 		<result property="fDescr" column="mu_Descr"/>
 		<result property="fGlyph" column="mu_Glyph"/>
@@ -39,15 +40,15 @@
 	
 	<insert id="insert" parameterType="com.huangtl.blogmgr.model.blog.Menu">
 		insert into mgr_menu(
-			mu_Id,mu_Name,mu_ParentId,mu_Icon,mu_Link,mu_Order,mu_Descr,mu_Glyph,mu_Expand
+			mu_Id,mu_Name,mu_ParentId,mu_Icon,mu_Url,mu_Order,mu_Descr,mu_Glyph,mu_Expand,mu_ViewClass
 		) values(
-			#{fId},#{fName},#{fParentId},#{fIcon},#{fLink},#{fOrder},#{fDescr},#{fGlyph},#{fExpand}
+			#{fId},#{fName},#{fParentId},#{fIcon},#{fUrl},#{fOrder},#{fDescr},#{fGlyph},#{fExpand},#{fViewClass}
 		);
 	</insert>
 	
 
 	<select id="selectList" resultMap="map" parameterType="map">
-		select mu_Id,mu_Name,mu_ParentId,mu_Icon,mu_Link,mu_Glyph,mu_Expand
+		select mu_Id,mu_Name,mu_ParentId,mu_Icon,mu_Url,mu_Glyph,mu_Expand,mu_ViewClass
 		from mgr_menu
 		<include refid="where"/>
 		order by mu_Order
@@ -59,7 +60,7 @@
 	</select>
 	
 	<select id="selectPaging" resultMap="map" parameterType="map">
-		select id,name,superiorUnit,type,url,icon,code,sort,usability,visibility
+		select mu_Id,mu_Name,mu_ParentId,mu_Icon,mu_Url,mu_ViewClass
 		from mgr_menu
 		<include refid="where"/>
 		<include refid="order"/>

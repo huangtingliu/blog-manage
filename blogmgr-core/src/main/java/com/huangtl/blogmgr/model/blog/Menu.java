@@ -14,11 +14,13 @@ public class Menu extends ObjectValue {
 	private String fName;			//
 	private String fParentId;		//父id
 	private String fIcon;			//图标 iconClass
-	private String fLink;			//链接
+	private String fViewClass;		//视图类
+	private String fUrl;			//链接
 	private Integer fOrder;			//排序
     private String fDescr;			//描述
     private Integer fGlyph;			//glyph 值
     private Integer fExpand;		//是否展开
+    
 	public String getfId() {
 		return fId;
 	}
@@ -43,11 +45,17 @@ public class Menu extends ObjectValue {
 	public void setfIcon(String fIcon) {
 		this.fIcon = fIcon;
 	}
-	public String getfLink() {
-		return fLink;
+	public String getfViewClass() {
+		return fViewClass;
 	}
-	public void setfLink(String fLink) {
-		this.fLink = fLink;
+	public void setfViewClass(String fViewClass) {
+		this.fViewClass = fViewClass;
+	}
+	public String getfUrl() {
+		return fUrl;
+	}
+	public void setfUrl(String fUrl) {
+		this.fUrl = fUrl;
 	}
 	public Integer getfOrder() {
 		return fOrder;

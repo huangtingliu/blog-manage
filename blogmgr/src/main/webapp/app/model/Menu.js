@@ -7,7 +7,8 @@ Ext.define('BlogMgr.model.Menu',{
 	    {name: 'fId', type: 'string'},
         {name: 'fName',  type: 'string'},
         {name: 'fIcon',   type: 'string'},
-        {name: 'fLink', type: 'string'},
+        {name: 'fViewClass', type: 'string'},
+        {name: 'fUrl', type: 'string'},
         {name: 'fGlyph', type: 'int'},
          {name: 'fExpand', type: 'int'}
     ],

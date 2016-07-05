@@ -10,7 +10,8 @@ Ext.define('BlogMgr.view.home.MenuGridController',{
         	id:record.get('fId'),
         	icon:record.get('fIcon'),
         	title:record.get('fName'),
-        	url:record.get('fLink'),
+        	viewClass:record.get('fViewClass'),
+        	url:record.get('fUrl'),
         	glyph:record.get('fGlyph')
         });
     },

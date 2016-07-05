@@ -7,13 +7,25 @@ Ext.define('Widget.tabs.controller.ReorderableTabsController', {
        
         if(!Ext.isEmpty(tab)){	//该tab已经存在了
         }else{	//添加一个新的tab
+        	
+        	if(!Ext.isEmpty(config.viewClass)){
+        		tab = tabPanel.add({
+		        	id:config.id,
+		        	title: config.title,
+		        	glyph:config.glyph,
+		        	layout:'fit',
+		        	items:Ext.create(config.viewClass)
+       	   		});
+       	   		return;
+        	}
+        	
         	tab = tabPanel.add({
-	        	id:config.id,
-	        	title: config.title,
-	        	glyph:config.glyph,
-	        	layout:'fit',
-	        	items:Ext.create('BlogMgr.view.mgruser.UserList')
-       	    });
+		        	id:config.id,
+		        	title: config.title,
+		        	glyph:config.glyph,
+		        	layout:'fit'
+       	   	});
+        	
         }
         tabPanel.setActiveTab(tab);
     },
