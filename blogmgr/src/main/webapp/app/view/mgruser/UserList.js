@@ -1,7 +1,6 @@
 /**
  * 后台用户列表
  */
-
 Ext.define('BlogMgr.view.mgruser.UserList', {
 			uses : ['Widget.button.TransparentButton',
 					'BlogMgr.view.mgruser.UserListToolBar',
@@ -18,8 +17,6 @@ Ext.define('BlogMgr.view.mgruser.UserList', {
 					type : 'mgruserlist'
 				},
 				columnLines : true,
-				height : '100%',
-				width : '100%',
 				selModel : {
 					mode : "SINGLE", // "SINGLE"/"SIMPLE"/"MULTI"
 					checkOnly : true
@@ -32,7 +29,6 @@ Ext.define('BlogMgr.view.mgruser.UserList', {
 				autoLoad : true,
 				scrollable : true,
 				rowLines : true,
-				// forceFit : true,
 				columns : [{
 							xtype : 'rownumberer',
 							width : 27
