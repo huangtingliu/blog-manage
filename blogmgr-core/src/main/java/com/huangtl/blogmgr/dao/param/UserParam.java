@@ -1,5 +1,9 @@
 package com.huangtl.blogmgr.dao.param;
 
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+
 import com.huangtl.blogmgr.model.type.Gender;
 import com.huangtl.blogmgr.model.type.UserStatus;
 
@@ -19,12 +23,19 @@ public class UserParam extends WhereParam {
 		return this;
 	}
 	
+	public UserParam idIn(List<String> userIds){
+		this.put("userIds", userIds);
+		return this;
+	}
+	
 	/**
 	 * 符合指定用户名
 	 * @param userName
 	 */
 	public UserParam userNameLike(String userName){
-		this.put("userName", userName);
+		if(StringUtils.isNotBlank(userName)){
+			this.put("userName", "%"+userName);
+		}
 		return this;
 	}
 	
@@ -34,7 +45,9 @@ public class UserParam extends WhereParam {
 	 * @return
 	 */
 	public UserParam pinYinLike(String pinYin ){
-		this.put("pinYin", pinYin);
+		if(StringUtils.isNotBlank(pinYin)){
+			this.put("pinYin", "%"+pinYin);
+		}
 		return this;
 	}
 	

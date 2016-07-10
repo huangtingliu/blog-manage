@@ -4,6 +4,9 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 /**
  * 分页对象<p>
@@ -18,27 +21,22 @@ import java.util.Map;
  */
 public class Page<T> {
 	
-	private int pageNo;    //当前页号
-    private int pageSize;  //每页几条
-    private long total;  //共有多少条记录
-    private Collection<T> pageContent; //该页的数据(记录明细)
-    private int buttonNum;	//页面按钮的数量
-    private Map<String, String> sorts;	
+	protected int pageNo;    //当前页号
+	protected int pageSize;  //每页几条
+	protected long total;  //共有多少条记录
+	protected Collection<T> pageContent; //该页的数据(记录明细)
+	protected Map<String, String> sorts;	
         
 	public Page() {
         this(1,15); 	
 	}
 	
 	public Page(Integer pageNo,Integer pageSize){
-		 this(pageNo,pageSize,5);
-	}
-	
-	public Page(Integer pageNo,Integer pageSize,Integer buttonNum){
-		 this.pageNo=(pageNo==null || pageNo<=0)?1:pageNo;
-		 this.pageSize = (pageSize==null || pageSize<=0)?15:pageSize;
-		 this.buttonNum = (buttonNum==null || buttonNum<=0)?5:buttonNum;
+		this.pageNo=(pageNo==null || pageNo<=0)?1:pageNo;
+		this.pageSize = (pageSize==null || pageSize<=0)?15:pageSize;
 		 total = 0l;
 	}
+	
 	public Page(Long startIndex,Integer pageSize){
 		this.pageSize = (pageSize==null || pageSize<=0)?15:pageSize;
 		setStartIndex(startIndex);
@@ -112,6 +110,8 @@ public class Page<T> {
 	 * 如分页大小为10条，当前页号为第3页，那么第一条记录在库中的编号为21条
 	 * @return
 	 */
+	@JsonIgnore
+	@JSONField(serialize=false)
 	public int getStartIndex()
 	{
 		return pageSize*(pageNo-1)+1;  
@@ -127,56 +127,17 @@ public class Page<T> {
 	 * 最后一条记录在库中的编号(编号从1开始)<p>
 	 * 如分页大小为10条，当前页号为第3页，那么最后一条记录在库中的编号为30条
 	 */
+	@JsonIgnore
+	@JSONField(serialize=false)
 	public int getEndIndex()
 	{
 		return (pageSize*pageNo>this.total)? (int)(this.total):(pageSize*pageNo);
 	}
-
-	/**
-	 * 当前页的按钮数量
-	 */
-	public int getButtonNum() {
-		return buttonNum;
-	}
-
-	public void setButtonNum(Integer buttonNum) {
-		this.buttonNum = buttonNum==null?0:buttonNum;
-	}
-
-	/**
-	 * 按钮的开始数字
-	 */
-	public int getButtonStartNum() {
-		if(this.getPageTotal()<this.buttonNum)
-			return 1;
-		int temp =this.buttonNum/2;
-		if(this.getPageTotal()-this.pageNo<temp)
-		{
-			return this.getPageTotal()-this.buttonNum+1;
-		}else{
-			return this.pageNo <= temp+1?1:this.pageNo-temp;
-		}
-	}
-
-	/**
-	 * 按钮的结束数字
-	 */
-	public int getButtonEndNum() {
-		
-		if(this.getPageTotal()<this.buttonNum)
-			return this.getPageTotal();
-			
-		int temp =this.buttonNum/2;
-		if(this.pageNo > temp+1)
-		return (this.pageNo+temp)>this.getPageTotal()?this.getPageTotal():this.pageNo+temp;
-		else{
-			return this.buttonNum;
-		}
-	}
 	
+	@JsonIgnore
+	@JSONField(serialize=false)
 	public Map<String, String> getSorts() {
 		return sorts;
 	}
-	
 	
 }

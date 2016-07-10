@@ -36,7 +36,7 @@ public final class ValidationUtils {
 				if(exceptFields!=null && ArrayUtils.contains(exceptFields, cv.getPropertyPath().toString())){
 					continue;
 				}
-				return Message.warn(cv.getMessage());
+				return Message.error(cv.getMessage());
 			}
 		}
 		return Message.SUCCESS;
@@ -51,7 +51,7 @@ public final class ValidationUtils {
 		Set<ConstraintViolation<T>> validateSet = validator.validate(entity, Default.class);
 		if( CollectionUtils.isNotEmpty(validateSet) ){
 			for (ConstraintViolation<T> cv : validateSet) {
-				return Message.warn(cv.getMessage());
+				return Message.error(cv.getMessage());
 			}
 		}
 		return Message.SUCCESS;
@@ -67,7 +67,7 @@ public final class ValidationUtils {
 	     Set<ConstraintViolation<T>> set = validator.validateProperty(entity,propertyName,Default.class);
 	     if( CollectionUtils.isNotEmpty(set) ){
 	       for(ConstraintViolation<T> cv : set){
-	    	   return Message.warn(cv.getMessage());
+	    	   return Message.error(cv.getMessage());
 	       }
 	     }
 	     return Message.SUCCESS;

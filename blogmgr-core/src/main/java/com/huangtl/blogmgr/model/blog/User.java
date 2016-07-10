@@ -34,6 +34,19 @@ public class User extends ObjectValue {
 	private Date fEditDate;			//修改日期
 	
 	
+	public User() {
+		this(false);
+	}
+	/**
+	 * true ,将自动创建id
+	 */
+	public User(boolean generateId) {
+		super();
+		if(generateId){
+			this.fId = newId();
+		}
+	}
+
 	@NotBlank(message="主键为空")
 	public String getfId() {
 		return fId;

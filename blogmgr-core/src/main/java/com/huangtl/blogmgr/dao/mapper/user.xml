@@ -10,6 +10,9 @@
 		<result property="fPassword" column="ui_Password"/>
 		<result property="fStatus" column="dic_Status"/>
 		<result property="fPinYin" column="ui_PinYin"/>
+		<result property="fEmail" column="ui_Email"/>
+		<result property="fGender" column="dic_Gender"/>
+		<result property="fPhone" column="ui_Phone"/>
 		<result property="fDescr" column="ui_Descr"/>
 		<result property="fCreater" column="ui_Creater"/>
 		<result property="fCreateDate" column="ui_CreateDate"/>
@@ -20,14 +23,20 @@
 	<sql id="where">
 		 <where>
 		 		1=1
-			<if test="userId !=null ">
-				and ui_Id = #{userId}
-			</if>
-			<if test="userName != null">
-				and ui_PinYin = like #{userName}
-			</if>
-			<if test="status != null">
-				and dic_Status = like #{status}
+			<if test="userId != null ">and   ui_Id       =  #{userId}</if>
+			<if test="userName != null">and  ui_Name     =  like #{userName}</if>
+			<if test="pinYin != null">and    ui_PinYin   = like #{pinYin}</if>
+			<if test="account != null ">and  ui_Account  = #{account}</if>
+			<if test="phone != null ">and    ui_Phone    = #{phone}</if>
+			<if test="email != null ">and    ui_Email    = #{email}</if>
+			<if test="gender != null ">and   dic_Gender  = #{gender}</if>
+			<if test="status != null">and    dic_Status  =  #{status}</if>
+			<if test="statusNot != null">and dic_Status !=  #{statusNot}</if>
+			<if test="userIds != null">
+				and ui_Id in
+				<foreach collection="userIds" open="(" item="id" separator="," close=")">
+					#{id}
+				</foreach>		
 			</if>
 		</where>
 	</sql>
@@ -43,10 +52,11 @@
 	
 	<insert id="insert" parameterType="com.huangtl.blogmgr.model.blog.Menu">
 		insert into mgr_userinfo(
-			ui_Id,ui_Name,ui_Account,ui_Password,dic_Status,ui_PinYin,ui_Descr,ui_Creater,ui_CreateDate,ui_Editor,ui_EditDate
+			ui_Id,ui_Name,ui_Account,ui_Password,dic_Status,ui_PinYin,ui_Descr,ui_Creater,ui_CreateDate,
+			ui_Editor,ui_EditDate,ui_Email,ui_Phone,dic_Gender
 		) values(
 			#{fId},#{fName},#{fAccount},#{fPassword},#{fStatus},#{fPinYin},#{fDescr},#{fCreater},#{fCreateDate},
-			#{fEditor},#{fEditDate}
+			#{fEditor},#{fEditDate},#{fEmail},#{fPhone},#{fGender}
 		);
 	</insert>
 	
@@ -60,13 +70,16 @@
 			<if test="fDescr !=null">ui_Descr = #{fDescr},</if>
 			<if test="fEditor !=null">ui_Editor = #{fEditor},</if>
 			<if test="fEditDate !=null">ui_EditDate = #{fEditDate},</if>
+			<if test="fEmail !=null">ui_Email = #{fEmail},</if>
+			<if test="fPhone !=null">ui_Phone = #{fPhone},</if>
+			<if test="fGender !=null">dic_Gender = #{fGender},</if>
 		</trim>
 		<include refid="where"/>
 	</update>
 
 	<select id="selectList" resultMap="map" parameterType="map">
 		select 
-			ui_Id,ui_Name,ui_Account,dic_Status,ui_Creater,ui_CreateDate
+			ui_Id,ui_Name,ui_Account,dic_Status,ui_Creater,ui_CreateDate,ui_Email,ui_Phone,dic_Gender
 		from mgr_userinfo
 		<include refid="where"/>
 	</select>
@@ -77,19 +90,18 @@
 	</select>
 	
 	<select id="selectPaging" resultMap="map" parameterType="map">
-		select ui_Id,ui_Name,ui_Account,dic_Status,ui_Creater,ui_CreateDate
+		select 
+			ui_Id,ui_Name,ui_Account,dic_Status,ui_Creater,ui_CreateDate,ui_Email,ui_Phone,dic_Gender
 		from mgr_userinfo
 		<include refid="where"/>
 		<include refid="order"/>
 		limit #{startIndex},#{pageSize}
 	</select>
 	
-	
 	<delete id="delete" parameterType="map">
 		delete from mgr_userinfo
 		<include refid="where"/>
 	</delete>
-	
 	
 	<delete id="deleteBatch" parameterType="list">
 		delete from mgr_userinfo where ui_Id in 

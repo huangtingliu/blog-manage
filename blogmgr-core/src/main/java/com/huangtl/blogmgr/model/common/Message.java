@@ -5,6 +5,8 @@ import java.io.Serializable;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.huangtl.blogmgr.exceptoin.ServiceFailException;
 
 
@@ -22,7 +24,7 @@ public class Message implements Serializable {
 	private Object content;				//消息内容
 	private Object annex;				//附带结果
 	
-	private static final String title_msg = "操作提示";
+	private static final String title_msg = null;
 	private static final String info_msg = "";
 	private static final String success_msg = "操作成功！";
 	private static final String warn_msg = "操作警告！";
@@ -129,7 +131,7 @@ public class Message implements Serializable {
 	public boolean isInfo(){
 		return this.type==MessageType.info;
 	}
-	@JsonIgnore	
+	
 	@JSONField(serialize=false)
 	public boolean isSuccess(){
 		return this.type==MessageType.success;
@@ -176,6 +178,7 @@ public class Message implements Serializable {
 		return JSON.toJSONString(this);
 	}
 	
+	@JsonInclude(value=Include.NON_EMPTY) //属性为 空（“”） 或者为 NULL 都不序列化 ，jackson
 	public String getTitle() {
 		return title;
 	}
@@ -185,6 +188,7 @@ public class Message implements Serializable {
 	public Object getContent() {
 		return content;
 	}
+	@JsonInclude(value=Include.NON_NULL)	//如果该属性为NULL则不参与序列化 ，jackson
 	public Object getAnnex() {
 		return annex;
 	}
