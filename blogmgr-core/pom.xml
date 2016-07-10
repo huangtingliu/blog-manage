@@ -12,6 +12,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
+	
 	<dependencies>
 		<!-- 框架依赖 -->
 		<dependency>
@@ -35,8 +36,6 @@
 					<groupId>org.jboss.logging</groupId>
 					<artifactId>jboss-logging</artifactId>
 				</exclusion>
-
-
 			</exclusions>
 		</dependency>
 

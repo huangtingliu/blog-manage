@@ -1,3 +1,6 @@
+/**
+ * 用户列表工具栏
+ */
 Ext.define('BlogMgr.view.mgruser.UserListToolBar', {
 		    uses:['Widget.input.GridSearchField'],
 			extend : 'Ext.toolbar.Toolbar',

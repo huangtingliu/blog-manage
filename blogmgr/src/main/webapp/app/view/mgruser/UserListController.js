@@ -1,3 +1,6 @@
+/**
+ * 用户列表控制器
+ */
 Ext.define('BlogMgr.view.mgruser.UserListController',{
 	uses:['BlogMgr.view.mgruser.UserAddDialog'],
 	extend: 'Ext.app.ViewController',

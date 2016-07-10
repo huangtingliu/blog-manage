@@ -12,7 +12,7 @@ Ext.define('BlogMgr.store.MenuDataProxy', {
 			reader : {
 				type : 'json',
 				successProperty : 'success',
-				rootProperty : 'data',
+				rootProperty : 'content',
 				messageProperty : 'content'
 			}
 		});

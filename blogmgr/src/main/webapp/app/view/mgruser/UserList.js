@@ -2,6 +2,7 @@
  * 后台用户列表
  */
 Ext.define('BlogMgr.view.mgruser.UserList', {
+			id:'mgruser_UserList',
 			uses : ['Widget.button.TransparentButton',
 					'BlogMgr.view.mgruser.UserListToolBar',
 					'BlogMgr.view.mgruser.UserListModel',

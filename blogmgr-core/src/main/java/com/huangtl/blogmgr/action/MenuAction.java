@@ -37,7 +37,7 @@ public class MenuAction extends BlogMgrAction {
 						  .parentIdEqual(parentId);
 		List<Menu> menus = this.menuService.getDao().selectList(param);
 		Message msg = Message.success("success");
-		msg.setData(menus);
+		msg.setContent(menus);
 		return msg;
 	}
 	

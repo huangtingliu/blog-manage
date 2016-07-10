@@ -8,6 +8,7 @@ import javax.validation.Validator;
 import javax.validation.groups.Default;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.ArrayUtils;
 
 import com.huangtl.blogmgr.model.common.Message;
 
@@ -28,10 +29,13 @@ public final class ValidationUtils {
 	 * @param entity
 	 * @return
 	 */
-	public static <T> Message validate(T entity){
+	public static <T> Message validate(T entity,String... exceptFields){
 		Set<ConstraintViolation<T>> validateSet = validator.validate(entity, Default.class);
 		if( CollectionUtils.isNotEmpty(validateSet) ){
 			for (ConstraintViolation<T> cv : validateSet) {
+				if(exceptFields!=null && ArrayUtils.contains(exceptFields, cv.getPropertyPath().toString())){
+					continue;
+				}
 				return Message.warn(cv.getMessage());
 			}
 		}

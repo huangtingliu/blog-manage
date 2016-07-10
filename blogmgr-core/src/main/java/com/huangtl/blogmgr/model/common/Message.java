@@ -2,10 +2,10 @@ package com.huangtl.blogmgr.model.common;
 
 import java.io.Serializable;
 
-import javax.naming.OperationNotSupportedException;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.annotation.JSONField;
-import com.huangtl.blogmgr.exceptoin.ServiceOperateFailException;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.huangtl.blogmgr.exceptoin.ServiceFailException;
 
 
 /**
@@ -19,8 +19,8 @@ public class Message implements Serializable {
 	
 	private  String title;				//消息标题
 	private final MessageType type;		//消息类型
-	private String content;				//消息内容
-	private Object data;	//返回结果
+	private Object content;				//消息内容
+	private Object annex;				//附带结果
 	
 	private static final String title_msg = "操作提示";
 	private static final String info_msg = "";
@@ -28,14 +28,13 @@ public class Message implements Serializable {
 	private static final String warn_msg = "操作警告！";
 	private static final String error_msg = "操作失败！";
 	private static final String exception_msg = "系统异常！";
-	private static final String modify_reject_msg = "拒绝修改！";
 	public static final Message INFO;
 	public static final Message SUCCESS;
 	public static final Message WARN;
 	public static final Message ERROR;
 	public static final Message EXCEPTION;
 	
-	private Message(String title, MessageType type, String content) {
+	private Message(String title, MessageType type, Object content) {
 		super();
 		this.title = title;
 		this.type = type;
@@ -43,93 +42,41 @@ public class Message implements Serializable {
 	}
 	
 	static{
-		INFO = new Message(title_msg, MessageType.info, info_msg){
-			private static final long serialVersionUID = -1833549720584810885L;
-			@Override
-			public void setTitle(String title) throws OperationNotSupportedException {
-				throw new OperationNotSupportedException(modify_reject_msg);
-			}
-			@Override
-			public void setContent(String content) throws OperationNotSupportedException {
-				throw new OperationNotSupportedException(modify_reject_msg);
-			}
-		};
-		SUCCESS = new Message(title_msg, MessageType.success, success_msg){
-			private static final long serialVersionUID = 4235292389960576772L;
-			@Override
-			public void setTitle(String title) throws OperationNotSupportedException {
-				throw new OperationNotSupportedException(modify_reject_msg);
-			}
-			@Override
-			public void setContent(String content) throws OperationNotSupportedException {
-				throw new OperationNotSupportedException(modify_reject_msg);
-			}
-		};
-		ERROR = new Message(title_msg, MessageType.error, error_msg){
-			private static final long serialVersionUID = -4367202540338122215L;
-			@Override
-			public void setTitle(String title) throws OperationNotSupportedException {
-				throw new OperationNotSupportedException(modify_reject_msg);
-			}
-			@Override
-			public void setContent(String content) throws OperationNotSupportedException {
-				throw new OperationNotSupportedException(modify_reject_msg);
-			}
-			
-		};
-		WARN = new Message(title_msg, MessageType.warn, warn_msg){
-			private static final long serialVersionUID = 6091253788900790488L;
-			@Override
-			public void setTitle(String title) throws OperationNotSupportedException {
-				throw new OperationNotSupportedException(modify_reject_msg);
-			}
-			@Override
-			public void setContent(String content) throws OperationNotSupportedException {
-				throw new OperationNotSupportedException(modify_reject_msg);
-			}
-		};
-		EXCEPTION = new Message(title_msg, MessageType.exception, exception_msg){
-			private static final long serialVersionUID = -3952314153162352153L;
-
-			@Override
-			public void setTitle(String title) throws OperationNotSupportedException {
-				throw new OperationNotSupportedException(modify_reject_msg);
-			}
-			@Override
-			public void setContent(String content) throws OperationNotSupportedException {
-				throw new OperationNotSupportedException(modify_reject_msg);
-			}
-		};
+		INFO = new Message(title_msg, MessageType.info, info_msg);
+		SUCCESS = new Message(title_msg, MessageType.success, success_msg);
+		ERROR = new Message(title_msg, MessageType.error, error_msg);
+		WARN = new Message(title_msg, MessageType.warn, warn_msg);
+		EXCEPTION = new Message(title_msg, MessageType.exception, exception_msg);
 	}
 	
-	public static Message info(String content){
+	public static Message info(Object content){
 		return INSTANCE(title_msg, MessageType.info, content);
 	}
-	public static Message info(String title,String content){
+	public static Message info(String title,Object content){
 		return INSTANCE(title, MessageType.info, content);
 	}
-	public static Message success(String content){
+	public static Message success(Object content){
 		return INSTANCE(title_msg, MessageType.success, content);
 	}
-	public static Message success(String title,String content){
+	public static Message success(String title,Object content){
 		return INSTANCE(title, MessageType.success, content);
 	}
-	public static Message warn(String content){
+	public static Message warn(Object content){
 		return INSTANCE(title_msg, MessageType.warn, content);
 	}
-	public static Message warn(String title,String content){
+	public static Message warn(String title,Object content){
 		return INSTANCE(title, MessageType.warn, content);
 	}
-	public static Message error(String content){
+	public static Message error(Object content){
 		return INSTANCE(title_msg, MessageType.error, content);
 	}
-	public static Message error(String title,String content){
+	public static Message error(String title,Object content){
 		return INSTANCE(title, MessageType.error, content);
 	}
-	public static Message exception(String content){
+	public static Message exception(Object content){
 		return INSTANCE(title_msg, MessageType.exception, content);
 	}
-	public static Message exception(String title,String content){
+	public static Message exception(String title,Object content){
 		return INSTANCE(title, MessageType.exception, content);
 	}
 	
@@ -173,50 +120,53 @@ public class Message implements Serializable {
 	 * @param content
 	 * @return
 	 */
-	public static Message INSTANCE(String title, MessageType type, String content){
+	public static Message INSTANCE(String title, MessageType type, Object content){
 		return new Message(title, type, content);
 	}
-
-	@JSONField(serialize=false)
+	
+	@JsonIgnore	//jaskson 注解
+	@JSONField(serialize=false)	//fastjson 注解
 	public boolean isInfo(){
 		return this.type==MessageType.info;
 	}
+	@JsonIgnore	
 	@JSONField(serialize=false)
 	public boolean isSuccess(){
 		return this.type==MessageType.success;
 	}
+	@JsonIgnore
 	@JSONField(serialize=false)
 	public boolean isWarn(){
 		return this.type==MessageType.warn;
 	}
+	@JsonIgnore
 	@JSONField(serialize=false)
 	public boolean isError(){
-		return this.type==MessageType.error;
+		return this.type==MessageType.error || this.type == MessageType.exception;
 	}
+	@JsonIgnore
 	@JSONField(serialize=false)
 	public boolean isException(){
 		return this.type==MessageType.exception;
 	}
 	
 	/**
-	 * 如果消息类型为error,那么就抛出{@link ServiceOperateFailException}
+	 * 如果消息类型为error,或exception那么就抛出{@link ServiceFailException}
 	 * @param message
 	 */
-	public void throwIfError(String message){
-		if(isError()){
+	public void throwIfError(Object message){
+		if(isError() || isException()){
 			this.content = message;
-			throw new ServiceOperateFailException(this);
+			throw new ServiceFailException(this);
 		}
 	}
 	
 	/**
-	 * 如果消息类型为error,那么就抛出{@link ServiceOperateFailException}
+	 * 如果消息类型为error,或exception那么就抛出{@link ServiceFailException}
 	 */
 	public void throwIfError(){
-		if(isError()){throw new ServiceOperateFailException(this);}
+		if(isError()|| isException()){throw new ServiceFailException(this);}
 	}
-	
-	
 	
 	/**
 	 * 转成json字符
@@ -232,26 +182,24 @@ public class Message implements Serializable {
 	public MessageType getType() {
 		return type;
 	}
-	public String getContent() {
+	public Object getContent() {
 		return content;
 	}
-	public Object getData() {
-		return data;
+	public Object getAnnex() {
+		return annex;
 	}
 	/**
 	 * 设置消息的附加数据
 	 * @param data
-	 * @throws OperationNotSupportedException 如果对象为ERROR/INFO/SUCCESS..修改对象时将抛出
 	 */
-	public void setData(Object data) {
-		this.data = data;
+	public void setAnnex(Object data) {
+		this.annex = data;
 	}
 	/**
 	 * 设置消息的内容
 	 * @param content
-	 * @throws OperationNotSupportedException 如果对象为ERROR/INFO/SUCCESS..修改对象时将抛出
 	 */
-	public void setContent(String content)throws OperationNotSupportedException {
+	public void setContent(Object content){
 		this.content = content;
 	}
 	/**
@@ -259,7 +207,7 @@ public class Message implements Serializable {
 	 * @param title 
 	 * @throws OperationNotSupportedException 如果对象为ERROR/INFO/SUCCESS..修改对象时将抛出
 	 */
-	public void setTitle(String title) throws OperationNotSupportedException {
+	public void setTitle(String title) {
 		this.title = title;
 	}
 	@Override
