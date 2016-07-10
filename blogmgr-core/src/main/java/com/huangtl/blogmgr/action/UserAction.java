@@ -37,7 +37,6 @@ public class UserAction extends BlogMgrAction {
 			Integer pageSize,Integer pageNo) {
 		Page<User> page = new Page<>(pageNo, pageSize);
 		this.userService.getDao().selectPaging(null, page);
-		
 		Message msg = Message.success("success");
 		msg.setContent(page);
 		return page;

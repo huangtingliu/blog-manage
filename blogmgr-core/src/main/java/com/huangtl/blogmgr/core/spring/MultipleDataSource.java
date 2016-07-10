@@ -1,4 +1,4 @@
-package com.huangtl.blogmgr.core.extend.spring;
+package com.huangtl.blogmgr.core.spring;
 
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 

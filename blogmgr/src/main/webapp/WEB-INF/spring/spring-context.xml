@@ -39,7 +39,6 @@
 	
 	<aop:config>
 		<aop:advisor advice-ref="commonTranscation"  pointcut="execution(* com.huangtl.blogmgr.service.impl..*.*(..))"/>
-		<!-- <aop:advisor advice-ref="commonTranscation" pointcut="execution(* org.snaker.engine..*.*(..))"/> -->
 	</aop:config>
 	
 	<bean id="myBatisSqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
@@ -50,7 +49,7 @@
 	</bean> 
 	
 	<!-- 多库数据源 -->
-	<bean id="multipleDataSource" class="com.huangtl.blogmgr.core.extend.spring.MultipleDataSource">
+	<bean id="multipleDataSource" class="com.huangtl.blogmgr.core.spring.MultipleDataSource">
 		<property name="defaultTargetDataSource" ref="blogDataSource"></property>
 		<property name="targetDataSources">
 			<map>

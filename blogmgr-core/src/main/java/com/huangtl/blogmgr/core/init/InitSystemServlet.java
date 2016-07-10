@@ -1,4 +1,4 @@
-package com.huangtl.blogmgr.core.system.init;
+package com.huangtl.blogmgr.core.init;
 
 import java.io.IOException;
 import java.net.MalformedURLException;

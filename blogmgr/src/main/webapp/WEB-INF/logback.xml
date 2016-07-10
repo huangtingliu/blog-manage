@@ -8,7 +8,7 @@
             ]]></pattern>
             <charset>utf-8</charset>
 		</encoder>
-		<filter class="com.huangtl.blogmgr.core.extend.log.LogLevelFilter">
+		<filter class="com.huangtl.blogmgr.core.log.LogLevelFilter">
 			<lessThan>WARN</lessThan>
 		</filter>
 	</appender>
@@ -21,7 +21,7 @@
             ]]></pattern>
 			<charset>utf-8</charset>
 		</encoder>
-		<filter class="com.huangtl.blogmgr.core.extend.log.LogLevelFilter">
+		<filter class="com.huangtl.blogmgr.core.log.LogLevelFilter">
 			<greaterThan>INFO</greaterThan>
 		</filter>
 	</appender>

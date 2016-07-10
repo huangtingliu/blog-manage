@@ -1,4 +1,4 @@
-package com.huangtl.blogmgr.core.extend.log;
+package com.huangtl.blogmgr.core.log;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.spi.LoggingEvent;

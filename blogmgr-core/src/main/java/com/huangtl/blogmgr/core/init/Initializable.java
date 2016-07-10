@@ -1,4 +1,4 @@
-package com.huangtl.blogmgr.core.system.init;
+package com.huangtl.blogmgr.core.init;
 
 /**
  * 凡实现该接口的都将在系统启动后调用初始化方法，用来初始化系统

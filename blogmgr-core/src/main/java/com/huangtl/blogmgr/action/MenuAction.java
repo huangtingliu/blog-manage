@@ -41,10 +41,4 @@ public class MenuAction extends BlogMgrAction {
 		return msg;
 	}
 	
-	public static void main(String[] args) {
-		Menu menu = new Menu();
-		System.out.println(0xf1fe   );
-		System.out.println(menu.newId());
-		
-	}
 }
