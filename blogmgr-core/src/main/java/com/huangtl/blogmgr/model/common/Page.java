@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.Map;
 
 import com.alibaba.fastjson.annotation.JSONField;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 /**
@@ -110,7 +109,6 @@ public class Page<T> {
 	 * 如分页大小为10条，当前页号为第3页，那么第一条记录在库中的编号为21条
 	 * @return
 	 */
-	@JsonIgnore
 	@JSONField(serialize=false)
 	public int getStartIndex()
 	{
@@ -127,14 +125,12 @@ public class Page<T> {
 	 * 最后一条记录在库中的编号(编号从1开始)<p>
 	 * 如分页大小为10条，当前页号为第3页，那么最后一条记录在库中的编号为30条
 	 */
-	@JsonIgnore
 	@JSONField(serialize=false)
 	public int getEndIndex()
 	{
 		return (pageSize*pageNo>this.total)? (int)(this.total):(pageSize*pageNo);
 	}
 	
-	@JsonIgnore
 	@JSONField(serialize=false)
 	public Map<String, String> getSorts() {
 		return sorts;

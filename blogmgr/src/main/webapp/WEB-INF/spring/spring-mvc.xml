@@ -36,24 +36,21 @@
 		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"></bean>
 
 	<!-- 
-	  1.如果返回 Object 就转成json
-	  2.如果返回 Resouce 就下载指定的资源
-	  3.如果返回String 就不变
-	  4.如果返回 byte[] 就表示下载
-	  
+	  1.如果返回String             就不变
+	  2.如果返回 Resouce            就下载指定的资源
+	  3.如果返回 byte[]             就表示下载
+	  5.如果返回 Object(其于的类型)  就转成json
 	 -->
 	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
 		<property name="messageConverters">
 			<list>
-				<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" >
-					<!-- <property name=""></property> -->
-				</bean> 
-				<bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter"></bean>
 				<bean class="org.springframework.http.converter.StringHttpMessageConverter">
-					 <constructor-arg index="0" value="utf-8"></constructor-arg>
-					 <property name="writeAcceptCharset" value="false"></property> 
+					 <constructor-arg index="0" value="utf-8"/>
+					 <property name="writeAcceptCharset" value="false"/> 
 				</bean>
-				<bean class="org.springframework.http.converter.ResourceHttpMessageConverter"></bean>
+				<bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter"/>
+				<bean class="org.springframework.http.converter.ResourceHttpMessageConverter"/>
+				<bean class="com.huangtl.blogmgr.core.spring.MappingFastJson2HttpMessageConverter" ></bean> 
 			</list>
 		</property>
 		<property name="customArgumentResolvers">

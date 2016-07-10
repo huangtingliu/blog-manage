@@ -4,9 +4,6 @@ import java.io.Serializable;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.annotation.JSONField;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.huangtl.blogmgr.exceptoin.ServiceFailException;
 
 
@@ -126,7 +123,6 @@ public class Message implements Serializable {
 		return new Message(title, type, content);
 	}
 	
-	@JsonIgnore	//jaskson 注解
 	@JSONField(serialize=false)	//fastjson 注解
 	public boolean isInfo(){
 		return this.type==MessageType.info;
@@ -136,17 +132,14 @@ public class Message implements Serializable {
 	public boolean isSuccess(){
 		return this.type==MessageType.success;
 	}
-	@JsonIgnore
 	@JSONField(serialize=false)
 	public boolean isWarn(){
 		return this.type==MessageType.warn;
 	}
-	@JsonIgnore
 	@JSONField(serialize=false)
 	public boolean isError(){
 		return this.type==MessageType.error || this.type == MessageType.exception;
 	}
-	@JsonIgnore
 	@JSONField(serialize=false)
 	public boolean isException(){
 		return this.type==MessageType.exception;
@@ -178,7 +171,6 @@ public class Message implements Serializable {
 		return JSON.toJSONString(this);
 	}
 	
-	@JsonInclude(value=Include.NON_EMPTY) //属性为 空（“”） 或者为 NULL 都不序列化 ，jackson
 	public String getTitle() {
 		return title;
 	}
@@ -188,7 +180,6 @@ public class Message implements Serializable {
 	public Object getContent() {
 		return content;
 	}
-	@JsonInclude(value=Include.NON_NULL)	//如果该属性为NULL则不参与序列化 ，jackson
 	public Object getAnnex() {
 		return annex;
 	}
