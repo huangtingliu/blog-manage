@@ -23,7 +23,7 @@ public class User extends ObjectValue {
 	private String fPassword;		//密码
 	private UserStatus fStatus;		//状态
 	private String fPhone;			//电话
-	private String fEmail;			//邮件
+	private String fEmail;			//邮箱
 	private Gender fGender;			//性别
 	private String fPinYin;			//拼音
 	private String fDescr;			//备注
@@ -124,10 +124,6 @@ public class User extends ObjectValue {
 	public String getfCreater() {
 		return fCreater;
 	}
-	public String getCreaterName(){
-		//TODO
-		return "";
-	}
 	public void setfCreater(String fCreater) {
 		this.fCreater = fCreater;
 	}
@@ -137,10 +133,6 @@ public class User extends ObjectValue {
 	}
 	public void setfCreateDate(Date fCreateDate) {
 		this.fCreateDate = fCreateDate;
-	}
-	public String getCreateDate(){
-		//TODO
-		return "";
 	}
 	public String getfEditor() {
 		return fEditor;

@@ -35,7 +35,7 @@ Ext.define('BlogMgr.view.mgruser.UserList', {
 							width : 27
 						}, {
 							xtype : 'checkcolumn',
-							dataIndex : 'fId',
+							dataIndex : 'ck',
 							width : 35,
 							sortable : false,
 							autoLock : true,
@@ -51,13 +51,25 @@ Ext.define('BlogMgr.view.mgruser.UserList', {
 							dataIndex : 'fAccount'
 						}, {
 							text : '状态',
-							dataIndex : 'statusName'
+							dataIndex : 'fStatus'
+						},{
+							text : '性别',
+							dataIndex : 'fGender',
+							hidden:true
+						},{
+							text : '电话',
+							dataIndex : 'fPhone'
+						},{
+							text : '邮箱',
+							dataIndex : 'fEmail',
+							hidden:true
 						}, {
 							text : '创建人',
-							dataIndex : 'createrName'
+							dataIndex : 'fCreater'
 						}, {
 							text : '创建日期',
-							dataIndex : 'createDate'
+							dataIndex : 'fCreateDate',
+							width:'15%'
 						}],
 				tbar : {
 					xtype : 'userlisttoolbar'

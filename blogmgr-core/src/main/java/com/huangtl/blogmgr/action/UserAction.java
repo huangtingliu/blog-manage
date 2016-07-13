@@ -47,7 +47,7 @@ public class UserAction extends BlogMgrAction {
 	 * @param user
 	 * @return
 	 */
-	@RequestMapping("addUser.do")
+	@RequestMapping("add.do")
 	@ResponseBody
 	private Object addUser(User user){
 		if(user==null){
