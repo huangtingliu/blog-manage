@@ -103,73 +103,85 @@ Ext.define('BlogMgr.view.mgruser.UserAddInfo', {
 				title : '附加信息',
 				xtype : 'fieldset',
 				items : [{
-							xtype : 'fieldcontainer',
-							layout: 'column',
-							items : [{
-										xtype : 'panel',
-										columnWidth: 0.67,
-										layout : 'anchor',
-										defaults : {
-											labelAlign : 'right',
+					xtype : 'fieldcontainer',
+					layout : 'column',
+					items : [{
+								xtype : 'panel',
+								columnWidth : 0.67,
+								layout : 'anchor',
+								defaults : {
+									labelAlign : 'right',
+									labelWidth : 70,
+									anchor : '100%'
+								},
+								items : [{
+											fieldLabel : '头像',
+											xtype : 'filefield',
+											name : 'fAvatar',
 											labelWidth : 70,
-											anchor : '100%'
-										},
-										items : [{
-													fieldLabel : '头像',
-													xtype : 'filefield',
-													name : 'fAvatar',
-													labelWidth : 70,
-													// msgTarget: 'side',
-													buttonText : '选择'
-												}, {
-													xtype : 'fieldcontainer',
-													fieldLabel : '性别',
-													defaultType : 'radiofield',
-													anchor : '90%',
-													defaults : {
-														flex : 1
-													},
-													layout : 'hbox',
-													items : [{
-																boxLabel : '男',
-																name : 'fGender',
-																inputValue : 'MALE'
-															}, {
-																boxLabel : '女',
-																name : 'fGender',
-																inputValue : 'FEMALE'
-															}, {
-																boxLabel : '未知',
-																name : 'fGender',
-																inputValue : 'UNKNOW'
-															}]
-												}, {
-													fieldLabel : '电话',
-													name : 'fPhone',
-													xtype : 'textfield'
-												}, {
-													fieldLabel : '邮箱',
-													name : 'fEmail',
-													xtype : 'textfield'
-												}]
-									}, {
-										columnWidth: 0.3,
-										xtype:'image',
-										defaultAlign:'center',
-										padding:'7',
-										src: 'http://www.sencha.com/img/20110215-feat-html5.png'
-									}]
-						}, {
-							fieldLabel : '备注',
-							xtype : 'textarea',
-							anchor : '100%',
-							grow : true,
-							growMax : 200,
-							labelWidth : 70,
-							labelAlign : 'right',
-							growMin : 100,
-							name : 'fDescr'
-						}]
+											// msgTarget: 'side',
+											buttonText : '选择'
+										}, {
+											xtype : 'fieldcontainer',
+											fieldLabel : '性别',
+											defaultType : 'radiofield',
+											anchor : '90%',
+											defaults : {
+												flex : 1
+											},
+											layout : 'hbox',
+											items : [{
+														boxLabel : '男',
+														name : 'fGender',
+														inputValue : 'MALE'
+													}, {
+														boxLabel : '女',
+														name : 'fGender',
+														inputValue : 'FEMALE'
+													}, {
+														boxLabel : '未知',
+														name : 'fGender',
+														inputValue : 'UNKNOW'
+													}]
+										}, {
+											fieldLabel : '电话',
+											name : 'fPhone',
+											xtype : 'textfield'
+										}, {
+											fieldLabel : '邮箱',
+											name : 'fEmail',
+											xtype : 'textfield'
+										}]
+							}, {
+								xtype : 'panel',
+								layout : {
+									type :'vbox',
+									align:'center'
+								},
+								columnWidth : 0.33,
+								height:110,
+								items : [{
+									xtype : 'image',
+									padding : '0 10 5 10',
+									width:165,
+									src : 'http://www.sencha.com/img/20110215-feat-html5.png',
+									flex:1
+								},{
+									xtype:'button',
+									text: '上传图片'
+								}]
+							}]
+				}, {
+					fieldLabel : '备注',
+					xtype : 'textarea',
+					anchor : '100%',
+					grow : true,
+					growMax : 200,
+					labelWidth : 70,
+					labelAlign : 'right',
+					growMin : 100,
+					name : 'fDescr'
+				}]
 			}]
 
 });
