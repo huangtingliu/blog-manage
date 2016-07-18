@@ -46,10 +46,11 @@ public class UserAction extends BlogMgrAction {
 	 * 添加用户
 	 * @param user
 	 * @return
+	 * @throws InterruptedException 
 	 */
 	@RequestMapping("add.do")
 	@ResponseBody
-	private Object addUser(User user){
+	private Object addUser(User user) {
 		if(user==null){
 			return Message.error("参数为空");
 		}

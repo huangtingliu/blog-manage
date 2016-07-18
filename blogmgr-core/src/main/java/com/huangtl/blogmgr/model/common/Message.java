@@ -127,8 +127,6 @@ public class Message implements Serializable {
 	public boolean isInfo(){
 		return this.type==MessageType.info;
 	}
-	
-	@JSONField(serialize=false)
 	public boolean isSuccess(){
 		return this.type==MessageType.success;
 	}

@@ -1,0 +1,16 @@
+/*操作消息提示*/
+.overrides-toast{}
+.overrides-toast-info{}
+.overrides-toast-info .x-autocontainer-outerCt{}
+.overrides-toast-success{}
+.overrides-toast-success .x-autocontainer-outerCt{
+	color: green;
+}
+.overrides-toast-warn{}
+.overrides-toast-warn .x-autocontainer-outerCt{}
+.overrides-toast-error{}
+.overrides-toast-error .x-autocontainer-outerCt{
+	color: red;
+}
+.overrides-toast-exception{}
+.overrides-toast-exception .x-autocontainer-outerCt{}
