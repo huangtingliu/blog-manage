@@ -9,13 +9,9 @@ Ext.define('Overrides.ext.Toast', {
 					config = { // 默认为info提示
 						title : '操作提示',
 						html : message,
-						iconCls : iconCls,
-						glyph : 0xf05a,
-						bodyCls : 'overrides-toast-info'
+						glyph : 0xf05a
 					};
-					if (align) {
-						config.align = align;
-					}
+					message = {type:'info',content:''};
 				} else {
 					var _glyph;
 					switch(message.type){
@@ -32,7 +28,6 @@ Ext.define('Overrides.ext.Toast', {
 					}
 					
 					Ext.applyIf(config, {
-								bodyCls : 'overrides-toast-' + message.type,
 								glyph : _glyph,
 								html : message.content
 					});
@@ -41,6 +36,8 @@ Ext.define('Overrides.ext.Toast', {
 				Ext.applyIf(config, {
 							title : '操作提示',
 							minWidth : 210,
+							bodyStyle:'#3DBFA3',
+							baseCls:'overrides-toast-'+message.type+' x-window',
 							slideInDuration : 400,
 							minHeight : 92
 						});

@@ -18,7 +18,9 @@ Ext.define('BlogMgr.view.mgruser.UserAddDialogController', {
 								Ext.getStore('s_mgruserlist').reload();
 							},
 							failure : function(form, action) {
-								Ext.toast(action.result);
+								if(action.result){
+									Ext.toast(action.result);
+								}
 							}
 						});
 			},

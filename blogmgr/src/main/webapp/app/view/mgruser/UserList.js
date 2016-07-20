@@ -2,7 +2,7 @@
  * 后台用户列表
  */
 Ext.define('BlogMgr.view.mgruser.UserList', {
-			id:'mgruser_UserList',
+			id : 'mgruser_UserList',
 			uses : ['Widget.button.TransparentButton',
 					'BlogMgr.view.mgruser.UserListToolBar',
 					'BlogMgr.view.mgruser.UserListModel',
@@ -14,35 +14,27 @@ Ext.define('BlogMgr.view.mgruser.UserList', {
 				xtype : 'grid',
 				store : Ext.getStore('s_mgruserlist'),
 				controller : 'mgruserlist',
+				columnLines : true,
+				autoLoad : true,
+				scrollable : true,
+				rowLines : true,
 				viewModel : {
 					type : 'mgruserlist'
 				},
-				columnLines : true,
 				selModel : {
-					mode : "SINGLE", // "SINGLE"/"SIMPLE"/"MULTI"
-					checkOnly : true
-					// 只能通过checkbox选择
+					selType : 'checkboxmodel',
+					ignoreRightMouseSelection:true,
+					pruneRemoved:false,
+					injectCheckbox:1
 				},
 				viewConfig : {
 					stripeRows : true, // 奇偶行不同底色
 					enableTextSelection : true
 				},
-				autoLoad : true,
-				scrollable : true,
-				rowLines : true,
 				columns : [{
 							xtype : 'rownumberer',
-							width : 27
-						}, {
-							xtype : 'checkcolumn',
-							dataIndex : 'ck',
-							width : 35,
-							sortable : false,
-							autoLock : true,
-							menuDisabled : true,
-							hideable : false,
-							resizable : false,
-							draggable : false
+							width : 37,
+							text:'No'
 						}, {
 							text : '名称',
 							dataIndex : 'fName'
@@ -52,24 +44,25 @@ Ext.define('BlogMgr.view.mgruser.UserList', {
 						}, {
 							text : '状态',
 							dataIndex : 'fStatus'
-						},{
+							
+						}, {
 							text : '性别',
 							dataIndex : 'fGender',
-							hidden:true
-						},{
+							hidden : true
+						}, {
 							text : '电话',
 							dataIndex : 'fPhone'
-						},{
+						}, {
 							text : '邮箱',
 							dataIndex : 'fEmail',
-							hidden:true
+							hidden : true
 						}, {
 							text : '创建人',
 							dataIndex : 'fCreater'
 						}, {
 							text : '创建日期',
 							dataIndex : 'fCreateDate',
-							width:'15%'
+							width : '15%'
 						}],
 				tbar : {
 					xtype : 'userlisttoolbar'

@@ -8,6 +8,8 @@ Ext.define('BlogMgr.view.mgruser.UserInfoForm', {
 	title : '用户信息',
 	url : '/blogmgr/mgruser/add.do',
 	method : 'POST',
+	fileUpload: false,
+	//enctype:'application/x-www-form-urlencoded',
 	defaults : {
 		layout : 'anchor',
 		collapsible : false,
@@ -114,13 +116,16 @@ Ext.define('BlogMgr.view.mgruser.UserInfoForm', {
 									labelWidth : 70,
 									anchor : '100%'
 								},
-								items : [/*{
+								items : [{
 											fieldLabel : '头像',
 											xtype : 'filefield',
 											name : 'fAvatar',
 											labelWidth : 70,
-											buttonText : '选择'
-										},*/ {
+											buttonText : '选择',
+											isFileUpload:function(){
+												return false;
+											}
+										}, {
 											xtype : 'fieldcontainer',
 											fieldLabel : '性别',
 											defaultType : 'radiofield',

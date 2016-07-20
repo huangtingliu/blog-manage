@@ -8,6 +8,9 @@ Ext.define('BlogMgr.view.mgruser.UserListController',{
     init: function() {},
     addUser:function(){	//新增用户
     	Ext.create('BlogMgr.view.mgruser.UserAddDialog').show();
+    },
+    deleteUser:function(){	//删除用户
+    	
     }
     
 });

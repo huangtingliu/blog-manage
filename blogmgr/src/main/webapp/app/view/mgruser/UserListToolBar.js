@@ -19,6 +19,7 @@ Ext.define('BlogMgr.view.mgruser.UserListToolBar', {
 					}, {
 						itemId : 'delete',
 						text : '删除',
+						handler:'deleteUser',
 						xtype:'transparent_button',
 						glyph : 0xf014
 					},'-',{
@@ -30,11 +31,7 @@ Ext.define('BlogMgr.view.mgruser.UserListToolBar', {
 						},'筛选', {
 							width : 60,
 							xtype : 'gridsearchfield',
-							store : Ext.create('Ext.data.Store', {
-										proxy : {
-											type : 'rest'
-										}
-									})
+							store :Ext.getStore('s_mgruserlist')
 							}]
 
 		});

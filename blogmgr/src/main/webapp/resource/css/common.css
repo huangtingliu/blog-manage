@@ -1,16 +1,59 @@
 /*操作消息提示*/
-.overrides-toast{}
+/*toast-info */
 .overrides-toast-info{}
-.overrides-toast-info .x-autocontainer-outerCt{}
+/*toast-success */
 .overrides-toast-success{}
-.overrides-toast-success .x-autocontainer-outerCt{
-	color: green;
+.overrides-toast-success.x-window-default{
+	border-color:rgba(38, 185, 154, 0.88)
 }
+.overrides-toast-success.x-window-header-default{
+	border-color:rgba(38, 200, 154, 0.88)
+}
+.overrides-toast-success.x-window-header-default-top{
+	background-color:rgba(38, 185, 154, 0.88)
+}
+.overrides-toast-success.x-window-body-default{
+	border-color:rgba(38, 185, 154, 0.88);
+}
+/*toast-warn */
 .overrides-toast-warn{}
-.overrides-toast-warn .x-autocontainer-outerCt{}
-.overrides-toast-error{}
-.overrides-toast-error .x-autocontainer-outerCt{
-	color: red;
+.overrides-toast-warn.x-window-default{
+	border-color:rgba(243, 156, 18, 0.88)
 }
+.overrides-toast-warn.x-window-header-default{
+	border-color:rgba(243, 171, 18, 0.88)
+}
+.overrides-toast-warn.x-window-header-default-top{
+	background-color:rgba(243, 156, 18, 0.88)
+}
+.overrides-toast-warn.x-window-body-default{
+	border-color:rgba(243, 156, 18, 0.88);
+}
+/*toast-error */
+.overrides-toast-error{}
+.overrides-toast-error.x-window-default{
+	border-color:rgba(231, 76, 60, 0.88)
+}
+.overrides-toast-error.x-window-header-default{
+	border-color:rgba(231, 103, 60, 0.88)
+}
+.overrides-toast-error.x-window-header-default-top{
+	background-color:rgba(231, 76, 60, 0.88)
+}
+.overrides-toast-error.x-window-body-default{
+	border-color:rgba(231, 76, 60, 0.88)
+}
+/*toast-exception */
 .overrides-toast-exception{}
-.overrides-toast-exception .x-autocontainer-outerCt{}
+.overrides-toast-exception.x-window-default{
+	border-color:rgba(52, 73, 94, 0.88)
+}
+.overrides-toast-exception.x-window-header-default{
+	border-color:rgba(66, 96, 116, 0.88)
+}
+.overrides-toast-exception.x-window-header-default-top{
+	background-color:rgba(52, 73, 94, 0.88)
+}
+.overrides-toast-exception.x-window-body-default{
+	border-color:rgba(52, 73, 94, 0.88)
+}

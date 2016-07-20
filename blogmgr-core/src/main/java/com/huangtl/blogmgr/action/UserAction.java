@@ -34,8 +34,8 @@ public class UserAction extends BlogMgrAction {
 	@RequestMapping("paging.data")
 	@ResponseBody
 	private Object menuSearch(
-			Integer pageSize,Integer pageNo) {
-		Page<User> page = new Page<>(pageNo, pageSize);
+			Integer pageNo,Integer pageSize) {
+		Page<User> page = new Page<>(pageSize, pageNo);
 		this.userService.getDao().selectPaging(null, page);
 		Message msg = Message.success("success");
 		msg.setContent(page);
