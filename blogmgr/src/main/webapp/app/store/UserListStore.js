@@ -10,6 +10,7 @@
 			proxy : {
 				limitParam:'pageNo',
 				pageParam:'pageSize',
+				//actionMethods:{ create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
 				type : 'ajax',
 				noCache:false,
 				url : '/blogmgr/mgruser/paging.data',

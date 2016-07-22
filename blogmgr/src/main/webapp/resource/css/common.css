@@ -14,6 +14,11 @@
 }
 .overrides-toast-success.x-window-body-default{
 	border-color:rgba(38, 185, 154, 0.88);
+	background-color:rgba(90, 200, 150, 0.2);
+}
+.overrides-toast-success .x-autocontainer-outerCt{
+	letter-spacing:0.5px;
+	font-weight:bold;
 }
 /*toast-warn */
 .overrides-toast-warn{}

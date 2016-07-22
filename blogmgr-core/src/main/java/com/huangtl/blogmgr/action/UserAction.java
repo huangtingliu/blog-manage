@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.annotation.Resource;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -67,6 +68,21 @@ public class UserAction extends BlogMgrAction {
 			
 		return this.userService.addUser(user);
 	}
+	
+	/**
+	 * 删除多名用户
+	 * @param userIds  格式： 'id,id,id,...'
+	 * @return 删除的人数
+	 */
+	@RequestMapping("delete.do")
+	@ResponseBody
+	private Object deleteUser(String userIds){
+		if(StringUtils.isBlank(userIds)){
+			return Message.error("无效参数!");
+		}
+		return this.userService.deleteUser(userIds.split(","));
+	}
+	
 	
 	
 }

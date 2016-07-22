@@ -5,7 +5,7 @@ Ext.define('Widget.tabs.ReorderableTabs', {
     extend: 'Ext.tab.Panel',
     uses: [
         'Ext.ux.TabReorderer',
-        'Widget.tabs.controller.ReorderableTabsController',
+        'Widget.tabs.ReorderableTabsController',
         'Ext.ux.TabCloseMenu'
     ],
     alias: ['widget.reorderable-tabs'],

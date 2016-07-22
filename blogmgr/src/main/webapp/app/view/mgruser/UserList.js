@@ -5,8 +5,9 @@ Ext.define('BlogMgr.view.mgruser.UserList', {
 			id : 'mgruser_UserList',
 			uses : ['Widget.button.TransparentButton',
 					'BlogMgr.view.mgruser.UserListToolBar',
-					'BlogMgr.view.mgruser.UserListModel',
-					'BlogMgr.view.mgruser.UserListController'],
+					'BlogMgr.view.mgruser.UserListController',
+					'BlogMgr.view.mgruser.UserListModel'
+					],
 			extend : 'Ext.panel.Panel',
 			alias : ['widget.mgruserlist'],
 			layout : 'fit',

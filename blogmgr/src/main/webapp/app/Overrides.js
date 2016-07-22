@@ -36,7 +36,6 @@ Ext.define('Overrides.ext.Toast', {
 				Ext.applyIf(config, {
 							title : '操作提示',
 							minWidth : 210,
-							bodyStyle:'#3DBFA3',
 							baseCls:'overrides-toast-'+message.type+' x-window',
 							slideInDuration : 400,
 							minHeight : 92

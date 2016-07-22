@@ -5,7 +5,6 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title></title>
 	<link rel="stylesheet" type="text/css" href="resource/css/common.css">
-	<link rel="stylesheet" type="text/css" href="resource/css/icons.css">
 	<!--awesome fonts-->
 	<link rel="stylesheet" type="text/css" href="plugin/awesome/css/font-awesome.min.css">
 	<!-- 海王星 -->

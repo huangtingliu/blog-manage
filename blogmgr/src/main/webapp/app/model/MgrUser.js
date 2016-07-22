@@ -4,9 +4,7 @@
 Ext.define('BlogMgr.model.MgrUser',{
 	extend:'Ext.data.Model',
 	idProperty:'fId',	//主键标识
-	
 	fields:[
-		{name:'ck',type:'boolean'},
 		{name:'fId',type:'string'},
 		{name:'fName',type:'string'},
 		{name:'fAccount',type:'string'},

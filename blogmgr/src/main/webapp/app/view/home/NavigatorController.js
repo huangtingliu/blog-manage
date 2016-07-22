@@ -14,7 +14,7 @@ Ext.define('BlogMgr.view.home.NavigatorController',{
 				title:menu.get('fName'),
 				xtype : 'menugrid'
 			});
-			//TODO 太生硬了
+			//TODO 初始化选中时太生硬了
 			if(menu.get('fExpand')==1){
 				view.getComponent(menu.get('fId')).expand(true);
 			}

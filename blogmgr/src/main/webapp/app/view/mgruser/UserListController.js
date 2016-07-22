@@ -10,7 +10,29 @@ Ext.define('BlogMgr.view.mgruser.UserListController',{
     	Ext.create('BlogMgr.view.mgruser.UserAddDialog').show();
     },
     deleteUser:function(){	//删除用户
-    	
+    	var grid = this.getView();
+    	var selectedRow = grid.getSelectionModel().getSelection();
+    	var ids = [];
+    	Ext.each(selectedRow,function(){
+    		ids.push(this.get("fId"));
+		})
+    	Ext.Ajax.request({
+    		url:'/blogmgr/mgruser/delete.do',
+    		method:'POST',
+    		params:{
+    			userIds:ids.join(',')
+    		},
+    		success:function(data){
+    			Ext.toast(JSON.parse(data.responseText));
+    			Ext.getStore('s_mgruserlist').reload();
+    		},
+    		failure:function(){
+    			Ext.toast({
+    				type:'exception',
+    				content:'异常'
+    			});
+    		}
+    	});
     }
     
 });
