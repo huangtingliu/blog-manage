@@ -6,8 +6,8 @@ Ext.define('BlogMgr.view.mgruser.UserList', {
 			uses : ['Widget.button.TransparentButton',
 					'BlogMgr.view.mgruser.UserListToolBar',
 					'BlogMgr.view.mgruser.UserListController',
-					'BlogMgr.view.mgruser.UserListModel'
-					],
+					'BlogMgr.view.mgruser.UserListModel',
+					'Ext.grid.filters.Filters'],
 			extend : 'Ext.panel.Panel',
 			alias : ['widget.mgruserlist'],
 			layout : 'fit',
@@ -19,14 +19,15 @@ Ext.define('BlogMgr.view.mgruser.UserList', {
 				autoLoad : true,
 				scrollable : true,
 				rowLines : true,
+				plugins : 'gridfilters',
 				viewModel : {
 					type : 'mgruserlist'
 				},
 				selModel : {
 					selType : 'checkboxmodel',
-					ignoreRightMouseSelection:true,
-					pruneRemoved:false,
-					injectCheckbox:1
+					ignoreRightMouseSelection : true,
+					pruneRemoved : false,
+					injectCheckbox : 1
 				},
 				viewConfig : {
 					stripeRows : true, // 奇偶行不同底色
@@ -35,17 +36,37 @@ Ext.define('BlogMgr.view.mgruser.UserList', {
 				columns : [{
 							xtype : 'rownumberer',
 							width : 37,
-							text:'No'
+							text : 'No'
 						}, {
 							text : '名称',
-							dataIndex : 'fName'
+							dataIndex : 'fName',
+							filter : {
+								type : 'string',
+								emptyText : '查询..'
+							}
 						}, {
 							text : '账号',
 							dataIndex : 'fAccount'
 						}, {
 							text : '状态',
-							dataIndex : 'fStatus'
-							
+							dataIndex : 'fStatus',
+							renderer:function(val){
+								if(val=='ENABLE'){
+									return '<span style="color:green">可用</span>';
+								}else if(val=='DISABLE'){
+									return '<span style="color:red">不可用</span>';
+								}else{
+									return '未知';
+								}
+							},
+							filter : {
+								type : 'list',
+								labelField: 'text',
+								options : [
+									{id:'ENABLE',text:'可用'},
+									{id:'DISABLE',text:'不可用'}
+								]
+							}
 						}, {
 							text : '性别',
 							dataIndex : 'fGender',

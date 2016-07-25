@@ -31,6 +31,7 @@ Ext.define('BlogMgr.view.mgruser.UserListToolBar', {
 						},'筛选', {
 							width : 60,
 							xtype : 'gridsearchfield',
+							paramName:'fName',
 							store :Ext.getStore('s_mgruserlist')
 							}]
 

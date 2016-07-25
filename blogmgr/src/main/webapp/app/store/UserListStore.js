@@ -2,11 +2,14 @@
  * 后台用户stroe
  */
  Ext.define('BlogMgr.store.UserListStore', {
- 		    uses:['BlogMgr.model.MgrUser'],
 			model : 'BlogMgr.model.MgrUser',
 			extend:'Ext.data.Store',
+			alias:'store.mgrUsers',
 			storeId : 's_mgruserlist',
 			pageSize:15,
+			remoteSort:false,
+			remoteFilter:true,
+			sorters:[],
 			proxy : {
 				limitParam:'pageNo',
 				pageParam:'pageSize',

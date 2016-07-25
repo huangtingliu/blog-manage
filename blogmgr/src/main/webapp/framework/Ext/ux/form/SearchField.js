@@ -39,14 +39,14 @@ Ext.define('Ext.ux.form.SearchField', {
         }
 
         // We're going to use filtering
-        store.setRemoteFilter(true);
+       // store.setRemoteFilter(true);
 
         // Set up the proxy to encode the filter in the simplest way as a name/value pair
-        proxy = me.store.getProxy();
+       /* proxy = me.store.getProxy();
         proxy.setFilterParam(me.paramName);
         proxy.encodeFilters = function(filters) {
             return filters[0].getValue();
-        }
+        }*/
     },
 
     onClearClick : function(){

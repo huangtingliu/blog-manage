@@ -14,7 +14,7 @@ Ext.application({
 			},
 			init : function() {
 				Ext.setGlyphFontFamily('FontAwesome');
-				
+				Ext.require(['BlogMgr.view.mgruser.UserList']);
 			},
 			launch : function(profile) {
 				// 附加额外的属性

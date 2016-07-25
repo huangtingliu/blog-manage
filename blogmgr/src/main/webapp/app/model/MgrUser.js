@@ -8,21 +8,8 @@ Ext.define('BlogMgr.model.MgrUser',{
 		{name:'fId',type:'string'},
 		{name:'fName',type:'string'},
 		{name:'fAccount',type:'string'},
-		{name:'fGender',type:'string',convert:function(data){
-			if("MALE"==data){
-				return '男';
-			}else if("FEMALE"==data){
-				return '女';
-			}
-			return '未知'
-		}},
-		{name:'fStatus',type:'string',convert:function(val){
-			if("ENABLE"==val){
-				return '可用';
-			}
-			return '不可用';
-			
-		}},
+		{name:'fGender',type:'string'},
+		{name:'fStatus',type:'string'},
 		{name:'fPhone',type:'string'},
 		{name:'fEmail',type:'string'},
 		{name:'fCreater',type:'string'},
