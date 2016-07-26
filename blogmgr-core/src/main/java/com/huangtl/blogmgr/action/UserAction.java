@@ -37,6 +37,7 @@ public class UserAction extends BlogMgrAction {
 	@ResponseBody
 	private Object menuSearch(
 			Integer pageNo,Integer pageSize,FilterCollection filter) {
+		
 		Page<User> page = new Page<>(pageSize, pageNo);
 		this.userService.getDao().selectPaging(null, page);
 		Message msg = Message.success("success");

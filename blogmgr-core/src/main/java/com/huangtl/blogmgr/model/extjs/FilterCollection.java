@@ -11,7 +11,7 @@ import com.alibaba.fastjson.JSON;
 import com.huangtl.blogmgr.model.extjs.Filter.Operator;
 
 /**
- * store查询过滤集合
+ * 查询过滤集
  * @date 2016年7月26日
  * @author PraiseLord
  */
