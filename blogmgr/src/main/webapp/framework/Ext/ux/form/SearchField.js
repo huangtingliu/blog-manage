@@ -1,6 +1,5 @@
 Ext.define('Ext.ux.form.SearchField', {
     extend: 'Ext.form.field.Text',
-
     alias: 'widget.searchfield',
 
     triggers: {
@@ -71,7 +70,8 @@ Ext.define('Ext.ux.form.SearchField', {
             // id is used by the Store to replace any previous filter
             me.activeFilter = new Ext.util.Filter({
                 property: me.paramName,
-                value: value
+                value: value,
+                operator:'like'
             });
             me.store.getFilters().add(me.activeFilter);
             me.getTrigger('clear').show();

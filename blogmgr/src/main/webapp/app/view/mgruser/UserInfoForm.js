@@ -8,8 +8,8 @@ Ext.define('BlogMgr.view.mgruser.UserInfoForm', {
 	title : '用户信息',
 	url : '/blogmgr/mgruser/add.do',
 	method : 'POST',
+	waitTitle:'处理中...',
 	fileUpload: false,
-	//enctype:'application/x-www-form-urlencoded',
 	defaults : {
 		layout : 'anchor',
 		collapsible : false,
@@ -165,13 +165,13 @@ Ext.define('BlogMgr.view.mgruser.UserInfoForm', {
 								},
 								columnWidth : 0.33,
 								height:110,
-								items : [{
+								items : [/*{
 									xtype : 'image',
 									padding : '0 10 5 10',
 									width:165,
 									src : 'http://www.sencha.com/img/20110215-feat-html5.png',
 									flex:1
-								},{
+								},*/{
 									xtype:'button',
 									text: '上传图片'
 								}]

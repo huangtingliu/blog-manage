@@ -12,7 +12,6 @@ import com.alibaba.fastjson.annotation.JSONField;
  * <blockquote>
  * <li>页号 1 （默认）
  * <li>每页15条 
- * <li>页面按钮的数量5个
  * </blockquote>
  * @version 
  * @date 2016年4月2日

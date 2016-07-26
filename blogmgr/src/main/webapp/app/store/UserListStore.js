@@ -16,13 +16,14 @@
 				//actionMethods:{ create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
 				type : 'ajax',
 				noCache:false,
+				paramsAsJson:true,
 				url : '/blogmgr/mgruser/paging.data',
 				reader : {
 					type : 'json',
-					successProperty : 'success',
 					rootProperty : 'pageContent',
-					messageProperty : 'content',
 					totalProperty : 'total'
+					//messageProperty : 'content',
+					//successProperty : 'success',
 				}
 			}
 });

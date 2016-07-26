@@ -9,13 +9,12 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 
 import com.alibaba.fastjson.JSON;
 
-public class JsonParamArgumentResolver implements HandlerMethodArgumentResolver  {
+public class JsonArgumentResolver implements HandlerMethodArgumentResolver{
 
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
         //对要解析的参数进行判断，是否需要此解析器
-		return parameter.hasParameterAnnotation(JsonParam.class);
-
+		return parameter.hasParameterAnnotation(Json.class);
 	}
 
 	@Override

@@ -7,6 +7,7 @@ Ext.define('BlogMgr.view.mgruser.UserList', {
 					'BlogMgr.view.mgruser.UserListToolBar',
 					'BlogMgr.view.mgruser.UserListController',
 					'BlogMgr.view.mgruser.UserListModel',
+					'Ext.ux.ProgressBarPager',
 					'Ext.grid.filters.Filters'],
 			extend : 'Ext.panel.Panel',
 			alias : ['widget.mgruserlist'],
@@ -70,10 +71,19 @@ Ext.define('BlogMgr.view.mgruser.UserList', {
 						}, {
 							text : '性别',
 							dataIndex : 'fGender',
-							hidden : true
+							hidden : true,
+							filter:{
+								type:'boolean',
+								yesText:'男',
+								noText :'女',
+								operator:'eq'
+							}
 						}, {
 							text : '电话',
-							dataIndex : 'fPhone'
+							dataIndex : 'fPhone',
+							filter:{
+								type:'number'
+							}
 						}, {
 							text : '邮箱',
 							dataIndex : 'fEmail',
@@ -84,7 +94,11 @@ Ext.define('BlogMgr.view.mgruser.UserList', {
 						}, {
 							text : '创建日期',
 							dataIndex : 'fCreateDate',
-							width : '15%'
+							width : '15%',
+							filter:{
+								 type: 'date',
+								  dateFormat: 'm/d/Y'
+							}
 						}],
 				tbar : {
 					xtype : 'userlisttoolbar'
@@ -94,6 +108,7 @@ Ext.define('BlogMgr.view.mgruser.UserList', {
 							store : Ext.getStore('s_mgruserlist'),
 							dock : 'bottom',
 							displayInfo : true,
+							//plugins: new Ext.ux.ProgressBarPager(),
 							items : [{
 										tooltip : '数据打印',
 										xtype : 'splitbutton',

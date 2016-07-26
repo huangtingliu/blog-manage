@@ -15,6 +15,7 @@ import com.huangtl.blogmgr.core.util.PinYinUtils;
 import com.huangtl.blogmgr.model.blog.User;
 import com.huangtl.blogmgr.model.common.Message;
 import com.huangtl.blogmgr.model.common.Page;
+import com.huangtl.blogmgr.model.extjs.FilterCollection;
 import com.huangtl.blogmgr.service.UserService;
 
 /**
@@ -35,7 +36,7 @@ public class UserAction extends BlogMgrAction {
 	@RequestMapping("paging.data")
 	@ResponseBody
 	private Object menuSearch(
-			Integer pageNo,Integer pageSize) {
+			Integer pageNo,Integer pageSize,FilterCollection filter) {
 		Page<User> page = new Page<>(pageSize, pageNo);
 		this.userService.getDao().selectPaging(null, page);
 		Message msg = Message.success("success");
@@ -82,7 +83,5 @@ public class UserAction extends BlogMgrAction {
 		}
 		return this.userService.deleteUser(userIds.split(","));
 	}
-	
-	
 	
 }

@@ -55,8 +55,8 @@
 		</property>
 		<property name="customArgumentResolvers">
 			<list>
-				<bean
-					class="com.huangtl.blogmgr.core.spring.JsonParamArgumentResolver"></bean>
+				<bean class="com.huangtl.blogmgr.core.spring.JsonArgumentResolver"></bean>
+				<bean class="com.huangtl.blogmgr.core.spring.FiltersArgumentResolver"></bean>
 			</list>
 		</property>
 	</bean>
