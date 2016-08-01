@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.huangtl.blogmgr.dao.UserDao;
-import com.huangtl.blogmgr.dao.param.UserParam;
+import com.huangtl.blogmgr.dao.where.UserSqlWhere;
 import com.huangtl.blogmgr.model.blog.User;
 import com.huangtl.blogmgr.model.common.Message;
 import com.huangtl.blogmgr.service.UserService;
@@ -34,8 +34,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Message eidtUser(User user, UserParam whereParam) {
-		int effectRow = this.userDao.update(user, whereParam);
+	public Message eidtUser(User user, UserSqlWhere where) {
+		int effectRow = this.userDao.update(user, where);
 		return Message.get(effectRow, "修改成功!", "修改失败!");
 	}
 

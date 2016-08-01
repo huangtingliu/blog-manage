@@ -1,7 +1,7 @@
 package com.huangtl.blogmgr.service;
 
 import com.huangtl.blogmgr.dao.UserDao;
-import com.huangtl.blogmgr.dao.param.UserParam;
+import com.huangtl.blogmgr.dao.where.UserSqlWhere;
 import com.huangtl.blogmgr.model.blog.User;
 import com.huangtl.blogmgr.model.common.Message;
 
@@ -28,7 +28,7 @@ public interface UserService {
 	 * @param user
 	 * @param whereParam
 	 */
-	Message eidtUser(User user, UserParam whereParam);
+	Message eidtUser(User user, UserSqlWhere where);
 	
 	/**
 	 * 删除用户

@@ -1,4 +1,4 @@
-package com.huangtl.blogmgr.dao.param;
+package com.huangtl.blogmgr.dao.where;
 
 import java.util.List;
 
@@ -13,18 +13,18 @@ import com.huangtl.blogmgr.model.type.UserStatus;
  * @author PraiseLord
  */
 @SuppressWarnings("serial")
-public class UserParam extends WhereParam {
+public class UserSqlWhere extends SqlWhere {
 	/**
 	 * 为指定用户id
 	 * @param userId
 	 */
-	public UserParam idEqual(String userId){
-		this.put("userId", userId);
+	public UserSqlWhere idEqual(String userId){
+		this.put("fId_eq", userId);
 		return this;
 	}
 	
-	public UserParam idIn(List<String> userIds){
-		this.put("userIds", userIds);
+	public UserSqlWhere idIn(List<String> userIds){
+		this.put("fId_in", userIds);
 		return this;
 	}
 	
@@ -32,9 +32,9 @@ public class UserParam extends WhereParam {
 	 * 符合指定用户名
 	 * @param userName
 	 */
-	public UserParam userNameLike(String userName){
+	public UserSqlWhere userNameLike(String userName){
 		if(StringUtils.isNotBlank(userName)){
-			this.put("userName", "%"+userName);
+			this.put("fName_like", "%"+userName);
 		}
 		return this;
 	}
@@ -44,9 +44,9 @@ public class UserParam extends WhereParam {
 	 * @param pinYin
 	 * @return
 	 */
-	public UserParam pinYinLike(String pinYin ){
+	public UserSqlWhere pinYinLike(String pinYin ){
 		if(StringUtils.isNotBlank(pinYin)){
-			this.put("pinYin", "%"+pinYin);
+			this.put("fPinYin_like", "%"+pinYin);
 		}
 		return this;
 	}
@@ -55,8 +55,8 @@ public class UserParam extends WhereParam {
 	 * 为指定账号
 	 * @param account
 	 */
-	public UserParam accountEqual(String account){
-		this.put("account", account);
+	public UserSqlWhere accountEqual(String account){
+		this.put("fAccount_eq", account);
 		return this;
 	}
 	
@@ -65,8 +65,8 @@ public class UserParam extends WhereParam {
 	 * @param phone
 	 * @return
 	 */
-	public UserParam phoneEqual(String phone){
-		this.put("phone", phone);
+	public UserSqlWhere phoneEqual(String phone){
+		this.put("fPhone_eq", phone);
 		return this;
 	}
 	
@@ -75,8 +75,8 @@ public class UserParam extends WhereParam {
 	 * @param email
 	 * @return
 	 */
-	public UserParam emailEqual(String email){
-		this.put("email", email);
+	public UserSqlWhere emailEqual(String email){
+		this.put("fEmail_eq", email);
 		return this;
 	}
 	
@@ -84,8 +84,8 @@ public class UserParam extends WhereParam {
 	 * 为指定状态
 	 * @param status
 	 */
-	public UserParam statusEqual(UserStatus status){
-		this.put("status", status);
+	public UserSqlWhere statusEqual(UserStatus status){
+		this.put("fStatus_eq", status);
 		return this;
 	}
 	
@@ -93,8 +93,8 @@ public class UserParam extends WhereParam {
 	 * 不为指定状态
 	 * @param status
 	 */
-	public UserParam statusNotEqual(UserStatus status){
-		this.put("statusNot", status);
+	public UserSqlWhere statusNotEqual(UserStatus status){
+		this.put("fStatus_ne", status);
 		return this;
 	}
 	
@@ -102,8 +102,8 @@ public class UserParam extends WhereParam {
 	 * 为指定性别
 	 * @param gender
 	 */
-	public UserParam genderEqual(Gender gender){
-		this.put("gender", gender);
+	public UserSqlWhere genderEqual(Gender gender){
+		this.put("fGender_eq", gender);
 		return this;
 	}
 	

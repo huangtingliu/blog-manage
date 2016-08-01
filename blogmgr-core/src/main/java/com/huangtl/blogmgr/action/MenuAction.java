@@ -8,8 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.huangtl.blogmgr.dao.param.MenuParam;
-import com.huangtl.blogmgr.dao.param.WhereParam;
+import com.huangtl.blogmgr.dao.where.MenuParam;
+import com.huangtl.blogmgr.dao.where.SqlWhere;
 import com.huangtl.blogmgr.model.blog.Menu;
 import com.huangtl.blogmgr.model.common.Message;
 import com.huangtl.blogmgr.service.MenuService;
@@ -32,7 +32,7 @@ public class MenuAction extends BlogMgrAction {
 	@RequestMapping("menus.data")
 	@ResponseBody
 	private Object menuSearch(String menuId,String parentId) {
-		WhereParam param = new MenuParam()
+		SqlWhere param = new MenuParam()
 						  .idEqual(menuId)
 						  .parentIdEqual(parentId);
 		List<Menu> menus = this.menuService.getDao().selectList(param);

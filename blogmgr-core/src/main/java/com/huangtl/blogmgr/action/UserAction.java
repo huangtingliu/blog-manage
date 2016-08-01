@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.huangtl.blogmgr.core.util.PinYinUtils;
+import com.huangtl.blogmgr.dao.where.UserSqlWhere;
 import com.huangtl.blogmgr.model.blog.User;
 import com.huangtl.blogmgr.model.common.Message;
 import com.huangtl.blogmgr.model.common.Page;
+import com.huangtl.blogmgr.model.extjs.Filter;
 import com.huangtl.blogmgr.model.extjs.FilterCollection;
 import com.huangtl.blogmgr.service.UserService;
 
@@ -35,11 +37,14 @@ public class UserAction extends BlogMgrAction {
 	 */
 	@RequestMapping("paging.data")
 	@ResponseBody
-	private Object menuSearch(
-			Integer pageNo,Integer pageSize,FilterCollection filter) {
+	private Object menuSearch(Integer pageNo,Integer pageSize,FilterCollection filter) {
 		
 		Page<User> page = new Page<>(pageSize, pageNo);
-		this.userService.getDao().selectPaging(null, page);
+		UserSqlWhere whereParam = new UserSqlWhere();
+		for (Filter f : filter) {
+			whereParam.putFilter(f);
+		}
+		this.userService.getDao().selectPaging(whereParam, page);
 		Message msg = Message.success("success");
 		msg.setContent(page);
 		return page;

@@ -11,7 +11,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.huangtl.blogmgr.dao.param.WhereParam;
+import com.huangtl.blogmgr.dao.where.SqlWhere;
 import com.huangtl.blogmgr.model.common.Page;
 
 /**
@@ -60,7 +60,7 @@ public abstract class MybatisDaoAdaptor<T> implements MybatisDao<T> {
 	
 	
 	@Override
-	public int delete(WhereParam param){
+	public int delete(SqlWhere param){
 		if(param==null || param.size()==0){return 0;}
 		return this.sqlSession.delete(nameSpace+".delete",param);
 	};
@@ -71,7 +71,7 @@ public abstract class MybatisDaoAdaptor<T> implements MybatisDao<T> {
 	 * @return
 	 */
 	@Override
-	public int update(T entity ,WhereParam param){
+	public int update(T entity ,SqlWhere param){
 		if(param==null || param.size()==0){return 0;}
 		if(entity==null){return 0;}
 		
@@ -84,7 +84,7 @@ public abstract class MybatisDaoAdaptor<T> implements MybatisDao<T> {
 	 * @return
 	 */
 	@Override
-	public List<T> selectList(WhereParam param){
+	public List<T> selectList(SqlWhere param){
 		if(param==null || param.size()==0){return new ArrayList<T>();}
 		List<T> lists = this.sqlSession.selectList(nameSpace+".selectList",param);
 		return lists;
@@ -94,7 +94,7 @@ public abstract class MybatisDaoAdaptor<T> implements MybatisDao<T> {
 	 * 查询总数
 	 */
 	@Override
-	public long selectCount(WhereParam param) {
+	public long selectCount(SqlWhere param) {
 		long count = this.sqlSession.selectOne(nameSpace+".selectCount",param);
 		return count;
 	}
@@ -103,8 +103,8 @@ public abstract class MybatisDaoAdaptor<T> implements MybatisDao<T> {
 	 * 分页查询
 	 */
 	@Override
-	public int selectPaging(WhereParam param, Page<T> page) {
-		if (param==null ) {param = WhereParam.instance();}
+	public int selectPaging(SqlWhere param, Page<T> page) {
+		if (param==null ) {param = SqlWhere.blankWhere();}
 		page.setTotalRecNum(selectCount(param));
 		param.put("startIndex", page.getStartIndex()-1);
 		param.put("endIndex", page.getEndIndex()-1);

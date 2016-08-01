@@ -1,4 +1,4 @@
-package com.huangtl.blogmgr.dao.param;
+package com.huangtl.blogmgr.dao.where;
 
 
 /**
@@ -7,7 +7,7 @@ package com.huangtl.blogmgr.dao.param;
  * @author PraiseLord
  */
 @SuppressWarnings("serial")
-public class MenuParam extends WhereParam {
+public class MenuParam extends SqlWhere {
 	
 	public MenuParam idEqual(String menuId){
 		this.put("menuId", menuId);

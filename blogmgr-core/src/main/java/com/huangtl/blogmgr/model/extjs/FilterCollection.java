@@ -8,7 +8,7 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 
 import com.alibaba.fastjson.JSON;
-import com.huangtl.blogmgr.model.extjs.Filter.Operator;
+import com.huangtl.blogmgr.core.dao.Operator;
 
 /**
  * 查询过滤集
@@ -39,8 +39,8 @@ public class FilterCollection implements Iterable<Filter> {
 	public FilterCollection addFilter(Filter filter){
 		if(filter==null || StringUtils.isBlank(filter.getProperty())){return this;}
 		
-		String operator = (filter.getOperator()==null?Operator.eq.toString():filter.getOperator().toString());
-		this.filters.put(filter.getProperty()+"."+operator, filter);
+		Operator operator = (filter.getOperator()==null?Operator.eq:filter.getOperator());
+		this.filters.put(filter.getProperty()+"_"+operator, filter);
 		return this;
 	}
 	
@@ -72,7 +72,7 @@ public class FilterCollection implements Iterable<Filter> {
 	 * @return
 	 */
 	public Filter getFilter(String field,Operator operator){
-		return this.filters.get(field+"."+operator.toString());
+		return this.filters.get(field+"_"+operator.toString());
 	}
 	
 	@Override

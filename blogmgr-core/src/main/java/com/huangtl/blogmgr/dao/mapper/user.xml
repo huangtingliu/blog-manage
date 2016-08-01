@@ -23,18 +23,18 @@
 	<sql id="where">
 		 <where>
 		 		1=1
-			<if test="userId != null ">and   ui_Id       =  #{userId}</if>
-			<if test="userName != null">and  ui_Name     =  like #{userName}</if>
-			<if test="pinYin != null">and    ui_PinYin   = like #{pinYin}</if>
-			<if test="account != null ">and  ui_Account  = #{account}</if>
-			<if test="phone != null ">and    ui_Phone    = #{phone}</if>
-			<if test="email != null ">and    ui_Email    = #{email}</if>
-			<if test="gender != null ">and   dic_Gender  = #{gender}</if>
-			<if test="status != null">and    dic_Status  =  #{status}</if>
-			<if test="statusNot != null">and dic_Status !=  #{statusNot}</if>
-			<if test="userIds != null">
+			<if test="fId_eq != null ">and         ui_Id       =   #{fId_eq}</if>
+			<if test="fName_like != null">and      ui_Name    like #{fName_like}</if>
+			<if test="fPinYin_like != null">and    ui_PinYin  like #{fPinYin_like}</if>
+			<if test="fAccount_eq != null ">and    ui_Account  =   #{fAccount_eq}</if>
+			<if test="fPhone_eq != null ">and      ui_Phone    =   #{fPhone_eq}</if>
+			<if test="fEmail_eq != null ">and      ui_Email    =   #{fEmail_eq}</if>
+			<if test="fGender_eq != null ">and     dic_Gender  =   #{fGender_eq}</if>
+			<if test="fStatus_eq != null">and      dic_Status  =   #{fStatus_eq}</if>
+			<if test="fStatus_ne != null">and      dic_Status !=   #{fStatus_ne}</if>
+			<if test="fId_in != null">
 				and ui_Id in
-				<foreach collection="userIds" open="(" item="id" separator="," close=")">
+				<foreach collection="fId_in" open="(" item="id" separator="," close=")">
 					#{id}
 				</foreach>		
 			</if>

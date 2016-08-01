@@ -72,6 +72,15 @@ Ext.define('BlogMgr.view.user.UserList', {
 							text : '性别',
 							dataIndex : 'fGender',
 							hidden : true,
+							renderer:function(val){
+								if(val=='MALE'){
+									return '男';
+								}else if(val=='FEMALE'){
+									return '女';
+								}else{
+									return '未知';
+								}
+							},
 							filter:{
 								type:'boolean',
 								yesText:'男',
