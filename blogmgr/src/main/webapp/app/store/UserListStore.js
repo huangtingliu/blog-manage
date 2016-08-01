@@ -2,10 +2,10 @@
  * 后台用户stroe
  */
  Ext.define('BlogMgr.store.UserListStore', {
-			model : 'BlogMgr.model.MgrUser',
+			model : 'BlogMgr.model.User',
 			extend:'Ext.data.Store',
-			alias:'store.mgrUsers',
-			storeId : 's_mgruserlist',
+			alias:'store.user',
+			storeId : 's_userlist',
 			pageSize:15,
 			remoteSort:false,
 			remoteFilter:true,
@@ -17,7 +17,7 @@
 				type : 'ajax',
 				noCache:false,
 				paramsAsJson:true,
-				url : '/blogmgr/mgruser/paging.data',
+				url : '/blogmgr/user/paging.data',
 				reader : {
 					type : 'json',
 					rootProperty : 'pageContent',

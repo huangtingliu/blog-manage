@@ -1,17 +1,17 @@
 /**
  * 用户添加弹出窗口
  */
-Ext.define('BlogMgr.view.mgruser.UserAddDialog', {
-			id : 'mgruser_useradd',
-			uses:['BlogMgr.view.mgruser.UserInfoForm',
-				  'BlogMgr.view.mgruser.UserAuthForm',
-				  'BlogMgr.view.mgruser.UserAddDialogController'],
+Ext.define('BlogMgr.view.user.UserAddDialog', {
+			id : 'user_useradd',
+			uses:['BlogMgr.view.user.UserInfoForm',
+				  'BlogMgr.view.user.UserAuthForm',
+				  'BlogMgr.view.user.UserAddDialogController'],
 			extend : 'Ext.window.Window',
-			alias : ['widget.mgruseradd'],
+			alias : ['widget.useradd'],
 			layout : 'fit',
 			title : '用户添加',
 			maximizable : true, // 最大化
-			controller:'mgruseradd',
+			controller:'useradd',
 			bodyStyle : 'padding : 2px 2px 0',
 			shadowOffset : 30, // 投影效果
 			modal : true, // 模态
@@ -44,7 +44,7 @@ Ext.define('BlogMgr.view.mgruser.UserAddDialog', {
 						bodyPadding : '5 5 5 5',
 						plain : true,
 						items : [{
-									xtype : 'mgruser_userinfoform'
+									xtype : 'user_userinfoform'
 								}]
 					}]
 		});

@@ -1,12 +1,12 @@
 /**
  * 用户信息表单
  */
-Ext.define('BlogMgr.view.mgruser.UserInfoForm', {
+Ext.define('BlogMgr.view.user.UserInfoForm', {
 	itemId : 'userInfoForm',
 	extend : 'Ext.form.Panel',
-	alias : ['widget.mgruser_userinfoform'],
+	alias : ['widget.user_userinfoform'],
 	title : '用户信息',
-	url : '/blogmgr/mgruser/add.do',
+	url : '/blogmgr/user/add.do',
 	method : 'POST',
 	waitTitle:'处理中...',
 	fileUpload: false,

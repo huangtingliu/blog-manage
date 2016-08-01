@@ -1,28 +1,28 @@
 /**
  * 后台用户列表
  */
-Ext.define('BlogMgr.view.mgruser.UserList', {
-			id : 'mgruser_UserList',
+Ext.define('BlogMgr.view.user.UserList', {
+			id : 'user_UserList',
 			uses : ['Widget.button.TransparentButton',
-					'BlogMgr.view.mgruser.UserListToolBar',
-					'BlogMgr.view.mgruser.UserListController',
-					'BlogMgr.view.mgruser.UserListModel',
+					'BlogMgr.view.user.UserListToolBar',
+					'BlogMgr.view.user.UserListController',
+					'BlogMgr.view.user.UserListModel',
 					'Ext.ux.ProgressBarPager',
 					'Ext.grid.filters.Filters'],
 			extend : 'Ext.panel.Panel',
-			alias : ['widget.mgruserlist'],
+			alias : ['widget.userlist'],
 			layout : 'fit',
 			items : {
 				xtype : 'grid',
-				store : Ext.getStore('s_mgruserlist'),
-				controller : 'mgruserlist',
+				store : Ext.getStore('s_userlist'),
+				controller : 'userlist',
 				columnLines : true,
 				autoLoad : true,
 				scrollable : true,
 				rowLines : true,
 				plugins : 'gridfilters',
 				viewModel : {
-					type : 'mgruserlist'
+					type : 'userlist'
 				},
 				selModel : {
 					selType : 'checkboxmodel',
@@ -105,7 +105,7 @@ Ext.define('BlogMgr.view.mgruser.UserList', {
 				},
 				dockedItems : [{
 							xtype : 'pagingtoolbar',
-							store : Ext.getStore('s_mgruserlist'),
+							store : Ext.getStore('s_userlist'),
 							dock : 'bottom',
 							displayInfo : true,
 							//plugins: new Ext.ux.ProgressBarPager(),

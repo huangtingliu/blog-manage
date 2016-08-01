@@ -24,7 +24,7 @@ import com.huangtl.blogmgr.service.UserService;
  * @author PraiseLord
  */
 @Controller
-@RequestMapping("/mgruser/*")
+@RequestMapping("/user/*")
 public class UserAction extends BlogMgrAction {
 	@Resource
 	private UserService userService;

@@ -1,7 +1,7 @@
 /**
  * 后台用户
  */
-Ext.define('BlogMgr.model.MgrUser',{
+Ext.define('BlogMgr.model.User',{
 	extend:'Ext.data.Model',
 	idProperty:'fId',	//主键标识
 	fields:[

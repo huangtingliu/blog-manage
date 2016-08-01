@@ -1,10 +1,10 @@
 /**
  * 用户权限表单
  */
-Ext.define('BlogMgr.view.mgruser.UserAuthForm', {
+Ext.define('BlogMgr.view.user.UserAuthForm', {
 			itemId : 'userAuthForm',
 			extend : 'Ext.form.Panel',
-			alias : ['widget.mgruser_userauthform'],
+			alias : ['widget.user_userauthform'],
 			title : '权限分配',
 			items : []
 		});

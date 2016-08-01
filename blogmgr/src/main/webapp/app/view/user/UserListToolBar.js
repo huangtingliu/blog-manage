@@ -1,7 +1,7 @@
 /**
  * 用户列表工具栏
  */
-Ext.define('BlogMgr.view.mgruser.UserListToolBar', {
+Ext.define('BlogMgr.view.user.UserListToolBar', {
 		    uses:['Widget.input.GridSearchField'],
 			extend : 'Ext.toolbar.Toolbar',
 			alias : 'widget.userlisttoolbar',
@@ -32,7 +32,7 @@ Ext.define('BlogMgr.view.mgruser.UserListToolBar', {
 							width : 60,
 							xtype : 'gridsearchfield',
 							paramName:'fName',
-							store :Ext.getStore('s_mgruserlist')
+							store :Ext.getStore('s_userlist')
 							}]
 
 		});

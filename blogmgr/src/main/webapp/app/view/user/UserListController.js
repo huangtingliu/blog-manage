@@ -1,10 +1,10 @@
 /**
  * 用户列表控制器
  */
-Ext.define('BlogMgr.view.mgruser.UserListController', {
-	uses : ['BlogMgr.view.mgruser.UserAddDialog'],
+Ext.define('BlogMgr.view.user.UserListController', {
+	uses : ['BlogMgr.view.user.UserAddDialog'],
 	extend : 'Ext.app.ViewController',
-	alias : 'controller.mgruserlist',
+	alias : 'controller.userlist',
 	init : function() {
 		this.mask = new Ext.LoadMask({
 					msg : '删除中...',
@@ -12,7 +12,7 @@ Ext.define('BlogMgr.view.mgruser.UserListController', {
 				});
 	},
 	addUser : function() { // 新增用户
-		Ext.create('BlogMgr.view.mgruser.UserAddDialog').show();
+		Ext.create('BlogMgr.view.user.UserAddDialog').show();
 	},
 
 	deleteUser : function() { // 删除用户
@@ -34,7 +34,7 @@ Ext.define('BlogMgr.view.mgruser.UserListController', {
 					if (val == 'yes') {
 						_this.mask.show();
 						Ext.Ajax.request({
-									url : '/blogmgr/mgruser/delete.do',
+									url : '/blogmgr/user/delete.do',
 									method : 'POST',
 									params : {
 										userIds : ids.join(',')
@@ -42,7 +42,7 @@ Ext.define('BlogMgr.view.mgruser.UserListController', {
 									success : function(data) {
 										_this.mask.hide();
 										Ext.toast(JSON.parse(data.responseText));
-										Ext.getStore('s_mgruserlist').reload();
+										Ext.getStore('s_userlist').reload();
 										grid.getSelectionModel().deselectAll();
 									},
 									failure : function() {

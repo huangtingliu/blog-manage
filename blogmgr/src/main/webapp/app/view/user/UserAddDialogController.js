@@ -1,9 +1,9 @@
 /**
  * 用户添加对话框控制器
  */
-Ext.define('BlogMgr.view.mgruser.UserAddDialogController', {
+Ext.define('BlogMgr.view.user.UserAddDialogController', {
 			extend : 'Ext.app.ViewController',
-			alias : 'controller.mgruseradd',
+			alias : 'controller.useradd',
 			init : function() {
 				this.mask = new Ext.LoadMask({
 					msg : '删除中...',
@@ -12,14 +12,14 @@ Ext.define('BlogMgr.view.mgruser.UserAddDialogController', {
 			},
 			userInfoSubmit : function() { // 用户信息提交
 				var _this = this;
-				var form = Ext.getCmp('mgruser_useradd')
+				var form = Ext.getCmp('user_useradd')
 						.getComponent('userAddTabPanel')
 						.getComponent("userInfoForm");
 				form.submit({
 							success : function(form, action) {
 								Ext.toast(action.result);
 								_this.closeDialog();
-								Ext.getStore('s_mgruserlist').reload();
+								Ext.getStore('s_userlist').reload();
 							},
 							failure : function(form, action) {
 								if(action.result){
@@ -31,7 +31,7 @@ Ext.define('BlogMgr.view.mgruser.UserAddDialogController', {
 				
 			},
 			closeDialog:function(){	//关闭对话窗
-				Ext.getCmp('mgruser_useradd').close();
+				Ext.getCmp('user_useradd').close();
 			}
 
 		});
