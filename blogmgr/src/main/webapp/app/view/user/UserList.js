@@ -7,8 +7,7 @@ Ext.define('BlogMgr.view.user.UserList', {
 					'BlogMgr.view.user.UserListToolBar',
 					'BlogMgr.view.user.UserListController',
 					'BlogMgr.view.user.UserListModel',
-					'Ext.ux.ProgressBarPager',
-					'Ext.grid.filters.Filters'],
+					'Ext.ux.ProgressBarPager', 'Ext.grid.filters.Filters'],
 			extend : 'Ext.panel.Panel',
 			alias : ['widget.userlist'],
 			layout : 'fit',
@@ -43,56 +42,72 @@ Ext.define('BlogMgr.view.user.UserList', {
 							dataIndex : 'fName',
 							filter : {
 								type : 'string',
-								emptyText : '查询..'
+								emptyText : '名称..'
 							}
 						}, {
 							text : '账号',
-							dataIndex : 'fAccount'
+							dataIndex : 'fAccount',
+							filter : {
+								type : 'string',
+								emptyText : '账号..'
+							}
 						}, {
 							text : '状态',
 							dataIndex : 'fStatus',
-							renderer:function(val){
-								if(val=='ENABLE'){
+							align:'center',
+							renderer : function(val) {
+								if (val == 'ENABLE') {
 									return '<span style="color:green">可用</span>';
-								}else if(val=='DISABLE'){
+								} else if (val == 'DISABLE') {
 									return '<span style="color:red">不可用</span>';
-								}else{
+								} else {
 									return '未知';
 								}
 							},
 							filter : {
 								type : 'list',
-								labelField: 'text',
-								options : [
-									{id:'ENABLE',text:'可用'},
-									{id:'DISABLE',text:'不可用'}
-								]
+								labelField : 'text',
+								options : [{
+											id : 'ENABLE',
+											text : '可用'
+										}, {
+											id : 'DISABLE',
+											text : '不可用'
+										}]
 							}
 						}, {
 							text : '性别',
 							dataIndex : 'fGender',
 							hidden : true,
-							renderer:function(val){
-								if(val=='MALE'){
+							align:'center',
+							renderer : function(val) {
+								if (val == 'MALE') {
 									return '男';
-								}else if(val=='FEMALE'){
+								} else if (val == 'FEMALE') {
 									return '女';
-								}else{
+								} else {
 									return '未知';
 								}
 							},
-							filter:{
-								type:'boolean',
-								yesText:'男',
-								noText :'女',
-								operator:'eq'
+							filter : {
+								type : 'list',
+								labelField : 'text',
+								single : true,
+								operator : 'eq',
+								options : [{
+											id : 'UNKNOW',
+											text : '未知'
+										}, {
+											id : 'MALE',
+											text : '男'
+										}, {
+											id : 'FEMALE',
+											text : '女'
+										}]
 							}
 						}, {
 							text : '电话',
-							dataIndex : 'fPhone',
-							filter:{
-								type:'number'
-							}
+							dataIndex : 'fPhone'
 						}, {
 							text : '邮箱',
 							dataIndex : 'fEmail',
@@ -103,10 +118,22 @@ Ext.define('BlogMgr.view.user.UserList', {
 						}, {
 							text : '创建日期',
 							dataIndex : 'fCreateDate',
-							width : '15%',
-							filter:{
-								 type: 'date',
-								  dateFormat: 'm/d/Y'
+							width : '10%',
+							align:'center',
+							renderer : function(val) {
+								return Ext.Date.format(new Date(val), 'Y-m-d');
+							},
+							filter : {
+								type : 'date',
+								dateFormat : 'Y-m-d',
+								fields : {
+									lt : {
+										text : '之前'
+									},
+									gt : {
+										text : '之后'
+									}
+								}
 							}
 						}],
 				tbar : {
@@ -117,7 +144,7 @@ Ext.define('BlogMgr.view.user.UserList', {
 							store : Ext.getStore('s_userlist'),
 							dock : 'bottom',
 							displayInfo : true,
-							//plugins: new Ext.ux.ProgressBarPager(),
+							// plugins: new Ext.ux.ProgressBarPager(),
 							items : [{
 										tooltip : '数据打印',
 										xtype : 'splitbutton',

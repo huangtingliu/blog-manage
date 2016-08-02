@@ -26,17 +26,27 @@
 			<if test="fId_eq != null ">and         ui_Id       =   #{fId_eq}</if>
 			<if test="fName_like != null">and      ui_Name    like #{fName_like}</if>
 			<if test="fPinYin_like != null">and    ui_PinYin  like #{fPinYin_like}</if>
+			<if test="fAccount_like != null ">and  ui_Account like #{fAccount_like}</if>
 			<if test="fAccount_eq != null ">and    ui_Account  =   #{fAccount_eq}</if>
 			<if test="fPhone_eq != null ">and      ui_Phone    =   #{fPhone_eq}</if>
 			<if test="fEmail_eq != null ">and      ui_Email    =   #{fEmail_eq}</if>
 			<if test="fGender_eq != null ">and     dic_Gender  =   #{fGender_eq}</if>
 			<if test="fStatus_eq != null">and      dic_Status  =   #{fStatus_eq}</if>
 			<if test="fStatus_ne != null">and      dic_Status !=   #{fStatus_ne}</if>
+			<if test="fCreateDate_eq != null">and  DATE_FORMAT(ui_createDate,'%Y-%m-%d') =  #{fCreateDate_eq}</if>
+			<if test="fCreateDate_gt != null">and  DATE_FORMAT(ui_createDate,'%Y-%m-%d') &gt;  #{fCreateDate_gt}</if>
+			<if test="fCreateDate_lt != null">and  DATE_FORMAT(ui_createDate,'%Y-%m-%d') &lt;  #{fCreateDate_lt}</if>
 			<if test="fId_in != null">
 				and ui_Id in
 				<foreach collection="fId_in" open="(" item="id" separator="," close=")">
 					#{id}
 				</foreach>		
+			</if>
+			<if test="fStatus_in != null ">
+				and dic_Status in 
+				<foreach collection="fStatus_in" open="(" item="status" separator="," close=")">
+					#{status}
+				</foreach>
 			</if>
 		</where>
 	</sql>

@@ -3,3 +3,20 @@ Ext.define("Ext.locale.zh_CN.grid.filters.Filters", {
     override: "Ext.grid.filters.Filters",
    menuFilterText: "过滤"
 });
+Ext.define("Ext.locale.zh_CN.grid.filters.filter.Date", {
+    override: "Ext.grid.filters.filter.Date",
+    config: {
+    		dateFormat : 'Y-m-d H:i:s',
+    		fields : {
+					lt : {
+						text : '之前'
+					},
+					gt : {
+						text : '之后'
+					},
+					eq : {
+						text : '等于'
+					}
+				}
+    }
+});

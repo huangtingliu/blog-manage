@@ -1,5 +1,7 @@
 package com.huangtl.blogmgr.dao.where;
 
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -15,53 +17,62 @@ import com.huangtl.blogmgr.model.type.UserStatus;
 @SuppressWarnings("serial")
 public class UserSqlWhere extends SqlWhere {
 	/**
-	 * 为指定用户id
+	 * 指定用户id为
 	 * @param userId
 	 */
 	public UserSqlWhere idEqual(String userId){
 		this.put("fId_eq", userId);
 		return this;
 	}
-	
+	/**
+	 * 指定用户id存在于
+	 * @param userIds
+	 * @return
+	 */
 	public UserSqlWhere idIn(List<String> userIds){
 		this.put("fId_in", userIds);
 		return this;
 	}
 	
 	/**
-	 * 符合指定用户名
+	 * 用户名模糊查询
 	 * @param userName
 	 */
 	public UserSqlWhere userNameLike(String userName){
-		if(StringUtils.isNotBlank(userName)){
-			this.put("fName_like", "%"+userName);
-		}
+		this.like("fName_like", userName);
 		return this;
 	}
 	
 	/**
-	 * 符合指定拼音
+	 * 拼音模糊查询
 	 * @param pinYin
 	 * @return
 	 */
 	public UserSqlWhere pinYinLike(String pinYin ){
-		if(StringUtils.isNotBlank(pinYin)){
-			this.put("fPinYin_like", "%"+pinYin);
-		}
+		this.like("fPinYin_like", pinYin);
 		return this;
 	}
 	
 	/**
-	 * 为指定账号
+	 * 指定账号为
 	 * @param account
 	 */
 	public UserSqlWhere accountEqual(String account){
 		this.put("fAccount_eq", account);
 		return this;
 	}
+	/**
+	 * 对账号进行模糊查询
+	 * @param account
+	 * @return
+	 */
+	public UserSqlWhere accountLike(String account){
+		this.like("fAccount_like", account);
+		return this;
+	}
 	
 	/**
-	 * 为指定电话
+	 * 指定电话为
 	 * @param phone
 	 * @return
 	 */
@@ -71,7 +82,7 @@ public class UserSqlWhere extends SqlWhere {
 	}
 	
 	/**
-	 * 为指定邮件
+	 * 指定邮件为
 	 * @param email
 	 * @return
 	 */
@@ -81,7 +92,7 @@ public class UserSqlWhere extends SqlWhere {
 	}
 	
 	/**
-	 * 为指定状态
+	 * 指定状态为
 	 * @param status
 	 */
 	public UserSqlWhere statusEqual(UserStatus status){
@@ -90,7 +101,7 @@ public class UserSqlWhere extends SqlWhere {
 	}
 	
 	/**
-	 * 不为指定状态
+	 * 指定状态不为
 	 * @param status
 	 */
 	public UserSqlWhere statusNotEqual(UserStatus status){
@@ -98,8 +109,15 @@ public class UserSqlWhere extends SqlWhere {
 		return this;
 	}
 	
+	public UserSqlWhere statusIn(UserStatus... status){
+		if(status==null || status.length==0){return this;}
+		
+		this.put("fStatus_in", Arrays.asList(status));
+		return this;
+	}
+	
 	/**
-	 * 为指定性别
+	 * 性别为
 	 * @param gender
 	 */
 	public UserSqlWhere genderEqual(Gender gender){
@@ -107,4 +125,36 @@ public class UserSqlWhere extends SqlWhere {
 		return this;
 	}
 	
+	/**
+	 * 创建日期大于指定日期
+	 * @param createDate
+	 * @return
+	 */
+	public UserSqlWhere createDateGreatThan(Date createDate){
+		this.put("fCreateDate_gt", createDate);
+		return this;
+	}
+	
+	/**
+	 * 创建日期小于指定日期
+	 * @param createDate
+	 * @return
+	 */
+	public UserSqlWhere createDateLessThan(Date createDate){
+		this.put("fCreateDate_lt", createDate);
+		return this;
+	}
+	/**
+	 * 创建日期为
+	 * @param createDate
+	 * @return
+	 */
+	public UserSqlWhere createDateEqual(Date createDate){
+		this.put("fCreateDate_eq", createDate);
+		return this;
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(StringUtils.trimToNull(null));
+	}
 }

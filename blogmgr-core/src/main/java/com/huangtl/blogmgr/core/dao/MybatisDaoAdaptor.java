@@ -3,7 +3,6 @@ package com.huangtl.blogmgr.core.dao;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.collections4.CollectionUtils;
@@ -85,7 +84,7 @@ public abstract class MybatisDaoAdaptor<T> implements MybatisDao<T> {
 	 */
 	@Override
 	public List<T> selectList(SqlWhere param){
-		if(param==null || param.size()==0){return new ArrayList<T>();}
+		if(param==null){param = SqlWhere.blankWhere();}
 		List<T> lists = this.sqlSession.selectList(nameSpace+".selectList",param);
 		return lists;
 	}
