@@ -20,11 +20,11 @@
 	<sql id="where">
 		 <where>
 		 		1=1
-			<if test="menuId !=null ">
-				and mu_Id = #{menuId}
+			<if test="fId_eq !=null ">
+				and mu_Id = #{fId_eq}
 			</if>
-			<if test="parentId != null">
-				and mu_ParentId = #{parentId}
+			<if test="fParentId_eq != null">
+				and mu_ParentId = #{fParentId_eq}
 			</if>
 		</where>
 	</sql>

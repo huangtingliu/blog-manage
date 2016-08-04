@@ -4,8 +4,6 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.huangtl.blogmgr.model.type.Gender;
 import com.huangtl.blogmgr.model.type.UserStatus;
 
@@ -152,9 +150,5 @@ public class UserSqlWhere extends SqlWhere {
 	public UserSqlWhere createDateEqual(Date createDate){
 		this.put("fCreateDate_eq", createDate);
 		return this;
-	}
-	
-	public static void main(String[] args) {
-		System.out.println(StringUtils.trimToNull(null));
 	}
 }

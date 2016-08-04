@@ -13,23 +13,18 @@
 			proxy : {
 				limitParam:'pageNo',
 				pageParam:'pageSize',
-				//actionMethods:{ create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
 				type : 'ajax',
 				noCache:false,
 				paramsAsJson:true,
 				url : '/blogmgr/user/paging.data',
 				reader : {
 					type : 'json',
-					rootProperty : 'pageContent',
-					totalProperty : 'total'
-					//messageProperty : 'content',
-					//successProperty : 'success',
+					rootProperty : 'userList',
+					totalProperty : 'total',
+					messageProperty : 'message',
+					successProperty : 'success'
 				}
 			},
-			listeners:{
-				/*update:function( _this , record , operation , modifiedFieldNames , details , eOpts ){
-					alert("update");
-				} */
-			}
+			listeners:{}
 });
 Ext.create('BlogMgr.store.UserListStore');

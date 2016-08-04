@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSONObject;
 import com.huangtl.blogmgr.core.util.PinYinUtils;
 import com.huangtl.blogmgr.dao.where.UserSqlWhere;
 import com.huangtl.blogmgr.model.blog.User;
@@ -26,18 +27,18 @@ import com.huangtl.blogmgr.service.UserService;
  * @author PraiseLord
  */
 @Controller
-@RequestMapping("/user/*")
+@RequestMapping("/user")
 public class UserAction extends BlogMgrAction {
 	@Resource
 	private UserService userService;
 	
 	/**
-	 * 主页面
+	 * 用户分页查询
 	 * @return
 	 */
 	@RequestMapping("paging.data")
 	@ResponseBody
-	private Object menuSearch(Integer pageNo,Integer pageSize,FilterCollection filter) {
+	public Object userPaging(Integer pageNo,Integer pageSize,FilterCollection filter) {
 		
 		Page<User> page = new Page<>(pageSize, pageNo);
 		UserSqlWhere whereParam = new UserSqlWhere();
@@ -45,9 +46,23 @@ public class UserAction extends BlogMgrAction {
 			whereParam.putFilter(f);
 		}
 		this.userService.getDao().selectPaging(whereParam, page);
-		Message msg = Message.success("success");
-		msg.setContent(page);
-		return page;
+		
+		JSONObject data = new JSONObject();
+		data.put("userList", page.getPageContent());
+		data.put("total", page.getTotal());
+		data.put("success", true);
+		data.put("message", "获取成功个数 "+page.getPageSize());
+		return data;
+	}
+	
+	@RequestMapping("get.data")
+	@ResponseBody
+	public Object getUser(String userId){
+		UserSqlWhere whereParam = new UserSqlWhere();
+		whereParam.idEqual(userId);
+		User user = this.userService.getDao().selectOne(userId);
+		if(user==null){return "{}";}
+		return user;
 	}
 	
 	/**
@@ -58,7 +73,7 @@ public class UserAction extends BlogMgrAction {
 	 */
 	@RequestMapping("add.do")
 	@ResponseBody
-	private Object addUser(User user) {
+	public Object addUser(User user) {
 		if(user==null){
 			return Message.error("参数为空");
 		}
@@ -83,7 +98,7 @@ public class UserAction extends BlogMgrAction {
 	 */
 	@RequestMapping("delete.do")
 	@ResponseBody
-	private Object deleteUser(String userIds){
+	public Object deleteUser(String userIds){
 		if(StringUtils.isBlank(userIds)){
 			return Message.error("无效参数!");
 		}

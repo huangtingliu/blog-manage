@@ -71,9 +71,8 @@ Ext.define('BlogMgr.view.user.UserListController', {
 	    Ext.each(m,function(user){ 
 	    	var updateField = user.getChanges();
 	    	updateField.fId=user.getId();
-	        jsonArray.push(user);  
+	        jsonArray.push(updateField);  
 	    });  
-	
 		Ext.Ajax.request({
 					url : '/blogmgr/user/update.do',
 					method : 'POST',
