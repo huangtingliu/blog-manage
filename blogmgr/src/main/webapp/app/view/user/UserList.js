@@ -19,7 +19,7 @@ Ext.define('BlogMgr.view.user.UserList', {
 				autoLoad : true,
 				scrollable : true,
 				rowLines : true,
-				plugins : 'gridfilters',
+				plugins : ['gridfilters', 'cellediting'],
 				viewModel : {
 					type : 'userlist'
 				},
@@ -34,27 +34,30 @@ Ext.define('BlogMgr.view.user.UserList', {
 					enableTextSelection : true
 				},
 				columns : [{
+							header : 'No',
 							xtype : 'rownumberer',
-							width : 37,
-							text : 'No'
+							width : 37
 						}, {
-							text : '名称',
+							header : '名称',
 							dataIndex : 'fName',
+							editor : {
+								allowBlank : false
+							},
 							filter : {
 								type : 'string',
 								emptyText : '名称..'
 							}
 						}, {
-							text : '账号',
+							header : '账号',
 							dataIndex : 'fAccount',
 							filter : {
 								type : 'string',
 								emptyText : '账号..'
 							}
 						}, {
-							text : '状态',
+							header : '状态',
 							dataIndex : 'fStatus',
-							align:'center',
+							align : 'center',
 							renderer : function(val) {
 								if (val == 'ENABLE') {
 									return '<span style="color:green">可用</span>';
@@ -63,6 +66,11 @@ Ext.define('BlogMgr.view.user.UserList', {
 								} else {
 									return '未知';
 								}
+							},
+							editor : {
+								xtype : 'combo',
+								editable : false,
+								store : [['ENABLE', '可用'], ['DISABLE', '不可用']]
 							},
 							filter : {
 								type : 'list',
@@ -76,10 +84,16 @@ Ext.define('BlogMgr.view.user.UserList', {
 										}]
 							}
 						}, {
-							text : '性别',
+							header : '性别',
 							dataIndex : 'fGender',
 							hidden : true,
-							align:'center',
+							align : 'center',
+							editor : {
+								xtype : 'combo',
+								editable : false,
+								store : [['UNKNOW', '未知'], ['MALE', '男'],
+										['FEMALE', '女']]
+							},
 							renderer : function(val) {
 								if (val == 'MALE') {
 									return '男';
@@ -106,34 +120,34 @@ Ext.define('BlogMgr.view.user.UserList', {
 										}]
 							}
 						}, {
-							text : '电话',
-							dataIndex : 'fPhone'
+							header : '电话',
+							dataIndex : 'fPhone',
+							editor : {
+								xtype : 'textfield',
+								allowBlank : true
+							}
 						}, {
-							text : '邮箱',
+							header : '邮箱',
 							dataIndex : 'fEmail',
-							hidden : true
+							hidden : true,
+							editor : {
+								xtype : 'textfield',
+								allowBlank : true
+							}
 						}, {
-							text : '创建人',
+							header : '创建人',
 							dataIndex : 'fCreater'
 						}, {
-							text : '创建日期',
+							header : '创建日期',
 							dataIndex : 'fCreateDate',
 							width : '10%',
-							align:'center',
+							align : 'center',
 							renderer : function(val) {
 								return Ext.Date.format(new Date(val), 'Y-m-d');
 							},
 							filter : {
 								type : 'date',
-								dateFormat : 'Y-m-d',
-								fields : {
-									lt : {
-										text : '之前'
-									},
-									gt : {
-										text : '之后'
-									}
-								}
+								dateFormat : 'Y-m-d'
 							}
 						}],
 				tbar : {

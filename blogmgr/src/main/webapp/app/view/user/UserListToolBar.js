@@ -22,15 +22,23 @@ Ext.define('BlogMgr.view.user.UserListToolBar', {
 						handler:'deleteUser',
 						xtype:'transparent_button',
 						glyph : 0xf014
+					},{
+						itemId : 'save',
+						text : '保存编辑',
+						handler:'saveRecord',
+						xtype:'transparent_button',
+						glyph : 0xf0c7
 					},'-',{
 							itendId:'chart',
 							text : '图表',
 							glyph : 0xf080,
 							xtype:'transparent_button',
 							tooltip : '图表分析'
-						},'筛选', {
-							width : 60,
+						}, {
+							width : 100,
+							blurWidth:100,
 							xtype : 'gridsearchfield',
+							emptyText:'用户名查询..',
 							paramName:'fName',
 							store :Ext.getStore('s_userlist')
 							}]

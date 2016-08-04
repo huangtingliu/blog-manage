@@ -25,6 +25,11 @@
 					//messageProperty : 'content',
 					//successProperty : 'success',
 				}
+			},
+			listeners:{
+				/*update:function( _this , record , operation , modifiedFieldNames , details , eOpts ){
+					alert("update");
+				} */
 			}
 });
 Ext.create('BlogMgr.store.UserListStore');
