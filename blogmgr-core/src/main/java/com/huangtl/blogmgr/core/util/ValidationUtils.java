@@ -39,7 +39,7 @@ public final class ValidationUtils {
 				return Message.error(cv.getMessage());
 			}
 		}
-		return Message.SUCCESS;
+		return Message.success("验证成功");
 	}
 	
 	/**

@@ -37,4 +37,5 @@ public interface MybatisDao<T> extends Dao<T> {
 	 * 查询总数如果查询参数为null或空。则返回记录的总数
 	 */
 	long selectCount(SqlWhere param);
+	
 }

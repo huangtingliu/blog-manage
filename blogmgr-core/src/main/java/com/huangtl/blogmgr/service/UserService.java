@@ -1,5 +1,7 @@
 package com.huangtl.blogmgr.service;
 
+import java.util.List;
+
 import com.huangtl.blogmgr.dao.UserDao;
 import com.huangtl.blogmgr.dao.where.UserSqlWhere;
 import com.huangtl.blogmgr.model.blog.User;
@@ -28,7 +30,14 @@ public interface UserService {
 	 * @param user
 	 * @param whereParam
 	 */
-	Message eidtUser(User user, UserSqlWhere where);
+	Message editUser(User user, UserSqlWhere where);
+	
+	/**
+	 * 批量修改用户，根据fId
+	 * @param users
+	 * @return
+	 */
+	Message batchEditUser(List<User> users);
 	
 	/**
 	 * 删除用户

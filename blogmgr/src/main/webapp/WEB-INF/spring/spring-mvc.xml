@@ -55,8 +55,8 @@
 		</property>
 		<property name="customArgumentResolvers">
 			<list>
-				<bean class="com.huangtl.blogmgr.core.spring.JsonArgumentResolver"></bean>
-				<bean class="com.huangtl.blogmgr.core.spring.FiltersArgumentResolver"></bean>
+				<bean class="com.huangtl.blogmgr.core.spring.resolver.JsonArgumentResolver"></bean>
+				<bean class="com.huangtl.blogmgr.core.spring.resolver.FiltersArgumentResolver"></bean>
 			</list>
 		</property>
 	</bean>
@@ -64,7 +64,7 @@
 	<!-- 拦截器 -->
 	<mvc:interceptors>
 		<!-- 多数据源切换拦截器 -->
-		<bean class="com.huangtl.blogmgr.core.interceptor.DataSourceDispatchInteceptor">
+		<bean class="com.huangtl.blogmgr.core.spring.interceptor.DataSourceDispatchInteceptor">
 			<property name="rule">
 				<map>
 					<entry key="/blogmgr/*" value="blogDataSource"></entry>

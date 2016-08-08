@@ -7,12 +7,12 @@ import com.huangtl.blogmgr.model.common.Message;
  * @author PraiseLord
  * @date 2016年3月9日
  */
-public class ServiceFailException extends RuntimeException {
+public class ServiceException extends RuntimeException {
 	private static final long serialVersionUID = -8611580355730108536L;
 	
 	private final Message message;
 	
-	public ServiceFailException(Message message) {
+	public ServiceException(Message message) {
 		this.message = message;
 	}
 	
@@ -20,28 +20,28 @@ public class ServiceFailException extends RuntimeException {
 		return this.message;
 	}
 	
-	public ServiceFailException() {
+	public ServiceException() {
 		super();
 		message = null;
 	}
 
-	public ServiceFailException(String message, Throwable cause, boolean enableSuppression,
+	public ServiceException(String message, Throwable cause, boolean enableSuppression,
 			boolean writableStackTrace) {
 		super(message, cause, enableSuppression, writableStackTrace);
 		this.message = null;
 	}
 
-	public ServiceFailException(String message, Throwable cause) {
+	public ServiceException(String message, Throwable cause) {
 		super(message, cause);
 		this.message = null;
 	}
 
-	public ServiceFailException(String message) {
+	public ServiceException(String message) {
 		super(message);
 		this.message = null;
 	}
 
-	public ServiceFailException(Throwable cause) {
+	public ServiceException(Throwable cause) {
 		super(cause);
 		this.message = null;
 	}

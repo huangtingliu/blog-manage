@@ -1,4 +1,4 @@
-package com.huangtl.blogmgr.core.spring;
+package com.huangtl.blogmgr.core.spring.resolver;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

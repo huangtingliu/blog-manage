@@ -1,9 +1,13 @@
 package com.huangtl.blogmgr.model.blog;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
 import com.huangtl.blogmgr.model.common.ObjectValue;
@@ -55,18 +59,23 @@ public class User extends ObjectValue {
 		this.fId = fId;
 	}
 	@NotBlank(message="名称为空")
+	@Length(message="名称长度不大于10",max=10)
+	@Pattern(regexp="[\\u4e00-\\u9fa5]*",message="名称必须是中文")
 	public String getfName() {
 		return fName;
 	}
 	public void setfName(String fName) {
 		this.fName = fName;
 	}
+	
+	@Pattern(regexp="\\d{11}|\\s*",message="手机号码无效")
 	public String getfPhone() {
 		return fPhone;
 	}
 	public void setfPhone(String fPhone) {
 		this.fPhone = fPhone;
 	}
+	@Email(message="邮箱地址无效")
 	public String getfEmail() {
 		return fEmail;
 	}
@@ -94,6 +103,8 @@ public class User extends ObjectValue {
 		this.fAccount = fAccount;
 	}
 	@NotBlank(message="密码为空")
+	@Length(message="密码长度为4-12",min=4,max=12)
+	@Pattern(regexp="[\\x21-\\x7E]*",message="密码由数字、字符、特殊字符组成")
 	public String getfPassword() {
 		return fPassword;
 	}
@@ -108,12 +119,14 @@ public class User extends ObjectValue {
 		this.fStatus = fStatus;
 	}
 	@NotBlank(message="拼音为空")
+	@Pattern(regexp="[a-zA-Z]*",message="拼音为英文无空格")
 	public String getfPinYin() {
 		return fPinYin;
 	}
 	public void setfPinYin(String fPinYin) {
 		this.fPinYin = fPinYin;
 	}
+	@Length(max=100,message="备注长度小于100字")
 	public String getfDescr() {
 		return fDescr;
 	}
@@ -145,5 +158,22 @@ public class User extends ObjectValue {
 	}
 	public void setfEditDate(Date fEditDate) {
 		this.fEditDate = fEditDate;
+	}
+	
+	public static void main(String[] args) throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+		User user = new User(true);
+		user.setfName("张三张三张三张三张三");
+		user.setfAccount("aa");
+		user.setfPinYin("aaa");
+		user.setfStatus(UserStatus.DISABLE);
+		user.setfPassword(")@#%%^&#@)");
+		user.setfGender(Gender.FEMALE);
+		user.setfCreater("adsfa");
+		user.setfEmail("");
+		user.setfPhone(" 2222222222");
+		user.setfCreateDate(new Date());
+		
+		
+		System.out.println(user.checkValidity());
 	}
 }

@@ -1,4 +1,4 @@
-package com.huangtl.blogmgr.core.interceptor;
+package com.huangtl.blogmgr.core.spring.interceptor;
 
 
 import java.util.Map;

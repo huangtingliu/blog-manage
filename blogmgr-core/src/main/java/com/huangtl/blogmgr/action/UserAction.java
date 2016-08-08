@@ -2,6 +2,7 @@ package com.huangtl.blogmgr.action;
 
 
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
+import com.huangtl.blogmgr.core.spring.resolver.Json;
 import com.huangtl.blogmgr.core.util.PinYinUtils;
 import com.huangtl.blogmgr.dao.where.UserSqlWhere;
 import com.huangtl.blogmgr.model.blog.User;
@@ -55,6 +57,11 @@ public class UserAction extends BlogMgrAction {
 		return data;
 	}
 	
+	/**
+	 * 单用户查询
+	 * @param userId
+	 * @return
+	 */
 	@RequestMapping("get.data")
 	@ResponseBody
 	public Object getUser(String userId){
@@ -103,6 +110,30 @@ public class UserAction extends BlogMgrAction {
 			return Message.error("无效参数!");
 		}
 		return this.userService.deleteUser(userIds.split(","));
+	}
+	
+	/**
+	 * 批量修改用户
+	 * @param user
+	 * @return
+	 */
+	@RequestMapping("batchEdit.do")
+	@ResponseBody
+	public Object batchEditUser(@Json List<User> users){
+		
+		return null;
+	}
+	
+	/**
+	 * 修改单个用户
+	 * @param user
+	 * @return
+	 */
+	@RequestMapping("edit.do")
+	@ResponseBody
+	public Object editUser(User user){
+		
+		return null;
 	}
 	
 }

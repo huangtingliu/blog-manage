@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.annotation.JSONField;
-import com.huangtl.blogmgr.exceptoin.ServiceFailException;
+import com.huangtl.blogmgr.exceptoin.ServiceException;
 
 
 /**
@@ -144,21 +144,21 @@ public class Message implements Serializable {
 	}
 	
 	/**
-	 * 如果消息类型为error,或exception那么就抛出{@link ServiceFailException}
+	 * 如果消息类型为error,或exception那么就抛出{@link ServiceException}
 	 * @param message
 	 */
 	public void throwIfError(Object message){
 		if(isError() || isException()){
 			this.content = message;
-			throw new ServiceFailException(this);
+			throw new ServiceException(this);
 		}
 	}
 	
 	/**
-	 * 如果消息类型为error,或exception那么就抛出{@link ServiceFailException}
+	 * 如果消息类型为error,或exception那么就抛出{@link ServiceException}
 	 */
 	public void throwIfError(){
-		if(isError()|| isException()){throw new ServiceFailException(this);}
+		if(isError()|| isException()){throw new ServiceException(this);}
 	}
 	
 	/**
