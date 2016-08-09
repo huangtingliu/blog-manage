@@ -2,7 +2,10 @@ package com.huangtl.blogmgr.model.common;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
+
+import org.apache.commons.lang3.StringUtils;
 
 import com.alibaba.fastjson.annotation.JSONField;
 
@@ -23,7 +26,7 @@ public class Page<T> {
 	protected int pageSize;  //每页几条
 	protected long total;  //共有多少条记录
 	protected Collection<T> pageContent; //该页的数据(记录明细)
-	protected Map<String, String> sorts;	
+	protected Map<String, Order> sorts;	
         
 	public Page() {
         this(1,15); 	
@@ -32,12 +35,14 @@ public class Page<T> {
 	public Page(Integer pageNo,Integer pageSize){
 		this.pageNo=(pageNo==null || pageNo<=0)?1:pageNo;
 		this.pageSize = (pageSize==null || pageSize<=0)?15:pageSize;
-		 total = 0l;
+		total = 0l;
+		sorts = new HashMap<String, Order>();
 	}
 	
 	public Page(Long startIndex,Integer pageSize){
 		this.pageSize = (pageSize==null || pageSize<=0)?15:pageSize;
 		setStartIndex(startIndex);
+		sorts = new HashMap<String, Order>();
 	}
 	
 	/**
@@ -131,8 +136,25 @@ public class Page<T> {
 	}
 	
 	@JSONField(serialize=false)
-	public Map<String, String> getSorts() {
+	public Map<String, Order> getSorts() {
 		return sorts;
 	}
 	
+	/**
+	 * 添加排序
+	 * @param field
+	 * @param order
+	 * @return
+	 */
+	public Map<String, Order> addSort(String field,Order order){
+		if(StringUtils.isBlank(field)){return this.sorts;}
+		this.sorts.put(field, order);
+		return this.sorts;
+	}
+	
+	
+	public enum Order{
+		desc,
+		asc
+	}
 }

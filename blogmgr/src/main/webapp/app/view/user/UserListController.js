@@ -99,7 +99,7 @@ Ext.define('BlogMgr.view.user.UserListController', {
 					callback : function(options, isSuccess, response) {
 						_this.mask.hide();
 						if (isSuccess) {
-							var result = JSON.parse(data.responseText);
+							var result = JSON.parse(response.responseText);
 							Ext.toast(result);
 							if (result.success) {
 								store.commitChanges(); // 消除修改标记

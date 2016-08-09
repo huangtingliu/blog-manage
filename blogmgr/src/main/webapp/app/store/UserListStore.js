@@ -7,7 +7,7 @@
 			alias:'store.user',
 			storeId : 's_userlist',
 			pageSize:15,
-			remoteSort:false,
+			remoteSort:true,
 			remoteFilter:true,
 			sorters:[],
 			proxy : {

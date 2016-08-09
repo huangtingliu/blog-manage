@@ -28,13 +28,13 @@ Ext.define('BlogMgr.view.user.UserListToolBar', {
 						handler:'saveRecord',
 						xtype:'transparent_button',
 						glyph : 0xf0c7
-					},'-',{
+					},/*'-',{
 							itendId:'chart',
 							text : '图表',
 							glyph : 0xf080,
 							xtype:'transparent_button',
 							tooltip : '图表分析'
-						}, {
+						}, */{
 							width : 100,
 							blurWidth:100,
 							xtype : 'gridsearchfield',

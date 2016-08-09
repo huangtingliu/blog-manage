@@ -7,7 +7,7 @@ Ext.define('BlogMgr.view.user.UserList', {
 					'BlogMgr.view.user.UserListToolBar',
 					'BlogMgr.view.user.UserListController',
 					'BlogMgr.view.user.UserListModel',
-					'Ext.ux.ProgressBarPager', 'Ext.grid.filters.Filters'],
+					 'Ext.grid.filters.Filters'/*,'Ext.ux.ProgressBarPager'*/],
 			extend : 'Ext.panel.Panel',
 			alias : ['widget.userlist'],
 			layout : 'fit',
@@ -40,6 +40,7 @@ Ext.define('BlogMgr.view.user.UserList', {
 						}, {
 							header : '名称',
 							dataIndex : 'fName',
+							sortable:false,
 							editor : {
 								allowBlank : false
 							},
@@ -50,6 +51,7 @@ Ext.define('BlogMgr.view.user.UserList', {
 						}, {
 							header : '账号',
 							dataIndex : 'fAccount',
+							sortable:false,
 							filter : {
 								type : 'string',
 								emptyText : '账号..'
@@ -58,6 +60,7 @@ Ext.define('BlogMgr.view.user.UserList', {
 							header : '状态',
 							dataIndex : 'fStatus',
 							align : 'center',
+							sortable:false,
 							renderer : function(val) {
 								if (val == 'ENABLE') {
 									return '<span style="color:green">可用</span>';
@@ -88,6 +91,7 @@ Ext.define('BlogMgr.view.user.UserList', {
 							dataIndex : 'fGender',
 							hidden : true,
 							align : 'center',
+							sortable:false,
 							editor : {
 								xtype : 'combo',
 								editable : false,
@@ -122,6 +126,11 @@ Ext.define('BlogMgr.view.user.UserList', {
 						}, {
 							header : '电话',
 							dataIndex : 'fPhone',
+							sortable:false,
+							filter : {
+								type : 'string',
+								emptyText : '电话..'
+							},
 							editor : {
 								xtype : 'textfield',
 								allowBlank : true
@@ -129,14 +138,21 @@ Ext.define('BlogMgr.view.user.UserList', {
 						}, {
 							header : '邮箱',
 							dataIndex : 'fEmail',
-							hidden : true,
+							sortable:false,
+							filter : {
+								operator : 'eq',
+								type : 'string',
+								emptyText : '电话..'
+							},
 							editor : {
 								xtype : 'textfield',
 								allowBlank : true
 							}
 						}, {
 							header : '创建人',
-							dataIndex : 'fCreater'
+							dataIndex : 'fCreater',
+							hidden : true,
+							sortable:false
 						}, {
 							header : '创建日期',
 							dataIndex : 'fCreateDate',

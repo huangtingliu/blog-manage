@@ -29,6 +29,7 @@
 			<if test="fAccount_like != null ">and  ui_Account like #{fAccount_like}</if>
 			<if test="fAccount_eq != null ">and    ui_Account  =   #{fAccount_eq}</if>
 			<if test="fPhone_eq != null ">and      ui_Phone    =   #{fPhone_eq}</if>
+			<if test="fPhone_like != null">and     ui_Phone   like #{fPhone_like}</if>
 			<if test="fEmail_eq != null ">and      ui_Email    =   #{fEmail_eq}</if>
 			<if test="fGender_eq != null ">and     dic_Gender  =   #{fGender_eq}</if>
 			<if test="fStatus_eq != null">and      dic_Status  =   #{fStatus_eq}</if>
@@ -101,7 +102,8 @@
 	
 	<select id="selectPaging" resultMap="map" parameterType="map">
 		select 
-			ui_Id,ui_Name,ui_Account,dic_Status,ui_Creater,ui_CreateDate,ui_Email,ui_Phone,dic_Gender
+			ui_Id,ui_Name,ui_Account,dic_Status,ui_Creater,ui_CreateDate as fCreateDate,
+			ui_Email,ui_Phone,dic_Gender
 		from mgr_userinfo
 		<include refid="where"/>
 		<include refid="order"/>

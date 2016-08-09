@@ -21,6 +21,7 @@ import com.huangtl.blogmgr.dao.where.UserSqlWhere;
 import com.huangtl.blogmgr.model.blog.User;
 import com.huangtl.blogmgr.model.common.Message;
 import com.huangtl.blogmgr.model.common.Page;
+import com.huangtl.blogmgr.model.common.Page.Order;
 import com.huangtl.blogmgr.model.extjs.Filter;
 import com.huangtl.blogmgr.model.extjs.FilterCollection;
 import com.huangtl.blogmgr.service.UserService;
@@ -46,6 +47,7 @@ public class UserAction extends BlogMgrAction {
 	public Object userPaging(Integer pageNo,Integer pageSize,FilterCollection filter) {
 		
 		Page<User> page = new Page<>(pageSize, pageNo);
+		page.addSort("fCreateDate", Order.desc);
 		UserSqlWhere whereParam = new UserSqlWhere();
 		for (Filter f : filter) {
 			whereParam.putFilter(f);
@@ -91,11 +93,11 @@ public class UserAction extends BlogMgrAction {
 		user.setfId(user.newId());
 		user.setfCreateDate(new Date());
 		user.setfCreater("root");
-		message = user.checkValidity();
+		message = user.checkValidity("fPinYin");
 		
 		if(message.isError()){return message;}
 		
-		user.setfPinYin(PinYinUtils.toPinYin(user.getfPinYin()));      //拼音转换
+		user.setfPinYin(PinYinUtils.toPinYin(user.getfName()));      //拼音转换
 		user.setfPassword(DigestUtils.md5Hex(user.getfPassword()));  
 			
 		return this.userService.addUser(user);

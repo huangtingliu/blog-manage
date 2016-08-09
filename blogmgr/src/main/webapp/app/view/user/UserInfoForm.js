@@ -79,6 +79,7 @@ Ext.define('BlogMgr.view.user.UserInfoForm', {
 										border : false,
 										vtype:'letter',
 										value:' ',
+										//disabled:true,
 										emptyText:'必须是字母'
 									}]
 						}, {

@@ -80,6 +80,16 @@ public class UserSqlWhere extends SqlWhere {
 	}
 	
 	/**
+	 * 模糊查询电话
+	 * @param phone
+	 * @return
+	 */
+	public UserSqlWhere phoneLike(String phone){
+		this.like("fPhone_like", phone);
+		return this;
+	}
+	
+	/**
 	 * 指定邮件为
 	 * @param email
 	 * @return
