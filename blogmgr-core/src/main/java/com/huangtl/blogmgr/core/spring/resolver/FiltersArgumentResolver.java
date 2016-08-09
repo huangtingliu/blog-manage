@@ -24,7 +24,7 @@ public class FiltersArgumentResolver implements HandlerMethodArgumentResolver {
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
 		Class<?> clazz =  parameter.getParameterType();
-		return clazz == FilterCollection.class;
+		return clazz.equals(FilterCollection.class);
 	}
 
 	@Override

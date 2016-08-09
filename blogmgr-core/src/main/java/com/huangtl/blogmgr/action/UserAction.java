@@ -21,9 +21,11 @@ import com.huangtl.blogmgr.dao.where.UserSqlWhere;
 import com.huangtl.blogmgr.model.blog.User;
 import com.huangtl.blogmgr.model.common.Message;
 import com.huangtl.blogmgr.model.common.Page;
-import com.huangtl.blogmgr.model.common.Page.Order;
+import com.huangtl.blogmgr.model.common.Page.Direction;
 import com.huangtl.blogmgr.model.extjs.Filter;
 import com.huangtl.blogmgr.model.extjs.FilterCollection;
+import com.huangtl.blogmgr.model.extjs.Sort;
+import com.huangtl.blogmgr.model.extjs.SortCollection;
 import com.huangtl.blogmgr.service.UserService;
 
 /**
@@ -44,14 +46,23 @@ public class UserAction extends BlogMgrAction {
 	 */
 	@RequestMapping("paging.data")
 	@ResponseBody
-	public Object userPaging(Integer pageNo,Integer pageSize,FilterCollection filter) {
+	public Object userPaging(Integer pageNo,Integer pageSize,
+			FilterCollection filter,SortCollection sort) {
 		
 		Page<User> page = new Page<>(pageSize, pageNo);
-		page.addSort("fCreateDate", Order.desc);
+		if(sort.isEmpty()){
+			page.addSort("fCreateDate", Direction.DESC);
+		}else{
+			for (Sort s : sort) {
+				page.addSort(s.getProperty(), s.getDirection());
+			}
+		}
+		
 		UserSqlWhere whereParam = new UserSqlWhere();
 		for (Filter f : filter) {
 			whereParam.putFilter(f);
 		}
+		
 		this.userService.getDao().selectPaging(whereParam, page);
 		
 		JSONObject data = new JSONObject();

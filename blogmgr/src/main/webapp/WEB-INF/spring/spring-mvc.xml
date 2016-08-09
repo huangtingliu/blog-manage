@@ -9,8 +9,7 @@
 	<!-- <mvc:resources location="/,classpath:/META-INF/" mapping="/framework/**" 
 		/> -->
 
-	<bean
-		class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"></bean>
+	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
 
 	<!-- 注意：FreeMarker与SpringMVC集成时，其配置一定要放在SpringMVC的配置之前 -->
 	<!-- 否则：在访问"/getUser"时服务器就会报告[HTTP Status 404 - /WEB-INF/jsp/myfree.jsp] -->
@@ -33,7 +32,7 @@
 	</bean>
 
 	<bean
-		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"></bean>
+		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
 
 	<!-- 
 	  1.如果返回String             就不变
@@ -50,13 +49,14 @@
 				</bean>
 				<bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter"/>
 				<bean class="org.springframework.http.converter.ResourceHttpMessageConverter"/>
-				<bean class="com.huangtl.blogmgr.core.spring.MappingFastJson2HttpMessageConverter" ></bean> 
+				<bean class="com.huangtl.blogmgr.core.spring.MappingFastJson2HttpMessageConverter" /> 
 			</list>
 		</property>
 		<property name="customArgumentResolvers">
 			<list>
-				<bean class="com.huangtl.blogmgr.core.spring.resolver.JsonArgumentResolver"></bean>
-				<bean class="com.huangtl.blogmgr.core.spring.resolver.FiltersArgumentResolver"></bean>
+				<bean class="com.huangtl.blogmgr.core.spring.resolver.JsonArgumentResolver"/>
+				<bean class="com.huangtl.blogmgr.core.spring.resolver.FiltersArgumentResolver"/>
+				<bean class="com.huangtl.blogmgr.core.spring.resolver.SortArgumentResolver"/>
 			</list>
 		</property>
 	</bean>
@@ -67,7 +67,7 @@
 		<bean class="com.huangtl.blogmgr.core.spring.interceptor.DataSourceDispatchInteceptor">
 			<property name="rule">
 				<map>
-					<entry key="/blogmgr/*" value="blogDataSource"></entry>
+					<entry key="/blogmgr/*" value="blogDataSource"/>
 				</map>
 			</property>
 		</bean>

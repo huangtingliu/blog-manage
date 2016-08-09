@@ -67,6 +67,14 @@ public class FilterCollection implements Iterable<Filter> {
 	}
 	
 	/**
+	 * 是否为空
+	 * @return
+	 */
+	public boolean isEmpty(){
+		return size()==0;
+	}
+	
+	/**
 	 * 根据要过虑的字段，找到过滤器
 	 * @param field
 	 * @return
