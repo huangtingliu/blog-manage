@@ -96,6 +96,8 @@ public class User extends ObjectValue {
 		this.fAvatar = fAvatar;
 	}
 	@NotBlank(message="账号为空")
+	@Length(message="账号长度为4-15",min=4,max=15)
+	@Pattern(regexp="^[a-zA-Z][a-zA-Z0-9_]{3,16}$",message="字母开头,数字下划线组成")
 	public String getfAccount() {
 		return fAccount;
 	}
@@ -163,14 +165,14 @@ public class User extends ObjectValue {
 	public static void main(String[] args) throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
 		User user = new User(true);
 		user.setfName("张三张三张三张三张三");
-		user.setfAccount("aa");
+		user.setfAccount("aaaabbbbccccddd");
 		user.setfPinYin("aaa");
 		user.setfStatus(UserStatus.DISABLE);
 		user.setfPassword(")@#%%^&#@)");
 		user.setfGender(Gender.FEMALE);
 		user.setfCreater("adsfa");
 		user.setfEmail("");
-		user.setfPhone(" 2222222222");
+		user.setfPhone("15960123876");
 		user.setfCreateDate(new Date());
 		
 		

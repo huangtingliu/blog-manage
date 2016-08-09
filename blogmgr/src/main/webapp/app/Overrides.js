@@ -99,4 +99,11 @@ Ext.apply(Ext.form.field.VTypes, {
     postCodeText: '必须是邮政编码',
     postCodeMask: /[\d]/
 });
+Ext.apply(Ext.form.field.VTypes, {
+    account:  function(v) {
+        return /^[a-zA-Z][a-zA-Z0-9_]{2,17}$/.test(v);
+    },
+    accountText: '字母开头,数字下划线组成',
+    accountMask: /[a-zA-Z\d_]/i
+});
 

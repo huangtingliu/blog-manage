@@ -33,6 +33,7 @@ Ext.define('BlogMgr.view.user.UserInfoForm', {
 							},
 							items : [{
 										fieldLabel : '账号类型',
+										name:'accountType',
 										xtype : 'combo',
 										store : {
 											fields : ['value', 'name'],
@@ -50,11 +51,37 @@ Ext.define('BlogMgr.view.user.UserInfoForm', {
 										displayField : 'name',
 										valueField : 'value',
 										value : 'custom',
-										editable : false
+										editable : false,
+										listeners:{
+											change:function(_this,newVal,oldVal){
+												var account = _this.nextSibling();
+												var mail = _this.up('form').down('textfield[name="fEmail"]');
+												var phone = _this.up('form').down('textfield[name="fPhone"]');
+												
+												if(newVal=='custom'){
+													account.disable(false);
+													mail.allowBlank = true;
+													phone.allowBlank = true;
+												}else if(newVal =='mail'){
+													mail.allowBlank=false;
+													phone.allowBlank = true;
+													account.disable(true);
+												}else if(newVal =='phone'){
+													mail.allowBlank = true;
+													phone.allowBlank=false;
+													account.disable(true);
+												}
+											}
+										}
 									}, {
 										fieldLabel : '账号',
+										itemId : 'userInfoFormAccount',
 										xtype : 'textfield',
 										name : 'fAccount',
+										maxLength:15,
+										minLength:4,
+										emptyText:'字母开头,数字下划线组成',
+										vtype : 'account',
 										allowBlank : false
 									}]
 						}, {
@@ -77,9 +104,9 @@ Ext.define('BlogMgr.view.user.UserInfoForm', {
 										fieldLabel : '拼音',
 										name : 'fPinYin',
 										border : false,
-										vtype:'letter',
+										//vtype:'letter',
 										value:' ',
-										//disabled:true,
+										allowBlank : true,
 										emptyText:'必须是字母'
 									}]
 						}, {
@@ -89,7 +116,6 @@ Ext.define('BlogMgr.view.user.UserInfoForm', {
 							emptyText:'数字、字符、特殊字符组成',
 							maxLength:12,
 							minLength:4,
-							value:'',
 							anchor : '50%'
 						}, {
 							fieldLabel : '状态',

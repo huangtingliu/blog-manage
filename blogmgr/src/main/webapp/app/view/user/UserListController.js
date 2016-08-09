@@ -70,7 +70,6 @@ Ext.define('BlogMgr.view.user.UserListController', {
 
 					}
 				});
-
 	},
 
 	/**
@@ -113,6 +112,5 @@ Ext.define('BlogMgr.view.user.UserListController', {
 						}
 					}
 				});
-
 	}
 });

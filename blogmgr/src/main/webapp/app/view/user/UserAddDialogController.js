@@ -12,9 +12,7 @@ Ext.define('BlogMgr.view.user.UserAddDialogController', {
 			},
 			userInfoSubmit : function() { // 用户信息提交
 				var _this = this;
-				var form = Ext.getCmp('user_useradd')
-						.getComponent('userAddTabPanel')
-						.getComponent("userInfoForm");
+				var form = this.getView().getComponent('userAddTabPanel').getComponent("userInfoForm");
 				form.submit({
 							success : function(form, action) {
 								Ext.toast(action.result);
@@ -31,7 +29,7 @@ Ext.define('BlogMgr.view.user.UserAddDialogController', {
 				
 			},
 			closeDialog:function(){	//关闭对话窗
-				Ext.getCmp('user_useradd').close();
+				this.getView().close();
 			}
 
 		});

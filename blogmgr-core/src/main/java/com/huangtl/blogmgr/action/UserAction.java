@@ -91,24 +91,35 @@ public class UserAction extends BlogMgrAction {
 	/**
 	 * 添加用户
 	 * @param user
+	 * @param accountType 参数类型,不指默认为:custom 
+	 * <li>custom  自定义
+	 * <li>mail    邮箱
+	 * <li>phone   手机
 	 * @return
 	 * @throws InterruptedException 
 	 */
 	@RequestMapping("add.do")
 	@ResponseBody
-	public Object addUser(User user) {
-		if(user==null){
-			return Message.error("参数为空");
-		}
+	public Object addUser(String accountType,User user) {
+		if(user==null){return Message.error("参数为空");}
+		
 		Message message = null;
 		user.setfId(user.newId());
+		user.setfPinYin(PinYinUtils.toPinYin(user.getfName())); 
 		user.setfCreateDate(new Date());
 		user.setfCreater("root");
-		message = user.checkValidity("fPinYin");
+		if(accountType.equals("mail")){
+			user.setfAccount(user.getfEmail());
+			message = user.checkValidity("fAccount");
+		}else if(accountType.equals("phone")){
+			user.setfAccount(user.getfPhone());
+			message = user.checkValidity("fAccount");
+		}else{
+			message = user.checkValidity();
+		}
 		
 		if(message.isError()){return message;}
-		
-		user.setfPinYin(PinYinUtils.toPinYin(user.getfName()));      //拼音转换
+		     
 		user.setfPassword(DigestUtils.md5Hex(user.getfPassword()));  
 			
 		return this.userService.addUser(user);
