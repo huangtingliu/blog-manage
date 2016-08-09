@@ -69,16 +69,26 @@ Ext.define('BlogMgr.view.user.UserInfoForm', {
 							},
 							items : [{
 										fieldLabel : '名称',
-										name : 'fName'
+										name : 'fName',
+										vtype:'chinese',
+										maxLength:10,
+										emptyText:'必须是中文'
 									}, {
 										fieldLabel : '拼音',
 										name : 'fPinYin',
-										border : false
+										border : false,
+										vtype:'letter',
+										value:' ',
+										emptyText:'必须是字母'
 									}]
 						}, {
 							fieldLabel : '密码',
 							inputType : 'password',
 							name : 'fPassword',
+							emptyText:'数字、字符、特殊字符组成',
+							maxLength:12,
+							minLength:4,
+							value:'',
 							anchor : '50%'
 						}, {
 							fieldLabel : '状态',
@@ -151,11 +161,13 @@ Ext.define('BlogMgr.view.user.UserInfoForm', {
 										}, {
 											fieldLabel : '电话',
 											name : 'fPhone',
-											xtype : 'textfield'
+											xtype : 'textfield',
+											vtype:'mobile'
 										}, {
 											fieldLabel : '邮箱',
 											name : 'fEmail',
-											xtype : 'textfield'
+											xtype : 'textfield',
+											vtype:'email'
 										}]
 							}, {
 								xtype : 'panel',
@@ -179,12 +191,14 @@ Ext.define('BlogMgr.view.user.UserInfoForm', {
 				}, {
 					fieldLabel : '备注',
 					xtype : 'textarea',
+					maxLength:150,
 					anchor : '100%',
 					grow : true,
 					growMax : 200,
 					labelWidth : 70,
 					labelAlign : 'right',
 					growMin : 100,
+					emptyText:'最多150个字',
 					name : 'fDescr'
 				}]
 			}]

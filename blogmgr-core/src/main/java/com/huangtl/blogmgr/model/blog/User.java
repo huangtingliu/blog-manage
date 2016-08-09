@@ -126,7 +126,7 @@ public class User extends ObjectValue {
 	public void setfPinYin(String fPinYin) {
 		this.fPinYin = fPinYin;
 	}
-	@Length(max=100,message="备注长度小于100字")
+	@Length(max=150,message="备注长度小于150字")
 	public String getfDescr() {
 		return fDescr;
 	}

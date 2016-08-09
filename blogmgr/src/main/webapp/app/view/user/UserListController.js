@@ -11,18 +11,24 @@ Ext.define('BlogMgr.view.user.UserListController', {
 					target : this.getView()
 				});
 	},
-	
-	addUser : function() { // 新增用户,弹出对话框
+
+	/**
+	 * 新增用户,弹出对话框
+	 */
+	addUser : function() {
 		Ext.create('BlogMgr.view.user.UserAddDialog').show();
 	},
 
-	deleteUser : function() { // 删除用户
+	/**
+	 * 删除用户
+	 */
+	deleteUser : function() {
 		var _this = this;
 		var grid = this.getView();
 		var store = grid.getStore();
-		var selectedRow = grid.getSelectionModel().getSelection();
+		var selectedRows = grid.getSelectionModel().getSelection();
 		var ids = [];
-		Ext.each(selectedRow, function() {
+		Ext.each(selectedRows, function() {
 					ids.push(this.get("fId"));
 				})
 		if (ids.length == 0) {
@@ -34,7 +40,7 @@ Ext.define('BlogMgr.view.user.UserListController', {
 		}
 		Ext.Msg.confirm('系统提示', '确定要删除吗?', function(val) {
 					if (val == 'yes') {
-						_this.mask.msg="删除中...";
+						_this.mask.msg = "删除中...";
 						_this.mask.show();
 						Ext.Ajax.request({
 									url : '/blogmgr/user/delete.do',
@@ -42,19 +48,24 @@ Ext.define('BlogMgr.view.user.UserListController', {
 									params : {
 										userIds : ids.join(',')
 									},
-									success : function(data) {
+									callback : function(options, isSuccess,response) {
 										_this.mask.hide();
-										Ext.toast(JSON.parse(data.responseText));
-										store.reload();
-										grid.getSelectionModel().deselectAll();
-									},
-									failure : function() {
-										_this.mask.hide();
-										Ext.toast({
-													type : 'exception',
-													content : '异常'
-												});
+										if (isSuccess) {
+											var result = JSON.parse(response.responseText);
+											Ext.toast(result);
+											if (result.success) {
+												// store.reload();
+												store.remove(selectedRows);
+												grid.getSelectionModel().deselectAll();
+											}
+										} else {
+											Ext.toast({
+														type : 'exception',
+														content : '服务器请求失败'
+													});
+										}
 									}
+
 								});
 
 					}
@@ -62,39 +73,46 @@ Ext.define('BlogMgr.view.user.UserListController', {
 
 	},
 
-	saveRecord :function(){	//表格编辑提交
+	/**
+	 * 表格编辑提交
+	 */
+	saveRecord : function() {
 		var _this = this;
 		var grid = this.getView();
 		var store = grid.getStore();
-		var m = store.getModifiedRecords();  
-	    var jsonArray = [];  
-	    Ext.each(m,function(user){ 
-	    	var updateField = user.getChanges();
-	    	updateField.fId=user.getId();
-	        jsonArray.push(updateField);  
-	    });  
-	    _this.mask.msg="提交中...";
-	    _this.mask.show();
+		var m = store.getModifiedRecords();
+		var jsonArray = [];
+		Ext.each(m, function(user) {
+					var updateField = user.getChanges();
+					updateField.fId = user.getId();
+					jsonArray.push(updateField);
+				});
+		_this.mask.msg = "提交中...";
+		_this.mask.show();
 		Ext.Ajax.request({
 					url : '/blogmgr/user/batchedit.do',
 					method : 'POST',
 					params : {
-						users : Ext.encode(jsonArray)//encodeURIComponent(Ext.encode(jsonArray))
+						users : Ext.encode(jsonArray)
+						// encodeURIComponent(Ext.encode(jsonArray))
 					},
-					success : function(data) {
+					callback : function(options, isSuccess, response) {
 						_this.mask.hide();
-						Ext.toast(JSON.parse(data.responseText));
-						store.reload();
-					},
-					failure : function() {
-						_this.mask.hide();
-						Ext.toast({
-									type : 'exception',
-									content : '异常'
-								});
+						if (isSuccess) {
+							var result = JSON.parse(data.responseText);
+							Ext.toast(result);
+							if (result.success) {
+								store.commitChanges(); // 消除修改标记
+								// store.reload();
+							}
+						} else {
+							Ext.toast({
+										type : 'exception',
+										content : '服务器请求失败'
+									});
+						}
 					}
 				});
 
-       //	store.commitChanges(); 消除红点
 	}
 });
