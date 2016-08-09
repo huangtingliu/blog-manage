@@ -1,5 +1,9 @@
 package com.huangtl.blogmgr.core.spring.resolver;
 
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.MethodParameter;
 import org.springframework.web.bind.support.WebDataBinderFactory;
@@ -20,14 +24,25 @@ public class JsonArgumentResolver implements HandlerMethodArgumentResolver{
 	@Override
 	public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
 			NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
-		String paramName = parameter.getParameterName();
 		Class<?> clazz= parameter.getParameterType();
-		
+		String paramName = parameter.getParameterName();
 		String paramValue = webRequest.getParameter(paramName);
 		if(StringUtils.isBlank(paramValue)){return null;}
+		
+		if(clazz.equals(List.class)){	//是一个集合
+			Class<?> listItemClass = null;
+			Type supperType = parameter.getNestedGenericParameterType();
+			if(supperType instanceof ParameterizedType){
+				Type[] paramTypes = ((ParameterizedType) supperType).getActualTypeArguments();
+				if (paramTypes.length>0) {
+					listItemClass = (Class<?>) paramTypes[0];
+				}
+			}
+			return JSON.parseArray(paramValue,listItemClass);
+		}
 		
 		return JSON.parseObject(paramValue, clazz);
 
 	}
-
+	
 }

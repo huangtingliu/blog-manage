@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration debug="false">
+	<!-- 警告以下级别消息打印-->
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
 		<target>System.out</target>
 		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
@@ -12,7 +13,8 @@
 			<lessThan>WARN</lessThan>
 		</filter>
 	</appender>
-
+	
+	<!-- 警告以上级别消息打印-->
 	<appender name="STDERR" class="ch.qos.logback.core.ConsoleAppender">
 		<target>System.err</target>
 		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
@@ -30,7 +32,7 @@
 	 <appender name="DailyRoll" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>E:/pld/log/today.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>E:/pld/log/%d.log</fileNamePattern>
+			<fileNamePattern>E:/blogmgr/log/%d.log</fileNamePattern>
 			<maxHistory>60</maxHistory>
 		</rollingPolicy>
 		
@@ -41,15 +43,16 @@
 			<charset>utf-8</charset>
 		</encoder>
 	</appender> 
+	
 	<!-- %n%-4r [%d{yyyy-MM-dd HH:mm:ss} %X{productionMode}] - %X{method} %X{requestURIWithQueryString} [ip=%X{remoteAddr}, ref=%X{referrer}, ua=%X{userAgent}, sid=%X{cookie.JSESSIONID}]%n  %-5level %logger{35} - %m%n -->
-<!-- level: trace,debug,info,warn,error -->
 	<logger name="com.huangtl.blogmgr.service" level="debug"></logger>
 	<logger name="com.huangtl.blogmgr.action" level="debug"></logger>
 	<logger name="com.huangtl.blogmgr.dao" level="debug"></logger>
 	<logger name="com.huangtl.blogmgr.model" level="debug"></logger>
 	
+	<!-- level: trace,debug,info,warn,error -->
 	<root>
-		<level value="error" />
+		<level value="warn" />
 		<appender-ref ref="STDERR" />
 		<appender-ref ref="STDOUT" />
 	</root>

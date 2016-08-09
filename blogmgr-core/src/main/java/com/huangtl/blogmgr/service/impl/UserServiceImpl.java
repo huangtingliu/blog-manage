@@ -50,6 +50,7 @@ public class UserServiceImpl implements UserService {
 		int effectRow = 0;
 		for (User user : users) {
 			if(StringUtils.isEmpty(user.getfId())){throw new ServiceException("无效参数：\n"+user.toString());}
+			sqlWhere.idEqual(user.getfId());
 			effectRow = this.userDao.update(user, sqlWhere);
 			if(effectRow==0){throw new ServiceException("更新失败！\n"+user.toString());}
 		}

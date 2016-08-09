@@ -8,6 +8,8 @@ import javax.annotation.Resource;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,6 +33,7 @@ import com.huangtl.blogmgr.service.UserService;
 @Controller
 @RequestMapping("/user")
 public class UserAction extends BlogMgrAction {
+	private static Logger logger = LoggerFactory.getLogger(UserAction.class);
 	@Resource
 	private UserService userService;
 	
@@ -117,11 +120,17 @@ public class UserAction extends BlogMgrAction {
 	 * @param user
 	 * @return
 	 */
-	@RequestMapping("batchEdit.do")
+	@RequestMapping("batchedit.do")
 	@ResponseBody
 	public Object batchEditUser(@Json List<User> users){
-		
-		return null;
+		Message message = null;
+		try {
+			message = this.userService.batchEditUser(users);
+		} catch (Exception e) {
+			message = Message.error("修改失败");
+			logger.error("",e);
+		}
+		return message;
 	}
 	
 	/**
@@ -132,8 +141,18 @@ public class UserAction extends BlogMgrAction {
 	@RequestMapping("edit.do")
 	@ResponseBody
 	public Object editUser(User user){
+		UserSqlWhere sqlWhere = new UserSqlWhere()
+							.idEqual(user.getfId());
+		Message message = null;
 		
-		return null;
+		try {
+			message = this.userService.editUser(user, sqlWhere);
+		} catch (Exception e) {
+			message = Message.error("修改失败");
+			logger.error("",e);
+		}
+		
+		return message;
 	}
 	
 }

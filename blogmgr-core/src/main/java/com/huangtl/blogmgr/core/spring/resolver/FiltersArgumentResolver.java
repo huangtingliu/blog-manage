@@ -31,8 +31,6 @@ public class FiltersArgumentResolver implements HandlerMethodArgumentResolver {
 	public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
 			NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
 		
-		Class<?> parameterType= parameter.getParameterType();
-		if(parameterType == FilterCollection.class){
 			FilterCollection filterCollection = new FilterCollection();
 			String paramName = parameter.getParameterName();
 			String paramValue = webRequest.getParameter(paramName);
@@ -43,9 +41,7 @@ public class FiltersArgumentResolver implements HandlerMethodArgumentResolver {
 			filterCollection.addFilter(filters);
 			
 			return filterCollection;
-		}
 		
-		return null;
 	}
 
 }

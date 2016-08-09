@@ -34,6 +34,7 @@ Ext.define('BlogMgr.view.user.UserListController', {
 		}
 		Ext.Msg.confirm('系统提示', '确定要删除吗?', function(val) {
 					if (val == 'yes') {
+						_this.mask.msg="删除中...";
 						_this.mask.show();
 						Ext.Ajax.request({
 									url : '/blogmgr/user/delete.do',
@@ -42,7 +43,6 @@ Ext.define('BlogMgr.view.user.UserListController', {
 										userIds : ids.join(',')
 									},
 									success : function(data) {
-										_this.mask.msg="删除中...";
 										_this.mask.hide();
 										Ext.toast(JSON.parse(data.responseText));
 										store.reload();
@@ -73,14 +73,15 @@ Ext.define('BlogMgr.view.user.UserListController', {
 	    	updateField.fId=user.getId();
 	        jsonArray.push(updateField);  
 	    });  
+	    _this.mask.msg="提交中...";
+	    _this.mask.show();
 		Ext.Ajax.request({
-					url : '/blogmgr/user/update.do',
+					url : '/blogmgr/user/batchedit.do',
 					method : 'POST',
 					params : {
 						users : Ext.encode(jsonArray)//encodeURIComponent(Ext.encode(jsonArray))
 					},
 					success : function(data) {
-						_this.mask.msg="提交中...";
 						_this.mask.hide();
 						Ext.toast(JSON.parse(data.responseText));
 						store.reload();

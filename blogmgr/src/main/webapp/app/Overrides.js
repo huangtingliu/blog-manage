@@ -7,7 +7,7 @@ Ext.define('Overrides.ext.Toast', {
 				var config = message, toast;
 				if (Ext.isString(message)) {
 					config = { // 默认为info提示
-						title : '操作提示',
+						title : '系统提示',
 						html : message,
 						glyph : 0xf05a
 					};
@@ -34,7 +34,7 @@ Ext.define('Overrides.ext.Toast', {
 				}
 
 				Ext.applyIf(config, {
-							title : '操作提示',
+							title : '系统提示',
 							minWidth : 210,
 							baseCls:'overrides-toast-'+message.type+' x-window',
 							slideInDuration : 400,
