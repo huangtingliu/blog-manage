@@ -12,7 +12,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSONObject;
 import com.huangtl.blogmgr.dao.where.MenuSqlWhere;
 import com.huangtl.blogmgr.dao.where.SqlWhere;
+import com.huangtl.blogmgr.dao.where.UserSqlWhere;
 import com.huangtl.blogmgr.model.blog.Menu;
+import com.huangtl.blogmgr.model.common.Page;
+import com.huangtl.blogmgr.model.common.Page.Direction;
+import com.huangtl.blogmgr.model.extjs.Filter;
+import com.huangtl.blogmgr.model.extjs.FilterCollection;
+import com.huangtl.blogmgr.model.extjs.Sort;
+import com.huangtl.blogmgr.model.extjs.SortCollection;
 import com.huangtl.blogmgr.service.MenuService;
 
 /**
@@ -25,6 +32,40 @@ import com.huangtl.blogmgr.service.MenuService;
 public class MenuAction extends BlogMgrAction {
 	@Resource
 	private MenuService menuService;
+	
+	/**
+	 * 用户分页查询
+	 * @return
+	 */
+	@RequestMapping("paging.data")
+	@ResponseBody
+	public Object pagingData(Integer pageNo,Integer pageSize,
+			FilterCollection filter,SortCollection sort) {
+		
+		Page<Menu> page = new Page<>(pageSize, pageNo);
+		if(sort.isEmpty()){
+			page.addSort("fId", Direction.ASC);
+			page.addSort("fOrder", Direction.ASC);
+		}else{
+			for (Sort s : sort) {
+				page.addSort(s.getProperty(), s.getDirection());
+			}
+		}
+		
+		UserSqlWhere whereParam = new UserSqlWhere();
+		for (Filter f : filter) {
+			whereParam.putFilter(f);
+		}
+		
+		this.menuService.getDao().selectPaging(whereParam, page);
+		
+		JSONObject data = new JSONObject();
+		data.put("userList", page.getPageContent());
+		data.put("total", page.getTotal());
+		data.put("success", true);
+		data.put("message", "获取成功个数 "+page.getPageSize());
+		return data;
+	}
 	
 	/**
 	 * 获取多个菜单
@@ -58,5 +99,7 @@ public class MenuAction extends BlogMgrAction {
 		
 		return menus.get(0);
 	}
+	
+	
 	
 }

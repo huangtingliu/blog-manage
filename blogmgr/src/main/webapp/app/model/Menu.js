@@ -3,6 +3,7 @@
  */
 Ext.define('BlogMgr.model.Menu',{
 	extend:'Ext.data.Model',
+	idProperty:'fId',	//主键标识
 	 fields: [
 	    {name: 'fId', type: 'string'},
         {name: 'fName',  type: 'string'},

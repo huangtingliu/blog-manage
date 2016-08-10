@@ -212,7 +212,10 @@ Ext.define('BlogMgr.view.user.UserInfoForm', {
 									flex:1
 								},*/{
 									xtype:'button',
-									text: '上传图片'
+									text: '上传图片',
+									handler:function(){
+										Ext.toast("待实现"); //TODO
+									}
 								}]
 							}]
 				}, {

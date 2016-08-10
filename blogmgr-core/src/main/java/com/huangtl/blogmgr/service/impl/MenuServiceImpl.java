@@ -15,7 +15,6 @@ public class MenuServiceImpl implements MenuService {
 	public MenuDao getDao() {
 		return menuDao;
 	}
-
 	
 	
 	public void setMenuDao(MenuDao menuDao) {

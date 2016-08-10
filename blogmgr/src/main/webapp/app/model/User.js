@@ -23,7 +23,6 @@ Ext.define('BlogMgr.model.User',{
         fName: 'presence',
         fStatus:'presence'
     }
-    
 })
 
 

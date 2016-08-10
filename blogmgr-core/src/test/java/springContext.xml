@@ -37,7 +37,7 @@
 	</bean> 
 	
 	<!-- 多库数据源 -->
-	<bean id="multipleDataSource" class="com.huangtl.blogmgr.core.extend.spring.MultipleDataSource">
+	<bean id="multipleDataSource" class="com.huangtl.blogmgr.core.spring.MultipleDataSource">
 		<property name="defaultTargetDataSource" ref="blogDataSource"></property>
 		<property name="targetDataSources">
 			<map>

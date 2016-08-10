@@ -42,7 +42,9 @@ Ext.define('BlogMgr.view.user.UserList', {
 							dataIndex : 'fName',
 							sortable:false,
 							editor : {
-								allowBlank : false
+								allowBlank : false,
+								vtype:'chinese',
+								maxLength:10
 							},
 							filter : {
 								type : 'string',
@@ -133,7 +135,8 @@ Ext.define('BlogMgr.view.user.UserList', {
 							},
 							editor : {
 								xtype : 'textfield',
-								allowBlank : true
+								allowBlank : true,
+								vtype:'mobile'
 							}
 						}, {
 							header : '邮箱',
@@ -146,7 +149,8 @@ Ext.define('BlogMgr.view.user.UserList', {
 							},
 							editor : {
 								xtype : 'textfield',
-								allowBlank : true
+								allowBlank : true,
+								vtype:'email'
 							}
 						}, {
 							header : '创建人',

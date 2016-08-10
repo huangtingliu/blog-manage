@@ -1,4 +1,4 @@
-package com.huangtl.blogmgr.model.type;
+package com.huangtl.blogmgr.model.blog.type;
 
 /**
  * 用户状态

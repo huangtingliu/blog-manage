@@ -5,8 +5,8 @@ Ext.onReady(function() {
 Ext.application({
 			name : 'BlogMgr',
 			appFolder : 'app',
-			models : ['Menu','User'],
-			stores : ['UserListStore'],
+			models : ['Menu','User','MenuTree'],
+			stores : ['UserListStore','MenuTreeStore'],
 			controllers:['Main','Root'],
 			views:['BlogMgr.view.home.Navigator'],
 			paths : {
@@ -14,7 +14,7 @@ Ext.application({
 			},
 			init : function() {
 				Ext.setGlyphFontFamily('FontAwesome');
-				Ext.require(['BlogMgr.view.user.UserList']);
+				Ext.require(['BlogMgr.view.user.UserList','BlogMgr.view.menu.MenuList']);
 			},
 			launch : function(profile) {
 				// 附加额外的属性

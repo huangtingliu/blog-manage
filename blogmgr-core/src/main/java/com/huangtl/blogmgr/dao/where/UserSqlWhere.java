@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import com.huangtl.blogmgr.model.type.Gender;
-import com.huangtl.blogmgr.model.type.UserStatus;
+import com.huangtl.blogmgr.model.blog.type.Gender;
+import com.huangtl.blogmgr.model.blog.type.UserStatus;
 
 /**
  * 后台用户查询条件参数集

@@ -1,5 +1,6 @@
 package com.huangtl.blogmgr.model.blog;
 
+import com.huangtl.blogmgr.model.blog.type.MenuType;
 import com.huangtl.blogmgr.model.common.ObjectValue;
 
 /**
@@ -20,12 +21,19 @@ public class Menu extends ObjectValue {
     private String fDescr;			//描述
     private Integer fGlyph;			//glyph 值
     private Integer fExpand;		//是否展开
+    private MenuType fType;			//菜单类型
     
 	public String getfId() {
 		return fId;
 	}
 	public void setfId(String fId) {
 		this.fId = fId;
+	}
+	public MenuType getfType() {
+		return fType;
+	}
+	public void setfType(MenuType fType) {
+		this.fType = fType;
 	}
 	public String getfName() {
 		return fName;
