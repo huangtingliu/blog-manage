@@ -5,7 +5,7 @@ Ext.onReady(function() {
 Ext.application({
 			name : 'BlogMgr',
 			appFolder : 'app',
-			models : ['Menu','User','MenuTree'],
+			models : ['Menu','User'],
 			stores : ['UserListStore','MenuTreeStore'],
 			controllers:['Main','Root'],
 			views:['BlogMgr.view.home.Navigator'],

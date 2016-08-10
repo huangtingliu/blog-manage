@@ -5,7 +5,7 @@ Ext.define('BlogMgr.store.MenuTreeStore',{
 	extend:'Ext.data.TreeStore',
 	alias:'store.menutree',
 	storeId : 's_menutree',
-	model: 'BlogMgr.model.MenuTree',
+	model: 'BlogMgr.model.Menu',
 	//parentIdProperty:'fParentId',
 	/*proxy:{
 		type: 'ajax',

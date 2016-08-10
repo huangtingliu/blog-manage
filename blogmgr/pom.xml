@@ -8,7 +8,11 @@
 	<name>blogmgr</name>
 
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		 <!-- 文件拷贝时的编码 -->  
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>  
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>  
+        <!-- 编译时的编码 -->  
+        <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
 	</properties>
 
 	<dependencies>
@@ -41,38 +45,23 @@
 				<configuration>
 					<source>1.7</source>
 					<target>1.7</target>
-					<encoding>utf-8</encoding>
+					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
-			
-			
 			<plugin>  
-                <artifactId>maven-assembly-plugin</artifactId>  
+                <groupId>org.apache.maven.plugins</groupId>  
+                <artifactId>maven-resources-plugin</artifactId>  
+                <version>2.6</version>  
                 <configuration>  
-                    <archive>  
-                        <manifest>  
-                            <mainClass>com.allen.capturewebdata.Main</mainClass>  
-                        </manifest>  
-                    </archive>  
-                    <descriptorRefs>  
-                        <descriptorRef>jar-with-dependencies</descriptorRef>  
-                    </descriptorRefs>  
+                    <encoding>UTF-8</encoding><!-- 指定编码格式，否则在DOS下运行mvn命令时当发生文件资源copy时将使用系统默认使用GBK编码 -->  
                 </configuration>  
-            </plugin>
-			
+            </plugin>  
 			<plugin>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>2.6</version>
 				<configuration>
-					<encoding>utf-8</encoding>
+					<encoding>UTF-8</encoding>
 					<version>3.1</version>
-					<webResources>
-						<webResource>
-							<directory>src\main\webapp</directory>
-							 <filtering>true</filtering>
-							 <targetPath>webapp</targetPath>  
-						</webResource>
-					</webResources>
 					<webappDirectory>E:\Project\blogmgr</webappDirectory>  
                		<warSourceDirectory>src\main\webapp</warSourceDirectory>
                		<webXml>src\main\webapp\WEB-INF\web.xml</webXml>

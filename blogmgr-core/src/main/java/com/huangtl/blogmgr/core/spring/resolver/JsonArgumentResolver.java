@@ -41,7 +41,7 @@ public class JsonArgumentResolver implements HandlerMethodArgumentResolver{
 			return JSON.parseArray(paramValue,listItemClass);
 		}
 		
-		return JSON.parseObject(paramValue, clazz);
+		return  JSON.parseObject(paramValue, clazz);
 
 	}
 	

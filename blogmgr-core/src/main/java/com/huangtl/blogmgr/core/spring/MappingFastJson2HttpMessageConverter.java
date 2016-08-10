@@ -27,6 +27,7 @@ public class MappingFastJson2HttpMessageConverter extends AbstractGenericHttpMes
 	@Override
 	protected void writeInternal(Object t, Type type, HttpOutputMessage outputMessage)
 			throws IOException, HttpMessageNotWritableException {
+		outputMessage.getHeaders().setContentType(MediaType.APPLICATION_JSON_UTF8);
 		JSON.writeJSONStringTo(t, new PrintWriter(outputMessage.getBody()),SerializerFeature.WriteEnumUsingToString,
 				SerializerFeature.WriteDateUseDateFormat);
 	}
