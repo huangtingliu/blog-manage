@@ -11,7 +11,7 @@ Ext.define('BlogMgr.store.MenuDataProxy', {
 			},
 			reader : {
 				type : 'json',
-				rootProperty : 'menuList',
+				rootProperty : 'menulist',
 				successProperty : 'success',
 				messageProperty : 'message'
 			}

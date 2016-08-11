@@ -1,5 +1,9 @@
 /**
- * 系统消息提示
+ * 该脚本主要是为了重写Ext的组件
+ */
+
+
+/** 系统消息提示
  * Ext.toast 重写
  */
 Ext.define('Overrides.ext.Toast', {

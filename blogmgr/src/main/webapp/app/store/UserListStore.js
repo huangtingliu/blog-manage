@@ -19,7 +19,7 @@
 				url : '/blogmgr/user/paging.data',
 				reader : {
 					type : 'json',
-					rootProperty : 'userList',
+					rootProperty : 'userlist',
 					totalProperty : 'total',
 					messageProperty : 'message',
 					successProperty : 'success'

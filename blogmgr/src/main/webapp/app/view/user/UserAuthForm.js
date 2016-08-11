@@ -1,5 +1,5 @@
 /**
- * 用户权限表单
+ * 后台用户权限表单
  */
 Ext.define('BlogMgr.view.user.UserAuthForm', {
 			itemId : 'userAuthForm',

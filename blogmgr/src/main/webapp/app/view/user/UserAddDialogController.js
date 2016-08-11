@@ -1,5 +1,5 @@
 /**
- * 用户添加对话框控制器
+ * 用户添加对话窗口控制器
  */
 Ext.define('BlogMgr.view.user.UserAddDialogController', {
 			extend : 'Ext.app.ViewController',

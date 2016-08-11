@@ -5,7 +5,7 @@ Ext.define('BlogMgr.view.home.Navigator', {
 			id:'home_navigator',
 			uses : ['BlogMgr.view.home.NavigatorModel',
 					'BlogMgr.view.home.NavigatorController',
-					'BlogMgr.view.home.MenuGrid'],
+					'BlogMgr.view.home.NavigatorMenu'],
 			extend : 'Ext.panel.Panel',
 			alias : 'widget.navigator',
 			viewModel:'navigator',

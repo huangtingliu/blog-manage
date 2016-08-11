@@ -21,8 +21,10 @@
 	</resultMap>
 	
 	<sql id="where">
-		 <where>
+		 <trim prefix="where" prefixOverrides="and|or">
+		 	<if test="defaultWhere">
 		 		1=1
+		 	</if>
 			<if test="fId_eq != null ">and         ui_Id       =   #{fId_eq}</if>
 			<if test="fName_like != null">and      ui_Name    like #{fName_like}</if>
 			<if test="fPinYin_like != null">and    ui_PinYin  like #{fPinYin_like}</if>
@@ -49,7 +51,7 @@
 					#{status}
 				</foreach>
 			</if>
-		</where>
+		</trim>
 	</sql>
 	
 	<sql id="order">

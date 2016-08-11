@@ -1,5 +1,5 @@
 /**
- * 后台用户列表
+ * 后台用户列表 - 主页
  */
 Ext.define('BlogMgr.view.user.UserList', {
 			id : 'user_UserList',

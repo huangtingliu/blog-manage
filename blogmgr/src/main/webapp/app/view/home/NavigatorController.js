@@ -12,7 +12,7 @@ Ext.define('BlogMgr.view.home.NavigatorController',{
 			view.add({
 				itemId:menu.get('fId'),
 				title:menu.get('fName'),
-				xtype : 'menugrid'
+				xtype : 'navigatormenu'
 			});
 			//TODO 初始化选中时太生硬了
 			if(menu.get('fExpand')==1){

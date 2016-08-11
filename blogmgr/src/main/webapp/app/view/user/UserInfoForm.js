@@ -1,5 +1,5 @@
 /**
- * 用户信息表单
+ * 添加后台用户信息表单
  */
 Ext.define('BlogMgr.view.user.UserInfoForm', {
 	itemId : 'userInfoForm',

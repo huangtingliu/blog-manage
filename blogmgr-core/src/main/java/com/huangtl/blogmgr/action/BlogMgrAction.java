@@ -6,6 +6,5 @@ package com.huangtl.blogmgr.action;
  * @author PraiseLord
  */
 public abstract class BlogMgrAction {
-	
 	//protected User
 }

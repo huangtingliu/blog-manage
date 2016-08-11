@@ -1,3 +1,6 @@
+/**
+ * 博客后台管理应用启动配置
+ */
 Ext.onReady(function() {
 	Ext.require(['Widget.tabs.ReorderableTabs']);
 });
@@ -5,8 +8,8 @@ Ext.onReady(function() {
 Ext.application({
 			name : 'BlogMgr',
 			appFolder : 'app',
-			models : ['Menu','User'],
-			stores : ['UserListStore','MenuTreeStore'],
+			models : ['Menu','User','Tree'],
+			stores : ['MenuDataProxy','UserListStore','MenuTreeStore'],
 			controllers:['Main','Root'],
 			views:['BlogMgr.view.home.Navigator'],
 			paths : {

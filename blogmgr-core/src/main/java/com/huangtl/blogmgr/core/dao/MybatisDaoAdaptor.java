@@ -120,6 +120,7 @@ public abstract class MybatisDaoAdaptor<T> implements MybatisDao<T> {
 	@Override
 	public int delete(SqlWhere param){
 		if(param==null || param.size()==0){return 0;}
+		param.defaultWhere(false);
 		return this.sqlSession.delete(nameSpace+".delete",param);
 	};
 	
@@ -132,7 +133,7 @@ public abstract class MybatisDaoAdaptor<T> implements MybatisDao<T> {
 	public int update(T entity ,SqlWhere param){
 		if(param==null || param.size()==0){return 0;}
 		if(entity==null){return 0;}
-		
+		param.defaultWhere(false);
 		param.putAll(entityToMap(entity));
 		return this.sqlSession.update(nameSpace+".update",param);
 	};

@@ -16,4 +16,5 @@ public interface UserDao extends MybatisDao<User> {
 	 * @return
 	 */
 	User selectOne(String userId);
+	
 }

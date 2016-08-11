@@ -1,5 +1,5 @@
 /**
- * 用户列表控制器
+ * 用户列表 - 视图控制器
  */
 Ext.define('BlogMgr.view.user.UserListController', {
 	uses : ['BlogMgr.view.user.UserAddDialog'],

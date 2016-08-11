@@ -19,8 +19,10 @@
 	</resultMap>
 	
 	<sql id="where">
-		 <where>
+		 <trim prefix="where" prefixOverrides="and|or">
+		 	<if test="defaultWhere">
 		 		1=1
+		 	</if>
 			<if test="fId_eq !=null ">
 				and mu_Id = #{fId_eq}
 			</if>
@@ -30,7 +32,7 @@
 			<if test="fType_eq != null">
 				and mu_Type = #{fType_eq}
 			</if>
-		</where>
+		</trim>
 	</sql>
 	
 	<sql id="order">
@@ -49,7 +51,6 @@
 			#{fId},#{fName},#{fParentId},#{fIcon},#{fUrl},#{fOrder},#{fDescr},#{fGlyph},#{fExpand},#{fViewClass},#{mu_Type}
 		);
 	</insert>
-	
 
 	<select id="selectList" resultMap="map" parameterType="map">
 		select mu_Id,mu_Name,mu_ParentId,mu_Icon,mu_Url,mu_Glyph,mu_Expand,mu_ViewClass
@@ -71,12 +72,10 @@
 		limit #{startIndex},#{pageSize}
 	</select>
 	
-	
 	<delete id="delete" parameterType="map">
 		delete from mgr_menu
 		<include refid="where"/>
 	</delete>
-	
 	
 	<delete id="deleteBatch" parameterType="list">
 		delete from mgr_menu where mu_Id in 

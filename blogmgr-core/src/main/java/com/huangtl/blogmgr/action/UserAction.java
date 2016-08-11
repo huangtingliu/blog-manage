@@ -42,11 +42,24 @@ public class UserAction extends BlogMgrAction {
 	
 	/**
 	 * 用户分页查询
+	* @param pageNo 当前页号
+	 * @param pageSize 每页记录个数 
+	 * @param filter 查询过滤器 <br>
+	 * <blockquote>
+	 *  格式  filter:[{"property":"fName","value":"张三","operator":"like"}] 
+	 *  </blockquote>
+	 * @param sort 排序方案 <br>
+	 * <blockquote>
+	 *  格式   sort:[{"property":"fCreateDate","direction":"ASC\DESC"}]
+	 * </blockquote>
 	 * @return
+	 * <pre>
+	 * {message: "获取成功个数 15", total: 0, userlist: [], success: true}
+	 * </pre>
 	 */
 	@RequestMapping("paging.data")
 	@ResponseBody
-	public Object userPaging(Integer pageNo,Integer pageSize,
+	public Object getPaging(Integer pageNo,Integer pageSize,
 			FilterCollection filter,SortCollection sort) {
 		
 		Page<User> page = new Page<>(pageSize, pageNo);
@@ -66,7 +79,7 @@ public class UserAction extends BlogMgrAction {
 		this.userService.getDao().selectPaging(whereParam, page);
 		
 		JSONObject data = new JSONObject();
-		data.put("userList", page.getPageContent());
+		data.put("userlist", page.getPageContent());
 		data.put("total", page.getTotal());
 		data.put("success", true);
 		data.put("message", "获取成功个数 "+page.getPageSize());

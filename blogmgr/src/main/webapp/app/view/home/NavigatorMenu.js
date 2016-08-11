@@ -1,12 +1,14 @@
-Ext.define('BlogMgr.view.home.MenuGrid', {
-			uses : ['BlogMgr.view.home.MenuGridController',
-					'BlogMgr.model.Menu',
+/**
+ * 导向栏菜单
+ */
+Ext.define('BlogMgr.view.home.NavigatorMenu', {
+			uses : ['BlogMgr.view.home.NavigatorMenuController',
 					'BlogMgr.store.MenuDataProxy'],
 			extend : 'Ext.grid.Panel',
-			alias : ['widget.menugrid'],
+			alias : ['widget.navigatormenu'],
 			title : '导航菜单',
 			hideHeaders : true,
-			controller : 'menugrid',
+			controller : 'navigatormenu',
 			initComponent : function() {
 				var parentMenu = this.getItemId();
 				this.store = {

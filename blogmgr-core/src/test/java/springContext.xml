@@ -92,8 +92,8 @@
 	</bean>
 	<bean id="menuDao" class="com.huangtl.blogmgr.dao.impl.MenuDaoImpl" parent="myBatisDao"></bean>
 	<!-- 后台用户管理 -->
-	<bean id="userService" class="com.huangtl.blogmgr.service.impl.UserServiceImpl">
+	<!-- <bean id="userService" class="com.huangtl.blogmgr.service.impl.UserServiceImpl">
 		<property name="userDao" ref="userDao"></property>
 	</bean>
-	<bean id="userDao" class="com.huangtl.blogmgr.dao.impl.UserDaoImpl" parent="myBatisDao"></bean>
+	<bean id="userDao" class="com.huangtl.blogmgr.dao.impl.UserDaoImpl" parent="myBatisDao"></bean> -->
 </beans>

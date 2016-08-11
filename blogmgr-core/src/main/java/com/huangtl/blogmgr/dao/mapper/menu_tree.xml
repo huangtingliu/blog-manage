@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huangtl.blogmgr.model.blog.menu.Tree">
+
+	<resultMap id="map" type="com.huangtl.blogmgr.model.extjs.TreeNode" >
+		<id property="id" column="mu_Id"/>
+		<result property="text" column="mu_Name"/>
+		<result property="parentId" column="mu_ParentId" />
+		<result property="iconCls" column="mu_Icon"/>
+		<result property="qtip" column="mu_Descr"/>
+		<result property="childrenSize" column="childrenSize"/>
+		<result property="attr" column="fOrder" typeHandler="com.huangtl.blogmgr.core.mybatis.handler.MapTypeHandler"/>
+		<result property="attr" column="fType" typeHandler="com.huangtl.blogmgr.core.mybatis.handler.MapTypeHandler"/>
+		
+		<!-- <result property="attr" column="mu_ViewClass" typeHandler="com.huangtl.blogmgr.core.mybatis.handler.MapTypeHandler"/>
+		<result property="attr" column="mu_Url" typeHandler="com.huangtl.blogmgr.core.mybatis.handler.MapTypeHandler"/>
+		<result property="attr" column="mu_Descr" typeHandler="com.huangtl.blogmgr.core.mybatis.handler.MapTypeHandler"/>
+		<result property="attr" column="mu_Expand" typeHandler="com.huangtl.blogmgr.core.mybatis.handler.MapTypeHandler"/> -->
+	</resultMap>
+	
+	<sql id="where">
+		 <trim prefix="where" prefixOverrides="and|or">
+		 	<if test="defaultWhere">
+		 		1=1
+		 	</if>
+			<if test="fId_eq !=null ">
+				and mu_Id = #{fId_eq}
+			</if>
+			<if test="fParentId_eq != null">
+				and mu_ParentId = #{fParentId_eq}
+			</if>
+			<if test="fType_eq != null">
+				and mu_Type = #{fType_eq}
+			</if>
+		 </trim>
+	</sql>
+	
+	<sql id="order">
+		<if test="sorts != null and sorts.size() != 0">
+			order by 
+			<foreach collection="sorts" separator="," index="key" item="val">
+				${key} ${val}
+			</foreach>
+		</if>
+	</sql>
+
+	<select id="selectTreeNodes" resultMap="map" parameterType="map">
+		select mu_Id,mu_Name,mu_ParentId,mu_Icon,
+		       mu_Order as fOrder,
+		       mu_Type as fType,
+		       (select count(*) from mgr_menu b where b.mu_ParentId =a.mu_Id ) as childrenSize
+		from mgr_menu a
+		<include refid="where"/>
+		order by mu_Order
+	</select>
+	
+</mapper>

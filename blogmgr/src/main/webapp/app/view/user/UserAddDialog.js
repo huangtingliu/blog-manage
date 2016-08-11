@@ -1,5 +1,5 @@
 /**
- * 用户添加弹出窗口
+ * 添加后台用户对话窗口
  */
 Ext.define('BlogMgr.view.user.UserAddDialog', {
 			id : 'user_useradd',

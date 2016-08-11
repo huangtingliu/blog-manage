@@ -1,17 +1,35 @@
 /**
- * 菜单管理
+ * 菜单管理 - 主页
  */
 Ext.define('BlogMgr.view.menu.MenuList', {
-	id : 'menu_MenuList',
-	extend : 'Ext.panel.Panel',
-	alias : ['widget.menulist'],
-	uses:['BlogMgr.view.menu.MenuTree'],
-	layout : 'column',
-	items : [{
-				columnWidth : 0.25,
-				xtype:'menutree'
-			}, {
-				columnWidth : 0.75,
-				html : '<p>This is some longer content.longer content.longer content.longer content.longer content. longer content.</p>'
-			}]
-});
+			id : 'menuList',
+			extend : 'Ext.panel.Panel',
+			alias : ['widget.menulist'],
+			uses : ['BlogMgr.view.menu.MenuTree', 'BlogMgr.view.menu.MenuGrid',
+					'BlogMgr.view.menu.MenuListController',
+					'BlogMgr.view.menu.MenuListModel'],
+			layout : 'border',
+			controller : 'menulist',
+			viewModel : {
+				type : 'menulist'
+			},
+			defaults : {
+				bodyPadding : 7
+			},
+			items : [{
+						region : 'west',
+						title : '',
+
+						width : 200,
+						split : true,
+						items : {
+							xtype : 'menutree'
+						}
+					}, {
+						region : 'center',
+						layout : 'fit',
+						items : {
+							xtype : 'menugrid'
+						}
+					}]
+		});

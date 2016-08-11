@@ -20,6 +20,10 @@ import com.huangtl.blogmgr.model.extjs.Filter;
 @SuppressWarnings("serial")
 public abstract class SqlWhere extends HashMap<String, Object> {
 	
+	public SqlWhere(){
+		defaultWhere(true);
+	}
+	
 	/** 
 	 * 查询值不能为null，但允许为是一个空串
 	 */
@@ -29,6 +33,16 @@ public abstract class SqlWhere extends HashMap<String, Object> {
 		if(value==null){return null;}
 		
 		return super.put(key, value);
+	}
+	
+	/**
+	 * 是否有默认的查询条件（1=1），默认（有）可以不带任何查询条件。否则必须带查询参数
+	 * @param has{true:有，false:没有}
+	 * @return
+	 */
+	public SqlWhere defaultWhere(boolean has){
+		this.put("defaultWhere", has);
+		return this;
 	}
 	
 	

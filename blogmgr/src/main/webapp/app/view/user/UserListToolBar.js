@@ -1,5 +1,5 @@
 /**
- * 用户列表工具栏
+ * 用户列表 - 工具栏
  */
 Ext.define('BlogMgr.view.user.UserListToolBar', {
 		    uses:['Widget.input.GridSearchField'],
