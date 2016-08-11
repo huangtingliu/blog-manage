@@ -2,7 +2,9 @@
  * 博客后台管理应用启动配置
  */
 Ext.onReady(function() {
-	Ext.require(['Ux.tabs.ReorderableTabs','Ux.toast.ColorfulToast']);
+	Ext.require(['Ux.tabs.ReorderableTabs',
+				 'Ux.toast.ColorfulToast'
+				 ]);
 	Ext.Loader.loadScript([
 		'/blogmgr/framework/Ux/VTypesPlus.js'
 	]);

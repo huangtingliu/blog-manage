@@ -59,17 +59,20 @@ Ext.define('BlogMgr.view.user.UserInfoForm', {
 												var phone = _this.up('form').down('textfield[name="fPhone"]');
 												
 												if(newVal=='custom'){
-													account.disable(false);
+													account.setDisabled(false);
 													mail.allowBlank = true;
 													phone.allowBlank = true;
+													return;
 												}else if(newVal =='mail'){
 													mail.allowBlank=false;
 													phone.allowBlank = true;
 													account.disable(true);
+													return;
 												}else if(newVal =='phone'){
 													mail.allowBlank = true;
 													phone.allowBlank=false;
 													account.disable(true);
+													return;
 												}
 											}
 										}
