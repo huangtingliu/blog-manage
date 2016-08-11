@@ -3,7 +3,7 @@
  */
 Ext.define('BlogMgr.view.user.UserList', {
 			id : 'user_UserList',
-			uses : ['Widget.button.TransparentButton',
+			uses : ['Ux.button.TransparentButton',
 					'BlogMgr.view.user.UserListToolBar',
 					'BlogMgr.view.user.UserListController',
 					'BlogMgr.view.user.UserListModel',

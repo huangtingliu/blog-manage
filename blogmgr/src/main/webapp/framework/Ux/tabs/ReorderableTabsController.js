@@ -1,6 +1,6 @@
-Ext.define('Widget.tabs.ReorderableTabsController', {
+Ext.define('Ux.tabs.ReorderableTabsController', {
 			extend : 'Ext.app.ViewController',
-			alias : 'controller.reorderable-tabs',
+			alias : 'controller.reorderable_tabs',
 			onAddTab : function(config) { // 附加一个tab
 				var tabPanel = this.getView();
 				var tab = tabPanel.child("#" + config.id);

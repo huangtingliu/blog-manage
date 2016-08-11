@@ -1,4 +1,4 @@
-Ext.define('Widget.accordion.Accordion', {
+Ext.define('Ux.accordion.Accordion', {
     extend: 'Ext.panel.Panel',
     requires: [
         'Accordion'

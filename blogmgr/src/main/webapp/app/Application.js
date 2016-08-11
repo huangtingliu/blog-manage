@@ -2,7 +2,10 @@
  * 博客后台管理应用启动配置
  */
 Ext.onReady(function() {
-	Ext.require(['Widget.tabs.ReorderableTabs']);
+	Ext.require(['Ux.tabs.ReorderableTabs','Ux.toast.ColorfulToast']);
+	Ext.Loader.loadScript([
+		'/blogmgr/framework/Ux/VTypesPlus.js'
+	]);
 });
 
 Ext.application({
@@ -13,11 +16,14 @@ Ext.application({
 			controllers:['Main','Root'],
 			views:['BlogMgr.view.home.Navigator'],
 			paths : {
-				'Ext' : 'framework/Ext'
+				'Ext' : 'framework/Ext',
+				'Ux' : 'framework/Ux'
 			},
 			init : function() {
 				Ext.setGlyphFontFamily('FontAwesome');
-				Ext.require(['BlogMgr.view.user.UserList','BlogMgr.view.menu.MenuList']);
+				Ext.require([
+					'BlogMgr.view.user.UserList',
+					'BlogMgr.view.menu.MenuList']);
 			},
 			launch : function(profile) {
 				// 附加额外的属性
@@ -46,7 +52,7 @@ Ext.application({
 									}, {
 										id : 'home-center',
 										region : 'center',
-										xtype : 'reorderable-tabs',
+										xtype : 'reorderable_tabs',
 										items : [{
 													id : 'tab-index',
 													title : '首页',

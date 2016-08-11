@@ -2,7 +2,7 @@
  * 用户列表 - 工具栏
  */
 Ext.define('BlogMgr.view.user.UserListToolBar', {
-		    uses:['Widget.input.GridSearchField'],
+		    uses:['Ux.input.GridSearchField'],
 			extend : 'Ext.toolbar.Toolbar',
 			alias : 'widget.userlisttoolbar',
 			items : [{

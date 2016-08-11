@@ -2,7 +2,7 @@
 /**
  * 放在grid上面的查询字段，focus的时候变长
  */
-Ext.define('Widget.input.GridSearchField', {
+Ext.define('Ux.input.GridSearchField', {
 			extend : 'Ext.ux.form.SearchField',
 			alias : 'widget.gridsearchfield',
 			focusWidth : 150,

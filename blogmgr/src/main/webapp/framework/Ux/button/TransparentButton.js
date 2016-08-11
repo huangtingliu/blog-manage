@@ -1,7 +1,7 @@
 /**
  * 定义了一个背景透明的Button类
  */
-Ext.define('Widget.button.TransparentButton', {
+Ext.define('Ux.button.TransparentButton', {
 			extend : 'Ext.button.Button', // 继续于Ext.button.Button
 			alias : 'widget.transparent_button', // 此类的xtype类型为buttontransparent
 			disableMouseOver : false,
