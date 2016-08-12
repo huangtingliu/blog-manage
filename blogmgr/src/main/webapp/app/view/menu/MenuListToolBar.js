@@ -14,13 +14,13 @@ Ext.define('BlogMgr.view.menu.MenuListToolBar', {
 					}, {
 						itemId : 'edit',
 						text : '修改',
-						handler : 'edit',
+						handler : 'editMenu',
 						xtype : 'transparent_button',
 						glyph : 0xf044
 					}, {
 						itemId : 'delete',
 						text : '删除',
-						handler : 'delete',
+						handler : 'deleteMenu',
 						xtype : 'transparent_button',
 						glyph : 0xf014
 					}, {

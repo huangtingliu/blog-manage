@@ -169,7 +169,6 @@ Ext.define('BlogMgr.view.user.UserInfoForm', {
 											xtype : 'fieldcontainer',
 											fieldLabel : '性别',
 											defaultType : 'radiofield',
-											anchor : '90%',
 											defaults : {
 												flex : 1
 											},
