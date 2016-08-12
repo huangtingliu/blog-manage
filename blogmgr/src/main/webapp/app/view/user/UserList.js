@@ -2,18 +2,18 @@
  * 后台用户列表 - 主页
  */
 Ext.define('BlogMgr.view.user.UserList', {
-			id : 'user_UserList',
+			id : 'userList',
 			uses : ['Ux.button.TransparentButton',
 					'BlogMgr.view.user.UserListToolBar',
 					'BlogMgr.view.user.UserListController',
 					'BlogMgr.view.user.UserListModel',
-					 'Ext.grid.filters.Filters'/*,'Ext.ux.ProgressBarPager'*/],
+					 'Ext.grid.filters.Filters'],
 			extend : 'Ext.panel.Panel',
 			alias : ['widget.userlist'],
 			layout : 'fit',
 			items : {
 				xtype : 'grid',
-				store : Ext.getStore('s_userlist'),
+				store : Ext.getStore('userPagingStore'),
 				controller : 'userlist',
 				columnLines : true,
 				autoLoad : true,
@@ -175,10 +175,9 @@ Ext.define('BlogMgr.view.user.UserList', {
 				},
 				dockedItems : [{
 							xtype : 'pagingtoolbar',
-							store : Ext.getStore('s_userlist'),
+							store : Ext.getStore('userPagingStore'),
 							dock : 'bottom',
 							displayInfo : true,
-							// plugins: new Ext.ux.ProgressBarPager(),
 							items : [{
 										tooltip : '数据打印',
 										xtype : 'splitbutton',

@@ -1,22 +1,22 @@
 /**
  * 后台用户stroe
  */
- Ext.define('BlogMgr.store.UserListStore', {
+ Ext.define('BlogMgr.store.UserPagingStore', {
 			model : 'BlogMgr.model.User',
 			extend:'Ext.data.Store',
-			alias:'store.user',
-			storeId : 's_userlist',
+			alias:'store.user_paging',
+			storeId : 'userPagingStore',
 			pageSize:15,
 			remoteSort:true,
 			remoteFilter:true,
 			sorters:[],
 			proxy : {
+				type : 'ajax',
+				url : '/blogmgr/user/paging.data',
 				limitParam:'pageNo',
 				pageParam:'pageSize',
-				type : 'ajax',
 				noCache:false,
 				paramsAsJson:true,
-				url : '/blogmgr/user/paging.data',
 				reader : {
 					type : 'json',
 					rootProperty : 'userlist',
@@ -27,4 +27,4 @@
 			},
 			listeners:{}
 });
-Ext.create('BlogMgr.store.UserListStore');
+Ext.create('BlogMgr.store.UserPagingStore');

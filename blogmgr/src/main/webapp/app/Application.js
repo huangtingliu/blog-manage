@@ -14,7 +14,7 @@ Ext.application({
 			name : 'BlogMgr',
 			appFolder : 'app',
 			models : ['Menu','User','Tree'],
-			stores : ['MenuDataProxy','UserListStore','MenuTreeStore'],
+			stores : ['MenuListProxy','UserPagingStore','MenuTreeStore','MenuPagingStore'],
 			controllers:['Main','Root'],
 			views:['BlogMgr.view.home.Navigator'],
 			paths : {

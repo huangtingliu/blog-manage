@@ -3,8 +3,8 @@
  */
 Ext.define('BlogMgr.store.MenuTreeStore', {
 			extend : 'Ext.data.TreeStore',
-			alias : 'store.menutree',
-			storeId : 's_menutree',
+			alias : 'store.menu_tree',
+			storeId : 'menuTreeStore',
 			model:'BlogMgr.model.Tree',
 			nodeParam : 'parentId',
 			parentIdProperty : 'parentId',

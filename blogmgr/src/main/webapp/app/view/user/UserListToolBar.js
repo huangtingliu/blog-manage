@@ -40,7 +40,7 @@ Ext.define('BlogMgr.view.user.UserListToolBar', {
 							xtype : 'gridsearchfield',
 							emptyText:'用户名查询..',
 							paramName:'fName',
-							store :Ext.getStore('s_userlist')
+							store :Ext.getStore('userPagingStore')
 							}]
 
 		});

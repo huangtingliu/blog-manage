@@ -1,9 +1,9 @@
 /**
  * 菜单ajax数据代理
  */
-Ext.define('BlogMgr.store.MenuDataProxy', {
+Ext.define('BlogMgr.store.MenuListProxy', {
 			extend : 'Ext.data.proxy.Ajax',
-			alias: 'proxy.menu_proxy',
+			alias: 'proxy.menu_list',
 			model : 'BlogMgr.model.Menu',
 			url : '/blogmgr/menu/list.data',
 			constructor:function(config){

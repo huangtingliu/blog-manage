@@ -2,7 +2,7 @@
  * 添加后台用户对话窗口
  */
 Ext.define('BlogMgr.view.user.UserAddDialog', {
-			id : 'user_useradd',
+			id : 'userAddDialog',
 			uses:['BlogMgr.view.user.UserInfoForm',
 				  'BlogMgr.view.user.UserAuthForm',
 				  'BlogMgr.view.user.UserAddDialogController'],

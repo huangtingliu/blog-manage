@@ -2,8 +2,7 @@
  * 导向栏菜单
  */
 Ext.define('BlogMgr.view.home.NavigatorMenu', {
-			uses : ['BlogMgr.view.home.NavigatorMenuController',
-					'BlogMgr.store.MenuDataProxy'],
+			uses : ['BlogMgr.view.home.NavigatorMenuController'],
 			extend : 'Ext.grid.Panel',
 			alias : ['widget.navigatormenu'],
 			title : '导航菜单',
@@ -16,7 +15,7 @@ Ext.define('BlogMgr.view.home.NavigatorMenu', {
 					autoLoadDelay : 0,
 					model : 'BlogMgr.model.Menu',
 					proxy : {
-						type : 'menu_proxy',
+						type : 'menu_list',
 						extraParams : {
 							parentId : parentMenu
 						}

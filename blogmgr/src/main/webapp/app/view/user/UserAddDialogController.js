@@ -17,7 +17,7 @@ Ext.define('BlogMgr.view.user.UserAddDialogController', {
 							success : function(form, action) {
 								Ext.toast(action.result);
 								_this.closeDialog();
-								Ext.getStore('s_userlist').reload(); //TODO 优化：本地加入
+								Ext.getStore('userPagingStore').reload(); //TODO 优化：本地加入
 							},
 							failure : function(form, action) {
 								if(action.result){
