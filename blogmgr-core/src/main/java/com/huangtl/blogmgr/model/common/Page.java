@@ -2,9 +2,9 @@ package com.huangtl.blogmgr.model.common;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.collections4.map.ListOrderedMap;
 import org.apache.commons.lang3.StringUtils;
 
 import com.alibaba.fastjson.annotation.JSONField;
@@ -36,13 +36,13 @@ public class Page<T> {
 		this.pageNo=(pageNo==null || pageNo<=0)?1:pageNo;
 		this.pageSize = (pageSize==null || pageSize<=0)?15:pageSize;
 		total = 0l;
-		sorts = new HashMap<String, Direction>();
+		sorts = new ListOrderedMap<String, Direction>();
 	}
 	
 	public Page(Long startIndex,Integer pageSize){
 		this.pageSize = (pageSize==null || pageSize<=0)?15:pageSize;
 		setStartIndex(startIndex);
-		sorts = new HashMap<String, Direction>();
+		sorts = new ListOrderedMap<String, Direction>();
 	}
 	
 	/**

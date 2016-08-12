@@ -7,11 +7,16 @@ Ext.define('BlogMgr.model.Menu',{
 	 fields: [
 	    {name: 'fId', type: 'string'},
         {name: 'fName',  type: 'string'},
-        {name: 'fIcon',   type: 'string'},
+        {name: 'fParentId',   type: 'string'},
         {name: 'fViewClass', type: 'string'},
         {name: 'fUrl', type: 'string'},
+        {name: 'fIcon', type: 'string'},
         {name: 'fGlyph', type: 'int'},
-         {name: 'fExpand', type: 'int'}
+        {name: 'fOrder', type: 'int'},
+        {name: 'fType', type: 'string'}
+       // {name: 'fDescr', type: 'string'},
+      //  {name: 'fExpand', type: 'int'}
+        
     ],
     validators: {
         fId: 'presence',

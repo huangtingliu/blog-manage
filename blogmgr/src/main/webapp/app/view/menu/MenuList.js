@@ -14,13 +14,10 @@ Ext.define('BlogMgr.view.menu.MenuList', {
 			viewModel : {
 				type : 'menulist'
 			},
-			defaults : {
-				bodyPadding : 7
-			},
 			items : [{
 						region : 'west',
 						title : '',
-
+						bodyPadding : 7,
 						width : 200,
 						split : true,
 						items : {

@@ -15,9 +15,9 @@ Ext.define('BlogMgr.view.home.NavigatorController',{
 				xtype : 'navigatormenu'
 			});
 			//TODO 初始化选中时太生硬了
-			if(menu.get('fExpand')==1){
+			/*if(menu.get('fExpand')==1){
 				view.getComponent(menu.get('fId')).expand(true);
-			}
+			}*/
 		});
 	}
     

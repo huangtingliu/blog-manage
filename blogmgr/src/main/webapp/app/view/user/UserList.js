@@ -7,7 +7,7 @@ Ext.define('BlogMgr.view.user.UserList', {
 					'BlogMgr.view.user.UserListToolBar',
 					'BlogMgr.view.user.UserListController',
 					'BlogMgr.view.user.UserListModel',
-					 'Ext.grid.filters.Filters'],
+					'Ext.grid.filters.Filters'],
 			extend : 'Ext.panel.Panel',
 			alias : ['widget.userlist'],
 			layout : 'fit',
@@ -171,7 +171,7 @@ Ext.define('BlogMgr.view.user.UserList', {
 							}
 						}],
 				tbar : {
-					xtype : 'userlisttoolbar'
+					xtype : 'userlist_toolbar'
 				},
 				dockedItems : [{
 							xtype : 'pagingtoolbar',

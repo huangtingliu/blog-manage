@@ -4,7 +4,7 @@
 Ext.define('BlogMgr.view.user.UserListToolBar', {
 		    uses:['Ux.input.GridSearchField'],
 			extend : 'Ext.toolbar.Toolbar',
-			alias : 'widget.userlisttoolbar',
+			alias : 'widget.userlist_toolbar',
 			items : [{
 						itemId : 'add',
 						text : '新增',

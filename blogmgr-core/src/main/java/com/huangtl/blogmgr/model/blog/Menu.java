@@ -20,8 +20,8 @@ public class Menu extends ObjectValue {
 	private Integer fOrder;			//排序
     private String fDescr;			//描述
     private Integer fGlyph;			//glyph 值
-    private Integer fExpand;		//是否展开
     private MenuType fType;			//菜单类型
+    private Integer fExpand;		//是否展开{0不展开，展开}
     
 	public String getfId() {
 		return fId;

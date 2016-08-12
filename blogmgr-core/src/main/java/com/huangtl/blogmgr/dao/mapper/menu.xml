@@ -65,7 +65,7 @@
 	</select>
 	
 	<select id="selectPaging" resultMap="map" parameterType="map">
-		select mu_Id,mu_Name,mu_ParentId,mu_Icon,mu_Url,mu_ViewClass,mu_Type
+		select mu_Id as fId,mu_Name,mu_ParentId,mu_Icon,mu_Url,mu_ViewClass,mu_Type,mu_Glyph,mu_Order as fOrder
 		from mgr_menu
 		<include refid="where"/>
 		<include refid="order"/>

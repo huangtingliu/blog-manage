@@ -6,5 +6,11 @@ Ext.define('BlogMgr.view.menu.MenuListController', {
 							msg : '删除中...',
 							target : this.getView()
 						});
+			},
+			/**
+			 * 添加菜单
+			 */
+			addMenu:function(){
+				Ext.toast('UnSupport operater');
 			}
 		});
