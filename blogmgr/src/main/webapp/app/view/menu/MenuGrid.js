@@ -29,7 +29,19 @@ Ext.define('BlogMgr.view.menu.MenuGrid', {
 			}, {
 				header : '编号',
 				dataIndex : 'fId',
-				sortable : true
+				sortable : true,
+				renderer:function(val){
+					 if(Ext.isEmpty(val)){return val;}
+					 var result = [];
+					 for(var i = 0; i<val.length;i=i+4){
+					 	var cor = (i+7).toString(16);
+					 	if(parseInt(cor,16)>16){
+					 		cor = (parseInt(cor,16)%9+7).toString(16);
+					 	}
+					 	result.push('<b style="color:#'+cor+'a7">'+val.substr(i,4)+'</b>');
+					 }
+					 return result.join('');
+				}
 			}, {
 				header : '名称',
 				dataIndex : 'fName',
@@ -50,12 +62,20 @@ Ext.define('BlogMgr.view.menu.MenuGrid', {
 			}, {
 				header : '视图类',
 				dataIndex : 'fViewClass',
-				sortable : false
+				sortable : false,
+				renderer:function(val){
+					if(Ext.isEmpty(val)){return '';}
+					return '<span data-qtip="'+val+'" >'+val+'</span>';
+				}
 			}, {
 				header : '链接',
 				dataIndex : 'fUrl',
 				hidden : true,
-				sortable : false
+				sortable : false,
+				renderer:function(val){
+					if(Ext.isEmpty(val)){return '';}
+					return '<span data-qtip="'+val+'">'+val+'</span>';
+				}
 			}, {
 				header : '序号',
 				dataIndex : 'fOrder',
@@ -82,8 +102,8 @@ Ext.define('BlogMgr.view.menu.MenuGrid', {
 				xtype : 'pagingtoolbar',
 				dock : 'bottom',
 				displayInfo : true,
-				store : Ext.getStore('menuPagingStore'),
-				items : [{
+				store : Ext.getStore('menuPagingStore')
+			/*	items : [{
 							tooltip : '数据打印',
 							xtype : 'splitbutton',
 							glyph : 0xf02f,
@@ -105,6 +125,6 @@ Ext.define('BlogMgr.view.menu.MenuGrid', {
 										text : '选中记录导出至excel',
 										glyph : 0xf1c3
 									}]
-						}]
+						}]*/
 			}]
 })
