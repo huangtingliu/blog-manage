@@ -181,24 +181,24 @@ Ext.define('BlogMgr.view.user.UserList', {
 							items : [{
 										tooltip : '数据打印',
 										xtype : 'splitbutton',
-										glyph : 0xf02f,
+										glyph : 0xe6b6,
 										menu : [{
 													text : '打印当前页',
-													glyph : 0xf02f
+													glyph : 0xe6b6
 												}, {
 													text : '打印所有记录',
-													glyph : 0xf02f
+													glyph : 0xe6b6
 												}]
 									}, {
 										tooltip : '数据导出',
 										xtype : 'splitbutton',
-										glyph : 0xf1c3,
+										glyph : 0xe63d,
 										menu : [{
 													text : '列表导出至excel',
-													glyph : 0xf1c3
+													glyph : 0xe63d
 												}, '-', {
 													text : '选中记录导出至excel',
-													glyph : 0xf1c3
+													glyph : 0xe63d
 												}]
 									}]
 						}]

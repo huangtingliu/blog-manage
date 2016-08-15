@@ -22,7 +22,7 @@ Ext.application({
 				'Ux' : 'framework/Ux'
 			},
 			init : function() {
-				Ext.setGlyphFontFamily('FontAwesome');
+				Ext.setGlyphFontFamily('iconfont');
 				Ext.require([
 					'BlogMgr.view.user.UserList',
 					'BlogMgr.view.menu.MenuList']);
@@ -59,7 +59,7 @@ Ext.application({
 													id : 'tab-index',
 													title : '首页',
 													closable : false,
-													glyph : 0xf015
+													glyph : 0xe622
 												}]
 									}, {
 										region : 'west',

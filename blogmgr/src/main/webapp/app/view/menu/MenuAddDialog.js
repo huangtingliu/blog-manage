@@ -15,7 +15,7 @@ Ext.define('BlogMgr.view.menu.MenuAddDialog',{
 			shadowOffset : 30, // 投影效果
 			modal : true, // 模态
 			width : 450,
-			glyph : 0xf1b2,
+			glyph : 0xe6cb,
 			tools : [{
 						type : 'help',
 						tooltip : '帮助'

@@ -5,8 +5,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title></title>
 	<link rel="stylesheet" type="text/css" href="resource/css/common.css">
-	<!--awesome fonts-->
-	<link rel="stylesheet" type="text/css" href="plugin/awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="plugin/iconfont/iconfont.css">
 	<!-- 海王星 -->
 	<link rel="stylesheet" type="text/css" href="framework/Ext/ext-theme-neptune/resources/ext-theme-neptune-all.css">
 	

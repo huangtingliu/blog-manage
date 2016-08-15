@@ -30,8 +30,7 @@ Ext.define('BlogMgr.view.home.NavigatorMenu', {
 				hideable : false,
 				width : '100%',
 				renderer : function(val, cell, model) {
-					return '<a><i class="fa ' + model.get('fIcon')
-							+ '"></i>&nbsp;' + val + '</a>';
+					return '<a><i class="iconfont">&#'+model.get('fGlyph')+'</i>&nbsp;' + val + '</a>';
 				}
 			}],
 			listeners : {

@@ -17,7 +17,7 @@ Ext.define('BlogMgr.view.user.UserAddDialog', {
 			modal : true, // 模态
 			width : 550,
 			// height : 500,
-			glyph : 0xf234,
+			glyph : 0xe614,
 			initComponent : function() {
 				this.callParent(arguments);
 			},
@@ -28,12 +28,12 @@ Ext.define('BlogMgr.view.user.UserAddDialog', {
 			buttons : [{
 				itemId : 'save',
 				text : '保存',
-				glyph : 0xf0c7,
+				glyph : 0xe650,
 				handler:'userInfoSubmit'
 			}, {
 				itemId : 'close',
 				text : '关闭',
-				glyph : 0xf00d,
+				glyph : 0xe6af,
 				handler:'closeDialog'
 			}],
 			items : [{
