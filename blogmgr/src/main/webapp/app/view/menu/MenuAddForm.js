@@ -28,6 +28,7 @@ Ext.define('BlogMgr.view.menu.MenuAddForm', {
 							name:'accountType',	
 							xtype:'treepicker',
 							store:Ext.getStore('menuTreeStore')
+							//selectItemAfter:'parentMenuSelect'
 						},{
 							xtype : 'fieldcontainer',
 							layout : 'hbox',

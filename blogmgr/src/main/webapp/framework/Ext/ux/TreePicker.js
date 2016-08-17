@@ -11,7 +11,8 @@
 			text:'菜单树',
 			expanded : true //如果展开就会自动加载
 		},
-		store:Ext.create('BlogMgr.store.MenuTreeStore')
+		store:Ext.create('BlogMgr.store.MenuTreeStore'),
+		selectItemAfter:function(record,me){}
 	}
  */
 Ext.define('Ext.ux.TreePicker', {
@@ -61,11 +62,29 @@ Ext.define('Ext.ux.TreePicker', {
          */
         minPickerHeight: 200,
         
+        /**
+         * 参见Ext.tree.Panel useArrows 配置
+         */
         useArrows: true,
         
+        /**
+         * 参见Ext.tree.Panel rootVisible配置
+         */
         rootVisible:false,
         
-        root:null
+        /**
+         * 参见Ext.tree.Panel root配置
+         */
+        root:null,
+        
+        /**
+         * @cfg {Function} 
+         * 选择树节点后,的回调方法
+         * @param record 选择的节点，model类型
+         * @param this 
+         */
+        selectItemAfter:Ext.emptyFn
+        
     },
     editable: false,
 	triggers: {
@@ -192,6 +211,7 @@ Ext.define('Ext.ux.TreePicker', {
         me.setValue(record.getId());
         me.fireEvent('select', me, record);
         me.collapse();
+	    me.selectItemAfter(record,me);
     },
 
     /**
