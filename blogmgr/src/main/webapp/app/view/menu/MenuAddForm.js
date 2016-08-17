@@ -25,7 +25,9 @@ Ext.define('BlogMgr.view.menu.MenuAddForm', {
 						},
 						items : [{
 							fieldLabel : '父级菜单',
-							name:'accountType'						
+							name:'accountType',	
+							xtype:'treepicker',
+							store:Ext.getStore('menuTreeStore')
 						},{
 							xtype : 'fieldcontainer',
 							layout : 'hbox',

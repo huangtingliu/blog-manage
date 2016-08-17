@@ -4,10 +4,11 @@
 Ext.onReady(function() {
 	Ext.require(['Ux.tabs.ReorderableTabs',
 				 'Ux.toast.ColorfulToast'
-				 ]);
+	]);
 	Ext.Loader.loadScript([
 		'/blogmgr/framework/Ux/VTypesPlus.js'
 	]);
+	
 });
 
 Ext.application({

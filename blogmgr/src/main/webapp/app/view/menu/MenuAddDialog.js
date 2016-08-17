@@ -4,6 +4,7 @@
 Ext.define('BlogMgr.view.menu.MenuAddDialog',{
 			id : 'menuAddDialog',
 			uses:['BlogMgr.view.menu.MenuAddForm',
+				  'Ext.ux.TreePicker',
 				  'BlogMgr.view.menu.MenuAddDialogController'],
 			extend : 'Ext.window.Window',
 			alias : ['widget.menuadd_dialog'],
@@ -23,12 +24,12 @@ Ext.define('BlogMgr.view.menu.MenuAddDialog',{
 			buttons : [{
 				itemId : 'save',
 				text : '保存',
-				glyph : 0xf0c7,
+				glyph : 0xe650,
 				handler:'userAddSubmit'
 			}, {
 				itemId : 'close',
 				text : '关闭',
-				glyph : 0xf00d,
+				glyph : 0xe6af,
 				handler:'closeDialog'
 			}],
 			items : {

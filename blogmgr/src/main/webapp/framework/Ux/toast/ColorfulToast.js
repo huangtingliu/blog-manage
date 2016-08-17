@@ -31,8 +31,7 @@ Ext.define('Ux.toast.ColorfulToast', {
 				if (Ext.isString(message)) {
 					config = { // 默认为info提示
 						title : '系统提示',
-						html : message,
-						glyph : 0xf05a
+						html : message
 					};
 					message = {type:'info',content:''};
 				} else {
@@ -51,7 +50,6 @@ Ext.define('Ux.toast.ColorfulToast', {
 					}
 					
 					Ext.applyIf(config, {
-								glyph : _glyph,
 								html : message.content
 					});
 				}
