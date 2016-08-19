@@ -16,7 +16,8 @@ Ext.define('BlogMgr.view.menu.MenuAddDialogController', {
 			closeDialog : function() { // 关闭对话窗
 				this.getView().close();
 			},
-			parentMenuSelect:function(record,me){ //选择父级菜单后处理方法
-				console.info(record);
+			parentMenuSelect:function( me , newValue , oldValue ){ //选择父级菜单后处理方法
+				var preCodeFile = this.lookupReference('menuAddFormPreCode');
+				preCodeFile.setValue(newValue);
 			}
 		});

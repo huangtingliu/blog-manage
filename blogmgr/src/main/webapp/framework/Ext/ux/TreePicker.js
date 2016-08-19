@@ -12,7 +12,10 @@
 			expanded : true //如果展开就会自动加载
 		},
 		store:Ext.create('BlogMgr.store.MenuTreeStore'),
-		selectItemAfter:function(record,me){}
+		selectItemAfter:function(record,me){},
+		listeners:{
+			change:
+		}
 	}
  */
 Ext.define('Ext.ux.TreePicker', {
@@ -72,6 +75,8 @@ Ext.define('Ext.ux.TreePicker', {
          */
         rootVisible:false,
         
+        editable: false,
+         
         /**
          * 参见Ext.tree.Panel root配置
          */
@@ -86,11 +91,23 @@ Ext.define('Ext.ux.TreePicker', {
         selectItemAfter:Ext.emptyFn
         
     },
-    editable: false,
+    /**
+     * @private
+     * 控件的值改变时触发
+     */
+    /*onChange:function(){
+    	var me = this;
+    	 me.fireEvent('change', me, state);
+    },*/
+   
+    /**
+     * clear button create
+     * @type 
+     */
 	triggers: {
 		bar: {
 			weight:-1,
-            cls: 'x-form-clear-trigger',
+           cls: 'x-form-clear-trigger',
             handler: function() {
             	this.setValue('');
             	this.collapse();
@@ -184,7 +201,7 @@ Ext.define('Ext.ux.TreePicker', {
      * @param {Ext.event.Event} e
      */
     onItemClick: function(view, record, node, rowIndex, e) {
-        this.selectItem(record);
+        this.selectItem(record,e);
     },
 
     /**
@@ -206,12 +223,19 @@ Ext.define('Ext.ux.TreePicker', {
      * @private
      * @param {Ext.data.Model} record
      */
-    selectItem: function(record) {
-        var me = this;
+    selectItem: function(record,e) {
+       var me = this;
+            
         me.setValue(record.getId());
         me.fireEvent('select', me, record);
         me.collapse();
-	    me.selectItemAfter(record,me);
+        
+        if(Ext.isFunction(me.selectItemAfter)){
+        	 me.selectItemAfter(record,me);
+        }else if(Ext.isString(me.selectItemAfter)){
+        	 Ext.callback(me.selectItemAfter, me.scope, [record, me, e], 0,me);
+        }
+        
     },
 
     /**
@@ -243,10 +267,17 @@ Ext.define('Ext.ux.TreePicker', {
      */
     setValue: function(value) {
     	
-        var me = this, record;
-
+        var me = this, record,
+        oldValue = this.getValue();
+		
+        if(value == oldValue){
+        	return;
+        }else{
+        	this.fireEvent('change', me,value, oldValue);
+        }
+        
         me.value = value;
-
+		
         if (me.store.loading) {
             // Called while the Store is loading. Ensure it is processed by the onLoad method.
             return me;
@@ -261,8 +292,9 @@ Ext.define('Ext.ux.TreePicker', {
         	record = me.store.getNodeById(value);
         }
         // set the raw value to the record's display field if a record was found
+		        
         me.setRawValue(record ? record.get(me.displayField) : '');
-
+        
         return me;
     },
     
