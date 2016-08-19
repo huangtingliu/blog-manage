@@ -10,8 +10,8 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
-import com.huangtl.blogmgr.model.blog.type.Gender;
-import com.huangtl.blogmgr.model.blog.type.UserStatus;
+import com.huangtl.blogmgr.model.blog.dictionary.Gender;
+import com.huangtl.blogmgr.model.blog.dictionary.UserStatus;
 import com.huangtl.blogmgr.model.common.ObjectValue;
 
 /**

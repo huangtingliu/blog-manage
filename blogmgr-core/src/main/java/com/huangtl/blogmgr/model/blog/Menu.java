@@ -1,6 +1,7 @@
 package com.huangtl.blogmgr.model.blog;
 
-import com.huangtl.blogmgr.model.blog.type.MenuType;
+import com.huangtl.blogmgr.model.blog.dictionary.CommonDictionary.Usability;
+import com.huangtl.blogmgr.model.blog.dictionary.MenuType;
 import com.huangtl.blogmgr.model.common.ObjectValue;
 
 /**
@@ -22,6 +23,7 @@ public class Menu extends ObjectValue {
     private Integer fGlyph;			//glyph 值
     private MenuType fType;			//菜单类型
     private Integer fExpand;		//是否展开{0不展开，展开}
+    private Usability fUsability;	//是否可用
     
 	public String getfId() {
 		return fId;
@@ -88,5 +90,11 @@ public class Menu extends ObjectValue {
 	}
 	public void setfExpand(Integer fExpand) {
 		this.fExpand = fExpand;
+	}
+	public Usability getfUsability() {
+		return fUsability;
+	}
+	public void setfUsability(Usability fUsability) {
+		this.fUsability = fUsability;
 	}
 }

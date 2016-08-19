@@ -1,4 +1,4 @@
-package com.huangtl.blogmgr.model.blog.type;
+package com.huangtl.blogmgr.model.blog.dictionary;
 
 /**
  * 性别

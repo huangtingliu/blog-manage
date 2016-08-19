@@ -5,6 +5,7 @@ import java.io.Serializable;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.huangtl.blogmgr.exceptoin.ServiceException;
+import com.huangtl.blogmgr.model.blog.dictionary.MessageType;
 
 
 /**

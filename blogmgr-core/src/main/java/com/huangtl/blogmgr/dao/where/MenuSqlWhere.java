@@ -1,6 +1,6 @@
 package com.huangtl.blogmgr.dao.where;
 
-import com.huangtl.blogmgr.model.blog.type.MenuType;
+import com.huangtl.blogmgr.model.blog.dictionary.MenuType;
 
 /**
  * 菜单sql查询参数

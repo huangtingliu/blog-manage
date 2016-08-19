@@ -1,4 +1,4 @@
-package com.huangtl.blogmgr.model.common;
+package com.huangtl.blogmgr.model.blog.dictionary;
 
 
 /**

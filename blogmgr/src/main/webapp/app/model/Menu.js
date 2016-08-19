@@ -13,7 +13,8 @@ Ext.define('BlogMgr.model.Menu',{
         {name: 'fIcon', type: 'string'},
         {name: 'fGlyph', type: 'int'},
         {name: 'fOrder', type: 'int'},
-        {name: 'fType', type: 'string'}
+        {name: 'fType', type: 'string'},
+        {name: 'fUsability', type: 'string'}
        // {name: 'fDescr', type: 'string'},
       //  {name: 'fExpand', type: 'int'}
         

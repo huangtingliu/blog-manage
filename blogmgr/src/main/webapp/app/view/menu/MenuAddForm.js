@@ -25,8 +25,9 @@ Ext.define('BlogMgr.view.menu.MenuAddForm', {
 						},
 						items : [{
 							fieldLabel : '父级菜单',
-							name:'accountType',	
+							name:'fParentId',
 							xtype:'treepicker',
+							emptyText:'请选择',
 							store:Ext.getStore('menuTreeStore'),
 							allowBlank : true,
 							listeners:{
@@ -43,30 +44,62 @@ Ext.define('BlogMgr.view.menu.MenuAddForm', {
 							items : [{
 								fieldLabel : '菜单代码',
 								width : '70%',
-								name:'accountType',
 								emptyText:'代码前缀',
 								reference: 'menuAddFormPreCode',
-								editable : false
+								editable : false,
+								submitValue:false
 							},{
-								name:'accountType',
+								name:'fId',
 								allowBlank : false,
-								width : '29.7%'
+								width : '29.7%',
+								emptyText:'菜单代码',
+								maxLength:4,
+								vtype:'alphanum',
+								getSubmitValue:function(){	
+									var me = this;
+									return Ext.callback('fIdSubmitValue', me.scope, [me.getValue()], 0,me);
+								}
 							}]
 						},{
 							fieldLabel : '菜单名称',
-							name:'accountType'
+							name:'fName',
+							emptyText:'必须是中文',
+							maxLength:10,
+							minLength:2,
+							vtype:'chinese'
 						},{
 							fieldLabel : '菜单排序',
-							name:'accountType'
+							name:'fOrder',
+							xtype:'numberfield',
+							minValue :0,
+							maxValue :100,
+							allowDecimals:false,
+							emptyText:'0 - 100'
 						},{
 							fieldLabel : '菜单类型',
-							name:'accountType'
+							name:'fType',
+							xtype : 'combo',
+							store : {
+								fields : ['value', 'name'],
+								data : [{
+											"value" : "NAVIGATOR",
+											"name" : "导航菜单"
+										}, {
+											"value" : "TOOLBAR",
+											"name" : "工具栏"
+										}]
+							},
+							displayField : 'name',
+							valueField : 'value',
+							value : 'NAVIGATOR',
+							editable : false
+							
 						},{
 							fieldLabel : '是否可用',
 		                    xtype: 'checkboxfield',
-							boxLabel  : '可用',
-		                    name      : 'topping',
-		                    inputValue: '2',
+							boxLabel  : '可用性',
+		                    name      : 'fUsability',
+		                    inputValue: 'ENABLE',
 		                    checked:true
 						}]
 					},{
@@ -79,15 +112,17 @@ Ext.define('BlogMgr.view.menu.MenuAddForm', {
 						},
 						items : [{
 							fieldLabel : '图标',
-							name:'accountType'
+							name:'fGlyph'
 						},{
 							fieldLabel : '视图类',
-							name:'accountType'
+							name:'fViewClass',
+							vtype:'letter'
 						},{
 							fieldLabel : '链接',
-							name:'accountType'
+							name:'fUrl'
 						},{
 							fieldLabel : '菜单描述',
+							name : 'fDescr',
 							xtype : 'textarea',
 							maxLength:150,
 							grow : true,
@@ -95,8 +130,7 @@ Ext.define('BlogMgr.view.menu.MenuAddForm', {
 							labelWidth : 70,
 							labelAlign : 'right',
 							growMin : 100,
-							emptyText:'最多150个字',
-							name : 'fDescr'
+							emptyText:'最多150个字'
 						}]
 					}]
 

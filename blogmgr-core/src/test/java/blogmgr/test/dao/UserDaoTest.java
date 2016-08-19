@@ -11,8 +11,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.huangtl.blogmgr.core.util.PinYinUtils;
 import com.huangtl.blogmgr.model.blog.User;
-import com.huangtl.blogmgr.model.blog.type.Gender;
-import com.huangtl.blogmgr.model.blog.type.UserStatus;
+import com.huangtl.blogmgr.model.blog.dictionary.Gender;
+import com.huangtl.blogmgr.model.blog.dictionary.UserStatus;
 import com.huangtl.blogmgr.model.common.Message;
 import com.huangtl.blogmgr.service.UserService;
 
