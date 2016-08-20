@@ -22,7 +22,7 @@
 	
 	<sql id="where">
 		 <trim prefix="where" prefixOverrides="and|or">
-		 	<if test="defaultWhere">
+		 	<if test="defaultWhere!=null and defaultWhere">
 		 		1=1
 		 	</if>
 			<if test="fId_eq != null ">and         ui_Id       =   #{fId_eq}</if>

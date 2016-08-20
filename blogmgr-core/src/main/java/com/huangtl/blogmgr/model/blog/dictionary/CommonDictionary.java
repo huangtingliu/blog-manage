@@ -37,8 +37,8 @@ public interface CommonDictionary {
 	 * @author PraiseLord
 	 */
 	public enum Visibility {
-		VISIBLE(0, "可用"),
-		INVISIBLE(1, "不可用");
+		VISIBLE(0, "可见"),
+		INVISIBLE(1, "不可见");
 		
 		private int code;
 		private String text;

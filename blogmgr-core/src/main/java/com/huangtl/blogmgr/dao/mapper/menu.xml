@@ -16,11 +16,12 @@
 		<result property="fGlyph" column="mu_Glyph"/>
 		<result property="fExpand" column="mu_Expand"/>
 		<result property="fType" column="mu_Type"/>
+		<result property="fUsability" column="mu_Usability"/>
 	</resultMap>
 	
 	<sql id="where">
 		 <trim prefix="where" prefixOverrides="and|or">
-		 	<if test="defaultWhere">
+		 	<if test="defaultWhere!=null and defaultWhere">
 		 		1=1
 		 	</if>
 			<if test="fId_eq !=null ">
@@ -31,6 +32,9 @@
 			</if>
 			<if test="fType_eq != null">
 				and mu_Type = #{fType_eq}
+			</if>
+			<if test="fUsability_eq != null">
+				and mu_Usability = #{fUsability_eq}
 			</if>
 		</trim>
 	</sql>
@@ -46,14 +50,15 @@
 	
 	<insert id="insert" parameterType="com.huangtl.blogmgr.model.blog.Menu">
 		insert into mgr_menu(
-			mu_Id,mu_Name,mu_ParentId,mu_Icon,mu_Url,mu_Order,mu_Descr,mu_Glyph,mu_Expand,mu_ViewClass,mu_Type
+			mu_Id,mu_Name,mu_ParentId,mu_Icon,mu_Url,mu_Order,mu_Descr,mu_Glyph,mu_Expand,mu_ViewClass,mu_Type,mu_Usability
 		) values(
-			#{fId},#{fName},#{fParentId},#{fIcon},#{fUrl},#{fOrder},#{fDescr},#{fGlyph},#{fExpand},#{fViewClass},#{mu_Type}
+			#{fId},#{fName},#{fParentId},#{fIcon},#{fUrl},#{fOrder},#{fDescr},#{fGlyph},#{fExpand},#{fViewClass},#{fType},
+			#{fUsability}
 		);
 	</insert>
 
 	<select id="selectList" resultMap="map" parameterType="map">
-		select mu_Id,mu_Name,mu_ParentId,mu_Icon,mu_Url,mu_Glyph,mu_Expand,mu_ViewClass
+		select mu_Id,mu_Name,mu_ParentId,mu_Icon,mu_Url,mu_Glyph,mu_Expand,mu_ViewClass,mu_Usability
 		from mgr_menu
 		<include refid="where"/>
 		order by mu_Order
@@ -65,7 +70,7 @@
 	</select>
 	
 	<select id="selectPaging" resultMap="map" parameterType="map">
-		select mu_Id as fId,mu_Name,mu_ParentId,mu_Icon,mu_Url,mu_ViewClass,mu_Type,mu_Glyph,mu_Order as fOrder
+		select mu_Id as fId,mu_Name,mu_ParentId,mu_Icon,mu_Url,mu_ViewClass,mu_Type,mu_Glyph,mu_Order as fOrder,mu_Usability
 		from mgr_menu
 		<include refid="where"/>
 		<include refid="order"/>

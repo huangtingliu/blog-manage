@@ -1,6 +1,8 @@
 package com.huangtl.blogmgr.service.impl;
 
 import com.huangtl.blogmgr.dao.MenuDao;
+import com.huangtl.blogmgr.model.blog.Menu;
+import com.huangtl.blogmgr.model.common.Message;
 import com.huangtl.blogmgr.service.MenuService;
 
 /**
@@ -16,7 +18,14 @@ public class MenuServiceImpl implements MenuService {
 		return menuDao;
 	}
 	
-	
+	@Override
+	public Message addMenu(Menu menu) {
+		int effectRow = menuDao.insert(menu);
+		return Message.get(effectRow, "添加成功", "添加失败");
+	}
+
+
+
 	public void setMenuDao(MenuDao menuDao) {
 		this.menuDao = menuDao;
 	}

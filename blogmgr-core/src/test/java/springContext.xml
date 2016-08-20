@@ -86,11 +86,14 @@
 	</bean>--><!-- /redis -->
     
 <!-- 导入模块bean -->
+
 	<!-- 菜单管理 -->
+	<bean id="menuAction" class="com.huangtl.blogmgr.action.MenuAction"> </bean>
 	<bean id="menuService" class="com.huangtl.blogmgr.service.impl.MenuServiceImpl">
 		<property name="menuDao" ref="menuDao"></property>
 	</bean>
 	<bean id="menuDao" class="com.huangtl.blogmgr.dao.impl.MenuDaoImpl" parent="myBatisDao"></bean>
+	
 	<!-- 后台用户管理 -->
 	<!-- <bean id="userService" class="com.huangtl.blogmgr.service.impl.UserServiceImpl">
 		<property name="userDao" ref="userDao"></property>

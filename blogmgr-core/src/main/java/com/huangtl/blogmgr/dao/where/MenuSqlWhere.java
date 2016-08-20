@@ -1,5 +1,6 @@
 package com.huangtl.blogmgr.dao.where;
 
+import com.huangtl.blogmgr.model.blog.dictionary.CommonDictionary.Usability;
 import com.huangtl.blogmgr.model.blog.dictionary.MenuType;
 
 /**
@@ -15,7 +16,7 @@ public class MenuSqlWhere extends SqlWhere {
 	 * @param menuId
 	 * @return
 	 */
-	public MenuSqlWhere idEqual(String menuId){
+	public MenuSqlWhere fIdEqual(String menuId){
 		this.put("fId_eq", menuId);
 		return this;
 	}
@@ -25,7 +26,7 @@ public class MenuSqlWhere extends SqlWhere {
 	 * @param parentId
 	 * @return
 	 */
-	public MenuSqlWhere parentIdEqual(String parentId){
+	public MenuSqlWhere fParentIdEqual(String parentId){
 		this.put("fParentId_eq", parentId);
 		return this;
 	}
@@ -35,8 +36,18 @@ public class MenuSqlWhere extends SqlWhere {
 	 * @param type
 	 * @return
 	 */
-	public MenuSqlWhere typeEqual(MenuType type){
+	public MenuSqlWhere fTypeEqual(MenuType type){
 		this.put("fType_eq", type);
+		return this;
+	}
+	
+	/**
+	 * 可用性等于
+	 * @param usability
+	 * @return
+	 */
+	public MenuSqlWhere fUsabilityEqual(Usability usability){
+		this.put("fUsability_eq", usability);
 		return this;
 	}
 	

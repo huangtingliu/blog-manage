@@ -25,10 +25,10 @@ public class User extends ObjectValue {
 	private String fName;			//名称
 	private String fAccount;		//登录账号
 	private String fPassword;		//密码
-	private UserStatus fStatus;		//状态
+	private UserStatus fStatus;		//状态，默认ENABLE
 	private String fPhone;			//电话
 	private String fEmail;			//邮箱
-	private Gender fGender;			//性别
+	private Gender fGender;			//性别，默认 UNKNOW
 	private String fPinYin;			//拼音
 	private String fDescr;			//备注
 	private String fAvatar;			//头像
@@ -36,7 +36,6 @@ public class User extends ObjectValue {
 	private Date fCreateDate;		//创建日期
 	private String fEditor;			//修改人
 	private Date fEditDate;			//修改日期
-	
 	
 	public User() {
 		this(false);
@@ -50,7 +49,6 @@ public class User extends ObjectValue {
 			this.fId = newId();
 		}
 	}
-
 	@NotBlank(message="主键为空")
 	public String getfId() {
 		return fId;

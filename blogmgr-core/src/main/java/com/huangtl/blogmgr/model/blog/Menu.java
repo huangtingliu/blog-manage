@@ -1,5 +1,12 @@
 package com.huangtl.blogmgr.model.blog;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.Range;
+
 import com.huangtl.blogmgr.model.blog.dictionary.CommonDictionary.Usability;
 import com.huangtl.blogmgr.model.blog.dictionary.MenuType;
 import com.huangtl.blogmgr.model.common.ObjectValue;
@@ -20,23 +27,28 @@ public class Menu extends ObjectValue {
 	private String fUrl;			//链接
 	private Integer fOrder;			//排序
     private String fDescr;			//描述
-    private Integer fGlyph;			//glyph 值
+    private Integer fGlyph;			//glyph值
     private MenuType fType;			//菜单类型
-    private Integer fExpand;		//是否展开{0不展开，展开}
-    private Usability fUsability;	//是否可用
+    private Integer fExpand;		//是否展开{0：不展开，1：展开},默认0
+    private Usability fUsability;	//是否可用，默认 ENABLE
     
+    @NotBlank(message="菜单id为空")
 	public String getfId() {
 		return fId;
 	}
 	public void setfId(String fId) {
 		this.fId = fId;
 	}
+	@NotNull(message="菜单类型为空")
 	public MenuType getfType() {
 		return fType;
 	}
 	public void setfType(MenuType fType) {
 		this.fType = fType;
 	}
+	@NotBlank(message="菜单名为空")
+	@Length(message="菜单名长度2-10",min=2,max=10)
+	@Pattern(regexp="[\\u4e00-\\u9fa5]*",message="菜单名必须是中文")
 	public String getfName() {
 		return fName;
 	}
@@ -67,12 +79,14 @@ public class Menu extends ObjectValue {
 	public void setfUrl(String fUrl) {
 		this.fUrl = fUrl;
 	}
+	@Range(message="菜单序号0-100",min=0,max=100)
 	public Integer getfOrder() {
 		return fOrder;
 	}
 	public void setfOrder(Integer fOrder) {
 		this.fOrder = fOrder;
 	}
+	@Length(message="菜单描述长度300",max=300)
 	public String getfDescr() {
 		return fDescr;
 	}

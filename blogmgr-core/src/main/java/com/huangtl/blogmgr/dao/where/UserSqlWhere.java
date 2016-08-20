@@ -18,7 +18,7 @@ public class UserSqlWhere extends SqlWhere {
 	 * 指定用户id为
 	 * @param userId
 	 */
-	public UserSqlWhere idEqual(String userId){
+	public UserSqlWhere fIdEqual(String userId){
 		this.put("fId_eq", userId);
 		return this;
 	}
@@ -27,7 +27,7 @@ public class UserSqlWhere extends SqlWhere {
 	 * @param userIds
 	 * @return
 	 */
-	public UserSqlWhere idIn(List<String> userIds){
+	public UserSqlWhere fIdIn(List<String> userIds){
 		this.put("fId_in", userIds);
 		return this;
 	}
@@ -36,7 +36,7 @@ public class UserSqlWhere extends SqlWhere {
 	 * 用户名模糊查询
 	 * @param userName
 	 */
-	public UserSqlWhere userNameLike(String userName){
+	public UserSqlWhere fNameLike(String userName){
 		this.like("fName_like", userName);
 		return this;
 	}
@@ -46,7 +46,7 @@ public class UserSqlWhere extends SqlWhere {
 	 * @param pinYin
 	 * @return
 	 */
-	public UserSqlWhere pinYinLike(String pinYin ){
+	public UserSqlWhere fPinYinLike(String pinYin ){
 		this.like("fPinYin_like", pinYin);
 		return this;
 	}
@@ -55,7 +55,7 @@ public class UserSqlWhere extends SqlWhere {
 	 * 指定账号为
 	 * @param account
 	 */
-	public UserSqlWhere accountEqual(String account){
+	public UserSqlWhere fAccountEqual(String account){
 		this.put("fAccount_eq", account);
 		return this;
 	}
@@ -64,7 +64,7 @@ public class UserSqlWhere extends SqlWhere {
 	 * @param account
 	 * @return
 	 */
-	public UserSqlWhere accountLike(String account){
+	public UserSqlWhere fAccountLike(String account){
 		this.like("fAccount_like", account);
 		return this;
 	}
@@ -74,7 +74,7 @@ public class UserSqlWhere extends SqlWhere {
 	 * @param phone
 	 * @return
 	 */
-	public UserSqlWhere phoneEqual(String phone){
+	public UserSqlWhere fPhoneEqual(String phone){
 		this.put("fPhone_eq", phone);
 		return this;
 	}
@@ -84,7 +84,7 @@ public class UserSqlWhere extends SqlWhere {
 	 * @param phone
 	 * @return
 	 */
-	public UserSqlWhere phoneLike(String phone){
+	public UserSqlWhere fPhoneLike(String phone){
 		this.like("fPhone_like", phone);
 		return this;
 	}
@@ -94,7 +94,7 @@ public class UserSqlWhere extends SqlWhere {
 	 * @param email
 	 * @return
 	 */
-	public UserSqlWhere emailEqual(String email){
+	public UserSqlWhere fEmailEqual(String email){
 		this.put("fEmail_eq", email);
 		return this;
 	}
@@ -103,7 +103,7 @@ public class UserSqlWhere extends SqlWhere {
 	 * 指定状态为
 	 * @param status
 	 */
-	public UserSqlWhere statusEqual(UserStatus status){
+	public UserSqlWhere fStatusEqual(UserStatus status){
 		this.put("fStatus_eq", status);
 		return this;
 	}
@@ -112,12 +112,12 @@ public class UserSqlWhere extends SqlWhere {
 	 * 指定状态不为
 	 * @param status
 	 */
-	public UserSqlWhere statusNotEqual(UserStatus status){
+	public UserSqlWhere fStatusNotEqual(UserStatus status){
 		this.put("fStatus_ne", status);
 		return this;
 	}
 	
-	public UserSqlWhere statusIn(UserStatus... status){
+	public UserSqlWhere fStatusIn(UserStatus... status){
 		if(status==null || status.length==0){return this;}
 		
 		this.put("fStatus_in", Arrays.asList(status));
@@ -128,7 +128,7 @@ public class UserSqlWhere extends SqlWhere {
 	 * 性别为
 	 * @param gender
 	 */
-	public UserSqlWhere genderEqual(Gender gender){
+	public UserSqlWhere fGenderEqual(Gender gender){
 		this.put("fGender_eq", gender);
 		return this;
 	}
@@ -138,7 +138,7 @@ public class UserSqlWhere extends SqlWhere {
 	 * @param createDate
 	 * @return
 	 */
-	public UserSqlWhere createDateGreatThan(Date createDate){
+	public UserSqlWhere fCreateDateGreatThan(Date createDate){
 		this.put("fCreateDate_gt", createDate);
 		return this;
 	}
@@ -148,7 +148,7 @@ public class UserSqlWhere extends SqlWhere {
 	 * @param createDate
 	 * @return
 	 */
-	public UserSqlWhere createDateLessThan(Date createDate){
+	public UserSqlWhere fCreateDateLessThan(Date createDate){
 		this.put("fCreateDate_lt", createDate);
 		return this;
 	}
@@ -157,7 +157,7 @@ public class UserSqlWhere extends SqlWhere {
 	 * @param createDate
 	 * @return
 	 */
-	public UserSqlWhere createDateEqual(Date createDate){
+	public UserSqlWhere fCreateDateEqual(Date createDate){
 		this.put("fCreateDate_eq", createDate);
 		return this;
 	}

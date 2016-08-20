@@ -5,6 +5,8 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -14,6 +16,7 @@ import com.huangtl.blogmgr.dao.where.MenuSqlWhere;
 import com.huangtl.blogmgr.dao.where.SqlWhere;
 import com.huangtl.blogmgr.dao.where.UserSqlWhere;
 import com.huangtl.blogmgr.model.blog.Menu;
+import com.huangtl.blogmgr.model.common.Message;
 import com.huangtl.blogmgr.model.common.Page;
 import com.huangtl.blogmgr.model.common.Page.Direction;
 import com.huangtl.blogmgr.model.extjs.Filter;
@@ -31,6 +34,8 @@ import com.huangtl.blogmgr.service.MenuService;
 @Controller
 @RequestMapping("/menu")
 public class MenuAction extends BlogMgrAction {
+	private static Logger logger = LoggerFactory.getLogger(MenuAction.class);
+	
 	@Resource
 	private MenuService menuService;
 	
@@ -94,8 +99,8 @@ public class MenuAction extends BlogMgrAction {
 	@ResponseBody
 	public Object getList(String parentId,String menuId) {
 		SqlWhere param = new MenuSqlWhere()
-						  .parentIdEqual(parentId)
-						  .idEqual(menuId);
+						  .fParentIdEqual(parentId)
+						  .fIdEqual(menuId);
 		List<Menu> menus = this.menuService.getDao().selectList(param);
 		
 		JSONObject data = new JSONObject();
@@ -112,7 +117,9 @@ public class MenuAction extends BlogMgrAction {
 	 * @param nodeId   根据节点id查询节点
 	 * @return
 	 * <blockquote>
-	 * 
+	 * [{
+	 * 	...
+	 * }]
 	 * </blockquote>
 	 */
 	@RequestMapping("tree.data")
@@ -121,8 +128,8 @@ public class MenuAction extends BlogMgrAction {
 		if("root".equals(parentId)){parentId="";}
 		
 		MenuSqlWhere sqlWhere = new MenuSqlWhere()
-								.parentIdEqual(parentId)
-								.idEqual(nodeId);
+								.fParentIdEqual(parentId)
+								.fIdEqual(nodeId);
 		List<TreeNode> nodes = this.menuService.getDao().selectTreeNodes(sqlWhere);
 		return nodes;
 	}
@@ -130,11 +137,15 @@ public class MenuAction extends BlogMgrAction {
 	/**
 	 * 获取单个菜单
 	 * @param menuId	菜单id
+	 * @return
+	 * {
+	 * 	
+	 * }
 	 */
 	@RequestMapping("get.data")
 	@ResponseBody
 	public Object getOne(String menuId){
-		SqlWhere param = new MenuSqlWhere().idEqual(menuId);
+		SqlWhere param = new MenuSqlWhere().fIdEqual(menuId);
 		List<Menu> menus = this.menuService.getDao().selectList(param);
 		
 		if(CollectionUtils.isEmpty(menus)){return "{}";}
@@ -142,5 +153,25 @@ public class MenuAction extends BlogMgrAction {
 		return menus.get(0);
 	}
 	
+	@RequestMapping("add.do")
+	@ResponseBody
+	public Object addMenu(Menu menu){
+		 Message message = menu.checkValidity();
+		if(message.isError()){return message;}
+		try {
+			message = this.menuService.addMenu(menu);
+		} catch (Exception e) {
+			logger.error("菜单添加失败",e);
+			message = Message.exception("菜单添加失败");
+		}
+		return message;
+	}
 	
+	
+	@RequestMapping("edit.do")
+	@ResponseBody
+	public Object editMenu(){
+		//TODO
+		return Message.warn("未实现");
+	}
 }

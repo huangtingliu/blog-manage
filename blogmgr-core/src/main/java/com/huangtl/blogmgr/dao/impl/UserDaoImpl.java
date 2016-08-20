@@ -20,7 +20,7 @@ public class UserDaoImpl extends MybatisDaoAdaptor<User> implements UserDao {
 	@Override
 	public User selectOne(String userId) {
 		if(StringUtils.isBlank(userId)){return null;}
-		UserSqlWhere where = new UserSqlWhere().idEqual(userId);
+		UserSqlWhere where = new UserSqlWhere().fIdEqual(userId);
 		List<User> users = this.selectList(where);
 		if(users.isEmpty()){return null;}
 		if(users.size()>1){throw new IllegalStateException("存在非法数据，出现了多个用户");}

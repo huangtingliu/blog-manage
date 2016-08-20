@@ -13,7 +13,7 @@ public abstract class ObjectValue implements Serializable {
 	
 	/**
 	 * 检测字段的有效性
-	 * @return
+	 * @return 当验证失败时 返回 Message.error 类型
 	 */
 	public Message checkValidity(String... exceptFields){
 		return ValidationUtils.validate(this, exceptFields);

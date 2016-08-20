@@ -56,6 +56,15 @@ public class UserAction extends BlogMgrAction {
 	 * <pre>
 	 * {message: "获取成功个数 15", total: 0, userlist: [], success: true}
 	 * </pre>
+	 * @return
+	 * <pre>
+	 * {
+	 * 		message: "获取成功个数 15",
+	 * 		total: 48,
+	 * 		userlist: […],
+	 * 		success: true
+	 * }
+	 * </pre>
 	 */
 	@RequestMapping("paging.data")
 	@ResponseBody
@@ -88,14 +97,19 @@ public class UserAction extends BlogMgrAction {
 	
 	/**
 	 * 单用户查询
-	 * @param userId
+	 * @param userId 用户id
 	 * @return
+	 * <pre>
+	 * 	{
+	 * 		
+	 * }
+	 * </pre>
 	 */
 	@RequestMapping("get.data")
 	@ResponseBody
 	public Object getUser(String userId){
 		UserSqlWhere whereParam = new UserSqlWhere();
-		whereParam.idEqual(userId);
+		whereParam.fIdEqual(userId);
 		User user = this.userService.getDao().selectOne(userId);
 		if(user==null){return "{}";}
 		return user;
@@ -104,7 +118,7 @@ public class UserAction extends BlogMgrAction {
 	/**
 	 * 添加用户
 	 * @param user
-	 * @param accountType 参数类型,不指默认为:custom 
+	 * @param accountType 账号类型,不指默认为:custom 
 	 * <li>custom  自定义
 	 * <li>mail    邮箱
 	 * <li>phone   手机
@@ -135,7 +149,13 @@ public class UserAction extends BlogMgrAction {
 		     
 		user.setfPassword(DigestUtils.md5Hex(user.getfPassword()));  
 			
-		return this.userService.addUser(user);
+		try {
+			message =  this.userService.addUser(user);
+		} catch (Exception e) {
+			logger.error("用户添加失败",e);
+			message = Message.exception("用户添加失败");
+		}
+		return message;
 	}
 	
 	/**
@@ -146,16 +166,22 @@ public class UserAction extends BlogMgrAction {
 	@RequestMapping("delete.do")
 	@ResponseBody
 	public Object deleteUser(String userIds){
-		if(StringUtils.isBlank(userIds)){
-			return Message.error("无效参数!");
+		if(StringUtils.isBlank(userIds)){return Message.error("无效参数!");}
+		
+		Message message = null;
+		 try {
+			 message = this.userService.deleteUser(userIds.split(","));
+		} catch (Exception e) {
+			logger.error("用户删除失败",e);
+			message = Message.exception("用户删除失败");
 		}
-		return this.userService.deleteUser(userIds.split(","));
+		 return message;
 	}
 	
 	/**
 	 * 批量修改用户
 	 * @param user
-	 * @return
+	 * @return 修改成功的人数
 	 */
 	@RequestMapping("batchedit.do")
 	@ResponseBody
@@ -164,8 +190,8 @@ public class UserAction extends BlogMgrAction {
 		try {
 			message = this.userService.batchEditUser(users);
 		} catch (Exception e) {
-			message = Message.error("修改失败");
-			logger.error("",e);
+			message = Message.exception("用户修改失败");
+			logger.error("用户修改失败",e);
 		}
 		return message;
 	}
@@ -179,14 +205,14 @@ public class UserAction extends BlogMgrAction {
 	@ResponseBody
 	public Object editUser(User user){
 		UserSqlWhere sqlWhere = new UserSqlWhere()
-							.idEqual(user.getfId());
+							.fIdEqual(user.getfId());
 		Message message = null;
 		
 		try {
 			message = this.userService.editUser(user, sqlWhere);
 		} catch (Exception e) {
-			message = Message.error("修改失败");
-			logger.error("",e);
+			message = Message.exception("用户修改失败");
+			logger.error("用户修改失败",e);
 		}
 		
 		return message;

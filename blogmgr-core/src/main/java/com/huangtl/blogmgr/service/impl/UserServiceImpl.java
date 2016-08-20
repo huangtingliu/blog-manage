@@ -50,11 +50,13 @@ public class UserServiceImpl implements UserService {
 		int effectRow = 0;
 		for (User user : users) {
 			if(StringUtils.isEmpty(user.getfId())){throw new ServiceException("无效参数：\n"+user.toString());}
-			sqlWhere.idEqual(user.getfId());
+			sqlWhere.fIdEqual(user.getfId());
 			effectRow = this.userDao.update(user, sqlWhere);
 			if(effectRow==0){throw new ServiceException("更新失败！\n"+user.toString());}
 		}
-		return Message.success("修改成功");
+		Message message = Message.success("修改成功");
+		message.setAnnex(users.size());
+		return message;
 	}
 
 	@Override
@@ -63,7 +65,9 @@ public class UserServiceImpl implements UserService {
 			return Message.error("未指定删除对象!");
 		}
 		int effectRow = this.userDao.deleteBatch(Arrays.asList(uids));
-		return Message.get(effectRow, "成功删除"+uids.length+"个用户!", "删除失败!");
+		Message message = Message.get(effectRow, "成功删除"+uids.length+"个用户!", "删除失败!");
+		message.setAnnex(effectRow);
+		return message;
 	}
 	
 	public void setUserDao(UserDao userDao) {

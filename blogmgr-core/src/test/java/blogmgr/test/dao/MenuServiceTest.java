@@ -21,7 +21,7 @@ public class MenuServiceTest {
 	
 	@Test
 	public void selectTreeNodeTest(){
-		MenuSqlWhere sqlWhere = new MenuSqlWhere().parentIdEqual("");
+		MenuSqlWhere sqlWhere = new MenuSqlWhere().fParentIdEqual("");
 		List<TreeNode> nodes = menuService.getDao().selectTreeNodes(sqlWhere);
 		System.out.println(nodes);
 		//System.out.println(menuService);
