@@ -10,14 +10,19 @@ Ext.define('BlogMgr.view.menu.MenuAddDialogController', {
 							target : this.getView()
 						});
 			},
-			userAddSubmit : function() { // 用户信息提交
+			/**
+			 * 用户信息提交
+			 */
+			userAddSubmit : function() { 
 				var me = this;
 				var form = this.getView().getComponent('menuAddForm');
 				form.submit({
+							submitEmptyText:false,
 							success : function(form, action) {
 								Ext.toast(action.result);
-								//_this.closeDialog();
-								//Ext.getStore('userPagingStore').reload(); //TODO 优化：本地加入
+								me.closeDialog();
+								Ext.getStore('menuPagingStore').reload(); 
+								//TODO 树刷新
 							},
 							failure : function(form, action) {
 								if(action.result){
@@ -27,14 +32,23 @@ Ext.define('BlogMgr.view.menu.MenuAddDialogController', {
 							waitMsg:' '
 						});
 			},
-			closeDialog : function() { // 关闭对话窗
+			/**
+			 *  关闭对话窗
+			 */
+			closeDialog : function() {
 				this.getView().close();
 			},
-			parentMenuSelect:function( me , newValue , oldValue ){ //选择父级菜单后处理方法
+			/**
+			 *  选择父级菜单后处理方法
+			 */
+			parentMenuSelect:function( me , newValue , oldValue ){
 				var preCodeFile = this.lookupReference('menuAddFormPreCode');
 				preCodeFile.setValue(newValue);
 			},
-			fIdSubmitValue:function(fixVal){	//菜单代码值 提取规则
+			/**
+			 * 菜单代码值 提取规则
+			 */
+			fIdSubmitValue:function(fixVal){	
 				var preCodeFile = this.lookupReference('menuAddFormPreCode');
 				var preVal = preCodeFile.getValue();
 				return Ext.String.trim(preVal)+fixVal;

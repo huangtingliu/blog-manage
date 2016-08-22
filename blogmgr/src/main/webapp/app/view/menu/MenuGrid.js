@@ -52,7 +52,7 @@ Ext.define('BlogMgr.view.menu.MenuGrid', {
 				sortable : false,
 				align : 'center',
 				renderer:function(val){
-					return '<span class="fa '+val+'"></span>';
+					return'<i class="iconfont '+val+'"><i/>';
 				}
 			}, {
 				header : 'glyph值',

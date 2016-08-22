@@ -8,7 +8,6 @@ Ext.onReady(function() {
 	Ext.Loader.loadScript([
 		'/blogmgr/framework/Ux/VTypesPlus.js'
 	]);
-	
 });
 
 Ext.application({
@@ -25,8 +24,8 @@ Ext.application({
 			init : function() {
 				Ext.setGlyphFontFamily('iconfont');
 				Ext.require([
-					'BlogMgr.view.user.UserList',
-					'BlogMgr.view.menu.MenuList']);
+					'BlogMgr.view.user.UserHome',
+					'BlogMgr.view.menu.MenuHome']);
 			},
 			launch : function(profile) {
 				// 附加额外的属性

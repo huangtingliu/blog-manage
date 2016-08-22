@@ -1,10 +1,10 @@
 /**
  * 用户列表 - 视图控制器
  */
-Ext.define('BlogMgr.view.user.UserListController', {
+Ext.define('BlogMgr.view.user.UserHomeController', {
 	uses : ['BlogMgr.view.user.UserAddDialog'],
 	extend : 'Ext.app.ViewController',
-	alias : 'controller.userlist',
+	alias : 'controller.userhome',
 	init : function() {
 		this.mask = new Ext.LoadMask({
 					msg : '删除中...',
@@ -80,6 +80,9 @@ Ext.define('BlogMgr.view.user.UserListController', {
 		var grid = this.getView();
 		var store = grid.getStore();
 		var m = store.getModifiedRecords();
+		if(m.length==0){
+			Ext.toast('记录未被编辑');return;
+		}
 		var jsonArray = [];
 		Ext.each(m, function(user) {
 					var updateField = user.getChanges();

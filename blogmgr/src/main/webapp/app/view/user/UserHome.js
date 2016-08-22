@@ -1,27 +1,27 @@
 /**
  * 后台用户列表 - 主页
  */
-Ext.define('BlogMgr.view.user.UserList', {
-			id : 'userList',
+Ext.define('BlogMgr.view.user.UserHome', {
+			id : 'userHome',
 			uses : ['Ux.button.TransparentButton',
-					'BlogMgr.view.user.UserListToolBar',
-					'BlogMgr.view.user.UserListController',
-					'BlogMgr.view.user.UserListModel',
+					'BlogMgr.view.user.UserHomeToolBar',
+					'BlogMgr.view.user.UserHomeController',
+					'BlogMgr.view.user.UserHomeModel',
 					'Ext.grid.filters.Filters'],
 			extend : 'Ext.panel.Panel',
-			alias : ['widget.userlist'],
+			alias : ['widget.userhome'],
 			layout : 'fit',
 			items : {
 				xtype : 'grid',
 				store : Ext.getStore('userPagingStore'),
-				controller : 'userlist',
+				controller : 'userhome',
 				columnLines : true,
 				autoLoad : true,
 				scrollable : true,
 				rowLines : true,
 				plugins : ['gridfilters', 'cellediting'],
 				viewModel : {
-					type : 'userlist'
+					type : 'userhome'
 				},
 				selModel : {
 					selType : 'checkboxmodel',
@@ -171,7 +171,7 @@ Ext.define('BlogMgr.view.user.UserList', {
 							}
 						}],
 				tbar : {
-					xtype : 'userlist_toolbar'
+					xtype : 'userhome_toolbar'
 				},
 				dockedItems : [{
 							xtype : 'pagingtoolbar',

@@ -1,7 +1,7 @@
 /**
  * 后台用户列表 - 视图模型
  */
-Ext.define('BlogMgr.view.user.UserListModel', {
+Ext.define('BlogMgr.view.user.UserHomeModel', {
 			extend : 'Ext.app.ViewModel',
-			alias : 'viewmodel.userlist'
+			alias : 'viewmodel.userhome'
 		})

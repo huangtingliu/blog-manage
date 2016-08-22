@@ -14,6 +14,7 @@ Ext.define('BlogMgr.view.user.UserAddDialogController', {
 				var _this = this;
 				var form = this.getView().getComponent('userAddTabPanel').getComponent("userInfoForm");
 				form.submit({
+							submitEmptyText:false,
 							success : function(form, action) {
 								Ext.toast(action.result);
 								_this.closeDialog();

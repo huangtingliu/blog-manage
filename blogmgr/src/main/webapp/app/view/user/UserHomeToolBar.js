@@ -1,10 +1,10 @@
 /**
  * 用户列表 - 工具栏
  */
-Ext.define('BlogMgr.view.user.UserListToolBar', {
+Ext.define('BlogMgr.view.user.UserHomeToolBar', {
 		    uses:['Ux.input.GridSearchField'],
 			extend : 'Ext.toolbar.Toolbar',
-			alias : 'widget.userlist_toolbar',
+			alias : 'widget.userhome_toolbar',
 			items : [{
 						itemId : 'add',
 						text : '新增',

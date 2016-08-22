@@ -1,6 +1,6 @@
-Ext.define('BlogMgr.view.menu.MenuListController', {
+Ext.define('BlogMgr.view.menu.MenuHomeController', {
 			extend : 'Ext.app.ViewController',
-			alias : 'controller.menulist',
+			alias : 'controller.menuhome',
 			uses:['BlogMgr.view.menu.MenuAddDialog'],
 			init : function() {
 				this.mask = new Ext.LoadMask({

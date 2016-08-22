@@ -50,10 +50,27 @@
 	
 	<insert id="insert" parameterType="com.huangtl.blogmgr.model.blog.Menu">
 		insert into mgr_menu(
-			mu_Id,mu_Name,mu_ParentId,mu_Icon,mu_Url,mu_Order,mu_Descr,mu_Glyph,mu_Expand,mu_ViewClass,mu_Type,mu_Usability
+			mu_Id,mu_Name,mu_Type
+			<if test="fParentId !=null">,mu_ParentId</if>
+			<if test="fIcon !=null">,mu_Icon</if>
+			<if test="fUrl !=null">,mu_Url</if>
+			<if test="fOrder !=null">,mu_Order</if>
+			<if test="fDescr !=null">,mu_Descr</if>
+			<if test="fGlyph !=null">,mu_Glyph</if>
+			<if test="fExpand !=null">,mu_Expand</if>
+			<if test="fViewClass !=null">,mu_ViewClass</if>
+			<if test="fUsability !=null">,mu_Usability</if>
 		) values(
-			#{fId},#{fName},#{fParentId},#{fIcon},#{fUrl},#{fOrder},#{fDescr},#{fGlyph},#{fExpand},#{fViewClass},#{fType},
-			#{fUsability}
+			#{fId},#{fName},#{fType}
+			<if test="fParentId !=null">,#{fParentId}</if>
+			<if test="fIcon !=null">,#{fIcon}</if>
+			<if test="fUrl !=null">,#{fUrl}</if>
+			<if test="fOrder !=null">,#{fOrder}</if>
+			<if test="fDescr !=null">,#{fDescr}</if>
+			<if test="fGlyph !=null">,#{fGlyph}</if>
+			<if test="fExpand !=null">,#{fExpand}</if>
+			<if test="fViewClass !=null">,#{fViewClass}</if>
+			<if test="fUsability !=null">,#{fUsability}</if>
 		);
 	</insert>
 

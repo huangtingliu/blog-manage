@@ -100,6 +100,7 @@ Ext.define('BlogMgr.view.menu.MenuAddForm', {
 							boxLabel  : '可用性',
 		                    name      : 'fUsability',
 		                    inputValue: 'ENABLE',
+		                    uncheckedValue:'DISABLE',
 		                    checked:true
 						}]
 					},{

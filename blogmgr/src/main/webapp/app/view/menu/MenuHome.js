@@ -1,18 +1,18 @@
 /**
  * 菜单管理 - 主页
  */
-Ext.define('BlogMgr.view.menu.MenuList', {
-			id : 'menuList',
+Ext.define('BlogMgr.view.menu.MenuHome', {
+			id : 'henuHome',
 			extend : 'Ext.panel.Panel',
-			alias : ['widget.menulist'],
+			alias : ['widget.menuhome'],
 			uses : ['BlogMgr.view.menu.MenuTree', 
 					'BlogMgr.view.menu.MenuGrid',
-					'BlogMgr.view.menu.MenuListController',
-					'BlogMgr.view.menu.MenuListModel'],
+					'BlogMgr.view.menu.MenuHomeController',
+					'BlogMgr.view.menu.MenuHomeModel'],
 			layout : 'border',
-			controller : 'menulist',
+			controller : 'menuhome',
 			viewModel : {
-				type : 'menulist'
+				type : 'menuhome'
 			},
 			items : [{
 						region : 'west',

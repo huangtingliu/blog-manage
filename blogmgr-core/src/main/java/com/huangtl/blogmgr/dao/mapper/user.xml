@@ -65,11 +65,23 @@
 	
 	<insert id="insert" parameterType="com.huangtl.blogmgr.model.blog.Menu">
 		insert into mgr_userinfo(
-			ui_Id,ui_Name,ui_Account,ui_Password,dic_Status,ui_PinYin,ui_Descr,ui_Creater,ui_CreateDate,
-			ui_Editor,ui_EditDate,ui_Email,ui_Phone,dic_Gender
+			ui_Id,ui_Name,ui_Account,ui_Password,ui_PinYin,ui_Creater,ui_CreateDate
+			<if test="fStatus !=null">,dic_Status</if>
+			<if test="fGender !=null">,dic_Gender</if>
+			<if test="fPhone !=null">,ui_Phone</if>
+			<if test="fEmail !=null">,ui_Email</if>
+			<if test="fDescr !=null">,ui_Descr</if>
+			<if test="fEditor !=null">,ui_Editor</if>
+			<if test="fEditDate !=null">,ui_EditDate</if>
 		) values(
-			#{fId},#{fName},#{fAccount},#{fPassword},#{fStatus},#{fPinYin},#{fDescr},#{fCreater},#{fCreateDate},
-			#{fEditor},#{fEditDate},#{fEmail},#{fPhone},#{fGender}
+			#{fId},#{fName},#{fAccount},#{fPassword},#{fPinYin},#{fCreater},#{fCreateDate}
+			<if test="fStatus !=null">,#{fStatus}</if>
+			<if test="fGender !=null">,#{fGender}</if>
+			<if test="fPhone !=null">,#{fPhone}</if>
+			<if test="fEmail !=null">,#{fEmail}</if>
+			<if test="fDescr !=null">,#{fDescr}</if>
+			<if test="fEditor !=null">,#{fEditor}</if>
+			<if test="fEditDate !=null">,#{fEditDate}</if>
 		);
 	</insert>
 	
