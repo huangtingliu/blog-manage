@@ -27,6 +27,7 @@ Ext.define('BlogMgr.view.menu.MenuHome', {
 						region : 'center',
 						layout : 'fit',
 						items : {
+							reference:'menuGrid',
 							xtype : 'menugrid'
 						}
 					}]

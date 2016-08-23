@@ -13,8 +13,8 @@
 			proxy : {
 				type : 'ajax',
 				url : '/blogmgr/user/paging.data',
-				limitParam:'pageNo',
-				pageParam:'pageSize',
+				limitParam:'pageSize',
+				pageParam:'pageNo',
 				noCache:false,
 				paramsAsJson:true,
 				reader : {

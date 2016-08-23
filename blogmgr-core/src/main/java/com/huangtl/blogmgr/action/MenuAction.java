@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -43,26 +44,37 @@ public class MenuAction extends BlogMgrAction {
 	 * 菜单分页查询
 	 * @param pageNo 当前页号
 	 * @param pageSize 每页记录个数 
-	 * @param filter 查询过滤器 <br>
+	 * @param filter 查询过滤器 ,允许null<br>
 	 * <blockquote>
 	 *  格式  filter:[{"property":"fName","value":"张三","operator":"like"}] 
 	 *  </blockquote>
-	 * @param sort 排序方案 <br>
+	 * @param sort 排序方案 ,允许null<br>
 	 * <blockquote>
 	 *  格式   sort:[{"property":"fCreateDate","direction":"ASC\DESC"}]
 	 * </blockquote>
 	 * @return
-	 * <blockquote>
-	 * {message: "获取成功个数 15", total: 0, menulist: [], success: true}
-	 * </blockquote>
+	 * <pre>
+	  {message: "获取成功个数 15", total: 0, menulist: [{
+			"fGlyph":59012,
+			"fIcon":"fa-bar-chart",
+			"fId":"B0010001",
+			"fName":"用户统计",
+			"fOrder":1,
+			"fParentId":"B001",
+			"fType":"NAVIGATOR",
+			"fUrl":"",
+			"fUsability":"ENABLE",
+			"fViewClass":""
+		}], success: true}
+	 * </pre>
 	 */
 	@RequestMapping("paging.data")
 	@ResponseBody
 	public Object getPaging(Integer pageNo,Integer pageSize,
 			FilterCollection filter,SortCollection sort) {
 		
-		Page<Menu> page = new Page<>(pageSize, pageNo);
-		if(sort.isEmpty()){
+		Page<Menu> page = new Page<>(pageNo,pageSize);
+		if(sort==null || sort.isEmpty()){
 			page.addSort("fId", Direction.ASC);
 			page.addSort("fOrder", Direction.ASC);
 		}else{
@@ -72,8 +84,10 @@ public class MenuAction extends BlogMgrAction {
 		}
 		
 		UserSqlWhere whereParam = new UserSqlWhere();
-		for (Filter f : filter) {
-			whereParam.putFilter(f);
+		if(filter!=null && !filter.isEmpty()){
+			for (Filter f : filter) {
+				whereParam.putFilter(f);
+			}
 		}
 		
 		this.menuService.getDao().selectPaging(whereParam, page);
@@ -116,11 +130,21 @@ public class MenuAction extends BlogMgrAction {
 	 * @param parentId 根据父节点查询其子节点
 	 * @param nodeId   根据节点id查询节点
 	 * @return
-	 * <blockquote>
-	 * [{
-	 * 	...
-	 * }]
-	 * </blockquote>
+	 * <pre>
+		 [{
+			"attr":{
+				"fOrder":1,
+				"fType":"NAVIGATOR"
+			},
+			"childrenSize":0,
+			"expanded":false,
+			"iconCls":"fa-users",
+			"id":"A0010001",
+			"leaf":true,
+			"parentId":"A001",
+			"text":"博客用户"
+		},{...}]
+	 * </pre>
 	 */
 	@RequestMapping("tree.data")
 	@ResponseBody
@@ -138,9 +162,18 @@ public class MenuAction extends BlogMgrAction {
 	 * 获取单个菜单
 	 * @param menuId	菜单id
 	 * @return
-	 * {
-	 * 	
-	 * }
+	 * <pre>
+	   {
+			"fGlyph":58917,
+			"fIcon":"fa-tencent-weibo",
+			"fId":"A001",
+			"fName":"",
+			"fParentId":"",
+			"fUrl":"",
+			"fUsability":"ENABLE",
+			"fViewClass":""
+		}
+	<pre>
 	 */
 	@RequestMapping("get.data")
 	@ResponseBody
@@ -168,10 +201,19 @@ public class MenuAction extends BlogMgrAction {
 	}
 	
 	
+	/**
+	 * 菜单修改，必须指定fId
+	 * 规则：<p>
+	 * <li>如果提交的参数不为空，那么就更新该字段。（空字符串也算）
+	 * 
+	 * @param menu
+	 * @return
+	 */
 	@RequestMapping("edit.do")
 	@ResponseBody
-	public Object editMenu(){
-		//TODO
+	public Object editMenu(Menu menu){
+		if(menu==null || StringUtils.isBlank(menu.getfId())){return Message.error("fId未指定");}
+		
 		return Message.warn("未实现");
 	}
 }

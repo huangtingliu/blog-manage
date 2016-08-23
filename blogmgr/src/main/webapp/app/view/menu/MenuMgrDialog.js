@@ -1,17 +1,19 @@
 /**
  * 菜单添加对话窗口
  */
-Ext.define('BlogMgr.view.menu.MenuAddDialog',{
-			id : 'menuAddDialog',
-			uses:['BlogMgr.view.menu.MenuAddForm',
+Ext.define('BlogMgr.view.menu.MenuMgrDialog',{
+			id : 'menuMgrDialog',
+			uses:['BlogMgr.view.menu.MenuMgrForm',
 				  'Ext.ux.TreePicker',
-				  'BlogMgr.view.menu.MenuAddDialogController'],
+				  'BlogMgr.view.menu.MenuMgrDialogController'],
 			extend : 'Ext.window.Window',
-			alias : ['widget.menuadd_dialog'],
+			alias : ['widget.menumgr_dialog'],
 			layout : 'fit',
-			title : '菜单添加',
+			bind:{
+				title : '{title}'
+			},
 			maximizable : true, // 最大化
-			controller:'menuadd_dialog',
+			controller:'menumgr_dialog',
 			bodyStyle : 'padding : 2px 2px 0',
 			shadowOffset : 30, // 投影效果
 			modal : true, // 模态
@@ -25,7 +27,9 @@ Ext.define('BlogMgr.view.menu.MenuAddDialog',{
 				itemId : 'save',
 				text : '保存',
 				glyph : 0xe650,
-				handler:'userAddSubmit'
+				bind:{
+					handler:'{saveHandler}'
+				}
 			}, {
 				itemId : 'close',
 				text : '关闭',
@@ -33,6 +37,6 @@ Ext.define('BlogMgr.view.menu.MenuAddDialog',{
 				handler:'closeDialog'
 			}],
 			items : {
-						xtype : 'menuadd_form'
+						xtype : 'menumgr_form'
 					}
 });

@@ -1,12 +1,10 @@
 /**
  * 菜单添加表单
  */
-Ext.define('BlogMgr.view.menu.MenuAddForm', {
-			itemId : 'menuAddForm',
+Ext.define('BlogMgr.view.menu.MenuMgrForm', {
+			itemId : 'menuMgrForm',
 			extend : 'Ext.form.Panel',
-			alias : ['widget.menuadd_form'],
-			url : '/blogmgr/menu/add.do',
-			method : 'POST',
+			alias : ['widget.menumgr_form'],
 			waitTitle : '处理中...',
 			fileUpload : false,
 			defaults : {
@@ -45,7 +43,7 @@ Ext.define('BlogMgr.view.menu.MenuAddForm', {
 								fieldLabel : '菜单代码',
 								width : '70%',
 								emptyText:'代码前缀',
-								reference: 'menuAddFormPreCode',
+								reference: 'menuMgrFormPreCode',
 								editable : false,
 								submitValue:false
 							},{

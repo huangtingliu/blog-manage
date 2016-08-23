@@ -75,7 +75,7 @@
 	</insert>
 
 	<select id="selectList" resultMap="map" parameterType="map">
-		select mu_Id,mu_Name,mu_ParentId,mu_Icon,mu_Url,mu_Glyph,mu_Expand,mu_ViewClass,mu_Usability
+		select mu_Id,mu_Name,mu_ParentId,mu_Icon,mu_Url,mu_Glyph,mu_ViewClass,mu_Usability
 		from mgr_menu
 		<include refid="where"/>
 		order by mu_Order

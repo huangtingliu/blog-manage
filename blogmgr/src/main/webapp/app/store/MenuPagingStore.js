@@ -13,8 +13,8 @@ Ext.define('BlogMgr.store.MenuPagingStore', {
 			proxy : {
 				type : 'ajax',
 				url : '/blogmgr/menu/paging.data',
-				limitParam : 'pageNo',
-				pageParam : 'pageSize',
+				limitParam:'pageSize',
+				pageParam:'pageNo',
 				noCache:false,
 				paramsAsJson:true,
 				reader : {

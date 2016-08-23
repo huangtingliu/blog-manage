@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.alibaba.fastjson.JSON;
 import com.huangtl.blogmgr.action.MenuAction;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -19,7 +20,8 @@ public class MenuActionTest {
 	
 	@Test
 	public void testGetPaging() {
-		fail("Not yet implemented");
+		Object menu = menuAction.getPaging(1, 5, null, null);
+		System.out.println(JSON.toJSONString(menu,true));
 	}
 
 	@Test
@@ -29,12 +31,15 @@ public class MenuActionTest {
 
 	@Test
 	public void testGetTreeNode() {
-		fail("Not yet implemented");
+		Object menu =  menuAction.getTreeNode("A001", null);
+		System.out.println(JSON.toJSONString(menu,true));
 	}
 
 	@Test
 	public void testGetOne() {
-		fail("Not yet implemented");
+		Object menu =  menuAction.getOne("A001");
+		System.out.println(JSON.toJSONString(menu,true));
+		
 	}
 
 	@Test
