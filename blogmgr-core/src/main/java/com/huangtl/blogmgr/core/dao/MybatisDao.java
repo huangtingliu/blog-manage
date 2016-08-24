@@ -19,6 +19,12 @@ public interface MybatisDao<T> extends Dao<T> {
 	 * 修改,返回记录的影响数。如果查询参数为null或空，则不更新返回 0
 	 */
 	int update(T entity ,SqlWhere param);
+	
+	/**
+	 * 批量修改
+	 */
+	int updateBatch(List<T> entitys);
+	
 	/**
 	 * 不分页查询，如果查询参数为null或空。则返回所有记录
 	 */

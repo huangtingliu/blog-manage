@@ -11,6 +11,17 @@
 	    <property name="dataSource" ref="multipleDataSource" />  
 	</bean> 
 	
+	<bean id="pldProperty" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="ignoreResourceNotFound" value="true"></property>
+		<property name="fileEncoding" value="utf-8"></property>
+		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE"></property>
+		<property name="locations">
+			<list>
+				<value>classpath:jdbc.properties</value>
+			</list>
+		</property>
+	</bean>	
+	
 	<tx:advice id="commonTranscation" transaction-manager="transactionManager">
 		<tx:attributes>
 			<tx:method name="get*" propagation="REQUIRED" read-only="true" />
@@ -47,12 +58,23 @@
 	</bean>
 	
 	<!-- 博客数据源 -->
-	<bean id="blogDataSource"  class="org.logicalcobwebs.proxool.ProxoolDataSource">
+	<!-- <bean id="blogDataSource"  class="org.logicalcobwebs.proxool.ProxoolDataSource">
 		<property name="driver" value="com.mysql.jdbc.Driver"></property>
 		<property name="alias" value="pld-blog"></property>
-		<property name="driverUrl" value="jdbc:mysql://127.0.0.1:3306/blog"></property>
+		<property name="driverUrl" value="jdbc:mysql://127.0.0.1:3306/blog?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true"></property>
 		<property name="user" value="root"></property>
 		<property name="password" value="abc123"></property>
+	</bean> -->
+	
+	<bean id="blogDataSource"  class="org.logicalcobwebs.proxool.ProxoolDataSource">
+		<property name="driver" value="${blog.mysql.driver}"></property>
+		<property name="alias" value="pld-blog"></property>
+		<property name="driverUrl" value="${blog.mysql.url}"></property>
+		<property name="password" value="${blog.mysql.password}"></property>
+		<property name="user" value="${blog.mysql.username}"></property>
+		<property name="minimumConnectionCount" value="${jdbc.minConnectionCount}"></property>
+		<property name="maximumConnectionCount" value="${jdbc.maxConnectionCount}"></property>
+		<property name="maximumActiveTime" value="${jdbc.maxActiveTime}"></property>		
 	</bean>
 	
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -95,8 +117,10 @@
 	<bean id="menuDao" class="com.huangtl.blogmgr.dao.impl.MenuDaoImpl" parent="myBatisDao"></bean>
 	
 	<!-- 后台用户管理 -->
-	<!-- <bean id="userService" class="com.huangtl.blogmgr.service.impl.UserServiceImpl">
+	<bean id="userAction" class="com.huangtl.blogmgr.action.UserAction"></bean>
+	<bean id="userService" class="com.huangtl.blogmgr.service.impl.UserServiceImpl">
 		<property name="userDao" ref="userDao"></property>
 	</bean>
-	<bean id="userDao" class="com.huangtl.blogmgr.dao.impl.UserDaoImpl" parent="myBatisDao"></bean> -->
+	<bean id="userDao" class="com.huangtl.blogmgr.dao.impl.UserDaoImpl" parent="myBatisDao"></bean> 
+	
 </beans>

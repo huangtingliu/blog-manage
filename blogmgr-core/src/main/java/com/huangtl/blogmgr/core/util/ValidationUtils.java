@@ -26,16 +26,20 @@ public final class ValidationUtils {
 	
 	/**
 	 * 验证实体是否满足约束条件
-	 * @param entity
-	 * @return
+	 * @param entity 被验证的实体
+	 * @param allowNull 总的设置是否验证为空字段,即忽略个别字段有@notNull的约束。默认false,将验证为null的字段
+	 * @param exceptFields 排除不验证的字段,默认验证所有的字段
+	 * @return 成功返回Message.success，否则Message.error
 	 */
-	public static <T> Message validate(T entity,String... exceptFields){
+	public static <T> Message validate(T entity,boolean allowNull,String... exceptFields){
 		Set<ConstraintViolation<T>> validateSet = validator.validate(entity, Default.class);
+		
 		if( CollectionUtils.isNotEmpty(validateSet) ){
 			for (ConstraintViolation<T> cv : validateSet) {
-				if(exceptFields!=null && ArrayUtils.contains(exceptFields, cv.getPropertyPath().toString())){
-					continue;
-				}
+				//排除为空的字段
+				if(allowNull && cv.getInvalidValue()==null ){continue;}
+				//排除指定排除的字段
+				if( ArrayUtils.contains(exceptFields, cv.getPropertyPath().toString())){continue;}
 				return Message.error(cv.getMessage());
 			}
 		}
@@ -44,8 +48,9 @@ public final class ValidationUtils {
 	
 	/**
 	 * 根据指定的验证器,验证实体是否满足约束条件
-	 * @param entity
-	 * @return
+	 * @param entity 被验证的实体
+	 * @param validator 自定义验证器
+	 * @return 成功返回Message.success，否则Message.error
 	 */
 	public static <T> Message validate(T entity,Validator validator){
 		Set<ConstraintViolation<T>> validateSet = validator.validate(entity, Default.class);
@@ -58,10 +63,10 @@ public final class ValidationUtils {
 	}
 	
 	/**
-	 * 验证某个字段是否满足约束条件
-	 * @param entity
-	 * @param propertyName
-	 * @return
+	 * 验证实体中的某个字段是否满足约束条件
+	 * @param entity 被验证的实体
+	 * @param propertyName  被验证的实体中的某个字段
+	 * @return 成功返回Message.success，否则Message.error
 	 */
 	public static <T> Message validateProperty(T entity,String propertyName){
 	     Set<ConstraintViolation<T>> set = validator.validateProperty(entity,propertyName,Default.class);

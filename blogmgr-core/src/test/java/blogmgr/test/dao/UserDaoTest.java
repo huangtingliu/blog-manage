@@ -23,7 +23,7 @@ public class UserDaoTest {
 	private UserService  userService;
 	
 	
-	
+	@Test
 	public void userAddTest(){
 		User user = new User(true);
 		user.setfAccount("test1");
@@ -35,7 +35,7 @@ public class UserDaoTest {
 		user.setfCreater("root");
 		user.setfPinYin(PinYinUtils.toPinYin("测试员1"));
 		
-		Message mesg = user.checkValidity();
+		Message mesg = user.checkValidity(false);
 		if(mesg.isSuccess()){
 			System.out.println(userService.addUser(user));	
 			return;
@@ -45,6 +45,17 @@ public class UserDaoTest {
 	
 	@Test
 	public void test(){
+		User user = new User(true);
+		user.setfAccount(null);
+		user.setfCreateDate(new Date());
+		user.setfGender(Gender.MALE);
+		user.setfName("测试员");
+		user.setfPassword("1223");
+		user.setfStatus(UserStatus.ENABLE);
+		user.setfCreater("root");
+		user.setfPinYin(PinYinUtils.toPinYin("adsfadf"));
 		
+		Message mesg = user.checkValidity(false);
+		System.out.println(mesg);
 	}
 }

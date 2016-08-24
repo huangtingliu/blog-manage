@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
+import com.huangtl.blogmgr.core.spring.resolver.Json;
 import com.huangtl.blogmgr.dao.where.MenuSqlWhere;
 import com.huangtl.blogmgr.dao.where.SqlWhere;
 import com.huangtl.blogmgr.dao.where.UserSqlWhere;
@@ -135,7 +136,6 @@ public class MenuAction extends BlogMgrAction {
 	
 	/**
 	 * 获取菜单数据，用于构建成一棵树
-	 * 
 	 * @param parentId 根据父节点查询其子节点
 	 * @param nodeId   根据节点id查询节点
 	 * @return
@@ -195,11 +195,19 @@ public class MenuAction extends BlogMgrAction {
 		return menus.get(0);
 	}
 	
+	
+	/**
+	 * 添加一个菜单<br>
+	 * 必填字段：fId,fName,fType
+	 * @param menu
+	 * @return
+	 */
 	@RequestMapping("add.do")
 	@ResponseBody
 	public Object addMenu(Menu menu){
 		 Message message = menu.checkValidity();
 		if(message.isError()){return message;}
+		
 		try {
 			message = this.menuService.addMenu(menu);
 		} catch (Exception e) {
@@ -213,8 +221,8 @@ public class MenuAction extends BlogMgrAction {
 	/**
 	 * 菜单修改，必须指定fId
 	 * 规则：<p>
-	 * <li>如果提交的参数不为空，那么就更新该字段。（空字符串也算）
-	 * 
+	 * <li>如果提交的参数不为空null，那么就更新该字段，否则不更新
+	 * <li>可供修改改字段：fName,fParentId,fIcon,fUrl,fViewClass,fType,fGlyph,fOrder,fUsability
 	 * @param menu
 	 * @return
 	 */
@@ -222,7 +230,49 @@ public class MenuAction extends BlogMgrAction {
 	@ResponseBody
 	public Object editMenu(Menu menu){
 		if(menu==null || StringUtils.isBlank(menu.getfId())){return Message.error("fId未指定");}
+		Message message = menu.checkValidity(true);
+		if(message.isError()){return message;}
 		
-		return Message.warn("未实现");
+		MenuSqlWhere sqlWhere = new MenuSqlWhere().fIdEqual(menu.getfId());
+		try {
+			message = this.menuService.editMenu(menu, sqlWhere);
+		} catch (Exception e) {
+			message = Message.exception("修改失败");
+			logger.error("菜单修改失败",e);
+		}
+		
+		return message;
 	}
+	
+	/**
+	 * 批量修改菜单,规则参见：editMenu<br>
+	 * @param menus 格式：
+	 <pre>
+	 	[{
+	 		fId:'',
+	 		fName:'',
+	 		...
+	 	},{...}]
+	 <pre>
+	 * @return
+	 */
+	public Object editBatchMenu(@Json List<Menu> menus){
+		Message message = null;
+		if(CollectionUtils.isEmpty(menus)){return Message.error("无效参数");}
+		for (Menu menu : menus) {
+			if(menu==null || StringUtils.isBlank(menu.getfId())){return Message.error("无效参数");}
+			message = menu.checkValidity(true);
+			if(message.isError()){return message;}
+		}
+		
+		try {
+			message = this.menuService.editBatchMenu(menus);
+		} catch (Exception e) {
+			message = Message.exception("菜单失败");
+			logger.error("菜单修改失败",e);
+		}
+		
+		return message;
+	}
+	
 }

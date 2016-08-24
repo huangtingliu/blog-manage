@@ -25,9 +25,9 @@ public class Menu extends ObjectValue {
 	private String fIcon;			//图标 iconClass
 	private String fViewClass;		//视图类
 	private String fUrl;			//链接
-	private Integer fOrder;			//排序
+	private Integer fOrder;			//排序 默认 0
     private String fDescr;			//描述
-    private Integer fGlyph;			//glyph值
+    private Integer fGlyph;			//glyph值 
     private MenuType fType;			//菜单类型
     private Integer fExpand;		//是否展开{0：不展开，1：展开},默认0
     private Usability fUsability;	//是否可用，默认 ENABLE

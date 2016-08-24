@@ -7,6 +7,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -100,9 +101,17 @@ public class UserAction extends BlogMgrAction {
 	 * @param userId 用户id
 	 * @return
 	 * <pre>
-	 * 	{
-	 * 		
-	 * }
+		{
+			"fAccount":"ouiogyui",
+			"fCreateDate":1469447144000,
+			"fCreater":"root",
+			"fEmail":"",
+			"fGender":"MALE",
+			"fId":"09dbccec890a4fa8bcd6b71f360551f4",
+			"fName":"uoyui",
+			"fPhone":"",
+			"fStatus":"ENABLE"
+		}
 	 * </pre>
 	 */
 	@RequestMapping("get.data")
@@ -116,14 +125,14 @@ public class UserAction extends BlogMgrAction {
 	}
 	
 	/**
-	 * 添加用户
+	 * 添加用户<br>
+	 * 必填字段：fId,fName,fAccount,fPassword,fPinYin,fCreater,fCreateDate
 	 * @param user
-	 * @param accountType 账号类型,不指默认为:custom 
+	 * @param accountType 账号类型,默认为:custom 
 	 * <li>custom  自定义
 	 * <li>mail    邮箱
 	 * <li>phone   手机
 	 * @return
-	 * @throws InterruptedException 
 	 */
 	@RequestMapping("add.do")
 	@ResponseBody
@@ -137,10 +146,10 @@ public class UserAction extends BlogMgrAction {
 		user.setfCreater("root");
 		if(accountType.equals("mail")){
 			user.setfAccount(user.getfEmail());
-			message = user.checkValidity("fAccount");
+			message = user.checkValidity(false,"fAccount");
 		}else if(accountType.equals("phone")){
 			user.setfAccount(user.getfPhone());
-			message = user.checkValidity("fAccount");
+			message = user.checkValidity(false,"fAccount");
 		}else{
 			message = user.checkValidity();
 		}
@@ -179,16 +188,32 @@ public class UserAction extends BlogMgrAction {
 	}
 	
 	/**
-	 * 批量修改用户
-	 * @param user
+	 * 根据用户的fId,批量修改每个用户,规则：参见editUser<br>
+	 * @param user 格式：<br>
+	 <pre>
+		[{
+		 	fId:'',
+		 	fName:'',
+		 	...
+		 },{
+		 	...
+		 }]
+	 </pre>
 	 * @return 修改成功的人数
 	 */
-	@RequestMapping("batchedit.do")
+	@RequestMapping("editbatch.do")
 	@ResponseBody
-	public Object batchEditUser(@Json List<User> users){
+	public Object editBatchUser(@Json List<User> users){
 		Message message = null;
+		if(CollectionUtils.isEmpty(users)){return Message.error("无效参数");}
+		for (User user : users) {
+			if(user==null || StringUtils.isBlank(user.getfId())){return Message.error("无效参数");}
+			 message = user.checkValidity(true);
+			 if(message.isError()){return message;}
+		}
+		
 		try {
-			message = this.userService.batchEditUser(users);
+			message = this.userService.editBatchUser(users);
 		} catch (Exception e) {
 			message = Message.exception("用户修改失败");
 			logger.error("用户修改失败",e);
@@ -197,17 +222,23 @@ public class UserAction extends BlogMgrAction {
 	}
 	
 	/**
-	 * 修改单个用户
-	 * @param user
+	 * 根据fId,修改单个用户<br> 
+	 * 规则：<br>
+	 * <li>可修改字段：fName,fPassword,fStatus,fPinYin,fDescr,fEditor,fEditDate,fEmail,fPhone,fGender
+	 * <li>只修改非null的字段
+	 * @param user 
 	 * @return
 	 */
 	@RequestMapping("edit.do")
 	@ResponseBody
 	public Object editUser(User user){
-		UserSqlWhere sqlWhere = new UserSqlWhere()
-							.fIdEqual(user.getfId());
-		Message message = null;
+		if(user==null || StringUtils.isBlank(user.getfId())){return Message.error("无效参数");}
 		
+		Message message = user.checkValidity(true);
+		if(message.isError()){return message;}
+		
+		UserSqlWhere sqlWhere = new UserSqlWhere()
+				.fIdEqual(user.getfId());
 		try {
 			message = this.userService.editUser(user, sqlWhere);
 		} catch (Exception e) {

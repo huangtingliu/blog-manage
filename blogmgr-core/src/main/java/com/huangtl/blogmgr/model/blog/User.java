@@ -1,6 +1,5 @@
 package com.huangtl.blogmgr.model.blog;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
 
 import javax.validation.constraints.NotNull;
@@ -119,7 +118,7 @@ public class User extends ObjectValue {
 		this.fStatus = fStatus;
 	}
 	@NotBlank(message="拼音为空")
-	@Pattern(regexp="[a-zA-Z]*",message="拼音为英文无空格")
+	@Pattern(regexp="[a-zA-Z]*",message="拼音不带空格")
 	public String getfPinYin() {
 		return fPinYin;
 	}
@@ -158,22 +157,5 @@ public class User extends ObjectValue {
 	}
 	public void setfEditDate(Date fEditDate) {
 		this.fEditDate = fEditDate;
-	}
-	
-	public static void main(String[] args) throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
-		User user = new User(true);
-		user.setfName("张三张三张三张三张三");
-		user.setfAccount("aaaabbbbccccddd");
-		user.setfPinYin("aaa");
-		user.setfStatus(UserStatus.DISABLE);
-		user.setfPassword(")@#%%^&#@)");
-		user.setfGender(Gender.FEMALE);
-		user.setfCreater("adsfa");
-		user.setfEmail("");
-		user.setfPhone("15960123876");
-		user.setfCreateDate(new Date());
-		
-		
-		System.out.println(user.checkValidity());
 	}
 }

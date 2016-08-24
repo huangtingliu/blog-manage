@@ -121,5 +121,22 @@
 		<include refid="where"/>
 	</update>
 	
+	<update id="updateBatch" parameterType="list">
+		 <foreach collection="list" item="menu" index="index" open="" close="" separator=";">
+				update mgr_menu 
+				<trim prefix="set" suffixOverrides=",">
+					<if test="menu.fName !=null ">mu_Name = #{menu.fName},</if>
+					<if test="menu.fParentId !=null ">mu_ParentId = #{menu.fParentId},</if>
+					<if test="menu.fIcon !=null ">mu_Icon = #{menu.fIcon},</if>
+					<if test="menu.fUrl !=null ">mu_Url = #{menu.fUrl},</if>
+					<if test="menu.fViewClass !=null ">mu_ViewClass = #{menu.fViewClass},</if>
+					<if test="menu.fType !=null ">mu_Type = #{menu.fType},</if>
+					<if test="menu.fGlyph !=null ">mu_Glyph = #{menu.fGlyph},</if>
+					<if test="menu.fOrder !=null ">mu_Order = #{menu.fOrder},</if>
+					<if test="menu.fUsability !=null ">mu_Usability = #{menu.fUsability},</if>
+				</trim>
+				where mu_Id = #{menu.fId}
+		 </foreach>
+	</update>
 	
 </mapper>

@@ -102,6 +102,25 @@
 		<include refid="where"/>
 	</update>
 
+	<update id="updateBatch" parameterType="list">
+		<foreach collection="list" item="user" index="index" open="" close="" separator=";">
+			update mgr_userinfo 
+			<trim prefix="set" suffixOverrides=",">
+				<if test="user.fName !=null">ui_Name = #{user.fName},</if>
+				<if test="user.fPassword !=null">ui_Password = #{user.fPassword},</if>
+				<if test="user.fStatus !=null">dic_Status = #{user.fStatus},</if>
+				<if test="user.fPinYin !=null">ui_PinYin = #{user.fPinYin},</if>
+				<if test="user.fDescr !=null">ui_Descr = #{user.fDescr},</if>
+				<if test="user.fEditor !=null">ui_Editor = #{user.fEditor},</if>
+				<if test="user.fEditDate !=null">ui_EditDate = #{user.fEditDate},</if>
+				<if test="user.fEmail !=null">ui_Email = #{user.fEmail},</if>
+				<if test="user.fPhone !=null">ui_Phone = #{user.fPhone},</if>
+				<if test="user.fGender !=null">dic_Gender = #{user.fGender},</if>
+			</trim>
+			 where ui_Id = #{user.fId}
+		</foreach>
+	</update>
+
 	<select id="selectList" resultMap="map" parameterType="map">
 		select 
 			ui_Id,ui_Name,ui_Account,dic_Status,ui_Creater,ui_CreateDate,ui_Email,ui_Phone,dic_Gender

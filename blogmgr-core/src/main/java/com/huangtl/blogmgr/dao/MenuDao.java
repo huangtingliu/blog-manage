@@ -21,4 +21,6 @@ public interface MenuDao extends MybatisDao<Menu> {
 	 * @return
 	 */
 	List<TreeNode> selectTreeNodes(MenuSqlWhere where);
+	
+	
 }

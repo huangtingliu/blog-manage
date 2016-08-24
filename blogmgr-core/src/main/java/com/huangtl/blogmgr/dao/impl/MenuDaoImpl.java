@@ -9,7 +9,7 @@ import com.huangtl.blogmgr.model.blog.Menu;
 import com.huangtl.blogmgr.model.extjs.TreeNode;
 
 /**
- * 菜单持久化接口 -  默认实现, 查询参数见{@link com.huangtl.blogmgr.dao.where.MenuParam}
+ * 菜单持久化接口 -  默认实现, 查询参数见{@link com.huangtl.blogmgr.dao.where.MenuSqlWhere}
  * @date 2016年6月30日
  * @author PraiseLord
  */

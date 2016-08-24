@@ -8,7 +8,7 @@ import com.huangtl.blogmgr.model.blog.User;
 import com.huangtl.blogmgr.model.common.Message;
 
 /**
- * 后台用户业务层接口
+ * 后台用户业务接口
  * @date 2016年7月4日
  * @author PraiseLord
  */
@@ -19,25 +19,27 @@ public interface UserService {
 	UserDao getDao();
 	
 	/**
-	 * 添加一名用户
+	 * 添加一名用户<br>
+	 * 必填字段：fId,fName,fAccount,fPassword,fPinYin,fCreater,fCreateDate
 	 * @param user
 	 * @return
 	 */
 	Message addUser(User user);
 	
 	/**
-	 * 修改用户
-	 * @param user
-	 * @param whereParam
+	 * 修改用户<br>
+	 * 可修改字段：fName,fPassword,fStatus,fPinYin,fDescr,fEditor,fEditDate,fEmail,fPhone,fGender
+	 * @param user 修改不为null的字段，否则不修改
+	 * @param whereParam 
 	 */
 	Message editUser(User user, UserSqlWhere where);
 	
 	/**
-	 * 批量修改用户，根据fId
+	 * 根据fId,批量修改用户<br>
+	 * 可修改字段：fName,fPassword,fStatus,fPinYin,fDescr,fEditor,fEditDate,fEmail,fPhone,fGender
 	 * @param users
-	 * @return
 	 */
-	Message batchEditUser(List<User> users);
+	Message editBatchUser(List<User> users);
 	
 	/**
 	 * 删除用户

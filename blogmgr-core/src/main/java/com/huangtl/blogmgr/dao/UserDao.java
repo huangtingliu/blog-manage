@@ -19,8 +19,8 @@ public interface UserDao extends MybatisDao<User> {
 	
 	/**
 	 * 批量删除用户
-	 * @param fIds
-	 * @return
+	 * @param fIds 如果参数为null,或长度为0。返回0
+	 * @return 返回影响的记录的个数
 	 */
 	int deleteBatch(String... fIds);
 }

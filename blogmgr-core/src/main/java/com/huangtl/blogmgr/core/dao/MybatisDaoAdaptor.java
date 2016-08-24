@@ -137,6 +137,15 @@ public abstract class MybatisDaoAdaptor<T> implements MybatisDao<T> {
 		return this.sqlSession.update(nameSpace+".update",param);
 	};
 	
+	/*
+	 * 批量修改
+	 */
+	@Override
+	public int updateBatch(List<T> entitys) {
+		if(entitys==null || entitys.isEmpty()){return 0;}
+		return this.sqlSession.update(nameSpace+".updateBatch", entitys);
+	}
+
 	//根据查询参数查询
 	@Override
 	public List<T> selectList(SqlWhere param){

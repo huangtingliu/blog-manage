@@ -92,7 +92,7 @@ Ext.define('BlogMgr.view.user.UserHomeController', {
 		_this.mask.msg = "提交中...";
 		_this.mask.show();
 		Ext.Ajax.request({
-					url : '/blogmgr/user/batchedit.do',
+					url : '/blogmgr/user/editbatch.do',
 					method : 'POST',
 					params : {
 						users : Ext.encode(jsonArray)
