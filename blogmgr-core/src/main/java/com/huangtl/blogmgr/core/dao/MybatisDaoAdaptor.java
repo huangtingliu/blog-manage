@@ -13,7 +13,6 @@ import java.util.regex.Pattern;
 import org.apache.commons.beanutils.BeanIntrospector;
 import org.apache.commons.beanutils.IntrospectionContext;
 import org.apache.commons.beanutils.PropertyUtilsBean;
-import org.apache.commons.collections4.CollectionUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -138,11 +137,7 @@ public abstract class MybatisDaoAdaptor<T> implements MybatisDao<T> {
 		return this.sqlSession.update(nameSpace+".update",param);
 	};
 	
-	/**
-	 * 根据查询参数查询
-	 * @param param
-	 * @return
-	 */
+	//根据查询参数查询
 	@Override
 	public List<T> selectList(SqlWhere param){
 		if(param==null){param = SqlWhere.blankWhere();}
@@ -150,18 +145,14 @@ public abstract class MybatisDaoAdaptor<T> implements MybatisDao<T> {
 		return lists;
 	}
 	
-	/** 
-	 * 查询总数
-	 */
+	//查询记录个数
 	@Override
 	public long selectCount(SqlWhere param) {
 		long count = this.sqlSession.selectOne(nameSpace+".selectCount",param);
 		return count;
 	}
 
-	/** 
-	 * 分页查询
-	 */
+	//分页查询
 	@Override
 	public int selectPaging(SqlWhere param, Page<T> page) {
 		if (param==null ) {param = SqlWhere.blankWhere();}
@@ -173,12 +164,6 @@ public abstract class MybatisDaoAdaptor<T> implements MybatisDao<T> {
 		List<T> lists = this.sqlSession.selectList(nameSpace+".selectPaging",param);
 		page.setPageContent(lists);
 		return lists==null?0:lists.size();
-	}
-
-	@Override
-	public int deleteBatch(List<String> entityIds) {
-		if(CollectionUtils.isEmpty(entityIds)){return 0;}
-		return this.sqlSession.delete(nameSpace+".deleteBatch",entityIds);
 	}
 
 	public void setSqlSessionTemplate(SqlSession sqlSession){

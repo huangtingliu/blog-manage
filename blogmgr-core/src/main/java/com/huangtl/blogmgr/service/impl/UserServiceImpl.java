@@ -1,6 +1,5 @@
 package com.huangtl.blogmgr.service.impl;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.collections4.CollectionUtils;
@@ -61,10 +60,9 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public Message deleteUser(String... uids) {
-		if(uids==null || uids.length==0){
-			return Message.error("未指定删除对象!");
-		}
-		int effectRow = this.userDao.deleteBatch(Arrays.asList(uids));
+		if(uids.length==0){return Message.error("未指定删除对象!");}
+		
+		int effectRow = this.userDao.deleteBatch(uids);
 		Message message = Message.get(effectRow, "成功删除"+uids.length+"个用户!", "删除失败!");
 		message.setAnnex(effectRow);
 		return message;

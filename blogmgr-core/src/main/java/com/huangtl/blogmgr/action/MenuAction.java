@@ -105,9 +105,18 @@ public class MenuAction extends BlogMgrAction {
 	 * @param parentId  菜单的父id
 	 * @param menuId    根据菜单id查询
 	 * @return
-	 * <blockquote>
-	 * {message: "获取成功个数 15", menulist: [], success: true}
-	 * </blockquote>
+	 * <pre>
+	 	{message: "获取成功个数 15", menulist: [{
+			"fGlyph":58901,
+			"fIcon":"fa-users",
+			"fId":"A0010001",
+			"fName":"博客用户",
+			"fParentId":"A001",
+			"fUrl":"",
+			"fUsability":"ENABLE",
+			"fViewClass":""
+		}], success: true}
+	 * </pre>
 	 */
 	@RequestMapping("list.data")
 	@ResponseBody

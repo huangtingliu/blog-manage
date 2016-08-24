@@ -36,6 +36,12 @@
 			<if test="fUsability_eq != null">
 				and mu_Usability = #{fUsability_eq}
 			</if>
+			<if test="fId_in !=null ">
+				and mu_Id in
+				<foreach collection="fId_in" open="(" item="id" separator="," close=")">
+					#{id}
+				</foreach>
+			</if>
 		</trim>
 	</sql>
 	
@@ -99,15 +105,20 @@
 		<include refid="where"/>
 	</delete>
 	
-	<delete id="deleteBatch" parameterType="list">
-		delete from mgr_menu where mu_Id in 
-		<foreach collection="list" open="(" item="id" separator="," close=")">
-			#{id}
-		</foreach>
-	</delete>
-	
-	<update id="update">
-		
+	<update id="update" parameterType="map" >
+		update mgr_menu  
+		<trim prefix="set" suffixOverrides=",">
+			<if test="fName !=null ">mu_Name = #{fName},</if>
+			<if test="fParentId !=null ">mu_ParentId = #{fParentId},</if>
+			<if test="fIcon !=null ">mu_Icon = #{fIcon},</if>
+			<if test="fUrl !=null ">mu_Url = #{fUrl},</if>
+			<if test="fViewClass !=null ">mu_ViewClass = #{fViewClass},</if>
+			<if test="fType !=null ">mu_Type = #{fType},</if>
+			<if test="fGlyph !=null ">mu_Glyph = #{fGlyph},</if>
+			<if test="fOrder !=null ">mu_Order = #{fOrder},</if>
+			<if test="fUsability !=null ">mu_Usability = #{fUsability},</if>
+		</trim>
+		<include refid="where"/>
 	</update>
 	
 	

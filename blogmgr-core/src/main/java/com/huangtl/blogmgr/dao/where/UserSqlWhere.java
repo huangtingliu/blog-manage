@@ -2,7 +2,6 @@ package com.huangtl.blogmgr.dao.where;
 
 import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
 import com.huangtl.blogmgr.model.blog.dictionary.Gender;
 import com.huangtl.blogmgr.model.blog.dictionary.UserStatus;
@@ -27,7 +26,8 @@ public class UserSqlWhere extends SqlWhere {
 	 * @param userIds
 	 * @return
 	 */
-	public UserSqlWhere fIdIn(List<String> userIds){
+	public UserSqlWhere fIdIn(String... userIds){
+		if(userIds.length==0){return this;}
 		this.put("fId_in", userIds);
 		return this;
 	}
@@ -117,8 +117,11 @@ public class UserSqlWhere extends SqlWhere {
 		return this;
 	}
 	
+	/**
+	 * 指定状态 存在于
+	 */
 	public UserSqlWhere fStatusIn(UserStatus... status){
-		if(status==null || status.length==0){return this;}
+		if(status.length==0){return this;}
 		
 		this.put("fStatus_in", Arrays.asList(status));
 		return this;

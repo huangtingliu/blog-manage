@@ -12,9 +12,15 @@ import com.huangtl.blogmgr.model.blog.User;
 public interface UserDao extends MybatisDao<User> {
 	/**
 	 * 根据用户id查询用户
-	 * @param userId
+	 * @param fId
 	 * @return
 	 */
-	User selectOne(String userId);
+	User selectOne(String fId);
 	
+	/**
+	 * 批量删除用户
+	 * @param fIds
+	 * @return
+	 */
+	int deleteBatch(String... fIds);
 }

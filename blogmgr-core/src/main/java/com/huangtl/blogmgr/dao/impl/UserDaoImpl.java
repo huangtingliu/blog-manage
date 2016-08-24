@@ -18,13 +18,19 @@ import com.huangtl.blogmgr.model.blog.User;
 public class UserDaoImpl extends MybatisDaoAdaptor<User> implements UserDao {
 
 	@Override
-	public User selectOne(String userId) {
-		if(StringUtils.isBlank(userId)){return null;}
-		UserSqlWhere where = new UserSqlWhere().fIdEqual(userId);
+	public User selectOne(String fId) {
+		if(StringUtils.isBlank(fId)){return null;}
+		UserSqlWhere where = new UserSqlWhere().fIdEqual(fId);
 		List<User> users = this.selectList(where);
 		if(users.isEmpty()){return null;}
 		if(users.size()>1){throw new IllegalStateException("存在非法数据，出现了多个用户");}
 		return users.get(0);
 	}
 
+	@Override
+	public int deleteBatch(String... fIds) {
+		if(fIds.length==0){return 0;}
+		UserSqlWhere where = new UserSqlWhere().fIdIn(fIds);
+		return this.delete(where);
+	}
 }

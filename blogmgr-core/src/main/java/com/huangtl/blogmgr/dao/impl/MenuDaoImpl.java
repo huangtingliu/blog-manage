@@ -14,12 +14,11 @@ import com.huangtl.blogmgr.model.extjs.TreeNode;
  * @author PraiseLord
  */
 public class MenuDaoImpl extends MybatisDaoAdaptor<Menu> implements MenuDao {
-	private final static String  MENU_TREE_NAMESPACE = "com.huangtl.blogmgr.model.blog.menu.Tree";
+	private final static String  MENU_TREE_NAMESPACE = "com.huangtl.blogmgr.model.blog.tree.Menu";
 
 	@Override
 	public List<TreeNode> selectTreeNodes(MenuSqlWhere where) {
 		return this.sqlSession.selectList(MENU_TREE_NAMESPACE+".selectTreeNodes", where);
 	}
-
 
 }

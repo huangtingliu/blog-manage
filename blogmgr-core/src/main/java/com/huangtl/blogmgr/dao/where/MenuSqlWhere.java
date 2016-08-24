@@ -22,6 +22,16 @@ public class MenuSqlWhere extends SqlWhere {
 	}
 	
 	/**
+	 * fId 存在于
+	 */
+	public MenuSqlWhere fIdIn(String... menuIds){
+		if(menuIds.length==0){return this;}
+		
+		this.put("fId_in", menuIds);
+		return this;
+	}
+	
+	/**
 	 * fParentId 等于
 	 * @param parentId
 	 * @return
@@ -50,6 +60,4 @@ public class MenuSqlWhere extends SqlWhere {
 		this.put("fUsability_eq", usability);
 		return this;
 	}
-	
-	
 }

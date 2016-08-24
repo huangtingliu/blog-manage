@@ -129,11 +129,4 @@
 		<include refid="where"/>
 	</delete>
 	
-	<delete id="deleteBatch" parameterType="list">
-		delete from mgr_userinfo where ui_Id in 
-		<foreach collection="list" open="(" item="id" separator="," close=")">
-			#{id}
-		</foreach>
-	</delete>
-	
 </mapper>

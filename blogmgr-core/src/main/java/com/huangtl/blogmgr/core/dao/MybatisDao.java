@@ -15,11 +15,6 @@ public interface MybatisDao<T> extends Dao<T> {
 	 * 删除,返回记录的影响数
 	 */
 	int delete(SqlWhere param);
-	
-	/**
-	 * 批量删除,返回记录的影响数
-	 */
-	int deleteBatch(List<String> entityIds);
 	/**
 	 * 修改,返回记录的影响数。如果查询参数为null或空，则不更新返回 0
 	 */

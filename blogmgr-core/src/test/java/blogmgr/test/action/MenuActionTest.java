@@ -26,7 +26,8 @@ public class MenuActionTest {
 
 	@Test
 	public void testGetList() {
-		fail("Not yet implemented");
+		Object menu = menuAction.getList("A001", null);
+		System.out.println(JSON.toJSONString(menu,true));
 	}
 
 	@Test

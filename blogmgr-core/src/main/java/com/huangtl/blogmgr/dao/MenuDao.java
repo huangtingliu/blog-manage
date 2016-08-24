@@ -14,5 +14,11 @@ import com.huangtl.blogmgr.model.extjs.TreeNode;
  * 查询参数默认使用 {@link com.huangtl.blogmgr.dao.where.MenuSqlWhere}
  */
 public interface MenuDao extends MybatisDao<Menu> {
+	
+	/**
+	 * 根据查询条件查询，并转成TreeNode模型结果返回
+	 * @param where {@link com.huangtl.blogmgr.dao.where.MenuSqlWhere}
+	 * @return
+	 */
 	List<TreeNode> selectTreeNodes(MenuSqlWhere where);
 }
