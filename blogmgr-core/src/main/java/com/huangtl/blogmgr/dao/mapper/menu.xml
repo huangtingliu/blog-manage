@@ -15,12 +15,12 @@
 		<result property="fDescr" column="mu_Descr"/>
 		<result property="fGlyph" column="mu_Glyph"/>
 		<result property="fExpand" column="mu_Expand"/>
-		<result property="fType" column="mu_Type"/>
+		<result property="fType" column="dic_Type"/>
 		<result property="fUsability" column="mu_Usability"/>
 	</resultMap>
 	
 	<sql id="field">
-		mu_Id as fId,mu_Name,mu_ParentId,mu_Url,mu_ViewClass,mu_Glyph,mu_Order as fOrder,mu_Type
+		mu_Id as fId,mu_Name,mu_ParentId,mu_Url,mu_ViewClass,mu_Glyph,mu_Order as fOrder,dic_Type
 		<if test="fUsability_show != null">,mu_Usability</if>
 		<if test="fIcon_show != null">,mu_Icon</if>
 		<if test="fExpand_show != null">,mu_Expand</if>
@@ -39,7 +39,7 @@
 				and mu_ParentId = #{fParentId_eq}
 			</if>
 			<if test="fType_eq != null">
-				and mu_Type = #{fType_eq}
+				and dic_Type = #{fType_eq}
 			</if>
 			<if test="fUsability_eq != null">
 				and mu_Usability = #{fUsability_eq}
@@ -64,7 +64,7 @@
 	
 	<insert id="insert" parameterType="com.huangtl.blogmgr.model.blog.Menu">
 		insert into mgr_menu(
-			mu_Id,mu_Name,mu_Type
+			mu_Id,mu_Name,dic_Type
 			<if test="fParentId !=null">,mu_ParentId</if>
 			<if test="fIcon !=null">,mu_Icon</if>
 			<if test="fUrl !=null">,mu_Url</if>
@@ -101,7 +101,7 @@
 			<if test="fIcon !=null ">mu_Icon = #{fIcon},</if>
 			<if test="fUrl !=null ">mu_Url = #{fUrl},</if>
 			<if test="fViewClass !=null ">mu_ViewClass = #{fViewClass},</if>
-			<if test="fType !=null ">mu_Type = #{fType},</if>
+			<if test="fType !=null ">dic_Type = #{fType},</if>
 			<if test="fGlyph !=null ">mu_Glyph = #{fGlyph},</if>
 			<if test="fOrder !=null ">mu_Order = #{fOrder},</if>
 			<if test="fUsability !=null ">mu_Usability = #{fUsability},</if>
@@ -119,7 +119,7 @@
 					<if test="menu.fIcon !=null ">mu_Icon = #{menu.fIcon},</if>
 					<if test="menu.fUrl !=null ">mu_Url = #{menu.fUrl},</if>
 					<if test="menu.fViewClass !=null ">mu_ViewClass = #{menu.fViewClass},</if>
-					<if test="menu.fType !=null ">mu_Type = #{menu.fType},</if>
+					<if test="menu.fType !=null ">dic_Type = #{menu.fType},</if>
 					<if test="menu.fGlyph !=null ">mu_Glyph = #{menu.fGlyph},</if>
 					<if test="menu.fOrder !=null ">mu_Order = #{menu.fOrder},</if>
 					<if test="menu.fUsability !=null ">mu_Usability = #{menu.fUsability},</if>

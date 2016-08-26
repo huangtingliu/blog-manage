@@ -23,7 +23,7 @@
 	<select id="selectTreeNodes" resultMap="map" parameterType="map">
 		select mu_Id,mu_Name,mu_ParentId,mu_Icon,
 		       mu_Order as fOrder,
-		       mu_Type as fType,
+		       dic_Type as fType,
 		       (select count(*) from mgr_menu b where b.mu_ParentId =a.mu_Id ) as childrenSize
 		from mgr_menu a
 		<include refid="com.huangtl.blogmgr.model.blog.Menu.where"/>
