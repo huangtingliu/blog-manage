@@ -16,12 +16,12 @@
 		<result property="fGlyph" column="mu_Glyph"/>
 		<result property="fExpand" column="mu_Expand"/>
 		<result property="fType" column="dic_Type"/>
-		<result property="fUsability" column="mu_Usability"/>
+		<result property="fUsability" column="dic_Usability"/>
 	</resultMap>
 	
 	<sql id="field">
 		mu_Id as fId,mu_Name,mu_ParentId,mu_Url,mu_ViewClass,mu_Glyph,mu_Order as fOrder,dic_Type
-		<if test="fUsability_show != null">,mu_Usability</if>
+		<if test="fUsability_show != null">,dic_Usability</if>
 		<if test="fIcon_show != null">,mu_Icon</if>
 		<if test="fExpand_show != null">,mu_Expand</if>
 		<if test="fDescr_show != null">,mu_Descr</if>
@@ -42,7 +42,7 @@
 				and dic_Type = #{fType_eq}
 			</if>
 			<if test="fUsability_eq != null">
-				and mu_Usability = #{fUsability_eq}
+				and dic_Usability = #{fUsability_eq}
 			</if>
 			<if test="fId_in !=null ">
 				and mu_Id in
@@ -73,7 +73,7 @@
 			<if test="fGlyph !=null">,mu_Glyph</if>
 			<if test="fExpand !=null">,mu_Expand</if>
 			<if test="fViewClass !=null">,mu_ViewClass</if>
-			<if test="fUsability !=null">,mu_Usability</if>
+			<if test="fUsability !=null">,dic_Usability</if>
 		) values(
 			#{fId},#{fName},#{fType}
 			<if test="fParentId !=null">,#{fParentId}</if>
@@ -104,7 +104,7 @@
 			<if test="fType !=null ">dic_Type = #{fType},</if>
 			<if test="fGlyph !=null ">mu_Glyph = #{fGlyph},</if>
 			<if test="fOrder !=null ">mu_Order = #{fOrder},</if>
-			<if test="fUsability !=null ">mu_Usability = #{fUsability},</if>
+			<if test="fUsability !=null ">dic_Usability = #{fUsability},</if>
 			<if test="fDescr !=null "> mu_Descr = #{fDescr}</if>
 		</trim>
 		<include refid="where"/>
@@ -122,7 +122,7 @@
 					<if test="menu.fType !=null ">dic_Type = #{menu.fType},</if>
 					<if test="menu.fGlyph !=null ">mu_Glyph = #{menu.fGlyph},</if>
 					<if test="menu.fOrder !=null ">mu_Order = #{menu.fOrder},</if>
-					<if test="menu.fUsability !=null ">mu_Usability = #{menu.fUsability},</if>
+					<if test="menu.fUsability !=null ">dic_Usability = #{menu.fUsability},</if>
 					<if test="menu.fDescr !=null "> mu_Descr = #{menu.fDescr}</if>
 				</trim>
 				where mu_Id = #{menu.fId}

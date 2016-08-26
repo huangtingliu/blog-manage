@@ -46,7 +46,7 @@ Ext.define('BlogMgr.view.menu.MenuGrid', {
 				header : '名称',
 				dataIndex : 'fName',
 				sortable : false
-			}, {
+			}, /*{
 				header : '图标',
 				dataIndex : 'fIcon',
 				sortable : false,
@@ -55,11 +55,16 @@ Ext.define('BlogMgr.view.menu.MenuGrid', {
 					if(Ext.isEmpty(val)){return "";}
 					return'<i class="iconfont '+val+'"><i/>';
 				}
-			}, {
+			},*/ {
 				header : 'glyph值',
 				dataIndex : 'fGlyph',
-				hidden : true,
-				sortable : false
+				sortable : false,
+				align : 'center',
+				renderer:function(val){
+					console.info(val);
+					if(Ext.isEmpty(val)){return "";}
+					return'<i class="iconfont">&#'+val+'</i>&nbsp;'+val;
+				}
 			}, {
 				header : '视图类',
 				dataIndex : 'fViewClass',
