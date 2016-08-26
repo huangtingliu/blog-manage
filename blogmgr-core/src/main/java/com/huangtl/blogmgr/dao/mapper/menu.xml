@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.huangtl.blogmgr.model.blog.Menu">
 
-	<resultMap id="map" type="com.huangtl.blogmgr.model.blog.Menu" >
+	<resultMap id="mapper" type="com.huangtl.blogmgr.model.blog.Menu" >
 		<id property="fId" column="mu_Id"/>
 		<result property="fName" column="mu_Name"/>
 		<result property="fParentId" column="mu_ParentId" />
@@ -18,6 +18,14 @@
 		<result property="fType" column="mu_Type"/>
 		<result property="fUsability" column="mu_Usability"/>
 	</resultMap>
+	
+	<sql id="field">
+		mu_Id as fId,mu_Name,mu_ParentId,mu_Url,mu_ViewClass,mu_Glyph,mu_Order as fOrder,mu_Type
+		<if test="fUsability_show != null">,mu_Usability</if>
+		<if test="fIcon_show != null">,mu_Icon</if>
+		<if test="fExpand_show != null">,mu_Expand</if>
+		<if test="fDescr_show != null">,mu_Descr</if>
+	</sql>
 	
 	<sql id="where">
 		 <trim prefix="where" prefixOverrides="and|or">
@@ -79,31 +87,11 @@
 			<if test="fUsability !=null">,#{fUsability}</if>
 		);
 	</insert>
-
-	<select id="selectList" resultMap="map" parameterType="map">
-		select mu_Id,mu_Name,mu_ParentId,mu_Icon,mu_Url,mu_Glyph,mu_ViewClass,mu_Usability
-		from mgr_menu
-		<include refid="where"/>
-		order by mu_Order
-	</select>
-	
-	<select id="selectCount"  resultType="long" parameterType="map">
-	  select count(mu_Id) from mgr_menu
-		<include refid="where"/>
-	</select>
-	
-	<select id="selectPaging" resultMap="map" parameterType="map">
-		select mu_Id as fId,mu_Name,mu_ParentId,mu_Icon,mu_Url,mu_ViewClass,mu_Type,mu_Glyph,mu_Order as fOrder,mu_Usability
-		from mgr_menu
-		<include refid="where"/>
-		<include refid="order"/>
-		limit #{startIndex},#{pageSize}
-	</select>
 	
 	<delete id="delete" parameterType="map">
 		delete from mgr_menu
 		<include refid="where"/>
-	</delete>
+	</delete>	
 	
 	<update id="update" parameterType="map" >
 		update mgr_menu  
@@ -117,6 +105,7 @@
 			<if test="fGlyph !=null ">mu_Glyph = #{fGlyph},</if>
 			<if test="fOrder !=null ">mu_Order = #{fOrder},</if>
 			<if test="fUsability !=null ">mu_Usability = #{fUsability},</if>
+			<if test="fDescr !=null "> mu_Descr = #{fDescr}</if>
 		</trim>
 		<include refid="where"/>
 	</update>
@@ -134,9 +123,32 @@
 					<if test="menu.fGlyph !=null ">mu_Glyph = #{menu.fGlyph},</if>
 					<if test="menu.fOrder !=null ">mu_Order = #{menu.fOrder},</if>
 					<if test="menu.fUsability !=null ">mu_Usability = #{menu.fUsability},</if>
+					<if test="menu.fDescr !=null "> mu_Descr = #{menu.fDescr}</if>
 				</trim>
 				where mu_Id = #{menu.fId}
 		 </foreach>
 	</update>
+	
+	<select id="selectCount"  resultType="long" parameterType="map">
+	  select count(mu_Id) from mgr_menu
+		<include refid="where"/>
+	</select>
+	
+	<select id="selectList" resultMap="mapper" parameterType="map">
+		select 
+			<include refid="field"/>
+		from mgr_menu
+			<include refid="where"/>
+		order by mu_Order
+	</select>
+	
+	<select id="selectPaging" resultMap="mapper" parameterType="map">
+		select 
+			<include refid="field"/>
+		from mgr_menu
+			<include refid="where"/>
+			<include refid="order"/>
+		limit #{startIndex},#{pageSize}
+	</select>
 	
 </mapper>

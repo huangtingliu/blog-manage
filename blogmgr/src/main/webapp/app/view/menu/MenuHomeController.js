@@ -40,8 +40,7 @@ Ext.define('BlogMgr.view.menu.MenuHomeController', {
 							});
 					return;
 				}
-				//表单数据回填
-				var editRecored = menuPagingStore.getById(ids[ids.length-1]);
+				
 				var menuAddDialog = Ext.create('BlogMgr.view.menu.MenuMgrDialog',{
 					viewModel:{
 						data:{
@@ -50,6 +49,9 @@ Ext.define('BlogMgr.view.menu.MenuHomeController', {
 						}
 					}
 				}).show();
+				
+				//表单数据回填
+				var editRecored = menuPagingStore.getById(ids[ids.length-1]);
 				var menuAddForm = menuAddDialog.getComponent('menuMgrForm');
 				menuAddForm.loadRecord(editRecored);
 				var menufId = editRecored.get("fId");

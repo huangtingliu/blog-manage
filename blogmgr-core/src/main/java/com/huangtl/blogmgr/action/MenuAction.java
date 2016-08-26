@@ -51,13 +51,13 @@ public class MenuAction extends BlogMgrAction {
 	 *  </blockquote>
 	 * @param sort 排序方案 ,允许null<br>
 	 * <blockquote>
+	 *  可排序字段：fId,fOrder
 	 *  格式   sort:[{"property":"fCreateDate","direction":"ASC\DESC"}]
 	 * </blockquote>
 	 * @return
 	 * <pre>
 	  {message: "获取成功个数 15", total: 0, menulist: [{
 			"fGlyph":59012,
-			"fIcon":"fa-bar-chart",
 			"fId":"B0010001",
 			"fName":"用户统计",
 			"fOrder":1,
@@ -91,7 +91,7 @@ public class MenuAction extends BlogMgrAction {
 			}
 		}
 		
-		this.menuService.getDao().selectPaging(whereParam, page);
+		this.menuService.getDao().selectPaging(whereParam, page,"fUsability");
 		
 		JSONObject data = new JSONObject();
 		data.put("menulist", page.getPageContent());
@@ -108,11 +108,12 @@ public class MenuAction extends BlogMgrAction {
 	 * @return
 	 * <pre>
 	 	{message: "获取成功个数 15", menulist: [{
-			"fGlyph":58901,
-			"fIcon":"fa-users",
-			"fId":"A0010001",
-			"fName":"博客用户",
-			"fParentId":"A001",
+			"fGlyph":59012,
+			"fId":"B0010001",
+			"fName":"用户统计",
+			"fOrder":1,
+			"fParentId":"B001",
+			"fType":"NAVIGATOR",
 			"fUrl":"",
 			"fUsability":"ENABLE",
 			"fViewClass":""
@@ -125,7 +126,7 @@ public class MenuAction extends BlogMgrAction {
 		SqlWhere param = new MenuSqlWhere()
 						  .fParentIdEqual(parentId)
 						  .fIdEqual(menuId);
-		List<Menu> menus = this.menuService.getDao().selectList(param);
+		List<Menu> menus = this.menuService.getDao().selectList(param,"fUsability");
 		
 		JSONObject data = new JSONObject();
 		data.put("menulist", menus);
@@ -173,13 +174,16 @@ public class MenuAction extends BlogMgrAction {
 	 * @return
 	 * <pre>
 	   {
-			"fGlyph":58917,
-			"fIcon":"fa-tencent-weibo",
-			"fId":"A001",
-			"fName":"",
-			"fParentId":"",
+			"fGlyph":59012,
+			"fIcon":"fa-bar-chart",
+			"fId":"B0010001",
+			"fName":"用户统计",
+			"fOrder":1,
+			"fParentId":"B001",
+			"fType":"NAVIGATOR",
 			"fUrl":"",
 			"fUsability":"ENABLE",
+			"fDescr":"博客前台管理",
 			"fViewClass":""
 		}
 	<pre>
@@ -188,7 +192,7 @@ public class MenuAction extends BlogMgrAction {
 	@ResponseBody
 	public Object getOne(String menuId){
 		SqlWhere param = new MenuSqlWhere().fIdEqual(menuId);
-		List<Menu> menus = this.menuService.getDao().selectList(param);
+		List<Menu> menus = this.menuService.getDao().selectList(param,"fUsability","fIcon","fDescr");
 		
 		if(CollectionUtils.isEmpty(menus)){return "{}";}
 		
@@ -222,7 +226,7 @@ public class MenuAction extends BlogMgrAction {
 	 * 菜单修改，必须指定fId
 	 * 规则：<p>
 	 * <li>如果提交的参数不为空null，那么就更新该字段，否则不更新
-	 * <li>可供修改改字段：fName,fParentId,fIcon,fUrl,fViewClass,fType,fGlyph,fOrder,fUsability
+	 * <li>可供修改改字段：fName,fParentId,fIcon,fUrl,fViewClass,fType,fGlyph,fOrder,fUsability,fDescr
 	 * @param menu
 	 * @return
 	 */

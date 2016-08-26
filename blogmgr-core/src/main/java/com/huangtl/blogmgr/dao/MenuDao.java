@@ -8,10 +8,15 @@ import com.huangtl.blogmgr.model.blog.Menu;
 import com.huangtl.blogmgr.model.extjs.TreeNode;
 
 /**
- * 菜单持久化接口
+ * 菜单持久化接口<br>
+ * <blockquote>
+ * 查询参数:<b>{@link com.huangtl.blogmgr.dao.where.MenuSqlWhere}</b><br><br>
+ * 查询结果:<br>
+ * <li>固定字段 --【fId,fName,fParentId,fUrl,fViewClass,fType,fGlyph,fOrder】
+ * <li>可选字段--【fIcon,fExpand,fDescr,fUsability】
+ * </blockquote>
  * @date 2016年6月30日
  * @author PraiseLord
- * 查询参数默认使用 {@link com.huangtl.blogmgr.dao.where.MenuSqlWhere}
  */
 public interface MenuDao extends MybatisDao<Menu> {
 	

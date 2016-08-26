@@ -21,16 +21,17 @@ import com.huangtl.blogmgr.dao.where.SqlWhere;
 import com.huangtl.blogmgr.model.common.Page;
 
 /**
- * 支持使用mybatis做orm的持久化
+ * 基于 mybatis 框架 持久化的通用操作 基础实现
  * @author PraiseLord
  * @date 2016年3月9日
  */
 public abstract class MybatisDaoAdaptor<T> implements MybatisDao<T> {
 	protected  Logger logger = LoggerFactory.getLogger(getClass());
+	//实体字段解析工具
 	private static final PropertyUtilsBean PROPERTY_UTIL = new PropertyUtilsBean();
 	
-	protected SqlSession sqlSession;
-	protected  String nameSpace;
+	protected SqlSession sqlSession;	//sql连接会话
+	protected  String nameSpace;		//mybatis 命名空间
 	
 	public MybatisDaoAdaptor() {
 		super();
@@ -105,7 +106,7 @@ public abstract class MybatisDaoAdaptor<T> implements MybatisDao<T> {
 	}
 	
 	/*
-	 * 新增
+	 * 插入一条数据
 	 */
 	@Override
 	public int insert(T entity){
@@ -113,6 +114,15 @@ public abstract class MybatisDaoAdaptor<T> implements MybatisDao<T> {
 		return this.sqlSession.insert(nameSpace+".insert", entity);
 	}
 	
+	/*
+	 *批量插入数据
+	 */
+	@Override
+	public int insertBatch(List<T> entitys) {
+		if(entitys==null || entitys.isEmpty()){return 0;}
+		return this.sqlSession.insert(nameSpace+".insertBatch", entitys);
+	}
+
 	/*
 	 * 删除
 	 */
@@ -148,8 +158,11 @@ public abstract class MybatisDaoAdaptor<T> implements MybatisDao<T> {
 
 	//根据查询参数查询
 	@Override
-	public List<T> selectList(SqlWhere param){
+	public List<T> selectList(SqlWhere param,String ... fields){
 		if(param==null){param = SqlWhere.blankWhere();}
+		for (String field : fields) {
+			param.put(field+"_show", true);
+		}
 		List<T> lists = this.sqlSession.selectList(nameSpace+".selectList",param);
 		return lists;
 	}
@@ -163,13 +176,17 @@ public abstract class MybatisDaoAdaptor<T> implements MybatisDao<T> {
 
 	//分页查询
 	@Override
-	public int selectPaging(SqlWhere param, Page<T> page) {
+	public int selectPaging(SqlWhere param, Page<T> page,String... fields) {
 		if (param==null ) {param = SqlWhere.blankWhere();}
 		page.setTotalRecNum(selectCount(param));
 		param.put("startIndex", page.getStartIndex()-1);
 		param.put("endIndex", page.getEndIndex()-1);
 		param.put("pageSize", page.getPageSize());
 		param.put("sorts", page.getSorts());
+		
+		for (String field : fields) {
+			param.put(field+"_app", true);
+		}
 		List<T> lists = this.sqlSession.selectList(nameSpace+".selectPaging",param);
 		page.setPageContent(lists);
 		return lists==null?0:lists.size();

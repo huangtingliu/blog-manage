@@ -26,7 +26,7 @@ public class Page<T> {
 	protected int pageSize;  //每页几条
 	protected long total;  //共有多少条记录
 	protected Collection<T> pageContent; //该页的数据(记录明细)
-	protected Map<String, Direction> sorts;	
+	protected Map<String, Direction> sorts;	//排序规则
         
 	public Page() {
         this(1,15); 	

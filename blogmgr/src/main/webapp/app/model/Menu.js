@@ -14,9 +14,9 @@ Ext.define('BlogMgr.model.Menu',{
         {name: 'fGlyph', type: 'int'},
         {name: 'fOrder', type: 'int'},
         {name: 'fType', type: 'string'},
-        {name: 'fUsability', type: 'string'}
-       // {name: 'fDescr', type: 'string'},
-      //  {name: 'fExpand', type: 'int'}
+        {name: 'fUsability', type: 'string'},
+        {name: 'fDescr', type: 'string'},
+        {name: 'fExpand', type: 'int'}
         
     ],
     validators: {

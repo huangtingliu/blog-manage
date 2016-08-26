@@ -28,7 +28,7 @@ public interface MenuService {
 	
 	/**
 	 * 修改一个菜单<br>
-	 * 可修改字段：fName,fParentId,fIcon,fUrl,fViewClass,fType,fGlyph,fOrder,fUsability
+	 * 可修改字段：fName,fParentId,fIcon,fUrl,fViewClass,fType,fGlyph,fOrder,fUsability,fDescr
 	 * @param menu 如果menu字段不为null,那么将更新该字段。否则不更新
 	 * @param where 更新条件
 	 * @return Message
@@ -37,6 +37,7 @@ public interface MenuService {
 	
 	/**
 	 * 根据fId批量的修改菜单
+	 * 可修改字段：参见 editMenu
 	 * @param menus
 	 * @return 影响的记录数
 	 */
