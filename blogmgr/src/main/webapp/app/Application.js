@@ -28,7 +28,10 @@ Ext.application({
 					'BlogMgr.view.menu.MenuHome']);
 			},
 			launch : function(profile) {
-				// 附加额外的属性
+				/**
+				 * 获取完整路径
+				 * BlogMgr.url(url,param);
+				 */
 				Ext.applyIf(BlogMgr, {
 							url : function(url, param) {
 								url = "http://localhost:8080/blogmgr/" + url; // 动态获取首地址
@@ -42,6 +45,7 @@ Ext.application({
 						});
 
 				Ext.create('Ext.container.Viewport', {
+							id:'application',
 							layout : 'border',
 							items : [{
 										id : 'home-header',

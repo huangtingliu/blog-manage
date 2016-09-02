@@ -1,7 +1,7 @@
 /**
  * 菜单添加表单
  */
-Ext.define('BlogMgr.view.menu.MenuMgrForm', {
+Ext.define('BlogMgr.view.menu.mgr.MenuMgrForm', {
 			itemId : 'menuMgrForm',
 			extend : 'Ext.form.Panel',
 			alias : ['widget.menumgr_form'],
@@ -22,8 +22,11 @@ Ext.define('BlogMgr.view.menu.MenuMgrForm', {
 							allowBlank : false
 						},
 						items : [{
-							fieldLabel : '父级菜单',
+							fieldLabel : '上级菜单',
 							name:'fParentId',
+							bind:{
+								readOnly :'{form.fParentIdReadOnly}'
+							},
 							xtype:'treepicker',
 							emptyText:'请选择',
 							store:Ext.getStore('menuTreeStore'),
@@ -50,9 +53,12 @@ Ext.define('BlogMgr.view.menu.MenuMgrForm', {
 								name:'fId',
 								allowBlank : false,
 								width : '29.7%',
+								bind:{
+									editable : '{form.fIdEditable}'
+								},
 								emptyText:'菜单代码',
 								maxLength:4,
-								vtype:'alphanum',
+								vtype : 'alphanum',
 								getSubmitValue:function(){	
 									var me = this;
 									return Ext.callback('fIdSubmitValue', me.scope, [me.getValue()], 0,me);
@@ -69,6 +75,7 @@ Ext.define('BlogMgr.view.menu.MenuMgrForm', {
 							fieldLabel : '菜单排序',
 							name:'fOrder',
 							xtype:'numberfield',
+							value:0,
 							minValue :0,
 							maxValue :100,
 							allowDecimals:false,

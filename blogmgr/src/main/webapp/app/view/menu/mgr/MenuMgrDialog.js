@@ -1,19 +1,24 @@
 /**
  * 菜单添加对话窗口
  */
-Ext.define('BlogMgr.view.menu.MenuMgrDialog',{
+Ext.define('BlogMgr.view.menu.mgr.MenuMgrDialog',{
 			id : 'menuMgrDialog',
-			uses:['BlogMgr.view.menu.MenuMgrForm',
-				  'Ext.ux.TreePicker',
-				  'BlogMgr.view.menu.MenuMgrDialogController'],
+			uses:['Ext.ux.TreePicker',
+				  'BlogMgr.view.menu.mgr.MenuMgrForm',
+				  'BlogMgr.view.menu.mgr.MenuEditDialogModel',
+				  'BlogMgr.view.menu.mgr.MenuAddDialogModel',
+				  'BlogMgr.view.menu.mgr.MenuMgrDialogController'],
 			extend : 'Ext.window.Window',
 			alias : ['widget.menumgr_dialog'],
+			controller:'menumgr_dialog',
+			viewModel : {
+				type : 'menu_add_dialog'
+			},
 			layout : 'fit',
 			bind:{
 				title : '{title}'
 			},
 			maximizable : true, // 最大化
-			controller:'menumgr_dialog',
 			bodyStyle : 'padding : 2px 2px 0',
 			shadowOffset : 30, // 投影效果
 			modal : true, // 模态

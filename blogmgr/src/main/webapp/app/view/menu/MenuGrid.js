@@ -61,7 +61,6 @@ Ext.define('BlogMgr.view.menu.MenuGrid', {
 				sortable : false,
 				align : 'center',
 				renderer:function(val){
-					console.info(val);
 					if(Ext.isEmpty(val)){return "";}
 					return'<i class="iconfont">&#'+val+'</i>&nbsp;'+val;
 				}

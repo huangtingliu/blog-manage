@@ -46,5 +46,15 @@ public class MenuServiceImpl implements MenuService {
 		this.menuDao = menuDao;
 	}
 
+	@Override
+	public Message deleteMenu(String... fId) {
+		if(fId==null || fId.length==0){return Message.error("无效参数");}
+		
+		MenuSqlWhere where = new MenuSqlWhere().fIdIn(fId);
+		int effectRow = this.menuDao.delete(where);
+		
+		return Message.get(effectRow, "删除成功", "删除失败");
+	}
+
 	
 }

@@ -22,6 +22,10 @@ Ext.define('BlogMgr.model.User',{
         fAccount: 'presence',
         fName: 'presence',
         fStatus:'presence'
+    },
+    proxy:{
+    	type:'ajax',
+    	url:'/blogmgr/user/get.data'
     }
 })
 

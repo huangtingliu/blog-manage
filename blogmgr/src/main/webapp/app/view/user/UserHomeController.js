@@ -46,7 +46,7 @@ Ext.define('BlogMgr.view.user.UserHomeController', {
 									url : '/blogmgr/user/delete.do',
 									method : 'POST',
 									params : {
-										userIds : ids.join(',')
+										id : ids.join(',')
 									},
 									callback : function(options, isSuccess,response) {
 										_this.mask.hide();
@@ -67,7 +67,6 @@ Ext.define('BlogMgr.view.user.UserHomeController', {
 									}
 
 								});
-
 					}
 				});
 	},

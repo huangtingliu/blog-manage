@@ -1,7 +1,7 @@
 /**
  * 菜单管理对话窗口
  */
-Ext.define('BlogMgr.view.menu.MenuMgrDialogController', {
+Ext.define('BlogMgr.view.menu.mgr.MenuMgrDialogController', {
 			extend : 'Ext.app.ViewController',
 			alias : 'controller.menumgr_dialog',
 			init : function() {
@@ -16,14 +16,24 @@ Ext.define('BlogMgr.view.menu.MenuMgrDialogController', {
 			userAddSubmit : function() { 
 				var me = this;
 				var form = this.getView().getComponent('menuMgrForm');
+				
 				form.submit({
 							url : '/blogmgr/menu/add.do',
 							method : 'POST',
 							submitEmptyText:false,
 							success : function(form, action) {
 								Ext.toast(action.result);
+								var menuId = form.findField("fId").getSubmitData().fId;
+								
+								BlogMgr.model.Menu.load(menuId,{
+									callback:function(rec,opt,success){
+										Ext.getStore('menuPagingStore').add(rec);
+										//TODO 界面更新
+										//TODO 树型下拉选择器，与左边的数据冲突
+									}
+								});
+								
 								me.closeDialog();
-								Ext.getStore('menuPagingStore').reload(); 
 							},
 							failure : function(form, action) {
 								if(action.result){
@@ -39,14 +49,16 @@ Ext.define('BlogMgr.view.menu.MenuMgrDialogController', {
 			userEditSubmit:function(){
 				var me = this;
 				var form = this.getView().getComponent('menuMgrForm');
+				//TODO 无法只提交修改的部分
 				form.submit({
 							url : '/blogmgr/menu/edit.do',
 							method : 'POST',
 							submitEmptyText:false,
 							success : function(form, action) {
 								Ext.toast(action.result);
+								form.getRecord().load();
 								me.closeDialog();
-								Ext.getStore('menuPagingStore').reload(); 
+								//TODO 界面无法完全刷新
 							},
 							failure : function(form, action) {
 								if(action.result){

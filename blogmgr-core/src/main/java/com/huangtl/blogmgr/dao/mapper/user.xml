@@ -20,6 +20,18 @@
 		<result property="fEditDate" column="ui_EditDate"/>
 	</resultMap>
 	
+	<sql id="field">
+		ui_Id,ui_Name,ui_Account,dic_Status,ui_Email,ui_Phone
+		<if test="fPassword_show">,ui_Password</if>
+		<if test="fGender_show">,dic_Gender</if>
+		<if test="fPinYin_show">,ui_PinYin</if>
+		<if test="fDescr_show">,ui_Descr</if>
+		<if test="fEditor_show">,ui_Editor</if>
+		<if test="fEditDate_show">,ui_EditDate as fEditDate</if>
+		<if test="fCreater_show">,ui_Creater</if>
+		<if test="fCreateDate_show">,ui_CreateDate as fCreateDate</if>
+	</sql>
+	
 	<sql id="where">
 		 <trim prefix="where" prefixOverrides="and|or">
 		 	<if test="defaultWhere!=null and defaultWhere">
@@ -123,29 +135,29 @@
 
 	<select id="selectList" resultMap="map" parameterType="map">
 		select 
-			ui_Id,ui_Name,ui_Account,dic_Status,ui_Creater,ui_CreateDate,ui_Email,ui_Phone,dic_Gender
+			<include refid="field"/>
 		from mgr_userinfo
-		<include refid="where"/>
+			<include refid="where"/>
 	</select>
 	
 	<select id="selectCount"  resultType="long" parameterType="map">
-	  select count(ui_Id) from mgr_userinfo
+	  select count(ui_Id) 
+	  from mgr_userinfo
 		<include refid="where"/>
 	</select>
 	
 	<select id="selectPaging" resultMap="map" parameterType="map">
 		select 
-			ui_Id,ui_Name,ui_Account,dic_Status,ui_Creater,ui_CreateDate as fCreateDate,
-			ui_Email,ui_Phone,dic_Gender
+			<include refid="field"/>
 		from mgr_userinfo
-		<include refid="where"/>
-		<include refid="order"/>
+			<include refid="where"/>
+			<include refid="order"/>
 		limit #{startIndex},#{pageSize}
 	</select>
 	
 	<delete id="delete" parameterType="map">
 		delete from mgr_userinfo
-		<include refid="where"/>
+			<include refid="where"/>
 	</delete>
 	
 </mapper>

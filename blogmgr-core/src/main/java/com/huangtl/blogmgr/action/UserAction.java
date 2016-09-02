@@ -62,7 +62,17 @@ public class UserAction extends BlogMgrAction {
 	 * {
 	 * 		message: "获取成功个数 15",
 	 * 		total: 48,
-	 * 		userlist: […],
+	 * 		userlist: [{
+			"fAccount":"ouiogyui",
+			"fEmail":"",
+			"fId":"09dbccec890a4fa8bcd6b71f360551f4",
+			"fName":"uoyui",
+			"fPhone":"",
+			"fCreateDate":'',
+			"fCreater":'root',
+			"fGender":'MALE',
+			"fStatus":"ENABLE"
+		}],
 	 * 		success: true
 	 * }
 	 * </pre>
@@ -72,7 +82,7 @@ public class UserAction extends BlogMgrAction {
 	public Object getPaging(Integer pageNo,Integer pageSize,
 			FilterCollection filter,SortCollection sort) {
 		
-		Page<User> page = new Page<>(pageSize, pageNo);
+		Page<User> page = new Page<>(pageNo, pageSize);
 		if(sort.isEmpty()){
 			page.addSort("fCreateDate", Direction.DESC);
 		}else{
@@ -86,7 +96,7 @@ public class UserAction extends BlogMgrAction {
 			whereParam.putFilter(f);
 		}
 		
-		this.userService.getDao().selectPaging(whereParam, page);
+		this.userService.getDao().selectPaging(whereParam, page,"fCreateDate","fGender","fCreater");
 		
 		JSONObject data = new JSONObject();
 		data.put("userlist", page.getPageContent());
@@ -98,15 +108,12 @@ public class UserAction extends BlogMgrAction {
 	
 	/**
 	 * 单用户查询
-	 * @param userId 用户id
+	 * @param id 用户id
 	 * @return
 	 * <pre>
 		{
 			"fAccount":"ouiogyui",
-			"fCreateDate":1469447144000,
-			"fCreater":"root",
 			"fEmail":"",
-			"fGender":"MALE",
 			"fId":"09dbccec890a4fa8bcd6b71f360551f4",
 			"fName":"uoyui",
 			"fPhone":"",
@@ -116,10 +123,10 @@ public class UserAction extends BlogMgrAction {
 	 */
 	@RequestMapping("get.data")
 	@ResponseBody
-	public Object getUser(String userId){
+	public Object getUser(String id){
 		UserSqlWhere whereParam = new UserSqlWhere();
-		whereParam.fIdEqual(userId);
-		User user = this.userService.getDao().selectOne(userId);
+		whereParam.fIdEqual(id);
+		User user = this.userService.getDao().selectOne(id);
 		if(user==null){return "{}";}
 		return user;
 	}
@@ -169,17 +176,17 @@ public class UserAction extends BlogMgrAction {
 	
 	/**
 	 * 删除多名用户
-	 * @param userIds  格式： 'id,id,id,...'
+	 * @param id 用户id  格式： 'id,id,id,...'
 	 * @return 删除的人数
 	 */
 	@RequestMapping("delete.do")
 	@ResponseBody
-	public Object deleteUser(String userIds){
-		if(StringUtils.isBlank(userIds)){return Message.error("无效参数!");}
+	public Object deleteUser(String id){
+		if(StringUtils.isBlank(id)){return Message.error("无效参数!");}
 		
 		Message message = null;
 		 try {
-			 message = this.userService.deleteUser(userIds.split(","));
+			 message = this.userService.deleteUser(id.split(","));
 		} catch (Exception e) {
 			logger.error("用户删除失败",e);
 			message = Message.exception("用户删除失败");

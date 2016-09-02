@@ -13,6 +13,7 @@ import java.util.regex.Pattern;
 import org.apache.commons.beanutils.BeanIntrospector;
 import org.apache.commons.beanutils.IntrospectionContext;
 import org.apache.commons.beanutils.PropertyUtilsBean;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -185,7 +186,8 @@ public abstract class MybatisDaoAdaptor<T> implements MybatisDao<T> {
 		param.put("sorts", page.getSorts());
 		
 		for (String field : fields) {
-			param.put(field+"_app", true);
+			if(StringUtils.isBlank(field)){continue;}
+			param.put(field+"_show", true);
 		}
 		List<T> lists = this.sqlSession.selectList(nameSpace+".selectPaging",param);
 		page.setPageContent(lists);

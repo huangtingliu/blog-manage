@@ -22,5 +22,9 @@ Ext.define('BlogMgr.model.Menu',{
     validators: {
         fId: 'presence',
         fName: 'presence'
+    },
+    proxy:{
+    	type:'ajax',
+    	url:'/blogmgr/menu/get.data'
     }
 });

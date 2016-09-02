@@ -69,8 +69,8 @@ public class MenuAction extends BlogMgrAction {
 		}], success: true}
 	 * </pre>
 	 */
-	@RequestMapping("paging.data")
 	@ResponseBody
+	@RequestMapping("paging.data")
 	public Object getPaging(Integer pageNo,Integer pageSize,
 			FilterCollection filter,SortCollection sort) {
 		
@@ -120,8 +120,8 @@ public class MenuAction extends BlogMgrAction {
 		}], success: true}
 	 * </pre>
 	 */
-	@RequestMapping("list.data")
 	@ResponseBody
+	@RequestMapping("list.data")
 	public Object getList(String parentId,String menuId) {
 		SqlWhere param = new MenuSqlWhere()
 						  .fParentIdEqual(parentId)
@@ -156,8 +156,8 @@ public class MenuAction extends BlogMgrAction {
 		},{...}]
 	 * </pre>
 	 */
-	@RequestMapping("tree.data")
 	@ResponseBody
+	@RequestMapping("tree.data")
 	public Object getTreeNode(String parentId,String nodeId){
 		if("root".equals(parentId)){parentId="";}
 		
@@ -170,7 +170,7 @@ public class MenuAction extends BlogMgrAction {
 	
 	/**
 	 * 获取单个菜单
-	 * @param menuId	菜单id
+	 * @param id	菜单id
 	 * @return
 	 * <pre>
 	   {
@@ -188,10 +188,10 @@ public class MenuAction extends BlogMgrAction {
 		}
 	<pre>
 	 */
-	@RequestMapping("get.data")
 	@ResponseBody
-	public Object getOne(String menuId){
-		SqlWhere param = new MenuSqlWhere().fIdEqual(menuId);
+	@RequestMapping("get.data")
+	public Object getOne(String id){
+		SqlWhere param = new MenuSqlWhere().fIdEqual(id);
 		List<Menu> menus = this.menuService.getDao().selectList(param,"fUsability","fIcon","fDescr");
 		
 		if(CollectionUtils.isEmpty(menus)){return "{}";}
@@ -206,8 +206,8 @@ public class MenuAction extends BlogMgrAction {
 	 * @param menu
 	 * @return
 	 */
-	@RequestMapping("add.do")
 	@ResponseBody
+	@RequestMapping("add.do")
 	public Object addMenu(Menu menu){
 		 Message message = menu.checkValidity();
 		if(message.isError()){return message;}
@@ -230,8 +230,8 @@ public class MenuAction extends BlogMgrAction {
 	 * @param menu
 	 * @return
 	 */
-	@RequestMapping("edit.do")
 	@ResponseBody
+	@RequestMapping("edit.do")
 	public Object editMenu(Menu menu){
 		if(menu==null || StringUtils.isBlank(menu.getfId())){return Message.error("fId未指定");}
 		Message message = menu.checkValidity(true);
@@ -260,6 +260,8 @@ public class MenuAction extends BlogMgrAction {
 	 <pre>
 	 * @return
 	 */
+	@ResponseBody
+	@RequestMapping("editbatch.do")
 	public Object editBatchMenu(@Json List<Menu> menus){
 		Message message = null;
 		if(CollectionUtils.isEmpty(menus)){return Message.error("无效参数");}
@@ -274,6 +276,27 @@ public class MenuAction extends BlogMgrAction {
 		} catch (Exception e) {
 			message = Message.exception("菜单失败");
 			logger.error("菜单修改失败",e);
+		}
+		
+		return message;
+	}
+	
+	/**
+	 * 删除菜单<br>
+	 * @param id 菜单id ,格式：【id,id,id,...】
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("delete.do")
+	public Object deleteMenu(String id){
+		Message message = null;
+		if(StringUtils.isBlank(id)){return Message.error("无效参数");}
+		
+		try {
+			message = this.menuService.deleteMenu(id.split(","));
+		} catch (Exception e) {
+			message = Message.exception("菜单删除失败");
+			logger.error("菜单删除失败",e);
 		}
 		
 		return message;

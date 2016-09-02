@@ -43,4 +43,11 @@ public interface MenuService {
 	 */
 	public Message editBatchMenu(List<Menu> menus);
 	
+	/**
+	 * 根据fId删除菜单
+	 * @param fId
+	 * @return
+	 */
+	public Message deleteMenu(String... fId);
+	
 }
