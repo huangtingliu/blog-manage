@@ -35,7 +35,7 @@ Ext.application({
 				Ext.applyIf(BlogMgr, {
 							url : function(url, param) {
 								url = "http://localhost:8080/blogmgr/" + url; // 动态获取首地址
-																				// TODO
+																				// TODO 动态获取
 								if (Ext.isObject(param)) {
 									param = Ext.Object.toQueryString(param);
 								}
@@ -43,7 +43,8 @@ Ext.application({
 								return result;
 							}
 						});
-
+				
+						
 				Ext.create('Ext.container.Viewport', {
 							id:'application',
 							layout : 'border',

@@ -14,5 +14,5 @@
 	<script type="text/javascript" src="framework/Ext/ext-locale-zh_CN.js"></script>
 	<script type="text/javascript" src="app/Application.js?a=1"></script>  
 </head>
-<body></body>
+	<body></body>
 </html>
