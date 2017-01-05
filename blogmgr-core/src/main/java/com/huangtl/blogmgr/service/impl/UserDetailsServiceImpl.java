@@ -26,6 +26,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 	private final Logger logger = LoggerFactory.getLogger(UserDetailsServiceImpl.class);
 	
+	
 	private UserDao userDao;
 	
 	@Override
@@ -36,7 +37,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		}
 		
 		SqlWhere where = new UserSqlWhere().fAccountEqual(arg0);
-		List<User> users =  userDao.selectList(where);
+		List<User> users =  userDao.selectList(where,"fPassword");
 		
 		if(users.isEmpty()){
 			 throw new UsernameNotFoundException("没有找到用户为:"+arg0+"用户!");

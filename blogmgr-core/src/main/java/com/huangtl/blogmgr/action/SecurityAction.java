@@ -25,6 +25,16 @@ public class SecurityAction extends BlogMgrAction  {
 		ModelAndView view = new ModelAndView("login");
 		return view;
 	}
+	
+	/**
+	 * 无权限页面
+	 * @return
+	 */
+	@RequestMapping("noauth.htm")
+	private ModelAndView accessDenied(){
+		ModelAndView view = new ModelAndView("noauth");
+		return view;
+	}
 
 	
 }

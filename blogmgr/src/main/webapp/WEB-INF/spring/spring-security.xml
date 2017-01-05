@@ -21,8 +21,8 @@
 		IS_AUTHENTICATED_FULLY 允许登录用户进入
 		IS_AUTHENTICATED_REMEMBERED 允许登录用户和rememberMe用户进入
      -->  
-    <sec:http auto-config="true" use-expressions="true" >  
-        <sec:intercept-url pattern="/**" access="hasRole('ROLE_USER')"/>
+    <sec:http auto-config="true" use-expressions="true"  >  
+        <sec:intercept-url pattern="/**" access="hasRole('USER')"/>
         
         <sec:form-login login-page="/login.htm" 
         	password-parameter="password" username-parameter="account"
@@ -31,9 +31,12 @@
         	always-use-default-target="false" 
         	login-processing-url="/login.do" />
         
-         <sec:logout invalidate-session="true"  success-handler-ref="logoutSuccessHandlerImpl" logout-url="/logout.do"  /> 
+        	 <sec:logout invalidate-session="true"  success-handler-ref="logoutSuccessHandlerImpl" logout-url="/logout.do"  /> 
         
-        <sec:csrf disabled="true" /> 
+        	 <sec:access-denied-handler ref="accessDeniedHandlerImpl"/>
+         
+        
+        	<sec:csrf disabled="true" /> 
         
         <!-- <sec:session-management session-authentication-error-url="/frame.expired" >  
             max-sessions只容许一个账号登录，error-if-maximum-exceeded 后面账号登录后踢出前一个账号，expired-url session过期跳转界面  
@@ -43,25 +46,19 @@
       
  	<bean id="loginStatusHandler" class="com.huangtl.blogmgr.handler.LoginStatusHandler"></bean>
  	<bean id="logoutSuccessHandlerImpl" class="com.huangtl.blogmgr.handler.LogoutSuccessHandlerImpl"></bean>
+ 	<bean id="accessDeniedHandlerImpl" class="com.huangtl.blogmgr.handler.AccessDeniedHandlerImpl"></bean>
  	
-    <!-- 配置用户管理 -->
-    <sec:authentication-manager>
-        <sec:authentication-provider>
-            <sec:user-service >
-                <sec:user name="admin" password="admin" authorities="ROLE_USER"/>  
-            </sec:user-service>
-        </sec:authentication-provider>
-    </sec:authentication-manager>
+ 	
+    <!-- 配置用户管理  -->
+     <sec:authentication-manager>
+     	<sec:authentication-provider user-service-ref="userDetailsServiceImpl">
+     		<sec:password-encoder hash="md5" />
+     	</sec:authentication-provider>
+     </sec:authentication-manager>
     
-     <!-- <authentication-manager>    
-        <authentication-provider user-service-ref="myUserDetailsService">    
-            加密  
-            <password-encoder hash="md5">  
-            </password-encoder>  
-        </authentication-provider>  
-    </authentication-manager>   -->
-    
-     
+     <bean id="userDetailsServiceImpl" class="com.huangtl.blogmgr.service.impl.UserDetailsServiceImpl">
+     	<property name="userDao" ref="userDao"></property>
+     </bean>
     
       
 </beans> 

@@ -29,5 +29,7 @@ public class LogoutSuccessHandlerImpl implements LogoutSuccessHandler{
 		logger.debug("name: {}",authentication.getName());
 		response.sendRedirect("login.htm");
 	} 
+	
+	
 
 }
