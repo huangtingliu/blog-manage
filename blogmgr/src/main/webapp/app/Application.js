@@ -3,7 +3,8 @@
  */
 Ext.onReady(function() {
 	Ext.require(['Ux.tabs.ReorderableTabs',
-				 'Ux.toast.ColorfulToast'
+				 'Ux.toast.ColorfulToast',
+				 'Ux.button.TransparentButton'
 	]);
 	Ext.Loader.loadScript([
 		'/blogmgr/framework/Ux/VTypesPlus.js'
@@ -16,7 +17,7 @@ Ext.application({
 			models : ['Menu','User','Tree'],
 			stores : ['MenuListProxy','UserPagingStore','MenuTreeStore','MenuPagingStore'],
 			controllers:['Main','Root'],
-			views:['BlogMgr.view.home.Navigator'],
+			views:['BlogMgr.view.home.Navigator','BlogMgr.view.home.HomeHeader'],
 			paths : {
 				'Ext' : 'framework/Ext',
 				'Ux' : 'framework/Ux'
@@ -51,11 +52,7 @@ Ext.application({
 							items : [{
 										id : 'home-header',
 										region : 'north',
-										xtype : 'component',
-										cls : 'appBanner',
-										padding : 10,
-										height : 40,
-										html : 'Blog Manager System(v0.0.1)'
+										xtype : 'home_header'
 									}, {
 										id : 'home-center',
 										region : 'center',

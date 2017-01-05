@@ -35,6 +35,13 @@ Ext.define('BlogMgr.view.login.LoginHomeController', {
 			 */
 			signup:function(){	
 				Ext.toast('未实现');
+			},
+			/**
+			 * 回车登录事件
+			 */
+			enterDown:function( t , e , eOpts){
+				if(e.getKey()==Ext.event.Event.ENTER){
+					this.login();
+				}
 			}
-
 		});

@@ -1,6 +1,9 @@
 package com.huangtl.blogmgr.model.blog;
 
+import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -8,6 +11,9 @@ import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.huangtl.blogmgr.model.blog.dictionary.Gender;
 import com.huangtl.blogmgr.model.blog.dictionary.UserStatus;
@@ -18,7 +24,7 @@ import com.huangtl.blogmgr.model.common.ObjectValue;
  * @date 2016年7月9日
  * @author PraiseLord
  */
-public class User extends ObjectValue {
+public class User extends ObjectValue implements UserDetails {
 	private static final long serialVersionUID = -7960114915317326699L;
 	private String fId;				//
 	private String fName;			//名称
@@ -158,4 +164,49 @@ public class User extends ObjectValue {
 	public void setfEditDate(Date fEditDate) {
 		this.fEditDate = fEditDate;
 	}
+	
+	/**
+	 * for spring security method 
+	 */
+	//用户的权限集
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		//TODO
+		Set<GrantedAuthority> authorities = new HashSet<>();
+		authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+		return authorities;
+	}
+	@Override
+	public String getPassword() {
+		return getPassword();
+	}
+	@Override
+	public String getUsername() {
+		return getfAccount();
+	}
+	
+	//用户是否可用
+	@Override
+	public boolean isEnabled() {
+		return UserStatus.ENABLE==getfStatus();
+	}
+	
+	//账号没有过期
+	@Override
+	public boolean isAccountNonExpired() {
+		return UserStatus.ACCOUNT_EXPIRED != getfStatus();
+	}
+	
+	//账号没有被锁住
+	@Override
+	public boolean isAccountNonLocked() {
+		return UserStatus.LOCKED !=getfStatus();
+	}
+	
+	//用户证书是否过期
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return UserStatus.CREDENTIALS_EXPIRED != getfStatus();
+	}
+	
 }

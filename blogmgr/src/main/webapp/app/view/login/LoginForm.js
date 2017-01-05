@@ -19,11 +19,19 @@ Ext.define('BlogMgr.view.login.LoginForm', {
 			},
 			items:[{
      			 fieldLabel : '用户名',
-     			 name:'account'
+     			 name:'account',
+     			 enableKeyEvents:true,
+				 listeners:{
+					keydown:'enterDown'
+				 },
 			},{
 				fieldLabel : '密码',
 				inputType : 'password',
-				name:'password'
+				name:'password',
+				enableKeyEvents:true,
+				listeners:{
+					keydown:'enterDown'
+				},
 			},{
 				xtype : 'panel',
 				align:'center',

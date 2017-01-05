@@ -50,6 +50,7 @@
 	<logger name="com.huangtl.blogmgr.action" level="debug"></logger>
 	<logger name="com.huangtl.blogmgr.dao" level="debug"></logger>
 	<logger name="com.huangtl.blogmgr.model" level="debug"></logger>
+	<logger name="com.huangtl.blogmgr.handler" level="debug"></logger>
 	
 	<!-- level: trace,debug,info,warn,error -->
 	<root>
