@@ -65,9 +65,9 @@ Ext.define('BlogMgr.view.user.UserHome', {
 							sortable:false,
 							renderer : function(val) {
 								if (val == 'ENABLE') {
-									return '<span style="color:green">可用</span>';
+									return '<b style="color:green">可用</b>';
 								} else if (val == 'DISABLE') {
-									return '<span style="color:red">不可用</span>';
+									return '<b style="color:red">不可用</b>';
 								} else {
 									return '未知';
 								}

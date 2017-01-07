@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huangtl.blogmgr.model.blog.RoleUser">
+
+	
+	
+	<sql id="role_field">
+		rol_Id ,rol_Name,rol_code,dic_status
+		<if test="fDescr_show != null">,rol_Descr</if>
+	</sql>
+	
+	
+	
+	<select id="selectRoles" parameterType="map" resultMap="com.huangtl.blogmgr.model.blog.Role.map">
+		select <include refid="role_field"></include>
+		 from (
+			select B.* from mgr_user_role A
+			left join mgr_role B on A.rol_id = B.rol_id
+			left join mgr_userinfo C on A.ui_Id = C.ui_id
+			<include refid="com.huangtl.blogmgr.model.blog.User.where"></include>
+		) Z
+	</select>
+	
+	
+	
+	
+	
+	
+	
+</mapper>

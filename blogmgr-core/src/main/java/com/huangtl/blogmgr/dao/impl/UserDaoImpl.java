@@ -17,19 +17,6 @@ import com.huangtl.blogmgr.model.blog.User;
  */
 public class UserDaoImpl extends MybatisDaoAdaptor<User> implements UserDao {
 
-	/*
-	 	{
-			"fAccount":"ouiogyui",
-			"fCreateDate":1469447144000,
-			"fCreater":"root",
-			"fEmail":"",
-			"fGender":"MALE",
-			"fId":"09dbccec890a4fa8bcd6b71f360551f4",
-			"fName":"uoyui",
-			"fPhone":"",
-			"fStatus":"ENABLE"
-		}
-	 */
 	@Override
 	public User selectOne(String fId) {
 		if(StringUtils.isBlank(fId)){return null;}
@@ -45,5 +32,10 @@ public class UserDaoImpl extends MybatisDaoAdaptor<User> implements UserDao {
 		if(fIds.length==0){return 0;}
 		UserSqlWhere where = new UserSqlWhere().fIdIn(fIds);
 		return this.delete(where);
+	}
+
+	@Override
+	public int fakeDeleteBatch(String... fIds) {
+		throw new UnsupportedOperationException("用户伪删除功能未实现");
 	}
 }

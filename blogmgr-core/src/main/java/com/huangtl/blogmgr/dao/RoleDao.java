@@ -1,26 +1,30 @@
 package com.huangtl.blogmgr.dao;
 
+import java.util.List;
+
 import com.huangtl.blogmgr.core.dao.MybatisDao;
-import com.huangtl.blogmgr.model.blog.User;
+import com.huangtl.blogmgr.dao.where.UserSqlWhere;
+import com.huangtl.blogmgr.model.blog.Role;
 
 /**
- * 后台用户持久化对象<br>
+ * 角色持久化对象
  * <blockquote>
- * 查询参数：{@link com.huangtl.blogmgr.dao.where.UserSqlWhere}<br><br>
+ * 查询参数：{@link com.huangtl.blogmgr.dao.where.RoleSqlWhere}<br><br>
  * 查询结果：<br>
- * 固定字段：【fId,fName,fAccount,fStatus,fEmail,fPhone】<br>
- * 可选字段：【fPassword,fGender,fPinYin,fDescr,fEditor,fEditDate,fCreater,fCreateDate】
+ * 固定字段：【fId,fName,fCode,fStatus】<br>
+ * 可选字段：【fDescr】
  * </blockquote>
- * @date 2016年7月4日
  * @author PraiseLord
+ * @date 2017年1月6日
+ *
  */
-public interface UserDao extends MybatisDao<User> {
+public interface RoleDao extends MybatisDao<Role> {
 	/**
-	 * 根据用户id查询用户
+	 * 根据角色id查询用户
 	 * @param fId
 	 * @return
 	 */
-	User selectOne(String fId);
+	Role selectOne(String fId);
 	
 	/**
 	 * 批量删除用户,数据从数据中抹去。慎重！！
@@ -35,4 +39,11 @@ public interface UserDao extends MybatisDao<User> {
 	 * @return 返回影响的记录的个数
 	 */
 	int fakeDeleteBatch(String... fIds);
+	
+	/**
+	 * 根据用户条件查询其权限
+	 * @param where
+	 * @return
+	 */
+	List<Role> selectByUserWhere(UserSqlWhere where,String... fields);
 }

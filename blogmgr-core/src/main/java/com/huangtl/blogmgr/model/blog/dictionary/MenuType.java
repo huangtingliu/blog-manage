@@ -6,8 +6,8 @@ package com.huangtl.blogmgr.model.blog.dictionary;
  * @author PraiseLord
  */
 public enum MenuType {
-	NAVIGATOR(0,"导航菜单"),
-	TOOLBAR(1,"工具栏");
+	NAVIGATOR(1,"导航菜单"),
+	TOOLBAR(2,"工具栏");
 	
 	
 	private String text;

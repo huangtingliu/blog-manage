@@ -14,8 +14,9 @@ Ext.onReady(function() {
 Ext.application({
 			name : 'BlogMgr',
 			appFolder : 'app',
-			models : ['Menu','User','Tree'],
-			stores : ['MenuListProxy','UserPagingStore','MenuTreeStore','MenuPagingStore'],
+			models : ['Menu','User','Tree','BaseData','Role'],
+			stores : ['MenuListProxy','UserPagingStore','MenuTreeStore','MenuPagingStore',
+			          'BaseDataStore','RolePagingStroe'],
 			controllers:['Main','Root'],
 			views:['BlogMgr.view.home.Navigator','BlogMgr.view.home.HomeHeader'],
 			paths : {
@@ -25,8 +26,8 @@ Ext.application({
 			init : function() {
 				Ext.setGlyphFontFamily('iconfont');
 				Ext.require([
-					'BlogMgr.view.user.UserHome',
-					'BlogMgr.view.menu.MenuHome']);
+					'BlogMgr.view.user.UserHome','BlogMgr.view.menu.MenuHome',
+					'BlogMgr.view.auth.AuthHome']);
 			},
 			launch : function(profile) {
 				/**

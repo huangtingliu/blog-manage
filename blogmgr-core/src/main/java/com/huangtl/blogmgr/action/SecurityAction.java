@@ -35,6 +35,8 @@ public class SecurityAction extends BlogMgrAction  {
 		ModelAndView view = new ModelAndView("noauth");
 		return view;
 	}
+	
+	
 
 	
 }

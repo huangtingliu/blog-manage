@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huangtl.blogmgr.model.blog.Role">
+
+	<resultMap id="map" type="com.huangtl.blogmgr.model.blog.Role" >
+		<id property="fId" column="rol_Id"/>
+		<result property="fName" column="rol_Name"/>
+		<result property="fDescr" column="rol_Descr" />
+		<result property="fCode" column="rol_code"/>
+		<result property="fStatus" column="dic_status"/>
+	</resultMap>
+	
+	<sql id="field">
+		rol_Id ,rol_Name as fName ,rol_code as fCode,dic_status as fStatus
+		<if test="fDescr_show != null">,rol_Descr</if>
+	</sql>
+	
+	<sql id="where">
+		 <trim prefix="where" prefixOverrides="and|or">
+		 	<if test="defaultWhere!=null and defaultWhere">
+		 		1=1
+		 	</if>
+			<if test="fId_eq !=null ">
+				and rol_Id = #{fId_eq}
+			</if>
+			<if test="fName_like != null">
+				and rol_Name like #{fName_like}
+			</if>
+			<if test="fCode_eq != null">
+				and rol_code = #{fCode_eq}
+			</if>
+			<if test="fStatus_eq != null">
+				and dic_status = #{fStatus_eq}
+			</if>
+			<if test="fStatus_ne != null">
+				and dic_status != #{fStatus_ne}
+			</if>
+			<if test="fId_in != null">
+				and rol_Id in
+				<foreach collection="fId_in" open="(" item="id" separator="," close=")">
+					#{id}
+				</foreach>
+			</if>
+		</trim>
+	</sql>
+	
+	<sql id="order">
+		<if test="sorts != null and sorts.size() != 0">
+			order by 
+			<foreach collection="sorts" separator="," index="key" item="val">
+				${key} ${val}
+			</foreach>
+		</if>
+	</sql>
+	
+	<insert id="insert" parameterType="com.huangtl.blogmgr.model.blog.Role">
+		insert into mgr_role(
+			rol_Id,rol_Name,rol_code,dic_status
+			<if test="fDescr !=null">,rol_Descr</if>
+		) values(
+			#{fId},#{fName},#{fCode},#{fStatus}
+			<if test="fDescr !=null">,#{fDescr}</if>
+		);
+	</insert>
+	
+	<update id="update" parameterType="map">
+		update mgr_role 
+		<trim prefix="set" suffixOverrides=",">
+			<if test="fStatus !=null">dic_Status = #{fStatus},</if>
+			<if test="fDescr !=null">rol_Descr = #{fDescr},</if>
+		</trim>
+		<include refid="where"/>
+	</update>
+	
+	<update id="updateBatch" parameterType="list">
+		<foreach collection="list" item="role" index="index" open="" close="" separator=";">
+			update mgr_role 
+			<trim prefix="set" suffixOverrides=",">
+				<if test="role.fStatus !=null">dic_Status = #{role.fStatus},</if>
+			</trim>
+			 where rol_Id = #{role.fId}
+		</foreach>
+	</update>
+	
+	<select id="selectList" resultMap="map" parameterType="map">
+		select 
+			<include refid="field"/>
+		from mgr_role
+			<include refid="where"/>
+	</select>
+	
+	<select id="selectCount"  resultType="long" parameterType="map">
+	  select count(rol_Id) 
+	  from mgr_role
+		<include refid="where"/>
+	</select>
+	
+	<select id="selectPaging" resultMap="map" parameterType="map">
+		select 
+			<include refid="field"/>
+		from mgr_role
+			<include refid="where"/>
+			<include refid="order"/>
+		limit #{startIndex},#{pageSize}
+	</select>
+	
+</mapper>

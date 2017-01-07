@@ -2,6 +2,7 @@ package com.huangtl.blogmgr.service.impl;
 
 import java.util.List;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,9 +10,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import com.huangtl.blogmgr.dao.RoleDao;
 import com.huangtl.blogmgr.dao.UserDao;
-import com.huangtl.blogmgr.dao.where.SqlWhere;
 import com.huangtl.blogmgr.dao.where.UserSqlWhere;
+import com.huangtl.blogmgr.model.blog.Role;
 import com.huangtl.blogmgr.model.blog.User;
 
 
@@ -28,27 +30,35 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	
 	
 	private UserDao userDao;
+	private RoleDao roleDao;
 	
 	@Override
-	public UserDetails loadUserByUsername(String arg0) throws UsernameNotFoundException {
-		if(StringUtils.isBlank(arg0)){
-			logger.error("无效的用户名：{}",arg0);
-			  throw new UsernameNotFoundException("无效的用户名,无法做为查询条件！");
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		if(StringUtils.isBlank(username)){
+			logger.error("无效的用户名：{}",username);
+			  throw new UsernameNotFoundException("用户名为空！");
 		}
 		
-		SqlWhere where = new UserSqlWhere().fAccountEqual(arg0);
+		UserSqlWhere where = new UserSqlWhere().fAccountEqual(username);
 		List<User> users =  userDao.selectList(where,"fPassword");
-		
 		if(users.isEmpty()){
-			 throw new UsernameNotFoundException("没有找到用户为:"+arg0+"用户!");
+			 throw new UsernameNotFoundException("没有找到名为:"+username+"用户!");
 		}
 		
-		//TODO 权限载入
-		
-		return users.get(0);
+		List<Role> roles = roleDao.selectByUserWhere(where);
+		if(CollectionUtils.isEmpty(roles)){
+			 throw new UsernameNotFoundException("该用户无任何权限！"); 
+		}
+		User user = users.get(0);
+		user.setRoles(roles);
+		return user;
 	}
 
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
 	}
+	public void setRoleDao(RoleDao roleDao) {
+		this.roleDao = roleDao;
+	}
+	
 }

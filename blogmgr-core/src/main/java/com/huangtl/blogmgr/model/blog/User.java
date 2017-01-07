@@ -2,8 +2,7 @@ package com.huangtl.blogmgr.model.blog;
 
 import java.util.Collection;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -12,7 +11,6 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.huangtl.blogmgr.model.blog.dictionary.Gender;
@@ -42,6 +40,8 @@ public class User extends ObjectValue implements UserDetails {
 	private Date fCreateDate; // 创建日期
 	private String fEditor; // 修改人
 	private Date fEditDate; // 修改日期
+	
+	private List<Role> roles;	//用户的角色
 
 	public User() {
 		this(false);
@@ -195,6 +195,12 @@ public class User extends ObjectValue implements UserDetails {
 	public void setfEditDate(Date fEditDate) {
 		this.fEditDate = fEditDate;
 	}
+	public List<Role> getRoles() {
+		return roles;
+	}
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
 
 	/**
 	 * for spring security method
@@ -202,10 +208,7 @@ public class User extends ObjectValue implements UserDetails {
 	// 用户的权限集
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO
-		Set<GrantedAuthority> authorities = new HashSet<>();
-		authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-		return authorities;
+		return this.roles;
 	}
 
 	@Override

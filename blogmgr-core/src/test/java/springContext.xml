@@ -123,4 +123,6 @@
 	</bean>
 	<bean id="userDao" class="com.huangtl.blogmgr.dao.impl.UserDaoImpl" parent="myBatisDao"></bean> 
 	
+	
+	<bean id="roleDao" class="com.huangtl.blogmgr.dao.impl.RoleDaoImpl" parent="myBatisDao"></bean> 
 </beans>

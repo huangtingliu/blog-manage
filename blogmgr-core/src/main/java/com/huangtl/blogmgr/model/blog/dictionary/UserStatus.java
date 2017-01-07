@@ -6,11 +6,13 @@ package com.huangtl.blogmgr.model.blog.dictionary;
  * @author PraiseLord
  */
 public enum UserStatus {
-	ENABLE(0,"可用"),
-	DISABLE(1,"不可用"),
-	LOCKED(2,"账号锁住"),
-	CREDENTIALS_EXPIRED(3,"密码过期"),
-	ACCOUNT_EXPIRED(4,"账号过期");
+	DELETE(0,"已删除"),
+	ENABLE(1,"可用"),
+	DISABLE(2,"不可用"),
+	LOCKED(3,"账号锁住"),
+	CREDENTIALS_EXPIRED(4,"密码过期"),
+	ACCOUNT_EXPIRED(5,"账号过期");
+	
 	
 	private int code;
 	private String text;

@@ -28,7 +28,7 @@ public interface MybatisDao<T> extends Dao<T> {
 	int insertBatch(List<T> entitys);
 	
 	/**
-	 * 删除一条记录,如果{@code where}为null或空，返回0<br>
+	 * 删除一条记录（记录将彻底的抹去，慎重）,如果{@code where}为null或空，返回0<br>
 	 * 当删除条件不匹配时，将会抛出异常
 	 * @param where 删除条件
 	 * @return 返回记录的影响数
