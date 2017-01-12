@@ -45,6 +45,8 @@ Ext.define('BlogMgr.view.user.UserAddDialog', {
 						plain : true,
 						items : [{
 									xtype : 'user_userinfoform'
+								},{
+									xtype : 'user_userauthform'
 								}]
 					}]
 		});

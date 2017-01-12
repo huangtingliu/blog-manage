@@ -5,6 +5,6 @@ Ext.define('BlogMgr.view.home.HomeHeaderController',{
 	extend:'Ext.app.ViewController',
 	alias:'controller.home_header',
 	logout:function(){
-		//window.location.href = '/blogmgr/logout.do';
+		window.location.href = '/blogmgr/logout.do';
 	}
 });

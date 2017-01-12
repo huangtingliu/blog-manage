@@ -5,6 +5,7 @@ Ext.define('BlogMgr.view.menu.mgr.MenuMgrForm', {
 			itemId : 'menuMgrForm',
 			extend : 'Ext.form.Panel',
 			alias : ['widget.menumgr_form'],
+			uses:['BlogMgr.store.MenuTreeStore'],
 			waitTitle : '处理中...',
 			fileUpload : false,
 			defaults : {
@@ -29,7 +30,10 @@ Ext.define('BlogMgr.view.menu.mgr.MenuMgrForm', {
 							},
 							xtype:'treepicker',
 							emptyText:'请选择',
-							store:Ext.getStore('menuTreeStore'),
+							store:Ext.getStore('treePickerStroe'),
+							root : {
+								expanded : true //如果展开就会自动加载
+							},
 							allowBlank : true,
 							listeners:{
 								change:'parentMenuSelect'

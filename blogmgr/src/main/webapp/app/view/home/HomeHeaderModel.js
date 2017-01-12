@@ -7,7 +7,7 @@ Ext.define('BlogMgr.view.home.HomeHeaderModel', {
 	data : Ext.getStore('baseDataStore').getData().items[0].data,
 	formulas : {
 		currentDate : function(get) {
-			return Ext.Date.format(get('serversDate'), 'Y年m月d日');
+			return Ext.Date.format(new Date(get('serversDate')), 'Y年m月d日');
 		}
 	}
 });

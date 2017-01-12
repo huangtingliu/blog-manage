@@ -2,7 +2,9 @@
  * 博客后台管理应用启动配置
  */
 Ext.onReady(function() {
-	Ext.require(['Ux.tabs.ReorderableTabs',
+	Ext.require([
+	             'BlogMgr.store.BaseDataStore',
+	             'Ux.tabs.ReorderableTabs',
 				 'Ux.toast.ColorfulToast',
 				 'Ux.button.TransparentButton'
 	]);
@@ -14,9 +16,9 @@ Ext.onReady(function() {
 Ext.application({
 			name : 'BlogMgr',
 			appFolder : 'app',
-			models : ['Menu','User','Tree','BaseData','Role'],
-			stores : ['MenuListProxy','UserPagingStore','MenuTreeStore','MenuPagingStore',
-			          'BaseDataStore','RolePagingStroe'],
+			models : ['Menu','User','Tree','BaseData','Role','Privilege'],
+			stores : ['BaseDataStore','MenuListProxy','UserPagingStore','MenuTreeStore','MenuPagingStore',
+			          'RolePagingStroe','PrivilegePagingStore'],
 			controllers:['Main','Root'],
 			views:['BlogMgr.view.home.Navigator','BlogMgr.view.home.HomeHeader'],
 			paths : {
@@ -24,6 +26,7 @@ Ext.application({
 				'Ux' : 'framework/Ux'
 			},
 			init : function() {
+				 //设置字体
 				Ext.setGlyphFontFamily('iconfont');
 				Ext.require([
 					'BlogMgr.view.user.UserHome','BlogMgr.view.menu.MenuHome',
@@ -36,8 +39,7 @@ Ext.application({
 				 */
 				Ext.applyIf(BlogMgr, {
 							url : function(url, param) {
-								url = "http://localhost:8080/blogmgr/" + url; // 动态获取首地址
-																				// TODO 动态获取
+								url = "http://localhost:8080/blogmgr/" + url; // 动态获取首地址 TODO 动态获取
 								if (Ext.isObject(param)) {
 									param = Ext.Object.toQueryString(param);
 								}
@@ -45,7 +47,6 @@ Ext.application({
 								return result;
 							}
 						});
-				
 						
 				Ext.create('Ext.container.Viewport', {
 							id:'application',

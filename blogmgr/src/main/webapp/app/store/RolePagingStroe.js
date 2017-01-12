@@ -15,7 +15,7 @@ Ext.define('BlogMgr.store.RolePagingStroe',{
 	}],*/
 	proxy : {
 		type : 'ajax',
-		url : '/blogmgr/auth/role_paging.data',
+		url : '/blogmgr/role/paging.data',
 		limitParam:'pageSize',
 		pageParam:'pageNo',
 		noCache:false,

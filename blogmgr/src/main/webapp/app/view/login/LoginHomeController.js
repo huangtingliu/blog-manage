@@ -20,6 +20,10 @@ Ext.define('BlogMgr.view.login.LoginHomeController', {
 				logonForm.submit({
 					submitEmptyText:false,
 					success : function(form, action) {
+						var baseData = action.result.annex
+						 if(window.sessionStorage){     
+							 sessionStorage.setItem('blgmgrBaseData',baseData);
+						  }
 						window.location.href = '/blogmgr/home.htm';
 					},
 					failure : function(form, action) {

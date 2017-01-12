@@ -11,7 +11,7 @@ import com.huangtl.blogmgr.model.common.Message;
  * @date 2017年1月7日
  *
  */
-public interface AuthService {
+public interface RoleService {
 	
 	/**
 	 * 取得角色持久化对象

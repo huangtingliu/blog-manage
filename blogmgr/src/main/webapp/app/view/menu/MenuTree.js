@@ -5,6 +5,7 @@ Ext.define('BlogMgr.view.menu.MenuTree',{
 	id : 'menuTree',
 	extend: 'Ext.tree.Panel',
 	alias : ['widget.menutree'],
+	uses:['BlogMgr.store.MenuTreeStore'],
     rootVisible: true,
     autoLoad:false,
     useArrows: true,
@@ -13,5 +14,5 @@ Ext.define('BlogMgr.view.menu.MenuTree',{
 				text:'菜单树',
 				expanded : true //如果展开就会自动加载
 			},
-    store:Ext.getStore('menuTreeStore')
+    store:Ext.getStore('menuHomeTreeStore')
 });

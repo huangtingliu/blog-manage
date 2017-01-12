@@ -4,12 +4,6 @@
 Ext.define('BlogMgr.view.auth.role.RoleAddDialogController', {
 			extend : 'Ext.app.ViewController',
 			alias : 'controller.roleadd',
-			init : function() {
-				this.mask = new Ext.LoadMask({
-					msg : '删除中...',
-					target : this.getView()
-				});
-			},
 			/**
 			 * 角色添加提交
 			 */
@@ -37,5 +31,9 @@ Ext.define('BlogMgr.view.auth.role.RoleAddDialogController', {
 			 */
 			closeDialog:function(){	
 				this.getView().close();
+			},
+			
+			onRowclick:function(){
+				
 			}
 		});

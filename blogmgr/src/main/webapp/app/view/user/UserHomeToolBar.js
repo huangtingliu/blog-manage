@@ -15,7 +15,8 @@ Ext.define('BlogMgr.view.user.UserHomeToolBar', {
 						itemId : 'edit',
 						text : '修改',
 						xtype:'transparent_button',
-						glyph : 0xe63c
+						glyph : 0xe63c,
+						handler:'editUser'
 					}, {
 						itemId : 'delete',
 						text : '删除',

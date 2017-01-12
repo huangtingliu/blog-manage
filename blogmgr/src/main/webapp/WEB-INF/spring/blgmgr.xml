@@ -15,9 +15,15 @@
 	</bean>
 	<bean id="userDao" class="com.huangtl.blogmgr.dao.impl.UserDaoImpl" parent="myBatisDao"></bean>
 	
-	<!-- 权限配置管理 -->
-	<bean id="authService" class="com.huangtl.blogmgr.service.impl.AuthServiceImpl">
+	<!-- 角色管理 -->
+	<bean id="roleService" class="com.huangtl.blogmgr.service.impl.RoleServiceImpl">
 		<property name="roleDao" ref="roleDao"></property>
 	</bean>
 	<bean id="roleDao" class="com.huangtl.blogmgr.dao.impl.RoleDaoImpl"  parent="myBatisDao"></bean>
+	
+	<!-- 权限管理 -->
+	<bean id="privilegeService" class="com.huangtl.blogmgr.service.impl.PrivilegeServiceImpl">
+		<property name="privilegeDao" ref="privilegeDao"></property>
+	</bean>
+	<bean id="privilegeDao" class="com.huangtl.blogmgr.dao.impl.PrivilegeDaoImpl" parent="myBatisDao"></bean>
 </beans>

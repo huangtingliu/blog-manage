@@ -3,7 +3,7 @@ package com.huangtl.blogmgr.service.impl;
 import com.huangtl.blogmgr.dao.RoleDao;
 import com.huangtl.blogmgr.dao.where.RoleSqlWhere;
 import com.huangtl.blogmgr.model.common.Message;
-import com.huangtl.blogmgr.service.AuthService;
+import com.huangtl.blogmgr.service.RoleService;
 import com.huangtl.blogmgr.model.blog.Role;
 
 /**
@@ -12,7 +12,7 @@ import com.huangtl.blogmgr.model.blog.Role;
  * @date 2017年1月7日
  *
  */
-public class AuthServiceImpl implements AuthService {
+public class RoleServiceImpl implements RoleService {
 	
 	private RoleDao roleDao;
 	
@@ -33,8 +33,10 @@ public class AuthServiceImpl implements AuthService {
 	}
 
 	@Override
-	public Message fakeDeleteRole(String... roleId) {
-		throw new UnsupportedOperationException("未实现");
+	public Message fakeDeleteRole(String... roleIds) {
+		if(roleIds==null || roleIds.length==0){return Message.error("无效参数");}
+		int effectRow = this.roleDao.fakeDeleteBatch(roleIds);
+		return Message.get(effectRow, "删除成功！", "删除失败！");
 	}
 
 	public void setRoleDao(RoleDao roleDao) {

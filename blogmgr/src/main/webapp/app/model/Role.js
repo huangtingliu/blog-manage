@@ -19,6 +19,6 @@ Ext.define('BlogMgr.model.Role',{
 	},
 	proxy:{
 		type:'ajax',
-		url:'/blogmgr/auth/role_get.data'
+		url:'/blogmgr/role/get.data'
 	}
 });

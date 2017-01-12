@@ -14,7 +14,8 @@ Ext.define('BlogMgr.model.BaseData',{
 		{name:'userEmail',type:'string'},
 		{name:'userRole',type:'string'},
 		//服务器数据
-		{name:'serversDate',type:'date'}	
+		{name:'serversDate',type:'auto'},
+		{name:'baseUrl',type:'string'}
 	],
 	validators: {
 		userId: 'presence',

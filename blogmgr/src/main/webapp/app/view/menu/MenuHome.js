@@ -2,7 +2,7 @@
  * 菜单管理 - 主页
  */
 Ext.define('BlogMgr.view.menu.MenuHome', {
-			id : 'henuHome',
+			id : 'menuHome',
 			extend : 'Ext.panel.Panel',
 			alias : ['widget.menuhome'],
 			uses : ['BlogMgr.view.menu.MenuTree', 

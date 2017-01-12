@@ -55,6 +55,7 @@ public class HomeAction extends BlogMgrAction {
 	 * 7.userRole	  当前用户角色
 	 *
 	 * 8.serversDate  服务器时间
+	 * 9.baseUrl 基础路径
 	 * @return
 	 */
 	@RequestMapping("home/baseData.data")
@@ -81,6 +82,10 @@ public class HomeAction extends BlogMgrAction {
 		sb.deleteCharAt(0);
 		data.put("userRole", sb.toString());
 		data.put("serversDate", new Date());
+		
+		String baseUrl = "http://" + request.getServerName()  + ":" + request.getServerPort() + request.getContextPath()+"/";       
+		data.put("baseUrl", baseUrl);
+		
 		return data;
 	}
 

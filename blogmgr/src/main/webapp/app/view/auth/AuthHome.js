@@ -22,10 +22,10 @@ Ext.define('BlogMgr.view.auth.AuthHome',{
 		 	}
 	     } ,{
 	    	 region : 'west',
-	    	 width : '22%',
-	    	 minWidth:300,
+	    	 width : '35%',
+	    	 minWidth:330,
 	    	 split : true,
-	    	xtype:'auth_rolegrid'
+	    	 xtype:'auth_rolegrid'
 	     },{
 	    	 region : 'center',
 	    	 xtype:'auth_modulegrid'

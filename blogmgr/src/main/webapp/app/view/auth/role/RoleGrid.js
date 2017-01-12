@@ -3,16 +3,21 @@
  */
 Ext.define('BlogMgr.view.auth.role.RoleGrid',{
 	extend : 'Ext.grid.Panel',
-	uses : ['Ux.button.TransparentButton',
+	uses : ['Ux.button.TransparentButton','BlogMgr.view.auth.role.RoleGridController',
 	        'Ext.grid.filters.Filters'],
 	store : Ext.getStore('rolePagingStroe'),
-	//controller : 'userhome',
 	alias:'widget.auth_rolegrid',
+	controller:'auth_rolegrid',
 	columnLines : true,
 	autoLoad : true,
 	scrollable : true,
+	//forceFit:true,
+	itemId:'roleGrid',
 	rowLines : true,
-	plugins : ['gridfilters', 'cellediting'],
+	plugins : ['gridfilters',{
+		ptype:'rowexpander',
+		rowBodyTpl:new Ext.XTemplate('<p>{fDescr}</p>')
+	}],
 	viewModel : {
 		type : 'userhome'
 	},
@@ -27,17 +32,20 @@ Ext.define('BlogMgr.view.auth.role.RoleGrid',{
 	}, {
 		header : '角色名称',
 		dataIndex : 'fName',
-		width : 140,
-		sortable:true
+		sortable:true,
+		width:'40%',
+		renderer:function(val){
+			return '<b>'+val+'</b>';
+		}
 	}, {
 		header : '角色编号',
 		dataIndex : 'fCode',
-		width : 70,
+		width:'19%',
 		sortable:true
 	}, {
 		header : '角色状态',
 		dataIndex : 'fStatus',
-		width : 100,
+		width:'19%',
 		sortable:true,
 		renderer : function(val) {
 			if (val == 'ENABLE') {
@@ -54,5 +62,8 @@ Ext.define('BlogMgr.view.auth.role.RoleGrid',{
 		store : Ext.getStore('rolePagingStroe'),
 		dock : 'bottom',
 		displayInfo : false
-	}]
+	}],
+	listeners:{
+		rowclick:'onRowclick'
+	}
 });

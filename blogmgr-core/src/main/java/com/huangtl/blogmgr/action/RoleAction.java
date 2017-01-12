@@ -2,6 +2,7 @@ package com.huangtl.blogmgr.action;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -19,21 +20,21 @@ import com.huangtl.blogmgr.model.extjs.Filter;
 import com.huangtl.blogmgr.model.extjs.FilterCollection;
 import com.huangtl.blogmgr.model.extjs.Sort;
 import com.huangtl.blogmgr.model.extjs.SortCollection;
-import com.huangtl.blogmgr.service.AuthService;
+import com.huangtl.blogmgr.service.RoleService;
 
 /**
- * 权限配置url接口
+ * 角色url接口
  * @author PraiseLord
  * @date 2017年1月7日
  *
  */
 @Controller
-@RequestMapping("/auth")
-public class AuthAction extends BlogMgrAction {
-	private static Logger logger = LoggerFactory.getLogger(AuthAction.class);
+@RequestMapping("/role")
+public class RoleAction extends BlogMgrAction {
+	private static Logger logger = LoggerFactory.getLogger(RoleAction.class);
 	
 	@Resource
-	private AuthService authService;
+	private RoleService roleService;
 	
 	/**
 	 * 角色分布查询数据
@@ -44,7 +45,7 @@ public class AuthAction extends BlogMgrAction {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping("role_paging.data")
+	@RequestMapping("paging.data")
 	public Object getPaging(Integer pageNo,Integer pageSize,
 			FilterCollection filter,SortCollection sort) {
 		
@@ -64,7 +65,7 @@ public class AuthAction extends BlogMgrAction {
 			}
 		}
 		
-		this.authService.getDao().selectPaging(whereParam, page);
+		this.roleService.getDao().selectPaging(whereParam, page,"fDescr");
 		
 		JSONObject data = new JSONObject();
 		data.put("rolelist", page.getPageContent());
@@ -74,12 +75,12 @@ public class AuthAction extends BlogMgrAction {
 		return data;
 	}
 	
-	@RequestMapping("role_get.data")
+	@RequestMapping("get.data")
 	@ResponseBody
 	public Object getUser(String id){
 		RoleSqlWhere whereParam = new RoleSqlWhere();
 		whereParam.fIdEqual(id);
-		Role role = this.authService.getDao().selectOne(id);
+		Role role = this.roleService.getDao().selectOne(id);
 		if(role==null){return "{}";}
 		return role;
 	}
@@ -89,15 +90,20 @@ public class AuthAction extends BlogMgrAction {
 	 * @param id   规则：id,id,id
 	 * @return
 	 */
-	@RequestMapping("role_delete.do")
+	@RequestMapping("delete.do")
 	@ResponseBody
 	public Object fakeDeleteRole(String id){
 		logger.debug("将要删除角色，角色的id为：{}",id);
-		return Message.info("功能未实现");
+		if(StringUtils.isBlank(id)){
+			return Message.error("无效参数，请定要删除的记录");
+		}
+		
+		Message msg = this.roleService.fakeDeleteRole(id.split(","));
+		return msg;
 	}
 	
 	
-	@RequestMapping("role_add.do")
+	@RequestMapping("add.do")
 	@ResponseBody
 	public Object addRole(Role role){
 		if(role==null){
@@ -111,7 +117,7 @@ public class AuthAction extends BlogMgrAction {
 			return message;
 		}
 		
-		message = this.authService.addRole(role);
+		message = this.roleService.addRole(role);
 		return message;
 	}
 	

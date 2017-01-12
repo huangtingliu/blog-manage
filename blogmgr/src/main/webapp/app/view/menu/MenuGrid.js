@@ -29,6 +29,7 @@ Ext.define('BlogMgr.view.menu.MenuGrid', {
 			}, {
 				header : '编号',
 				dataIndex : 'fId',
+				width:'14%',
 				sortable : true,
 				renderer:function(val){
 					 if(Ext.isEmpty(val)){return val;}
@@ -45,6 +46,7 @@ Ext.define('BlogMgr.view.menu.MenuGrid', {
 			}, {
 				header : '名称',
 				dataIndex : 'fName',
+				width:'12%',
 				sortable : false
 			}, /*{
 				header : '图标',
@@ -60,14 +62,31 @@ Ext.define('BlogMgr.view.menu.MenuGrid', {
 				dataIndex : 'fGlyph',
 				sortable : false,
 				align : 'center',
+				width:'10%',
 				renderer:function(val){
 					if(Ext.isEmpty(val)){return "";}
 					return'<i class="iconfont">&#'+val+'</i>&nbsp;'+val;
 				}
 			}, {
+				header:'可用性',
+				dataIndex : 'fUsability',
+				sortable : false,
+				align : 'center',
+				width:'10%',
+				renderer:function(val){
+					if (val == 'ENABLE') {
+						return '<b style="color:green">可用</b>';
+					} else if (val == 'DISABLE') {
+						return '<b style="color:red">不可用</b>';
+					} else {
+						return '未知';
+					}
+				}
+			},{
 				header : '视图类',
 				dataIndex : 'fViewClass',
 				sortable : false,
+				width:'19%',
 				renderer:function(val){
 					if(Ext.isEmpty(val)){return '';}
 					return '<span data-qtip="'+val+'" >'+val+'</span>';
@@ -76,6 +95,7 @@ Ext.define('BlogMgr.view.menu.MenuGrid', {
 				header : '链接',
 				dataIndex : 'fUrl',
 				hidden : true,
+				width:'15%',
 				sortable : false,
 				renderer:function(val){
 					if(Ext.isEmpty(val)){return '';}
@@ -84,12 +104,14 @@ Ext.define('BlogMgr.view.menu.MenuGrid', {
 			}, {
 				header : '序号',
 				dataIndex : 'fOrder',
-				align : 'center'
+				align : 'center',
+				width:'9%'
 			}, {
 				header : '类型',
 				dataIndex : 'fType',
 				sortable : false,
 				align : 'center',
+				width:'12%',
 				renderer:function(val){
 					if (val == 'NAVIGATOR') {
 						return '导航菜单';

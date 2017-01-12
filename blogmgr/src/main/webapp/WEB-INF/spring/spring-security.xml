@@ -23,6 +23,7 @@
      -->  
     <sec:http auto-config="true" use-expressions="true"  >  
         <sec:intercept-url pattern="/**"  access="hasRole('ADMIN') or hasRole('USER')"/>
+        <!-- <sec:custom-filter before="FILTER_SECURITY_INTERCEPTOR" ref=""/> -->
         
         <sec:form-login login-page="/login.htm" 
         	password-parameter="password" username-parameter="account"

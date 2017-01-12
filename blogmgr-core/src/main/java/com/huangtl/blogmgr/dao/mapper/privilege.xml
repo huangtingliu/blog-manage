@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huangtl.blogmgr.model.blog.Privilege">
+
+	<resultMap id="map" type="com.huangtl.blogmgr.model.blog.Privilege" >
+		<id property="fId" column="pri_id"/>
+		<result property="fPriority" column="dic_auth_priority"/>
+		<result property="fFunId" column="fun_id" />
+		<result property="fRoleId" column="rol_id"/>
+		<result property="fType" column="dic_type"/>
+		
+		<result property="descr" column="mu_Descr"/>
+		<result property="funName" column="mu_Name"/>
+	</resultMap>
+	
+	<sql id="field">
+		pri_id ,dic_auth_priority as fPriority ,fun_id as fFunId ,dic_type as fType,rol_id,
+		mu_Name as funName,mu_Descr  as descr
+	</sql>
+	
+	<sql id="where">
+		 <trim prefix="where" prefixOverrides="and|or">
+		 	<if test="defaultWhere!=null and defaultWhere">
+		 		1=1
+		 	</if>
+			<if test="fType_eq !=null ">
+				and dic_type = #{fType_eq}
+			</if>
+			<if test="fPriority_eq != null">
+				and dic_auth_priority = #{fPriority_eq}
+			</if>
+			<if test="fId_eq != null">
+				and pri_id = #{fId_eq}
+			</if>
+			<if test="fRoleId_eq != null">
+				and rol_id = #{fRoleId_eq}
+			</if>
+			<if test="fFunId_eq != null">
+				and fun_id= #{fFunId_eq}
+			</if>
+		</trim>
+	</sql>
+	
+	<sql id="order">
+		<if test="sorts != null and sorts.size() != 0">
+			order by 
+			<foreach collection="sorts" separator="," index="key" item="val">
+				${key} ${val}
+			</foreach>
+		</if>
+	</sql>
+	
+	<insert id="insert" parameterType="com.huangtl.blogmgr.model.blog.Privilege">
+		insert into mgr_privilege(
+			pri_id,dic_auth_priority,fun_id,rol_id,dic_type
+		) values(
+			#{fId},#{fPriority},#{fFunId},#{fRoleId},#{fType}
+		);
+	</insert>
+	
+	<update id="update" parameterType="map">
+		update mgr_privilege 
+		<trim prefix="set" suffixOverrides=",">
+			<if test="fPriority !=null">dic_auth_priority = #{fPriority},</if>
+			<if test="fType !=null">dic_type = #{fType},</if>
+		</trim>
+		<include refid="where"/>
+	</update>
+	
+	 <update id="updateBatch" parameterType="list">
+		<foreach collection="list" item="privilege" index="index" open="" close="" separator=";">
+			update mgr_privilege 
+			<trim prefix="set" suffixOverrides=",">
+				<if test="privilege.fPriority !=null">dic_auth_priority = #{privilege.fPriority},</if>
+			</trim>
+			 where pri_id = #{privilege.fId}
+		</foreach>
+	</update> 
+	
+	<select id="selectList" resultMap="map" parameterType="map">
+		select 
+			<include refid="field"/>
+		from mgr_privilege
+			<include refid="where"/>
+	</select>
+	
+	<select id="selectCount"  resultType="long" parameterType="map">
+	  select count(pri_id) 
+	  from mgr_privilege
+		<include refid="where"/>
+	</select>
+	
+	<select id="selectPaging" resultMap="map" parameterType="map">
+		select 
+			<include refid="field"/>
+		from 
+			(select mu_Descr,mu_Name,mu_id 
+			   from mgr_menu where dic_Usability = 'ENABLE') a 
+			left join mgr_privilege b on a.mu_Id = b.fun_id
+			<include refid="where"/>
+			<include refid="order"/>
+		limit #{startIndex},#{pageSize}
+	</select>
+	
+</mapper>

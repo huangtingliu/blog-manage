@@ -12,6 +12,12 @@ Ext.define('BlogMgr.view.auth.AuthHomeToolBar', {
 						xtype : 'transparent_button',
 						glyph : 0xe6cb
 					},{
+						itemId : 'edit',
+						text : '修改角色',
+						handler : 'editRole',
+						xtype : 'transparent_button',
+						glyph : 0xe63c
+					},{
 						itemId : 'delete',
 						text : '删除角色',
 						handler:'deleteRole',

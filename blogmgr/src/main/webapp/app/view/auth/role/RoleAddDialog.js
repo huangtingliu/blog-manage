@@ -36,7 +36,7 @@ Ext.define('BlogMgr.view.auth.role.RoleAddDialog', {
 			items : {
 				xtype:'form',
 				itemId : 'roleAddForm',
-				url : '/blogmgr/auth/role_add.do',
+				url : '/blogmgr/role/add.do',
 				method : 'POST',
 				layout : 'anchor',
 				waitTitle:'处理中...',

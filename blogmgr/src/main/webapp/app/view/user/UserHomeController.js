@@ -18,7 +18,13 @@ Ext.define('BlogMgr.view.user.UserHomeController', {
 	addUser : function() {
 		Ext.create('BlogMgr.view.user.UserAddDialog').show();
 	},
-
+	/**
+	 * 修改用户
+	 */
+	editUser:function(){
+		 Ext.toast('UnSupport operater');
+	},
+	
 	/**
 	 * 删除用户
 	 */

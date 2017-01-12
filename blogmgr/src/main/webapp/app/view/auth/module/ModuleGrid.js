@@ -5,11 +5,13 @@ Ext.define('BlogMgr.view.auth.module.ModuleGrid',{
 	extend : 'Ext.grid.Panel',
 	uses : ['Ux.button.TransparentButton',
 	        'Ext.grid.filters.Filters'],
-	store : Ext.getStore('userPagingStore'),
+	store : Ext.getStore('privilegePagingStore'),
 	//controller : 'userhome',
 	alias:'widget.auth_modulegrid',
 	columnLines : true,
-	autoLoad : true,
+	autoLoad : false,
+	itemId:'moduleGrid',
+	//forceFit:true,
 	scrollable : true,
 	rowLines : true,
 	plugins : ['gridfilters', 'cellediting'],
@@ -23,6 +25,8 @@ Ext.define('BlogMgr.view.auth.module.ModuleGrid',{
 		injectCheckbox : 1
 	},
 	viewConfig : {
+		emptyText:'请选择左边的角色进行加载数据...',
+		deferEmptyText  :false,
 		stripeRows : true, // 奇偶行不同底色
 		enableTextSelection : true
 	},
@@ -31,23 +35,70 @@ Ext.define('BlogMgr.view.auth.module.ModuleGrid',{
 		xtype : 'rownumberer',
 		width : 37
 	}, {
-		header : '模块名称',
-		dataIndex : 'fName',
-		sortable:false,
-		editor : {
-			allowBlank : false,
-			vtype:'chinese',
-			maxLength:10
-		},
-		filter : {
-			type : 'string',
-			emptyText : '名称..'
+		header : '组件编号',
+		dataIndex : 'fFunId',
+		sortable:true,
+		width:'15%',
+		renderer:function(val){
+			 if(Ext.isEmpty(val)){return val;}
+			 var result = [];
+			 for(var i = 0; i<val.length;i=i+4){
+			 	var cor = (i+7).toString(16);
+			 	if(parseInt(cor,16)>16){
+			 		cor = (parseInt(cor,16)%9+7).toString(16);
+			 	}
+			 	result.push('<b style="color:#'+cor+'a7">'+val.substr(i,4)+'</b>');
+			 }
+			 return result.join('');
 		}
+	}, {
+		header : '组件名称',
+		dataIndex : 'funName',
+		width:'15%',
+		sortable:false
+	},  {
+		header : '组件类型',
+		dataIndex : 'fType',
+		sortable:true,
+		width:'11%',
+		renderer:function(val){
+			if(val=="VIEW"){
+				return '视图'
+			}else if(val="FUNCTION"){
+				return '功能'
+			}
+		}
+	},{
+		header : '组件状态',
+		dataIndex : 'fPriority',
+		sortable:true,
+		width:'11%',
+		editor:{
+			xtype : 'combo',
+			editable : false,
+			store : [['ENABLE', '可用'], ['LIMIT', '受约束'],['DISABLE', '禁用'],['CLOSE', '关闭']]
+	},
+		renderer:function(val){
+			if(val=="ENABLE"){
+				return '<b style="color:green">可用</b>';
+			}else if(val=="LIMIT"){
+				return '<b style="color:#7A7">受约束</b>';
+			}else if(val=='DISABLE'){
+				return '<b style="color:gray">禁用</b>';
+			}else if(val=='CLOSE'){
+				return '<b style="color:red">关闭</b>';
+			}
+		}
+	},{
+		header : '组件描述',
+		dataIndex : 'descr',
+		width:'31%',
+		sortable:false
 	}],
 	dockedItems : [{
 		xtype : 'pagingtoolbar',
-		store : Ext.getStore('userPagingStore'),
+		store : Ext.getStore('privilegePagingStore'),
 		dock : 'bottom',
-		displayInfo : false,
+		displayInfo : true,
 	}]
 });

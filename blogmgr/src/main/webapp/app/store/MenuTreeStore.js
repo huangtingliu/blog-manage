@@ -15,4 +15,11 @@ Ext.define('BlogMgr.store.MenuTreeStore', {
 				url : '/blogmgr/menu/tree.data'
 			}
 		});
-Ext.create('BlogMgr.store.MenuTreeStore');
+//菜单配置左边的菜单树
+Ext.create('BlogMgr.store.MenuTreeStore',{
+	storeId:'menuHomeTreeStore'
+});
+//菜单新增时的菜单树
+Ext.create('BlogMgr.store.MenuTreeStore',{
+	storeId:'treePickerStroe'
+});

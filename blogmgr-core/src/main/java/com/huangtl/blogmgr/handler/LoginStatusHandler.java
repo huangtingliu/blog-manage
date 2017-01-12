@@ -2,6 +2,7 @@ package com.huangtl.blogmgr.handler;
 
 import java.io.IOException;
 import java.io.Writer;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,9 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
+import com.alibaba.fastjson.JSONObject;
+import com.huangtl.blogmgr.model.blog.Role;
+import com.huangtl.blogmgr.model.blog.User;
 import com.huangtl.blogmgr.model.common.Message;
 
 /**
@@ -23,15 +27,38 @@ import com.huangtl.blogmgr.model.common.Message;
 public class LoginStatusHandler implements AuthenticationSuccessHandler, AuthenticationFailureHandler {
 	private final Logger logger = LoggerFactory.getLogger(LoginStatusHandler.class);
 
-	// 用户登录成功处理
+	// 用户登录成功处理：返回登录成功标识，并发送系统初始化使用的基础数据
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
 		logger.debug("用户登录成功");
-		// 认证成功后，获取用户信息并添加到session中
-		request.getSession().setAttribute("user", "admin");
+		response.setCharacterEncoding("utf-8");
 		Writer writer = response.getWriter();
-		writer.write(Message.success("登录成功").toJson());
+		
+		Message msg = Message.success("登录成功");
+		//base data
+		User user = (User) authentication.getPrincipal();
+		JSONObject data = new JSONObject();
+		data.put("userId", user.getfId());
+		data.put("userName", user.getfName());
+		data.put("userAccount", user.getfAccount());
+		data.put("userStatus", user.getfStatus());
+		data.put("userPhone", user.getfPhone());
+		data.put("userEmail", user.getfEmail());
+		
+		StringBuilder sb  = new StringBuilder();
+		for (Role role : user.getRoles()) {
+			sb.append(",").append(role.getfName());
+		}
+		sb.deleteCharAt(0);
+		data.put("userRole", sb.toString());
+		data.put("serversDate", new Date());
+		
+		String baseUrl = "http://" + request.getServerName()  + ":" + request.getServerPort() + request.getContextPath()+"/";      
+		data.put("baseUrl", baseUrl);
+		msg.setAnnex(data);
+		
+		writer.write(msg.toJson());
 		writer.flush();
 		writer.close();
 		writer = null;
