@@ -72,7 +72,7 @@ Ext.define('BlogMgr.view.menu.MenuHomeController', {
 			 */
 			deleteMenu:function(){
 				Ext.toast("待修改"); 
-				return;  
+				return;   
 				var me = this;
 				var menuGrid = this.lookupReference('menuGrid');
 				var menuPagingStore = menuGrid.getStore();
