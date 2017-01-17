@@ -3,7 +3,7 @@
  */
 Ext.define('BlogMgr.view.user.UserHome', {
 			id : 'userHome',
-			uses : ['Ux.button.TransparentButton',
+			requires : ['Ux.button.TransparentButton',
 					'BlogMgr.view.user.UserHomeToolBar',
 					'BlogMgr.view.user.UserHomeController',
 					'BlogMgr.view.user.UserHomeModel',

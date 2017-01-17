@@ -16,7 +16,8 @@ Ext.define('BlogMgr.model.Menu',{
         {name: 'fType', type: 'string'},
         {name: 'fUsability', type: 'string'},
         {name: 'fDescr', type: 'string'},
-        {name: 'fExpand', type: 'int'}
+        {name: 'fExpand', type: 'int'},
+        {name: 'authPriority', type: 'string'}
         
     ],
     validators: {

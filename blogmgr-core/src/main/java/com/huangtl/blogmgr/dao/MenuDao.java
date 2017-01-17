@@ -5,6 +5,7 @@ import java.util.List;
 import com.huangtl.blogmgr.core.dao.MybatisDao;
 import com.huangtl.blogmgr.dao.where.MenuSqlWhere;
 import com.huangtl.blogmgr.model.blog.Menu;
+import com.huangtl.blogmgr.model.blog.dictionary.AuthPriority;
 import com.huangtl.blogmgr.model.extjs.TreeNode;
 
 /**
@@ -27,5 +28,15 @@ public interface MenuDao extends MybatisDao<Menu> {
 	 */
 	List<TreeNode> selectTreeNodes(MenuSqlWhere where);
 	
+	
+	/**
+	 * 权限角色与权限查询菜单
+	 * @param roleId  必须，角色id
+	 * @param privilegeTypes 必须，权限类型。表示菜单持有的权限
+	 * @param parentId 可选，菜单父id
+	 * @param menuId	可选，菜单id
+	 * @return
+	 */
+	List<Menu> selectPrivilegeMenu(String[] roleIds,AuthPriority[] authPrioritys,String parentId,String menuId);
 	
 }

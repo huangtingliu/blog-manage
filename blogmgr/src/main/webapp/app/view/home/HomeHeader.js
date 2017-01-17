@@ -30,7 +30,7 @@ Ext.define('BlogMgr.view.home.HomeHeader',{
 	        	 padding:'5 0 0 0',
 	        	 bind:{
 	        	 	html:'用户：{userName} <br> 时间：{currentDate}'
-	         	},
+	         	}
 	         },{
 	        	 maxWidth: 1,
 	        	 bodyPadding : '5 0 5 50%',

@@ -48,7 +48,7 @@ public class PrivilegeServiceImpl implements PrivilegeService {
 	@Override
 	public Message editBatch(List<Privilege> privileges) {
 		int efftectRow = this.privilegeDao.updateBatch(privileges);
-		return Message.get(efftectRow, "成功修改"+efftectRow+"条记录。", "修改失败！");
+		return Message.get(efftectRow, "修改成功。", "修改失败！");
 	}
 	
 }

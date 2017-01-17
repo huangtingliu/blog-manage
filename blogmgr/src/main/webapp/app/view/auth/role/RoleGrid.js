@@ -19,7 +19,7 @@ Ext.define('BlogMgr.view.auth.role.RoleGrid',{
 		rowBodyTpl:new Ext.XTemplate('<p>{fDescr}</p>')
 	}],
 	viewModel : {
-		type : 'userhome'
+		//type : 'userhome'
 	},
 	viewConfig : {
 		stripeRows : true, // 奇偶行不同底色

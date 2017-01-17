@@ -17,7 +17,7 @@ Ext.define('BlogMgr.view.home.NavigatorMenu', {
 					proxy : {
 						type : 'menu_list',
 						extraParams : {
-							parentId : parentMenu
+							parentId : parentMenu 
 						}
 					}
 				}
@@ -29,8 +29,14 @@ Ext.define('BlogMgr.view.home.NavigatorMenu', {
 				sortable : false,
 				hideable : false,
 				width : '100%',
-				renderer : function(val, cell, model) {
-					return '<a><i class="iconfont">&#'+model.get('fGlyph')+'</i>&nbsp;' + val + '</a>';
+				renderer : function(val, cell, model,rowIndex,colIndex,store,view) {
+					if(view.ownerCt.authPriority=='DISABLE'){
+						return '&nbsp;<a style="color:gray"><i class="iconfont">&#'+model.get('fGlyph')+'</i>&nbsp;<b>' + val + '</b></a>';
+					}
+					if(model.get('authPriority')=='DISABLE'){
+						return '&nbsp;<a style="color:gray"><i class="iconfont">&#'+model.get('fGlyph')+'</i>&nbsp;<b>' + val + '</b></a>';
+					}
+						return '&nbsp;<a><i class="iconfont">&#'+model.get('fGlyph')+'</i>&nbsp;<b>' + val + '</b></a>';
 				}
 			}],
 			listeners : {

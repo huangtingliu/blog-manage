@@ -6,6 +6,14 @@ Ext.define('BlogMgr.view.home.NavigatorMenuController',{
     alias: 'controller.navigatormenu',
     init: function() {},
     onClickRow: function(row,record,tr,rowIndex,e) {
+    	if(this.getView().authPriority=='DISABLE'){
+    		Ext.toast("当前功能被禁用了！");
+    		return;
+    	}
+    	if(record.get('authPriority')=='DISABLE'){//当前菜单处理禁用状态
+    		Ext.toast("当前功能被禁用了！");
+    		return;
+    	}
         this.onLink({
         	id:record.get('fId'),
         	icon:record.get('fIcon'),

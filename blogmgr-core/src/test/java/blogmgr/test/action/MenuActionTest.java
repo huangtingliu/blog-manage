@@ -26,8 +26,8 @@ public class MenuActionTest {
 
 	@Test
 	public void testGetList() {
-		Object menu = menuAction.getList("A001", null);
-		System.out.println(JSON.toJSONString(menu,true));
+		//Object menu = menuAction.getList("A001", null);
+		//System.out.println(JSON.toJSONString(menu,true));
 	}
 
 	@Test

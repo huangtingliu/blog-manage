@@ -72,7 +72,7 @@ Ext.define('BlogMgr.view.menu.MenuGrid', {
 				dataIndex : 'fUsability',
 				sortable : false,
 				align : 'center',
-				width:'10%',
+				width:'8%',
 				renderer:function(val){
 					if (val == 'ENABLE') {
 						return '<b style="color:green">可用</b>';
@@ -86,7 +86,7 @@ Ext.define('BlogMgr.view.menu.MenuGrid', {
 				header : '视图类',
 				dataIndex : 'fViewClass',
 				sortable : false,
-				width:'19%',
+				width:'15%',
 				renderer:function(val){
 					if(Ext.isEmpty(val)){return '';}
 					return '<span data-qtip="'+val+'" >'+val+'</span>';
@@ -94,8 +94,8 @@ Ext.define('BlogMgr.view.menu.MenuGrid', {
 			}, {
 				header : '链接',
 				dataIndex : 'fUrl',
-				hidden : true,
-				width:'15%',
+				//hidden : true,
+				width:'14%',
 				sortable : false,
 				renderer:function(val){
 					if(Ext.isEmpty(val)){return '';}
@@ -105,7 +105,7 @@ Ext.define('BlogMgr.view.menu.MenuGrid', {
 				header : '序号',
 				dataIndex : 'fOrder',
 				align : 'center',
-				width:'9%'
+				width:'6%'
 			}, {
 				header : '类型',
 				dataIndex : 'fType',

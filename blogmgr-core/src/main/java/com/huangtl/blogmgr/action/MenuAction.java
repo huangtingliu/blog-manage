@@ -1,5 +1,6 @@
 package com.huangtl.blogmgr.action;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -8,6 +9,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,6 +20,9 @@ import com.huangtl.blogmgr.dao.where.MenuSqlWhere;
 import com.huangtl.blogmgr.dao.where.SqlWhere;
 import com.huangtl.blogmgr.dao.where.UserSqlWhere;
 import com.huangtl.blogmgr.model.blog.Menu;
+import com.huangtl.blogmgr.model.blog.Role;
+import com.huangtl.blogmgr.model.blog.User;
+import com.huangtl.blogmgr.model.blog.dictionary.AuthPriority;
 import com.huangtl.blogmgr.model.common.Message;
 import com.huangtl.blogmgr.model.common.Page;
 import com.huangtl.blogmgr.model.common.Page.Direction;
@@ -42,7 +47,7 @@ public class MenuAction extends BlogMgrAction {
 	private MenuService menuService;
 	
 	/**
-	 * 菜单分页查询
+	 * 菜单分页查询，无权限
 	 * @param pageNo 当前页号
 	 * @param pageSize 每页记录个数 
 	 * @param filter 查询过滤器 ,允许null<br>
@@ -102,7 +107,7 @@ public class MenuAction extends BlogMgrAction {
 	}
 	
 	/**
-	 * 获取多个菜单
+	 * 获取多个菜单，有权限
 	 * @param parentId  菜单的父id
 	 * @param menuId    根据菜单id查询
 	 * @return
@@ -115,19 +120,31 @@ public class MenuAction extends BlogMgrAction {
 			"fParentId":"B001",
 			"fType":"NAVIGATOR",
 			"fUrl":"",
-			"fUsability":"ENABLE",
+			"fUsability":"ENABLE",d
 			"fViewClass":""
 		}], success: true}
 	 * </pre>
 	 */
 	@ResponseBody
-	@RequestMapping("list.data")
-	public Object getList(String parentId,String menuId) {
-		SqlWhere param = new MenuSqlWhere()
-						  .fParentIdEqual(parentId)
-						  .fIdEqual(menuId);
-		List<Menu> menus = this.menuService.getDao().selectList(param,"fUsability");
+	@RequestMapping("authMenus.data")
+	public Object getAuthMenus(String menuId,String parentId) {
+		List<Menu> menus = null;
 		
+		//获取当前角色
+		@SuppressWarnings("unchecked")
+		List<Role> roles = (List<Role>) SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+		if(CollectionUtils.isEmpty(roles)){
+			User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			logger.error("当前用户:{}无权限",user.toString());
+			menus = new ArrayList<>();
+		}else{
+			String[] roleIds = new String[roles.size()];
+			for (int i = 0; i < roles.size(); i++) {
+				roleIds[i] = roles.get(i).getfId();
+			}
+			AuthPriority[] authPrioritys = {AuthPriority.ENABLE,AuthPriority.LIMIT,AuthPriority.DISABLE};
+			menus = this.menuService.getDao().selectPrivilegeMenu(roleIds, authPrioritys, parentId, menuId);
+		}
 		JSONObject data = new JSONObject();
 		data.put("menulist", menus);
 		data.put("success", true);
@@ -169,7 +186,7 @@ public class MenuAction extends BlogMgrAction {
 	}
 	
 	/**
-	 * 获取单个菜单
+	 * 获取单个菜单，无权限
 	 * @param id	菜单id
 	 * @return
 	 * <pre>
@@ -198,7 +215,6 @@ public class MenuAction extends BlogMgrAction {
 		
 		return menus.get(0);
 	}
-	
 	
 	/**
 	 * 添加一个菜单<br>

@@ -17,6 +17,9 @@
 		<result property="fExpand" column="mu_Expand"/>
 		<result property="fType" column="dic_Type"/>
 		<result property="fUsability" column="dic_Usability"/>
+		
+		<result property="authPriority" column="dic_auth_priority"/>
+		
 	</resultMap>
 	
 	<sql id="field">
@@ -140,6 +143,48 @@
 		from mgr_menu
 			<include refid="where"/>
 		order by mu_Order
+	</select>
+	
+	<select id="selectPrivilegeMenu" resultMap="mapper" parameterType="map">
+			select 
+				a.mu_Id as fId,a.mu_Name,a.mu_ParentId,a.mu_ViewClass,a.mu_Glyph,a.mu_Order as fOrder,
+				a.dic_Usability,a.mu_Url,a.mu_Descr,b.dic_auth_priority
+			from 
+				(select 
+					mu_Id,mu_Name,mu_ParentId,mu_ViewClass,mu_Glyph,mu_Order,dic_Usability,mu_Url,
+					mu_Descr
+				from mgr_menu
+					where dic_Usability = 'ENABLE'
+					<if test="parentId != null ">and mu_ParentId = #{parentId}</if>
+					<if test="menuId != null ">and mu_Id = #{menuId}</if>) a
+				left join (
+					 select fun_id,dic_auth_priority from mgr_privilege a
+					 where 
+					 pri_id = (
+						select pri_id from  mgr_privilege b
+						left join (
+							select * from sys_dictionary
+							where dt_type = 'AuthPriority'
+						) c on b.dic_auth_priority = c.dic_id
+						where b.fun_id = a.fun_id
+						and b.rol_id in
+						<foreach collection="roleIds" open="(" separator="," close=")" item="role">
+							#{role}
+						</foreach>
+						order by dic_code asc
+						limit 1
+					 )
+					 and a.rol_id in 
+					 <foreach collection="roleIds" open="(" separator="," close=")" item="role">
+							#{role}
+						</foreach>
+				)b on a.mu_id = b.fun_id
+			where 
+				b.dic_auth_priority in
+				<foreach collection="authPrioritys" open="(" separator="," close=")" item="priority">
+					#{priority}
+				</foreach>
+			order by mu_Order
 	</select>
 	
 	<select id="selectPaging" resultMap="mapper" parameterType="map">

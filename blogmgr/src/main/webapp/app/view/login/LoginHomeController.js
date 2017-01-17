@@ -22,7 +22,7 @@ Ext.define('BlogMgr.view.login.LoginHomeController', {
 					success : function(form, action) {
 						var baseData = action.result.annex
 						 if(window.sessionStorage){     
-							 sessionStorage.setItem('blgmgrBaseData',baseData);
+							 sessionStorage.setItem('blgmgrBaseData',JSON.stringify(baseData));
 						  }
 						window.location.href = '/blogmgr/home.htm';
 					},

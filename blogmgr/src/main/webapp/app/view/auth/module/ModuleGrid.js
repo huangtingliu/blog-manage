@@ -16,7 +16,7 @@ Ext.define('BlogMgr.view.auth.module.ModuleGrid',{
 	rowLines : true,
 	plugins : ['gridfilters', 'cellediting'],
 	viewModel : {
-		type : 'userhome'
+		//type : 'userhome'
 	},
 	selModel : {
 		selType : 'checkboxmodel',
@@ -73,6 +73,10 @@ Ext.define('BlogMgr.view.auth.module.ModuleGrid',{
 		dataIndex : 'fPriority',
 		sortable:true,
 		width:'11%',
+		tooltip:"<b style='color:green'>可用</b>:&nbsp;功能可完全使用;<br>"+
+		        "<b style='color:#7A7'>受约束</b>:功能只允操作本人的记录;<br>"+
+		        "<b style='color:gray'>禁用</b>:&nbsp;功能不可使用，但可见;<br>"+
+		        "<b style='color:red'>关闭</b>:&nbsp;功能完全不可用，且不可见.",
 		editor:{
 			xtype : 'combo',
 			editable : false,

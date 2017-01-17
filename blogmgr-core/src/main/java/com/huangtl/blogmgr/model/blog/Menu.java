@@ -8,6 +8,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
 
 import com.huangtl.blogmgr.model.blog.dictionary.CommonDictionary.Usability;
+import com.huangtl.blogmgr.model.blog.dictionary.AuthPriority;
 import com.huangtl.blogmgr.model.blog.dictionary.MenuType;
 import com.huangtl.blogmgr.model.common.ObjectValue;
 
@@ -31,6 +32,8 @@ public class Menu extends ObjectValue {
     private MenuType fType;			//菜单类型
     private Integer fExpand;		//是否展开{0：不展开，1：展开},默认0
     private Usability fUsability;	//是否可用，默认 ENABLE
+    
+    private AuthPriority authPriority;	//权限级别
     
     @NotBlank(message="菜单id为空")
 	public String getfId() {
@@ -110,5 +113,11 @@ public class Menu extends ObjectValue {
 	}
 	public void setfUsability(Usability fUsability) {
 		this.fUsability = fUsability;
+	}
+	public AuthPriority getAuthPriority() {
+		return authPriority;
+	}
+	public void setAuthPriority(AuthPriority authPriority) {
+		this.authPriority = authPriority;
 	}
 }

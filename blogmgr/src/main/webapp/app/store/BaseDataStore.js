@@ -13,7 +13,7 @@ Ext.create('BlogMgr.store.BaseDataStore');
 if(window.sessionStorage){ //如果本地存储可用，就从本地存储获取系统初始化的数据，该数据在登录时存储的    
 	var baseData = sessionStorage.getItem('blgmgrBaseData');
 	if(baseData){
-		Ext.getStore('baseDataStore').add(baseData);
+		Ext.getStore('baseDataStore').add(JSON.parse(baseData));
 	}else{
 		Ext.getStore('baseDataStore').load();
 	}
