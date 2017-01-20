@@ -1,6 +1,8 @@
 package com.huangtl.blogmgr.dao;
 
+import com.alibaba.fastjson.JSONObject;
 import com.huangtl.blogmgr.core.dao.MybatisDao;
+import com.huangtl.blogmgr.dao.where.PrivilegeSqlWhere;
 import com.huangtl.blogmgr.model.blog.Privilege;
 
 /**
@@ -11,4 +13,11 @@ import com.huangtl.blogmgr.model.blog.Privilege;
  */
 public interface PrivilegeDao extends MybatisDao<Privilege> {
 	
+	
+	/**
+	 * 查询权限，返回供extjs树使用
+	 * @param where
+	 * @return
+	 */
+	JSONObject selectPrivilegeTree(PrivilegeSqlWhere where,Integer treeDeep);
 }

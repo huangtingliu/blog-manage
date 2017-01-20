@@ -2,6 +2,7 @@ package com.huangtl.blogmgr.dao;
 
 import java.util.List;
 
+import com.alibaba.fastjson.JSONObject;
 import com.huangtl.blogmgr.core.dao.MybatisDao;
 import com.huangtl.blogmgr.dao.where.MenuSqlWhere;
 import com.huangtl.blogmgr.model.blog.Menu;
@@ -30,7 +31,7 @@ public interface MenuDao extends MybatisDao<Menu> {
 	
 	
 	/**
-	 * 权限角色与权限查询菜单
+	 * 根据权限查询菜单
 	 * @param roleId  必须，角色id
 	 * @param privilegeTypes 必须，权限类型。表示菜单持有的权限
 	 * @param parentId 可选，菜单父id
@@ -39,4 +40,13 @@ public interface MenuDao extends MybatisDao<Menu> {
 	 */
 	List<Menu> selectPrivilegeMenu(String[] roleIds,AuthPriority[] authPrioritys,String parentId,String menuId);
 	
+	/**
+	 * 根据权限查询菜单，并转成extjs树结构返回
+	 * @param roleId  必须，角色id
+	 * @param privilegeTypes 必须，权限类型。表示菜单持有的权限
+	 * @param parentId 可选，菜单父id
+	 * @param treeDeep	可选，树的深度,-1表示加载全部。默认为：1
+	 * @return
+	 */
+	JSONObject selectTreePrivilegeMenu(String[] roleIds,AuthPriority[] authPrioritys,String parentId,Integer treeDeep);
 }

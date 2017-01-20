@@ -20,7 +20,8 @@ public class Privilege extends ObjectValue {
 	private PrivilegeType fType;			//权限类型
 	
 	private String funName;			//功能名称
-	private String descr;			//功能描述
+	private String funParentId;		//功能父id
+	private String funDescr;		//功能描述
 	
 	public String getfId() {
 		return fId;
@@ -58,15 +59,17 @@ public class Privilege extends ObjectValue {
 	public void setFunName(String funName) {
 		this.funName = funName;
 	}
-	public String getDescr() {
-		return descr;
+	public String getFunParentId() {
+		return funParentId;
 	}
-	public void setDescr(String descr) {
-		this.descr = descr;
+	public void setFunParentId(String funParentId) {
+		this.funParentId = funParentId;
+	}
+	public String getFunDescr() {
+		return funDescr;
+	}
+	public void setFunDescr(String funDescr) {
+		this.funDescr = funDescr;
 	}
 	
-	public static void main(String[] args) {
-		Privilege p = new Privilege();
-		System.out.println(p.newId());
-	}
 }

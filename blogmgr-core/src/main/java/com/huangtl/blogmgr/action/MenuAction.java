@@ -152,6 +152,29 @@ public class MenuAction extends BlogMgrAction {
 		return data;
 	}
 	
+	@ResponseBody
+	@RequestMapping("authTreeMenus.data")
+	public Object getAuthTreeMenus(String parentId) {
+		//获取当前角色
+		JSONObject tree = null;
+		@SuppressWarnings("unchecked")
+		List<Role> roles = (List<Role>) SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+		if(CollectionUtils.isEmpty(roles)){
+			User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			logger.error("当前用户:{}无权限",user.toString());
+			tree = new JSONObject();
+		}else{
+			String[] roleIds = new String[roles.size()];
+			for (int i = 0; i < roles.size(); i++) {
+				roleIds[i] = roles.get(i).getfId();
+			}
+			AuthPriority[] authPrioritys = {AuthPriority.ENABLE,AuthPriority.LIMIT,AuthPriority.DISABLE};
+			tree = this.menuService.getDao().selectTreePrivilegeMenu(roleIds, authPrioritys, parentId, 2);
+		}
+		
+		return tree;
+	}
+	
 	/**
 	 * 获取菜单数据，用于构建成一棵树
 	 * @param parentId 根据父节点查询其子节点

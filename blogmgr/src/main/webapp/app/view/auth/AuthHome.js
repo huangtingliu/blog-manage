@@ -3,8 +3,10 @@
  */
 Ext.define('BlogMgr.view.auth.AuthHome',{
 	id:'authHome',
-	uses:['BlogMgr.view.auth.role.RoleGrid','BlogMgr.view.auth.module.ModuleGrid',
-	      'BlogMgr.view.auth.AuthHomeToolBar','BlogMgr.view.auth.AuthHomeController'],
+	uses:['BlogMgr.view.auth.role.RoleGrid',
+	      'BlogMgr.view.auth.module.ModuleTreeGrid',
+	      'BlogMgr.view.auth.AuthHomeToolBar',
+	      'BlogMgr.view.auth.AuthHomeController'],
 	extend : 'Ext.panel.Panel',
 	alias:'widget.authhome',
 	controller:'authhome',
@@ -28,7 +30,7 @@ Ext.define('BlogMgr.view.auth.AuthHome',{
 	    	 xtype:'auth_rolegrid'
 	     },{
 	    	 region : 'center',
-	    	 xtype:'auth_modulegrid'
+	    	 xtype:'auth_moduletreegrid'
 	     }     
 	]
 });

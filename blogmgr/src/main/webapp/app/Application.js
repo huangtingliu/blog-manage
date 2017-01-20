@@ -16,9 +16,9 @@ Ext.onReady(function() {
 Ext.application({
 			name : 'BlogMgr',
 			appFolder : 'app',
-			models : ['Menu','User','Tree','BaseData','Role','Privilege'],
+			models : ['Menu','User','Tree','BaseData','Role','Privilege','PrivilegeTree'],
 			stores : ['BaseDataStore','MenuListProxy','UserPagingStore','MenuTreeStore','MenuPagingStore',
-			          'RolePagingStroe','PrivilegePagingStore'],
+			          'RolePagingStroe','PrivilegePagingStore','PrivilegeTreeStore'],
 			controllers:['Main','Root'],
 			views:['BlogMgr.view.home.Navigator','BlogMgr.view.home.HomeHeader'],
 			paths : {

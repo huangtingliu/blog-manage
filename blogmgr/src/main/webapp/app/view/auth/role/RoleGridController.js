@@ -4,20 +4,18 @@
 Ext.define('BlogMgr.view.auth.role.RoleGridController', {
 			extend : 'Ext.app.ViewController',
 			alias : 'controller.auth_rolegrid',
+			selectedRecId:null,	//已经选中的记录id
 			onRowclick:function( grid , record , tr , rowIndex , e , eOpts){
-				//var moduleGrid = this.getView().ownerCt.down('auth_modulegrid');
-				var store = Ext.getStore('privilegePagingStore');
+//				var newSelectedRec = record.get('fId');
+//				if(newSelectedRec==this.selectedRecId){return;} //避免点击多次就加载多次记录的情况
+				//this.selectedRecId = newSelectedRec;
+				
+				var store = Ext.getStore('privilegeTreeStore');
 				store.addFilter({
 					property:'fRoleId',
 					value:record.get('fId'),
 					operator:'eq'
 				});
 				store.load();
-//				Ext.getStore('privilegePagingStore').load({
-//				    params : {
-//				    	filter : '[{"property":"fRoleId","value":"'+record.get('fId')+'","operator":"eq"}]'
-//					}
-//				});
-
 			}
 });

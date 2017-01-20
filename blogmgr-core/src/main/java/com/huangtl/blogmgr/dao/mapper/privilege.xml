@@ -11,13 +11,14 @@
 		<result property="fRoleId" column="rol_id"/>
 		<result property="fType" column="dic_type"/>
 		
-		<result property="descr" column="mu_Descr"/>
+		<result property="funDescr" column="mu_Descr"/>
 		<result property="funName" column="mu_Name"/>
+		<result property="funParentId" column="mu_ParentId"/>
 	</resultMap>
 	
 	<sql id="field">
 		pri_id ,dic_auth_priority as fPriority ,fun_id as fFunId ,dic_type as fType,rol_id,
-		mu_Name as funName,mu_Descr  as descr
+		mu_Name as funName,mu_Descr as funDescr,mu_ParentId as funParentId
 	</sql>
 	
 	<sql id="where">
@@ -39,6 +40,9 @@
 			</if>
 			<if test="fFunId_eq != null">
 				and fun_id= #{fFunId_eq}
+			</if>
+			<if test="funParentId_eq != null">
+				and mu_ParentId = #{funParentId_eq}
 			</if>
 		</trim>
 	</sql>
@@ -82,13 +86,18 @@
 	<select id="selectList" resultMap="map" parameterType="map">
 		select 
 			<include refid="field"/>
-		from mgr_privilege
+		from 
+			(select mu_Descr,mu_Name,mu_id,mu_ParentId
+			   from mgr_menu where dic_Usability = 'ENABLE') a 
+			left join mgr_privilege b on a.mu_Id = b.fun_id
 			<include refid="where"/>
 	</select>
 	
+	
+	
 	<select id="selectCount"  resultType="long" parameterType="map">
 	  select count(pri_id) 
-	  from mgr_privilege
+	 	from mgr_privilege
 		<include refid="where"/>
 	</select>
 	
@@ -96,7 +105,7 @@
 		select 
 			<include refid="field"/>
 		from 
-			(select mu_Descr,mu_Name,mu_id 
+			(select mu_Descr,mu_Name,mu_id,mu_ParentId
 			   from mgr_menu where dic_Usability = 'ENABLE') a 
 			left join mgr_privilege b on a.mu_Id = b.fun_id
 			<include refid="where"/>

@@ -60,4 +60,14 @@ public class PrivilegeSqlWhere extends SqlWhere {
 		this.put("fPriority_eq", fPriority);
 		return this;
 	}
+	
+	/**
+	 * 功能父id等于
+	 * @param funParentId
+	 * @return
+	 */
+	public PrivilegeSqlWhere funParentIdEqual(String funParentId){
+		this.put("funParentId_eq", funParentId);
+		return this;
+	}
 }

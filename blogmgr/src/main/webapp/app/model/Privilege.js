@@ -10,8 +10,9 @@ Ext.define('BlogMgr.model.Privilege',{
 	    {name: 'fFunId', type: 'string'},
 	    {name: 'fRoleId', type: 'string'},
 	    {name: 'fType', type: 'string'},
-	    {name: 'descr', type: 'string'},
-	    {name: 'funName', type: 'string'}
+	    {name: 'funDescr', type: 'string'},
+	    {name: 'funName', type: 'string'},
+	    {name: 'funParentId', type: 'string'}
     ],
     validators: {
     	fPriority: 'presence',

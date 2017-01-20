@@ -87,4 +87,20 @@ public class PrivilegeAction extends BlogMgrAction {
 		}
 		return message;
 	}
+	
+	@RequestMapping("tree.data")
+	@ResponseBody
+	public Object getTree(String parentId,FilterCollection filter){
+		if(parentId.equalsIgnoreCase("root")){parentId="";}
+		PrivilegeSqlWhere whereParam = new PrivilegeSqlWhere();
+		for (Filter f : filter) {
+			whereParam.putFilter(f);
+		}
+		whereParam.funParentIdEqual(parentId);
+		
+		JSONObject result = this.privilegeService.getDao().selectPrivilegeTree(whereParam, 1);
+		return result;
+	}
+	
+	
 }

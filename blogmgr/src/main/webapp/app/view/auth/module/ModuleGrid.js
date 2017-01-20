@@ -3,10 +3,8 @@
  */
 Ext.define('BlogMgr.view.auth.module.ModuleGrid',{
 	extend : 'Ext.grid.Panel',
-	uses : ['Ux.button.TransparentButton',
-	        'Ext.grid.filters.Filters'],
+	uses : ['Ext.grid.filters.Filters'],
 	store : Ext.getStore('privilegePagingStore'),
-	//controller : 'userhome',
 	alias:'widget.auth_modulegrid',
 	columnLines : true,
 	autoLoad : false,
@@ -15,6 +13,10 @@ Ext.define('BlogMgr.view.auth.module.ModuleGrid',{
 	scrollable : true,
 	rowLines : true,
 	plugins : ['gridfilters', 'cellediting'],
+	initComponent:function(){
+		Ext.getStore('privilegePagingStore').removeAll(true);//创建表格时清空所有 的数据
+		this.callParent();
+	},
 	viewModel : {
 		//type : 'userhome'
 	},

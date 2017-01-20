@@ -24,5 +24,4 @@
 		<include refid="com.huangtl.blogmgr.model.blog.Menu.where"/>
 		order by mu_Order
 	</select>
-	
 </mapper>

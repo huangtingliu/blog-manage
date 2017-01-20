@@ -61,9 +61,21 @@ Ext.define('Ext.ux.TreePicker', {
 
         /**
          * @cfg {Number} minPickerHeight
-         * The minimum height of the tree dropdown. Defaults to 100.
+         * The minimum height of the tree dropdown. Defaults to 200.
          */
         minPickerHeight: 200,
+        
+         /**
+         * @cfg {Number} pickerHeight
+         * The  height of the tree dropdown. Defaults to 200.
+         */
+        pickerHeight:200,
+        
+        /**
+         * @cfg {boolean} pickerManageHeight
+         * When true, the dock component layout writes height information to the panel's DOM elements based on its shrink wrap height calculation.
+         */
+        pickerManageHeight:false,
         
         /**
          * 参见Ext.tree.Panel useArrows 配置
@@ -148,7 +160,8 @@ Ext.define('Ext.ux.TreePicker', {
                 maxHeight: me.maxPickerHeight,
                 useArrows:me.useArrows,
                 rootVisible:me.rootVisible,
-                manageHeight: false,
+                height:me.pickerHeight,
+                manageHeight:me.pickerManageHeight,
                 shadow: false,
                 root:me.root,
                 listeners: {
