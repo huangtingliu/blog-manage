@@ -44,6 +44,7 @@ public class PrivilegeDaoImpl extends  MybatisDaoAdaptor<Privilege> implements P
 		
 		for (Privilege privilege : privileges) {
 			JSONObject node = new JSONObject();
+			node.put("fId", privilege.getfId());
 			node.put("funName", privilege.getFunName());
 			node.put("fPriority", privilege.getfPriority());
 			node.put("fType", privilege.getfType());

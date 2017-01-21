@@ -5,6 +5,7 @@ Ext.define('BlogMgr.model.PrivilegeTree',{
 	extend:'Ext.data.TreeModel',
 	idProperty:'fFunId',	//主键标识
 	 fields: [
+	    {name: 'fId', type: 'string'},     
 	    {name: 'fFunId', type: 'string'},
 	    {name: 'funName', type: 'string'},
 	    {name: 'fPriority', type: 'string'},

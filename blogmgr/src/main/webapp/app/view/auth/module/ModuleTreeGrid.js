@@ -91,11 +91,11 @@ Ext.define('BlogMgr.view.auth.module.ModuleTreeGrid',{
 				return '<b style="color:red">关闭</b>';
 			}
 		}
-	}],
-	dockedItems : [{
-		xtype : 'pagingtoolbar',
-		store : Ext.getStore('privilegeTreeStore'),
-		dock : 'bottom',
-		displayInfo : true,
 	}]
+//	dockedItems : [{
+//		xtype : 'pagingtoolbar',
+//		store : Ext.getStore('privilegeTreeStore'),
+//		dock : 'bottom',
+//		displayInfo : true,
+//	}]
 });

@@ -77,7 +77,7 @@ Ext.define('BlogMgr.view.auth.AuthHomeController', {
 	 */
 	saveRecord : function() {
 		var _this = this;
-		var grid = this.getView().getComponent('moduleGrid');
+		var grid = this.getView().getComponent('moduleTreeGrid');
 		var store = grid.getStore();
 		var m = store.getModifiedRecords();
 		if(m.length==0){
@@ -86,7 +86,7 @@ Ext.define('BlogMgr.view.auth.AuthHomeController', {
 		var jsonArray = [];
 		Ext.each(m, function(privilege) {
 					var updateField = privilege.getChanges();
-					updateField.fId = privilege.getId();
+					updateField.fId = privilege.get('fId');
 					jsonArray.push(updateField);
 				});
 		_this.mask.msg = "提交中...";
@@ -105,7 +105,6 @@ Ext.define('BlogMgr.view.auth.AuthHomeController', {
 							Ext.toast(result);
 							if (result.success) {
 								store.commitChanges(); // 消除修改标记
-								// store.reload();
 							}
 						} else {
 							Ext.toast({

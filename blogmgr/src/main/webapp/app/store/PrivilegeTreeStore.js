@@ -21,14 +21,21 @@ Ext.define('BlogMgr.store.PrivilegeTreeStore', {
 				extraParams:{
 					filter:'[{"property":"fRoleId","value":" ","operator":"eq"}]'
 				},
-//				reader : {
-//					type : 'json',
-//					rootProperty : function(val){
-//						return val.privilegetree;
-//					},
-//					totalProperty : 'total',
-//					messageProperty : 'message',
-//					successProperty : 'success'
-//				}
+				reader : {
+					type : 'json',
+					rootProperty : function(data){
+//						if(data.privilegetree){
+//							return data.privilegetree;
+//						}else if(data.children){
+//							return data.children;
+//						}else{
+//							return data;
+//						}
+						return data.items || data.children;
+					},
+					totalProperty : 'total',
+					messageProperty : 'message',
+					successProperty : 'success'
+				}
 			}
 		});
