@@ -1,5 +1,5 @@
 /**
- * 权限配置 右边的模块列表
+ * 权限配置 右边的模块列表表格 - 【deprecated】
  */
 Ext.define('BlogMgr.view.auth.module.ModuleGrid',{
 	extend : 'Ext.grid.Panel',
@@ -80,10 +80,10 @@ Ext.define('BlogMgr.view.auth.module.ModuleGrid',{
 		        "<b style='color:gray'>禁用</b>:&nbsp;功能不可使用，但可见;<br>"+
 		        "<b style='color:red'>关闭</b>:&nbsp;功能完全不可用，且不可见.",
 		editor:{
-			xtype : 'combo',
-			editable : false,
-			store : [['ENABLE', '可用'], ['LIMIT', '受约束'],['DISABLE', '禁用'],['CLOSE', '关闭']]
-	},
+				xtype : 'combo',
+				editable : false,
+				store : [['ENABLE', '可用'], ['LIMIT', '受约束'],['DISABLE', '禁用'],['CLOSE', '关闭']]
+		},
 		renderer:function(val){
 			if(val=="ENABLE"){
 				return '<b style="color:green">可用</b>';

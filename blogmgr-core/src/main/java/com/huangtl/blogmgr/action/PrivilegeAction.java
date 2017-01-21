@@ -39,6 +39,14 @@ public class PrivilegeAction extends BlogMgrAction {
 	@Resource
 	private PrivilegeService privilegeService;
 	
+	/**
+	 * 表格-分页查询权限
+	 * @param pageNo
+	 * @param pageSize
+	 * @param filter
+	 * @param sort
+	 * @return
+	 */
 	@RequestMapping("paging.data")
 	@ResponseBody
 	public Object getPaging(Integer pageNo,Integer pageSize,
@@ -68,9 +76,14 @@ public class PrivilegeAction extends BlogMgrAction {
 		return data;
 	}
 	
+	/**
+	 * 批量修改权限
+	 * @param privileges
+	 * @return
+	 */
 	@RequestMapping("editbatch.do")
 	@ResponseBody
-	public Object editBatchUser(@Json List<Privilege> privileges){
+	public Object editBatchPrivilege(@Json List<Privilege> privileges){
 		Message message = null;
 		if(CollectionUtils.isEmpty(privileges)){return Message.error("无效参数");}
 		for (Privilege privilege : privileges) {
@@ -88,18 +101,30 @@ public class PrivilegeAction extends BlogMgrAction {
 		return message;
 	}
 	
+	/**
+	 * 树型分页查询权限
+	 * @param parentId 
+	 * @param filter
+	 * @return
+	 */
 	@RequestMapping("tree.data")
 	@ResponseBody
-	public Object getTree(String parentId,FilterCollection filter){
+	public Object getTree(Integer pageNo,Integer pageSize,String parentId,FilterCollection filter
+			,SortCollection sort){
 		if(parentId.equalsIgnoreCase("root")){parentId="";}
 		PrivilegeSqlWhere whereParam = new PrivilegeSqlWhere();
 		for (Filter f : filter) {
 			whereParam.putFilter(f);
 		}
 		whereParam.funParentIdEqual(parentId);
+		JSONObject tree = this.privilegeService.getDao().selectPrivilegeTree(whereParam, 2);
 		
-		JSONObject result = this.privilegeService.getDao().selectPrivilegeTree(whereParam, 1);
-		return result;
+		JSONObject data = new JSONObject();
+		data.put("privilegetree", tree);
+		data.put("total", 10);
+		data.put("success", true);
+		data.put("message", "获取成功个数 "+10);
+		return tree;
 	}
 	
 	

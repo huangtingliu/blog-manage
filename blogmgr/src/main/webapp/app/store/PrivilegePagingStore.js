@@ -1,5 +1,5 @@
 /**
- * 权限分页 store
+ * 表格权限分页 store
  */
 Ext.define('BlogMgr.store.PrivilegePagingStore',{
 	model : 'BlogMgr.model.Privilege',

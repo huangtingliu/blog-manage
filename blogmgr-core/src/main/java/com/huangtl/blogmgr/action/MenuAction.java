@@ -152,6 +152,11 @@ public class MenuAction extends BlogMgrAction {
 		return data;
 	}
 	
+	/**
+	 * 树型结构查询权限菜单
+	 * @param parentId
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping("authTreeMenus.data")
 	public Object getAuthTreeMenus(String parentId) {
