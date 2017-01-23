@@ -50,11 +50,16 @@ Ext.define('BlogMgr.view.menu.MenuFactory', {
 									result.toolBarMenus.push(item);
 				                });
 		                }
-		            }  
+		            },
+		            failure: function(response, opts) {
+		            	Ext.toast({
+							type : 'exception',
+							content : '会话超时，请重新登录'
+						});
+		            	throw exception('会话超时，请重新登录');
+		            }
 		        });
 		        return result;
 		}
-
 	}
-
 });

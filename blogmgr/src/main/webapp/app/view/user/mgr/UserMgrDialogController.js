@@ -1,9 +1,9 @@
 /**
  * 用户添加对话窗口控制器
  */
-Ext.define('BlogMgr.view.user.UserAddDialogController', {
+Ext.define('BlogMgr.view.user.mgr.UserMgrDialogController', {
 			extend : 'Ext.app.ViewController',
-			alias : 'controller.useradd',
+			alias : 'controller.user_mgr_dialog',
 			init : function() {
 				this.mask = new Ext.LoadMask({
 					msg : '删除中...',
@@ -12,7 +12,7 @@ Ext.define('BlogMgr.view.user.UserAddDialogController', {
 			},
 			userInfoSubmit : function() { // 用户信息提交
 				var _this = this;
-				var form = this.getView().getComponent('userAddTabPanel').getComponent("userInfoForm");
+				var form = this.getView().getComponent('userMgrTabPanel').getComponent("userInfoForm");
 				form.submit({
 							submitEmptyText:false,
 							success : function(form, action) {
@@ -31,6 +31,8 @@ Ext.define('BlogMgr.view.user.UserAddDialogController', {
 			},
 			closeDialog:function(){	//关闭对话窗
 				this.getView().close();
+			},
+			tabChange:function(tabPanel , newCard , oldCard , eOpts){
+				//console.info(newCard);
 			}
-
 		});

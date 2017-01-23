@@ -1,7 +1,5 @@
 package com.huangtl.blogmgr.action;
 
-import java.util.UUID;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -36,12 +34,6 @@ public class SecurityAction extends BlogMgrAction  {
 	private ModelAndView accessDenied(){
 		ModelAndView view = new ModelAndView("noauth");
 		return view;
-	}
-	
-	
-	public static void main(String[] args) {
-		String uuid = UUID.randomUUID().toString();
-		System.out.println(uuid.replace("-", ""));
 	}
 	
 }

@@ -5,7 +5,7 @@ Ext.define('BlogMgr.view.auth.role.RoleGrid',{
 	extend : 'Ext.grid.Panel',
 	uses : ['Ux.button.TransparentButton','BlogMgr.view.auth.role.RoleGridController',
 	        'Ext.grid.filters.Filters'],
-	store : Ext.getStore('rolePagingStroe'),
+	store : Ext.getStore('rolePagingStore'),
 	alias:'widget.auth_rolegrid',
 	controller:'auth_rolegrid',
 	columnLines : true,

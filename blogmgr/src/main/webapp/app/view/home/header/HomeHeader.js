@@ -1,8 +1,8 @@
 /***
  * 首页头部
  */
-Ext.define('BlogMgr.view.home.HomeHeader',{
-	uses:['BlogMgr.view.home.HomeHeaderController','BlogMgr.view.home.HomeHeaderModel'],
+Ext.define('BlogMgr.view.home.header.HomeHeader',{
+	uses:['BlogMgr.view.home.header.HomeHeaderController','BlogMgr.view.home.header.HomeHeaderModel'],
 	id:'home_header',
 	extend : 'Ext.panel.Panel',
 	alias : 'widget.home_header',

@@ -1,8 +1,8 @@
 /**
  * 导向栏菜单
  */
-Ext.define('BlogMgr.view.home.NavigatorMenu', {
-			uses : ['BlogMgr.view.home.NavigatorMenuController'],
+Ext.define('BlogMgr.view.home.left.NavigatorMenu', {
+			uses : ['BlogMgr.view.home.left.NavigatorMenuController'],
 			extend : 'Ext.grid.Panel',
 			alias : ['widget.navigatormenu'],
 			title : '导航菜单',

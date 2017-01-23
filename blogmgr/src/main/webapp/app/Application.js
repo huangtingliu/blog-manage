@@ -18,9 +18,9 @@ Ext.application({
 			appFolder : 'app',
 			models : ['Menu','User','Tree','BaseData','Role','Privilege','PrivilegeTree'],
 			stores : ['BaseDataStore','MenuListProxy','UserPagingStore','MenuTreeStore','MenuPagingStore',
-			          'RolePagingStroe','PrivilegePagingStore','PrivilegeTreeStore'],
+			          'RolePagingStore','PrivilegePagingStore','PrivilegeTreeStore','RoleListStore'],
 			controllers:['Main','Root'],
-			views:['BlogMgr.view.home.Navigator','BlogMgr.view.home.HomeHeader'],
+			views:['BlogMgr.view.home.left.Navigator','BlogMgr.view.home.header.HomeHeader'],
 			paths : {
 				'Ext' : 'framework/Ext',
 				'Ux' : 'framework/Ux'
@@ -45,6 +45,23 @@ Ext.application({
 								}
 								var result = Ext.String.urlAppend(url, param);
 								return result;
+							},
+							/**
+							 * @param property  参数见 BlogMgr.model.BaseData 
+							 * ① baseUrl
+							 * ② serversDate
+							 * ③ userAccount
+							 * ④ userEmail
+							 * ⑤ userId
+							 * ⑥ userName
+							 * ⑦ userPhone
+							 * ⑧ userRole
+							 * ⑨ userStatus
+							 */
+							baseData:function(property){
+								var store = Ext.getStore('baseDataStore');
+								var data = store.getData().first()
+								return data.get(property);
 							}
 						});
 						

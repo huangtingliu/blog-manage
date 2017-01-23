@@ -1,17 +1,22 @@
 /**
  * 添加后台用户对话窗口
  */
-Ext.define('BlogMgr.view.user.UserAddDialog', {
-			id : 'userAddDialog',
-			uses:['BlogMgr.view.user.UserInfoForm',
-				  'BlogMgr.view.user.UserAuthForm',
-				  'BlogMgr.view.user.UserAddDialogController'],
+Ext.define('BlogMgr.view.user.mgr.UserMgrDialog', {
+			id : 'userMgrDialog',
+			alias : ['widget.user_mgr_dialog'],
+			requires:[
+			      'BlogMgr.view.user.mgr.UserInfoForm',
+				  'BlogMgr.view.user.mgr.UserAuthForm',
+				  'BlogMgr.view.user.mgr.UserMgrDialogController',
+				  'BlogMgr.view.user.mgr.UserMgrDialogModel'],
 			extend : 'Ext.window.Window',
-			alias : ['widget.useradd'],
 			layout : 'fit',
 			title : '用户添加',
 			maximizable : true, // 最大化
-			controller:'useradd',
+			controller:'user_mgr_dialog',
+			viewModel : {
+				type : 'user_mgr_dialog'
+			},
 			bodyStyle : 'padding : 2px 2px 0',
 			shadowOffset : 30, // 投影效果
 			modal : true, // 模态
@@ -23,7 +28,9 @@ Ext.define('BlogMgr.view.user.UserAddDialog', {
 			},
 			tools : [{
 						type : 'help',
-						tooltip : '帮助'
+						bind:{
+							tooltip : '{toolTip}'
+						}
 					}],
 			buttons : [{
 				itemId : 'save',
@@ -37,16 +44,20 @@ Ext.define('BlogMgr.view.user.UserAddDialog', {
 				handler:'closeDialog'
 			}],
 			items : [{
-						itemId : 'userAddTabPanel',
+						itemId : 'userMgrTabPanel',
 						xtype : 'tabpanel',
 						frame : false,
 						border : false,
 						bodyPadding : '5 5 5 5',
+						reference:'userMgrTabPanel',
 						plain : true,
 						items : [{
 									xtype : 'user_userinfoform'
 								},{
 									xtype : 'user_userauthform'
-								}]
+								}],
+						listeners:{
+							tabchange:'tabChange'
+						}
 					}]
 		});

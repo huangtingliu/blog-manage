@@ -6,11 +6,43 @@ package com.huangtl.blogmgr.core.dao;
  * @author PraiseLord
  */
 public enum Operator{
-	ne,		//不等于
-	eq,		//等于
-	in,		//包含
-	like,	//单边模糊
-	likein, //双边模糊
-	lt,		//小于
-	gt,		//大于
+	/**
+	 * 不等于
+	 */
+	ne,		
+	/**
+	 * 等于
+	 */
+	eq,		
+	/**
+	 * 包含
+	 */
+	in,		
+	/**
+	 * 单边模糊
+	 */
+	like,	
+	/**
+	 * 双边模糊
+	 */
+	likein, 
+	/**
+	 * 小于
+	 */
+	lt,		
+	/**
+	 * 大于
+	 */
+	gt,		
+	/**
+	 * 不包含
+	 */
+	nin;
+	
+	public String eval(String field){
+		if(field==null||field.trim().equals("")){
+			throw new IllegalStateException("参数不能为空");
+		}
+		return field+"_"+this.toString();
+	}
 }

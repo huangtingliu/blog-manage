@@ -5,32 +5,12 @@ Ext.define('BlogMgr.view.auth.AuthHomeToolBar', {
 		    uses:['Ux.input.GridSearchField'],
 			extend : 'Ext.toolbar.Toolbar',
 			alias : 'widget.authhome_toolbar',
+			initComponent : function() {
+				var viewModel = this.up('authhome').getViewModel();// 把ViewModel中生成的菜单items加到此toolbar的items中
+				this.items = viewModel.get('toolBarMenus').concat(this.items);
+				this.callParent();
+			},
 			items : [{
-						itemId : 'add',
-						text : '新增角色',
-						handler : 'addRole',
-						xtype : 'transparent_button',
-						glyph : 0xe6cb
-					},{
-						itemId : 'edit',
-						text : '修改角色',
-						handler : 'editRole',
-						xtype : 'transparent_button',
-						glyph : 0xe63c
-					},{
-						itemId : 'delete',
-						text : '删除角色',
-						handler:'deleteRole',
-						xtype:'transparent_button',
-						glyph : 0xe62d
-					},{
-						itemId : 'save',
-						text : '保存编辑',
-						handler:'saveRecord',
-						xtype:'transparent_button',
-						tooltip:'保存编辑好的角色数据',
-						glyph : 0xe650
-					},{
 						width : 110,
 						blurWidth : 130,
 						xtype : 'gridsearchfield',

@@ -1,7 +1,7 @@
 /**
  * 添加后台用户信息表单
  */
-Ext.define('BlogMgr.view.user.UserInfoForm', {
+Ext.define('BlogMgr.view.user.mgr.UserInfoForm', {
 	itemId : 'userInfoForm',
 	extend : 'Ext.form.Panel',
 	alias : ['widget.user_userinfoform'],
@@ -101,6 +101,7 @@ Ext.define('BlogMgr.view.user.UserInfoForm', {
 										fieldLabel : '名称',
 										name : 'fName',
 										vtype:'chinese',
+										reference:'aaaaaaa',
 										maxLength:10,
 										emptyText:'必须是中文'
 									}, {
@@ -231,7 +232,8 @@ Ext.define('BlogMgr.view.user.UserInfoForm', {
 					labelAlign : 'right',
 					growMin : 100,
 					emptyText:'最多150个字',
-					name : 'fDescr'
+					name : 'fDescr',
+					padding:'0 0 21 0'
 				}]
 			}]
 

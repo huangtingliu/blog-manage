@@ -1,7 +1,7 @@
 /**
  * 导航栏菜单控制器
  */
-Ext.define('BlogMgr.view.home.NavigatorMenuController',{
+Ext.define('BlogMgr.view.home.left.NavigatorMenuController',{
 	extend: 'Ext.app.ViewController',
     alias: 'controller.navigatormenu',
     init: function() {},

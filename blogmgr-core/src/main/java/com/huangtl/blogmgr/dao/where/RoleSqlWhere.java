@@ -1,5 +1,6 @@
 package com.huangtl.blogmgr.dao.where;
 
+import com.huangtl.blogmgr.core.dao.Operator;
 import com.huangtl.blogmgr.model.blog.dictionary.CommonDictionary.Usability;
 
 @SuppressWarnings("serial")
@@ -9,9 +10,30 @@ public class RoleSqlWhere extends SqlWhere {
 	 * @param roleId
 	 */
 	public RoleSqlWhere fIdEqual(String roleId){
-		this.put("fId_eq", roleId);
+		this.put(Operator.eq.eval("fId"), roleId);
 		return this;
 	}
+	
+	/**
+	 * 查询的角色为用户所持有的权限
+	 * @return
+	 */
+	public RoleSqlWhere fromUser(String userId){
+		this.put(Operator.eq.eval("userId"), userId);
+		return this;
+	}
+	
+	/**
+	 * 查询的角色不为用户所持有的权限
+	 * @param userId
+	 * @return
+	 */
+	public RoleSqlWhere notFromUser(String userId){
+		this.put(Operator.ne.eval("userId"), userId);
+		return this;
+	}
+	
+	
 	/**
 	 * 指定角色id存在于
 	 * @param roleIds
@@ -19,7 +41,7 @@ public class RoleSqlWhere extends SqlWhere {
 	 */
 	public RoleSqlWhere fIdIn(String... roleIds){
 		if(roleIds.length==0){return this;}
-		this.put("fId_in", roleIds);
+		this.put(Operator.in.eval("fId"), roleIds);
 		return this;
 	}
 	/**
@@ -28,7 +50,7 @@ public class RoleSqlWhere extends SqlWhere {
 	 * @return
 	 */
 	public RoleSqlWhere fStatusEqual(Usability fStatus){
-		this.put("fStatus_eq", fStatus);
+		this.put(Operator.eq.eval("fStatus"), fStatus);
 		return this;
 	}
 	
@@ -38,7 +60,7 @@ public class RoleSqlWhere extends SqlWhere {
 	 * @return
 	 */
 	public RoleSqlWhere fStatusNotEqual(Usability fStatus){
-		this.put("fStatus_ne", fStatus);
+		this.put(Operator.ne.eval("fStatus"), fStatus);
 		return this;
 	}
 	
@@ -48,7 +70,7 @@ public class RoleSqlWhere extends SqlWhere {
 	 * @return
 	 */
 	public RoleSqlWhere fNameLike(String fName){
-		this.like("fName_like", fName);
+		this.like(Operator.like.eval("fName"), fName);
 		return this;
 	}
 	/**
@@ -57,7 +79,7 @@ public class RoleSqlWhere extends SqlWhere {
 	 * @return
 	 */
 	public RoleSqlWhere fCodeEqual(Integer fCode){
-		this.put("fCode_eq", fCode);
+		this.put(Operator.eq.eval("fCode"), fCode);
 		return this;
 	}
 	

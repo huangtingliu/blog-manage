@@ -1,7 +1,7 @@
 /**
  * 首页头部控制器
  */
-Ext.define('BlogMgr.view.home.HomeHeaderController',{
+Ext.define('BlogMgr.view.home.header.HomeHeaderController',{
 	extend:'Ext.app.ViewController',
 	alias:'controller.home_header',
 	logout:function(){

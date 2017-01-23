@@ -1,11 +1,11 @@
 /**
  * home 面的导航栏组件
  */
-Ext.define('BlogMgr.view.home.Navigator', {
+Ext.define('BlogMgr.view.home.left.Navigator', {
 			id:'home_navigator',
-			uses : ['BlogMgr.view.home.NavigatorModel',
-					'BlogMgr.view.home.NavigatorController',
-					'BlogMgr.view.home.NavigatorMenu'],
+			uses : ['BlogMgr.view.home.left.NavigatorModel',
+					'BlogMgr.view.home.left.NavigatorController',
+					'BlogMgr.view.home.left.NavigatorMenu'],
 			extend : 'Ext.panel.Panel',
 			alias : 'widget.navigator',
 			viewModel:'navigator',

@@ -41,6 +41,7 @@ Ext.define('BlogMgr.view.user.UserHome', {
 							header : '名称',
 							dataIndex : 'fName',
 							sortable:false,
+							width : '11%',
 							editor : {
 								allowBlank : false,
 								vtype:'chinese',
@@ -54,6 +55,7 @@ Ext.define('BlogMgr.view.user.UserHome', {
 							header : '账号',
 							dataIndex : 'fAccount',
 							sortable:false,
+							width : '11%',
 							filter : {
 								type : 'string',
 								emptyText : '账号..'
@@ -63,6 +65,7 @@ Ext.define('BlogMgr.view.user.UserHome', {
 							dataIndex : 'fStatus',
 							align : 'center',
 							sortable:false,
+							width : '7%',
 							renderer : function(val) {
 								if (val == 'ENABLE') {
 									return '<b style="color:green">可用</b>';
@@ -89,11 +92,17 @@ Ext.define('BlogMgr.view.user.UserHome', {
 										}]
 							}
 						}, {
+							header : '用户权限',
+							dataIndex : 'auths',
+							width : '13%',
+							sortable:false
+						},{
 							header : '性别',
 							dataIndex : 'fGender',
 							hidden : true,
 							align : 'center',
 							sortable:false,
+							width : '7%',
 							editor : {
 								xtype : 'combo',
 								editable : false,
@@ -129,6 +138,7 @@ Ext.define('BlogMgr.view.user.UserHome', {
 							header : '电话',
 							dataIndex : 'fPhone',
 							sortable:false,
+							width : '12%',
 							filter : {
 								type : 'string',
 								emptyText : '电话..'
@@ -142,6 +152,7 @@ Ext.define('BlogMgr.view.user.UserHome', {
 							header : '邮箱',
 							dataIndex : 'fEmail',
 							sortable:false,
+							width : '12%',
 							filter : {
 								operator : 'eq',
 								type : 'string',
@@ -160,8 +171,9 @@ Ext.define('BlogMgr.view.user.UserHome', {
 						}, {
 							header : '创建日期',
 							dataIndex : 'fCreateDate',
-							width : '10%',
+							width : '11%',
 							align : 'center',
+							hidden : true,
 							renderer : function(val) {
 								return Ext.Date.format(new Date(val), 'Y-m-d');
 							},

@@ -2,7 +2,7 @@
  * 用户列表 - 视图控制器
  */
 Ext.define('BlogMgr.view.user.UserHomeController', {
-	uses : ['BlogMgr.view.user.UserAddDialog'],
+	uses : ['BlogMgr.view.user.mgr.UserMgrDialog'],
 	extend : 'Ext.app.ViewController',
 	alias : 'controller.userhome',
 	init : function() {
@@ -16,7 +16,7 @@ Ext.define('BlogMgr.view.user.UserHomeController', {
 	 * 新增用户,弹出对话框
 	 */
 	addUser : function() {
-		Ext.create('BlogMgr.view.user.UserAddDialog').show();
+		Ext.create('BlogMgr.view.user.mgr.UserMgrDialog').show();
 	},
 	/**
 	 * 修改用户

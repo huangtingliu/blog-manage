@@ -1,7 +1,7 @@
 /**
  * 首页头部视图模型数据
  */
-Ext.define('BlogMgr.view.home.HomeHeaderModel', {
+Ext.define('BlogMgr.view.home.header.HomeHeaderModel', {
 	extend : 'Ext.app.ViewModel',
 	alias : 'viewmodel.home_header',
 	data : Ext.getStore('baseDataStore').getData().items[0].data,

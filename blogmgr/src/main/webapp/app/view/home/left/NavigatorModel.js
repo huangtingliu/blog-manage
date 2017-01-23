@@ -1,7 +1,7 @@
 /**
  * 导航栏view model
  */
-Ext.define('BlogMgr.view.home.NavigatorModel', {
+Ext.define('BlogMgr.view.home.left.NavigatorModel', {
 			extend : 'Ext.app.ViewModel',
 			alias : 'viewmodel.navigator',
 			stores : {
@@ -18,12 +18,12 @@ Ext.define('BlogMgr.view.home.NavigatorModel', {
 							if(success){
 								var navigator = Ext.getCmp('home_navigator');
 								if(Ext.isEmpty(navigator)){
-									Ext.log({msg:"[BlogMgr.view.home.NavigatorModel]无法根据[home_navigator]找到导航栏！",level:'error'});
+									Ext.log({msg:"[BlogMgr.view.home.left.NavigatorModel]无法根据[home_navigator]找到导航栏！",level:'error'});
 									return;
 								}
 								navigator.fireEvent('proxyLoad',records);
 							}else{
-								Ext.log({msg:"[BlogMgr.view.home.NavigatorModel]导航栏数据加载失败！",level:'error'});
+								Ext.log({msg:"[BlogMgr.view.home.left.NavigatorModel]导航栏数据加载失败！",level:'error'});
 							}
 						}
 					}

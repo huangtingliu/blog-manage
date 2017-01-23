@@ -3,6 +3,7 @@
  */
 Ext.define('BlogMgr.view.auth.AuthHome',{
 	id:'authHome',
+	requires:['BlogMgr.view.auth.AuthHomeModel'],
 	uses:['BlogMgr.view.auth.role.RoleGrid',
 	      'BlogMgr.view.auth.module.ModuleTreeGrid',
 	      'BlogMgr.view.auth.AuthHomeToolBar',
@@ -10,6 +11,7 @@ Ext.define('BlogMgr.view.auth.AuthHome',{
 	extend : 'Ext.panel.Panel',
 	alias:'widget.authhome',
 	controller:'authhome',
+	viewModel:'authhome',
 	layout : 'border',
 	height:'100%',
 	defaults:{

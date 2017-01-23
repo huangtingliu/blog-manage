@@ -1,11 +1,11 @@
 /**
  * 角色分页 store
  */
-Ext.define('BlogMgr.store.RolePagingStroe',{
+Ext.define('BlogMgr.store.RolePagingStore',{
 	model : 'BlogMgr.model.Role',
 	extend:'Ext.data.Store',
 	alias:'store.role_paging',
-	storeId : 'rolePagingStroe',
+	storeId : 'rolePagingStore',
 	pageSize:15,
 	remoteSort:true,
 	remoteFilter:true,
@@ -30,4 +30,4 @@ Ext.define('BlogMgr.store.RolePagingStroe',{
 	},
 	listeners:{}
 });
-Ext.create('BlogMgr.store.RolePagingStroe');
+Ext.create('BlogMgr.store.RolePagingStore');

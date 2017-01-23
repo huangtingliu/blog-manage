@@ -55,7 +55,7 @@
 				and ui_Id in
 				<foreach collection="fId_in" open="(" item="id" separator="," close=")">
 					#{id}
-				</foreach>		
+				</foreach>
 			</if>
 			<if test="fStatus_in != null ">
 				and dic_Status in 

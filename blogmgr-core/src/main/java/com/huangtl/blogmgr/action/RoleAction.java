@@ -1,5 +1,7 @@
 package com.huangtl.blogmgr.action;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
@@ -75,9 +77,34 @@ public class RoleAction extends BlogMgrAction {
 		return data;
 	}
 	
+	/**
+	 * 角色列表
+	 * @param filter
+	 * @param sort
+	 * @return
+	 */
+	@RequestMapping("list.data")
+	@ResponseBody
+	public Object getList(FilterCollection filter){
+		RoleSqlWhere whereParam = new RoleSqlWhere().fStatusNotEqual(Usability.DELETE);
+		if(filter!=null && !filter.isEmpty()){
+			for (Filter f : filter) {
+				whereParam.putFilter(f);
+			}
+		}
+		
+		List<Role> roles = this.roleService.getDao().selectList(whereParam);
+		return roles;
+	}
+	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping("get.data")
 	@ResponseBody
-	public Object getUser(String id){
+	public Object getRole(String id){
 		RoleSqlWhere whereParam = new RoleSqlWhere();
 		whereParam.fIdEqual(id);
 		Role role = this.roleService.getDao().selectOne(id);
@@ -120,5 +147,6 @@ public class RoleAction extends BlogMgrAction {
 		message = this.roleService.addRole(role);
 		return message;
 	}
+	
 	
 }

@@ -43,6 +43,16 @@
 					#{id}
 				</foreach>
 			</if>
+			<if test="userId_eq != null">
+				and rol_Id in (
+					select rol_id from mgr_user_role where ui_id= #{userId_eq}
+				)
+			</if>
+			<if test="userId_ne != null">
+				and rol_Id not in  (
+					select rol_id from mgr_user_role where ui_id= #{userId_ne}
+				)
+			</if>
 		</trim>
 	</sql>
 	

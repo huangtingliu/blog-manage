@@ -15,7 +15,7 @@ Ext.define('BlogMgr.view.auth.role.RoleAddDialogController', {
 							success : function(form, action) {
 								Ext.toast(action.result);
 								_this.closeDialog();
-								Ext.getStore('rolePagingStroe').reload(); 
+								Ext.getStore('rolePagingStore').reload(); 
 							},
 							failure : function(form, action) {
 								if(action.result){
