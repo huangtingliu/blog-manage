@@ -11,13 +11,15 @@ Ext.define('BlogMgr.view.user.mgr.UserMgrDialogModel', {
 				operateToolTip:{
 					userInfo:'用户基础信息填写',
 					userAuth:'可双击选择,或拖拽选择'
-				}
+				},
+				selectTabType:'user_userinfoform'
 			},
 			formulas: {  
 				toolTip:function(get){
-					console.info(get);
-					
-					return 'aaaa';
+					if(get('selectTabType')=='user_userauthform'){
+						return get('operateToolTip.userAuth');
+					}
+					return get('operateToolTip.userInfo');
 				}
 			}  
 })

@@ -33,6 +33,6 @@ Ext.define('BlogMgr.view.user.mgr.UserMgrDialogController', {
 				this.getView().close();
 			},
 			tabChange:function(tabPanel , newCard , oldCard , eOpts){
-				//console.info(newCard);
+				this.getViewModel().set('selectTabType',newCard.getXType());
 			}
 		});

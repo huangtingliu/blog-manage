@@ -20,7 +20,8 @@ Ext.application({
 			stores : ['BaseDataStore','MenuListProxy','UserPagingStore','MenuTreeStore','MenuPagingStore',
 			          'RolePagingStore','PrivilegePagingStore','PrivilegeTreeStore','RoleListStore'],
 			controllers:['Main','Root'],
-			views:['BlogMgr.view.home.left.Navigator','BlogMgr.view.home.header.HomeHeader'],
+			views:['BlogMgr.view.home.left.Navigator','BlogMgr.view.home.header.HomeHeader',
+			       'BlogMgr.view.home.center.HomeIndex'],
 			paths : {
 				'Ext' : 'framework/Ext',
 				'Ux' : 'framework/Ux'
@@ -77,11 +78,9 @@ Ext.application({
 										region : 'center',
 										xtype : 'reorderable_tabs',
 										items : [{
-													id : 'tab-index',
-													title : '首页',
-													closable : false,
-													glyph : 0xe622
-												}]
+											xtype:'home_index',
+											closable : false,
+										}]
 									}, {
 										region : 'west',
 										width : 250,

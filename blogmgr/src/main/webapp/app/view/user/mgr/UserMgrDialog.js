@@ -49,7 +49,6 @@ Ext.define('BlogMgr.view.user.mgr.UserMgrDialog', {
 						frame : false,
 						border : false,
 						bodyPadding : '5 5 5 5',
-						reference:'userMgrTabPanel',
 						plain : true,
 						items : [{
 									xtype : 'user_userinfoform'
