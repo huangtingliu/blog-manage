@@ -12,17 +12,17 @@ Ext.define('BlogMgr.view.user.UserHome', {
 			alias : ['widget.userhome'],
 			layout : 'fit',
 			items : {
+				controller : 'userhome',
+				viewModel : {
+					type : 'userhome'
+				},
 				xtype : 'grid',
 				store : Ext.getStore('userPagingStore'),
-				controller : 'userhome',
 				columnLines : true,
 				autoLoad : true,
 				scrollable : true,
 				rowLines : true,
 				plugins : ['gridfilters', 'cellediting'],
-				viewModel : {
-					type : 'userhome'
-				},
 				selModel : {
 					selType : 'checkboxmodel',
 					ignoreRightMouseSelection : true,
@@ -92,11 +92,6 @@ Ext.define('BlogMgr.view.user.UserHome', {
 										}]
 							}
 						}, {
-							header : '用户权限',
-							dataIndex : 'auths',
-							width : '13%',
-							sortable:false
-						},{
 							header : '性别',
 							dataIndex : 'fGender',
 							hidden : true,
@@ -181,6 +176,22 @@ Ext.define('BlogMgr.view.user.UserHome', {
 								type : 'date',
 								dateFormat : 'Y-m-d'
 							}
+						},{
+							header : '操作',
+							xtype: 'actioncolumn',
+							width : '5%',
+							sortable: false,
+							align:'center',
+							menuDisabled: true,
+			                items: [{
+			                    tooltip: '用户详情',
+			                    iconCls:'img-icon-detail',
+			                    scope: this,
+			                    handler:function(view,rowIndex,colIndex,item,e,record){
+			                		var gridController = view.ownerCt.getController();
+			                		gridController.userDetail(view,rowIndex,colIndex,item,e,record);
+			                	}
+			                }]
 						}],
 				tbar : {
 					xtype : 'userhome_toolbar'
@@ -213,7 +224,6 @@ Ext.define('BlogMgr.view.user.UserHome', {
 													glyph : 0xe63d
 												}]
 									}]
-						}]
+						}],
 			}
-
 		})

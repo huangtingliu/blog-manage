@@ -120,5 +120,11 @@ Ext.define('BlogMgr.view.user.UserHomeController', {
 						}
 					}
 				});
+	},
+	//用户详情
+	userDetail:function(view,rowIndex,colIndex,item,e,record){
+		Ext.toast('待完成');
 	}
+	
+	 
 });

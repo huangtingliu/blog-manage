@@ -1,0 +1,8 @@
+@CHARSET "UTF-8";
+/*图片icon*/
+.img-icon{
+	
+}
+.img-icon-detail {
+    background-image:url(../images/icons/application_view_list.png) !important;
+ }

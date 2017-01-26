@@ -19,6 +19,7 @@ Ext.define('BlogMgr.store.RolePagingStore',{
 		limitParam:'pageSize',
 		pageParam:'pageNo',
 		noCache:false,
+		model : 'BlogMgr.model.Role',
 		paramsAsJson:true,
 		reader : {
 			type : 'json',

@@ -16,7 +16,7 @@ Ext.define('BlogMgr.view.auth.AuthHomeToolBar', {
 						xtype : 'gridsearchfield',
 						emptyText : '角色名查询..',
 						paramName : 'fName',
-						store : Ext.getStore('rolePagingStroe')
+						store : Ext.getStore('rolePagingStore')
 				}]
 
 		});

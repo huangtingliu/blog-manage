@@ -6,6 +6,7 @@
 	<title></title>
 	<link rel="stylesheet" type="text/css" href="resource/css/common.css">
 	<link rel="stylesheet" type="text/css" href="plugin/iconfont/iconfont.css">
+	<link rel="stylesheet" type="text/css" href="resource/css/image_icon.css">
 	<!-- 海王星 -->
 	<link rel="stylesheet" type="text/css" href="framework/Ext/ext-theme-neptune/resources/ext-theme-neptune-all.css">
 	

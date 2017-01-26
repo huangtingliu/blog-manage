@@ -36,7 +36,7 @@ Ext.define('BlogMgr.view.user.mgr.UserMgrDialog', {
 				itemId : 'save',
 				text : '保存',
 				glyph : 0xe650,
-				handler:'userInfoSubmit'
+				handler:'userMgrDialogSubmit'
 			}, {
 				itemId : 'close',
 				text : '关闭',

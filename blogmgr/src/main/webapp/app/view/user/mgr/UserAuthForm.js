@@ -23,22 +23,29 @@ Ext.define('BlogMgr.view.user.mgr.UserAuthForm', {
 				        hideHeaders : true,
 				        rowLines : true,
 				        viewConfig : {
-							stripeRows : false //奇偶行不同底色
+							stripeRows : false, //奇偶行不同底色
+							 plugins: {  
+						        ptype: "gridviewdragdrop",  
+						        ddGroup: "userFormRoleList"  
+						    } 
 						},
 				        minHeight:362,
 				        store:{
 							type:'role_list',
-					        filters: [{
-					            property: 'userId',
-					            operator:'ne',
-					            value:BlogMgr.baseData('userId')
-					        }]
+							storeId:'userFormFromRoleGridStore'
 						},
 				        columns : [{
+							header : 'No',
+							xtype : 'rownumberer',
+							width : 37
+						},{
 				        	header : '可选角色',
 				        	dataIndex : 'fName',
-				        	width:'100%'
-				        }]
+				        	flex:1
+				        }],
+						listeners:{
+							rowdblclick:'fromRoleGridDoubleClick'
+						}
 					 }]
 				},{
 					width: 20,
@@ -50,26 +57,38 @@ Ext.define('BlogMgr.view.user.mgr.UserAuthForm', {
 					padding:'13 13 13 13',
 					items:[{
 						xtype : 'grid',
-					    autoLoad:true,
+					    autoLoad:false,
 					    hideHeaders : true,
 						viewConfig : {
-							stripeRows : false // 奇偶行不同底色
+							stripeRows : false, // 奇偶行不同底色
+							 plugins: {  
+						        ptype: "gridviewdragdrop",  
+						        ddGroup: "userFormRoleList"  //只有同组的两个grid可能拖拽
+						    } 
 						},
 					    rowLines : true,
 					    minHeight:362,
 					    store:{
 							type:'role_list',
-						    filters: [{
-					            property: 'userId',
-					            operator:'eq',
-					            value:BlogMgr.baseData('userId')
-					        }]
+							storeId:'userFormToRoleGridStroe'
+//						    filters: [{		//用修改时加载所修改用户的角色
+//					            property: 'userId',
+//					            operator:'eq',
+//					            value:BlogMgr.baseData('userId')
+//					        }]
 						},
 				        columns : [{
+							header : 'No',
+							xtype : 'rownumberer',
+							width : 37
+						},{
 				        	header : '选定角色',
 				        	dataIndex : 'fName',
-				        	width:'100%'
-				        }]
+				        	flex:1
+				        }],
+				        listeners:{
+							rowdblclick:'toRoleGridDoubleClick'
+						}
 					}]
 				}]
 			}]
