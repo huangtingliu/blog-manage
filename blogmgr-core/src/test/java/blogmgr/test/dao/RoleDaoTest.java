@@ -2,6 +2,7 @@ package blogmgr.test.dao;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -15,6 +16,7 @@ import com.huangtl.blogmgr.dao.RoleDao;
 import com.huangtl.blogmgr.dao.where.RoleSqlWhere;
 import com.huangtl.blogmgr.dao.where.UserSqlWhere;
 import com.huangtl.blogmgr.model.blog.Role;
+import com.huangtl.blogmgr.model.common.TwoTuple;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:springContext.xml")
@@ -43,6 +45,15 @@ public class RoleDaoTest {
 		UserSqlWhere userSqlWhere = new UserSqlWhere();
 		roles = this.roleDao.selectList(userSqlWhere);
 		System.out.println(roles);
+	}
+	
+	@Test
+	public void insertUserRole(){
+		List<TwoTuple<String, String>> userRole = new ArrayList<TwoTuple<String,String>>();
+		userRole.add(new TwoTuple<String, String>("a", "b"));
+		userRole.add(new TwoTuple<String, String>("c", "d"));
+		int i = this.roleDao.insertUserRole(userRole);
+		System.out.println(i);
 	}
 
 	@Test

@@ -24,7 +24,12 @@
 	</select>
 	
 	
-	
+	<select id="insertUserRole" parameterType="list">
+		insert into mgr_user_role (ui_id,rol_id)
+		 <foreach collection="list" item="item" separator="union">
+		 	select #{item.first},#{item.second}
+		 </foreach>
+	</select>
 	
 	
 	

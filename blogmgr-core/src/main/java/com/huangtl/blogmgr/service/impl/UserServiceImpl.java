@@ -1,15 +1,19 @@
 package com.huangtl.blogmgr.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.huangtl.blogmgr.dao.RoleDao;
 import com.huangtl.blogmgr.dao.UserDao;
 import com.huangtl.blogmgr.dao.where.UserSqlWhere;
+import com.huangtl.blogmgr.model.blog.Role;
 import com.huangtl.blogmgr.model.blog.User;
 import com.huangtl.blogmgr.model.common.Message;
+import com.huangtl.blogmgr.model.common.TwoTuple;
 import com.huangtl.blogmgr.service.UserService;
 
 /**
@@ -21,16 +25,34 @@ public class UserServiceImpl implements UserService {
 	private static Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 	
 	private UserDao userDao;
+	private RoleDao roleDao;
 	
 	@Override
 	public UserDao getDao() {
 		return userDao;
 	}
 
+	/* 
+	 * 1. 添加用户基础信息
+	 * 2. 为用户添加权限
+	 */
 	@Override
 	public Message addUser(User user) {
 		logger.debug("添加用户{}",user);
 		int effectRow = this.userDao.insert(user);
+		
+		Message.get(effectRow).throwIfError("系统异常,用户添加失败！");;
+		
+		//添加权限
+		List<TwoTuple<String, String>> userRoles = new ArrayList<>();
+		for (Role role : user.getRoles()) {
+			userRoles.add(new TwoTuple<String, String>(user.getfId(), role.getfId()));
+		}
+		
+		effectRow = this.roleDao.insertUserRole(userRoles);
+		
+		Message.get(effectRow).throwIfError("系统异常,用户角色添加失败！");;
+		
 		return Message.get(effectRow, "添加成功!", "添加失败!");
 	}
 
@@ -59,5 +81,8 @@ public class UserServiceImpl implements UserService {
 	
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
+	}
+	public void setRoleDao(RoleDao roleDao) {
+		this.roleDao = roleDao;
 	}
 }

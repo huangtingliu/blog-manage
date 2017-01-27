@@ -3,6 +3,7 @@ package com.huangtl.blogmgr.dao.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.huangtl.blogmgr.core.dao.MybatisDaoAdaptor;
@@ -11,6 +12,7 @@ import com.huangtl.blogmgr.dao.where.RoleSqlWhere;
 import com.huangtl.blogmgr.dao.where.UserSqlWhere;
 import com.huangtl.blogmgr.model.blog.Role;
 import com.huangtl.blogmgr.model.blog.dictionary.CommonDictionary.Usability;
+import com.huangtl.blogmgr.model.common.TwoTuple;
 
 /**
  * 角色持久化默认实现
@@ -64,6 +66,15 @@ public class RoleDaoImpl extends MybatisDaoAdaptor<Role> implements RoleDao {
 		List<Role> lists = this.sqlSession.selectList(ROLE_USER_NAMESPACE+".selectRoles",where);
 		return lists;
 		
+	}
+
+	@Override
+	public int insertUserRole(List<TwoTuple<String, String>> userRoles) {
+		if(CollectionUtils.isEmpty(userRoles)){
+			return 0;
+		}
+		
+		return this.sqlSession.insert(ROLE_USER_NAMESPACE+".insertUserRole", userRoles);
 	}
 
 }

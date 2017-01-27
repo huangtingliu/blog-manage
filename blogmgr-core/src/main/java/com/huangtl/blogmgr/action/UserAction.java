@@ -1,6 +1,7 @@
 package com.huangtl.blogmgr.action;
 
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -13,12 +14,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
 import com.huangtl.blogmgr.core.spring.resolver.Json;
 import com.huangtl.blogmgr.core.util.PinYinUtils;
 import com.huangtl.blogmgr.dao.where.UserSqlWhere;
+import com.huangtl.blogmgr.model.blog.Role;
 import com.huangtl.blogmgr.model.blog.User;
 import com.huangtl.blogmgr.model.common.Message;
 import com.huangtl.blogmgr.model.common.Page;
@@ -143,8 +146,19 @@ public class UserAction extends BlogMgrAction {
 	 */
 	@RequestMapping("add.do")
 	@ResponseBody
-	public Object addUser(String accountType,User user) {
+	public Object addUser(String accountType,User user,@RequestParam List<String> roleIds) {
 		if(user==null){return Message.error("参数为空");}
+		if(CollectionUtils.isEmpty(roleIds)){
+			return Message.error("未为用户分配权限");
+		}
+		
+		List<Role> roles = new ArrayList<>();
+		for (String roleId : roleIds) {
+			Role role = new Role();
+			role.setfId(roleId);
+			roles.add(role);
+		}
+		user.setRoles(roles);
 		
 		Message message = null;
 		user.setfId(user.newId());

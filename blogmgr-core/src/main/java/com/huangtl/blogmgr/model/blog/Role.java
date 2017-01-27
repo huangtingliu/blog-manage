@@ -25,6 +25,8 @@ public class Role extends ObjectValue implements GrantedAuthority {
 	private Integer fCode;			//角色编码  必须
 	private Usability fStatus;		//角色状态，可用/不可用
 	
+	
+	
 	@NotBlank(message = "主键为空")
 	public String getfId() {
 		return fId;

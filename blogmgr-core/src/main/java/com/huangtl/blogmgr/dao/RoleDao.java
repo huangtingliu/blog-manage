@@ -5,6 +5,7 @@ import java.util.List;
 import com.huangtl.blogmgr.core.dao.MybatisDao;
 import com.huangtl.blogmgr.dao.where.UserSqlWhere;
 import com.huangtl.blogmgr.model.blog.Role;
+import com.huangtl.blogmgr.model.common.TwoTuple;
 
 /**
  * 角色持久化对象
@@ -39,6 +40,13 @@ public interface RoleDao extends MybatisDao<Role> {
 	 * @return 返回影响的记录的个数
 	 */
 	int fakeDeleteBatch(String... fIds);
+	
+	/**
+	 * 添加用户权限
+	 * @param userRoles
+	 * @return
+	 */
+	int insertUserRole(List<TwoTuple<String, String>> userRoles);
 	
 	/**
 	 * 根据用户条件查询其权限
