@@ -12,10 +12,11 @@ Ext.define('BlogMgr.view.auth.role.RoleGridController', {
 				var store = Ext.getStore('privilegeTreeStore');
 				store.getProxy().extraParams = null;
 				store.getRootNode().removeAll();
-				store.load({
-					params:{
-						filter:'[{"property":"fRoleId","value":"'+this.selectedRecId+'","operator":"eq"}]'
-					}
-				});
+				
+				store.getProxy().extraParams = {
+					filter:'[{"property":"fRoleId","value":"'+this.selectedRecId+'","operator":"eq"}]'
+				};
+				
+				store.load();
 			}
 });

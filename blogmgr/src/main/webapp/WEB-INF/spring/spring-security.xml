@@ -21,24 +21,24 @@
 		IS_AUTHENTICATED_FULLY 允许登录用户进入
 		IS_AUTHENTICATED_REMEMBERED 允许登录用户和rememberMe用户进入
      -->  
-    <sec:http auto-config="true" use-expressions="true"  >  
-        <sec:intercept-url pattern="/**"  access="hasRole('ADMIN') or hasRole('USER')"/>
-        <!-- <sec:custom-filter before="FILTER_SECURITY_INTERCEPTOR" ref=""/> -->
-        
-        <sec:form-login login-page="/login.htm" 
-        	password-parameter="password" username-parameter="account"
-        	authentication-success-handler-ref="loginStatusHandler"
-        	authentication-failure-handler-ref="loginStatusHandler"
-        	always-use-default-target="false" 
-        	login-processing-url="/login.do" />
-        
+     <!-- 
+     	always-use-default-target="true" 不管是直接请求登录页面，还是通过Spring Security引导过来的，登录之后都跳转到指定的页面
+     -->
+    <sec:http auto-config="true" use-expressions="true"  > 
+    	<!-- 登录 --> 
+	        <sec:form-login login-page="/login.htm" 
+	        	password-parameter="password" username-parameter="account"
+	        	authentication-success-handler-ref="loginStatusHandler"
+	        	authentication-failure-handler-ref="loginStatusHandler"
+	        	login-processing-url="/login.do" />
+        	<!-- 退出 -->
         	 <sec:logout invalidate-session="true"  success-handler-ref="logoutSuccessHandlerImpl" logout-url="/logout.do"  /> 
-        
+        	<!-- 访问拒绝 -->
         	 <sec:access-denied-handler ref="accessDeniedHandlerImpl"/>
-         
-        
         	<sec:csrf disabled="true" /> 
-        
+	        <sec:intercept-url  pattern="/**"  access="isAuthenticated()"/>
+	 	 	<sec:custom-filter after="FILTER_SECURITY_INTERCEPTOR" ref="resourceAuthorityFilter"/> 
+	    <!--  <sec:intercept-url  pattern="/**"  access="hasRole('ADMIN') or hasRole('USER')"/> -->
         <!-- <sec:session-management session-authentication-error-url="/frame.expired" >  
             max-sessions只容许一个账号登录，error-if-maximum-exceeded 后面账号登录后踢出前一个账号，expired-url session过期跳转界面  
             <sec:concurrency-control max-sessions="1" error-if-maximum-exceeded="false" expired-url="/frame.expired" session-registry-ref="sessionRegistry" />  
@@ -49,10 +49,11 @@
  	<bean id="logoutSuccessHandlerImpl" class="com.huangtl.blogmgr.handler.LogoutSuccessHandlerImpl"></bean>
  	<bean id="accessDeniedHandlerImpl" class="com.huangtl.blogmgr.handler.AccessDeniedHandlerImpl"></bean>
  	
+ 	<bean id="resourceAuthorityFilter" class="com.huangtl.blogmgr.core.security.ResourceAuthorityFilter"/>
  	
     <!-- 配置用户管理  -->
-     <sec:authentication-manager>
-     	<sec:authentication-provider user-service-ref="userDetailsServiceImpl">
+     <sec:authentication-manager alias="authenticationManager">
+     	<sec:authentication-provider  user-service-ref="userDetailsServiceImpl">
      		<sec:password-encoder hash="md5" />
      	</sec:authentication-provider>
      </sec:authentication-manager>

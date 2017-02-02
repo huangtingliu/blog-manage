@@ -22,7 +22,8 @@ Ext.define('BlogMgr.view.auth.module.ModuleTreeGrid',{
 	initComponent:function(){
 		this.store = Ext.create('BlogMgr.store.PrivilegeTreeStore',{
 			storeId : 'privilegeTreeStore',
-			autoLoad:true
+			autoLoad:true,
+			
 		});
 		this.callParent();
 	},
@@ -78,7 +79,7 @@ Ext.define('BlogMgr.view.auth.module.ModuleTreeGrid',{
 		editor:{
 			xtype : 'combo',
 			editable : false,
-			store : [['ENABLE', '可用'], ['LIMIT', '受约束'],['DISABLE', '禁用'],['CLOSE', '关闭']]
+			store : [['ENABLE', '唯此可用'],['ALL_ENABLE', '全部可用'], ['LIMIT', '受约束'],['DISABLE', '禁用'],['CLOSE', '关闭']]
 		},
 	    renderer:function(val){
 			if(val=="ENABLE"){
@@ -89,6 +90,8 @@ Ext.define('BlogMgr.view.auth.module.ModuleTreeGrid',{
 				return '<b style="color:gray">禁用</b>';
 			}else if(val=='CLOSE'){
 				return '<b style="color:red">关闭</b>';
+			}else if(val=='ALL_ENABLE'){
+				return '<b style="color:green">可用</b>';
 			}
 		}
 	}]

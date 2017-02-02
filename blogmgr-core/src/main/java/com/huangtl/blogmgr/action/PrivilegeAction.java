@@ -118,13 +118,11 @@ public class PrivilegeAction extends BlogMgrAction {
 		}
 		whereParam.funParentIdEqual(parentId);
 		JSONObject tree = this.privilegeService.getDao().selectPrivilegeTree(whereParam, 2);
-		
-		JSONObject data = new JSONObject();
-		data.put("privilegetree", tree);
-		data.put("total", 10);
-		data.put("success", true);
-		data.put("message", "获取成功个数 "+10);
+		if(!parentId.equals("")){
+			return tree.get("children");
+		}
 		return tree;
+		
 	}
 	
 	

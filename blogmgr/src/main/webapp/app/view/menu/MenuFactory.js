@@ -44,6 +44,7 @@ Ext.define('BlogMgr.view.menu.MenuFactory', {
 										text:value.fName,
 										glyph:value.fGlyph,
 										handler:value.fUrl,
+										tooltip:value.fDescr,
 										disabled:disable,
 										xtype:'transparent_button'
 									};

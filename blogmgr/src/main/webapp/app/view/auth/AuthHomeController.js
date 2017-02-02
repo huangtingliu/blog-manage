@@ -114,6 +114,6 @@ Ext.define('BlogMgr.view.auth.AuthHomeController', {
 						}
 					}
 				});
-	},
+	}
 	
 });

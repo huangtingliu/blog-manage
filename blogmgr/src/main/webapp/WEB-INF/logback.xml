@@ -33,7 +33,7 @@
 	 <appender name="DailyRoll" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>E:/pld/log/today.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>E:/blogmgr/log/%d.log</fileNamePattern>
+			<fileNamePattern>E:/Other/blogmgr/log/%d.log</fileNamePattern>
 			<maxHistory>60</maxHistory>
 		</rollingPolicy>
 		
@@ -51,6 +51,7 @@
 	<logger name="com.huangtl.blogmgr.dao" level="debug"></logger>
 	<logger name="com.huangtl.blogmgr.model" level="debug"></logger>
 	<logger name="com.huangtl.blogmgr.handler" level="debug"></logger>
+	<logger name="com.huangtl.blogmgr.core" level="debug"></logger>
 	
 	<!-- level: trace,debug,info,warn,error -->
 	<root>
