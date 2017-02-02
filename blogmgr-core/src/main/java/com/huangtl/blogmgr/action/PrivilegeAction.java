@@ -117,7 +117,7 @@ public class PrivilegeAction extends BlogMgrAction {
 			whereParam.putFilter(f);
 		}
 		whereParam.funParentIdEqual(parentId);
-		JSONObject tree = this.privilegeService.getDao().selectPrivilegeTree(whereParam, 2);
+		JSONObject tree = this.privilegeService.getDao().selectPrivilegeTree(whereParam, 6);
 		if(!parentId.equals("")){
 			return tree.get("children");
 		}
