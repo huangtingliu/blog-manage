@@ -49,7 +49,9 @@
  	<bean id="logoutSuccessHandlerImpl" class="com.huangtl.blogmgr.handler.LogoutSuccessHandlerImpl"></bean>
  	<bean id="accessDeniedHandlerImpl" class="com.huangtl.blogmgr.handler.AccessDeniedHandlerImpl"></bean>
  	
- 	<bean id="resourceAuthorityFilter" class="com.huangtl.blogmgr.core.security.ResourceAuthorityFilter"/>
+ 	<bean id="resourceAuthorityFilter" class="com.huangtl.blogmgr.core.security.ResourceAuthorityFilter">
+ 		<property name="privilegeService" ref="privilegeService"></property>
+ 	</bean>
  	
     <!-- 配置用户管理  -->
      <sec:authentication-manager alias="authenticationManager">

@@ -23,6 +23,7 @@ import com.huangtl.blogmgr.core.util.PinYinUtils;
 import com.huangtl.blogmgr.dao.where.UserSqlWhere;
 import com.huangtl.blogmgr.model.blog.Role;
 import com.huangtl.blogmgr.model.blog.User;
+import com.huangtl.blogmgr.model.blog.dictionary.UserStatus;
 import com.huangtl.blogmgr.model.common.Message;
 import com.huangtl.blogmgr.model.common.Page;
 import com.huangtl.blogmgr.model.common.Page.Direction;
@@ -95,6 +96,7 @@ public class UserAction extends BlogMgrAction {
 		}
 		
 		UserSqlWhere whereParam = new UserSqlWhere();
+		whereParam.fStatusNotEqual(UserStatus.DELETE);
 		for (Filter f : filter) {
 			whereParam.putFilter(f);
 		}
@@ -128,7 +130,8 @@ public class UserAction extends BlogMgrAction {
 	@ResponseBody
 	public Object getUser(String id){
 		UserSqlWhere whereParam = new UserSqlWhere();
-		whereParam.fIdEqual(id);
+		whereParam.fIdEqual(id).fStatusNotEqual(UserStatus.DELETE);
+		
 		User user = this.userService.getDao().selectOne(id);
 		if(user==null){return "{}";}
 		return user;
@@ -200,7 +203,7 @@ public class UserAction extends BlogMgrAction {
 		
 		Message message = null;
 		 try {
-			 message = this.userService.deleteUser(id.split(","));
+			 message = this.userService.fakeDeleteUser(id.split(","));
 		} catch (Exception e) {
 			logger.error("用户删除失败",e);
 			message = Message.exception("用户删除失败");

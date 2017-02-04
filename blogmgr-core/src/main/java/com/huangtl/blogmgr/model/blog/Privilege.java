@@ -17,7 +17,7 @@ public class Privilege extends ObjectValue {
 	private AuthPriority fPriority;		//权限级别
 	private String fFunId;				//功能id
 	private String fRoleId;				//角色id
-	private PrivilegeType fType;			//权限类型
+	private PrivilegeType fType;		//权限类型
 	
 	private String funName;			//功能名称
 	private String funParentId;		//功能父id

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd">  
+     
+    <diskStore path="java.io.tmpdir/ehcache"/>  
+      
+    <!-- 默认缓存
+    <cache  
+    	   name = "myCache"             缓存名称,cache的唯一标识(ehcache会把这个cache放到HashMap里)
+           maxElementsInMemory="1000"   内存缓存中最多可以存放的元素数量,若放入Cache中的元素超过这个数值
+           eternal="false"              缓存中对象是否永久有效,即是否永驻内存,true时将忽略timeToIdleSeconds和timeToLiveSeconds。
+           timeToIdleSeconds="120"      缓存数据在失效前的允许闲置时间(单位:秒),即：某元素在120秒内没有被访问，将会被移除
+           timeToLiveSeconds="120"      缓存数据在失效前的允许存活时间(单位:秒),即：元素只允许存留120秒
+           maxElementsOnDisk="10000000" 磁盘缓存中最多可以存放的元素数量,0表示无穷大。
+           overflowToDisk="false"       内存不足时,是否启用磁盘缓存(即内存中对象数量达到maxElementsInMemory时,Ehcache会将对象写到磁盘中)
+           diskPersistent="true"        是否持久化磁盘缓存.如果为true,ehcache开始时会将磁盘中的数据加载到内存
+           diskExpiryThreadIntervalSeconds = "120" 磁盘缓存的清理线程运行间隔,默认是120秒。
+           diskSpoolBufferSize="30"     设置DiskStore（磁盘缓存）的缓存区大小,默认是30MB
+           memoryStoreEvictionPolicy="LRU"内存存储与释放策略,即达到maxElementsInMemory限制,同时overflowToDisk=false,Ehcache会根据指定策略清理内存，
+                                                                                                                              共有三种策略,分别为LRU(最近最少使用)、LFU(最常用的)、FIFO(先进先出)。
+     />-->  
+           
+           
+    <defaultCache
+            maxElementsInMemory="10000"
+            eternal="false"
+            timeToIdleSeconds="120"
+            timeToLiveSeconds="120"
+            maxElementsOnDisk="10000000"
+            diskExpiryThreadIntervalSeconds="120"
+            memoryStoreEvictionPolicy="LRU">
+       		<persistence strategy="localTempSwap"/>
+    </defaultCache>
+             
+    <!-- 权限缓存 -->      
+    <cache name="privilegeCache"   
+           maxElementsInMemory="500"   
+           eternal="true"  
+           overflowToDisk="false"   
+           memoryStoreEvictionPolicy="LRU"/>  
+      
+</ehcache>  

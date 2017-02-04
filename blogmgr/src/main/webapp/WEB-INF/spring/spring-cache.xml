@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-4.3.xsd">
+
+	<!-- redis 
+	<bean id="redisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">  
+        <property name="maxIdle" value="${redis.maxIdle}" />  
+        <property name="maxWaitMillis" value="${redis.maxWait}"></property>
+        <property name="testOnBorrow" value="${redis.testOnBorrow}" />  
+    </bean>  
+    
+     <bean id="redisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+     	<prop2erty name="hostName" value="${redis.host}"></property>
+     	<property name="port" value="${redis.port}"></property>
+     	<property name="poolConfig" ref="redisPoolConfig"></property>
+     </bean>
+      
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">  
+        <property name="connectionFactory"   ref="redisConnectionFactory" />  
+    </bean>
+    
+    <bean id="redisDao" abstract="true">
+		<property name="redisTemplate" ref="redisTemplate"></property>
+	</bean>--><!-- /redis -->
+    
+    <!-- ecache -->
+    <cache:annotation-driven cache-manager="cacheManager"/>  
+      
+     <bean id="cacheManagerFactory" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">  
+        <property name="configLocation" value="/WEB-INF/ehcache.xml" />  
+    </bean>  
+      
+    <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">      
+        <property name="cacheManager"  ref="cacheManagerFactory"/>      
+    </bean>  
+    
+    
+</beans>

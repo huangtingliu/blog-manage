@@ -49,4 +49,10 @@ public interface PrivilegeService {
 	 * @return
 	 */
 	Message editBatch(List<Privilege> privileges);
+	
+	/**
+	 * 根据角色id查询权限
+	 * @return
+	 */
+	List<Privilege> queryPrivilegesByRoleId(String roleId);
 }

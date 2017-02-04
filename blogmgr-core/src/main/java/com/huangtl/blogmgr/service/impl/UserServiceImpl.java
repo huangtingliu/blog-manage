@@ -12,6 +12,7 @@ import com.huangtl.blogmgr.dao.UserDao;
 import com.huangtl.blogmgr.dao.where.UserSqlWhere;
 import com.huangtl.blogmgr.model.blog.Role;
 import com.huangtl.blogmgr.model.blog.User;
+import com.huangtl.blogmgr.model.blog.dictionary.UserStatus;
 import com.huangtl.blogmgr.model.common.Message;
 import com.huangtl.blogmgr.model.common.TwoTuple;
 import com.huangtl.blogmgr.service.UserService;
@@ -79,10 +80,30 @@ public class UserServiceImpl implements UserService {
 		return Message.get(effectRow, "成功删除"+uids.length+"个用户!", "删除失败!");
 	}
 	
+	@Override
+	public Message fakeDeleteUser(String... uids) {
+		if(uids.length==0){return Message.error("未指定删除对象!");}
+		
+		List<User> entitys = new ArrayList<>();
+		for (String userId : uids) {
+			User user = new User();
+			user.setfId(userId);
+			user.setfStatus(UserStatus.DELETE);
+			entitys.add(user);
+		}
+		
+		int effectRow = this.userDao.updateBatch(entitys);
+		
+		return Message.get(effectRow, "成功删除"+uids.length+"个用户!", "删除失败!");
+	}
+	
+	
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
 	}
 	public void setRoleDao(RoleDao roleDao) {
 		this.roleDao = roleDao;
 	}
+
+	
 }

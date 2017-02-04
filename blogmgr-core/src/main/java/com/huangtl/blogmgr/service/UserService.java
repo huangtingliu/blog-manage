@@ -42,9 +42,15 @@ public interface UserService {
 	Message editBatchUser(List<User> users);
 	
 	/**
-	 * 删除用户
+	 * 伪删除用户
 	 * @param uids
 	 */
-	Message deleteUser(String... uids);
+	Message fakeDeleteUser(String... uids);
 	
+	/**
+	 * 彻底的删除用户
+	 * @param uids
+	 * @return
+	 */
+	Message deleteUser(String... uids);
 }

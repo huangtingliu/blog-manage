@@ -28,7 +28,7 @@ Ext.define('BlogMgr.view.user.UserHomeController', {
 	/**
 	 * 删除用户
 	 */
-	deleteUser : function() {
+	deleteUser : function(toolbarBtn) {
 		var _this = this;
 		var grid = this.getView();
 		var store = grid.getStore();
@@ -52,7 +52,8 @@ Ext.define('BlogMgr.view.user.UserHomeController', {
 									url : '/blogmgr/user/delete.do',
 									method : 'POST',
 									params : {
-										id : ids.join(',')
+										id : ids.join(','),
+										_mgr_fucode:toolbarBtn.itemId
 									},
 									callback : function(options, isSuccess,response) {
 										_this.mask.hide();
