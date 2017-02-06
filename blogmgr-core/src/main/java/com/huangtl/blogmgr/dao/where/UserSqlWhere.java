@@ -3,6 +3,7 @@ package com.huangtl.blogmgr.dao.where;
 import java.util.Arrays;
 import java.util.Date;
 
+import com.huangtl.blogmgr.core.dao.Operator;
 import com.huangtl.blogmgr.model.blog.dictionary.Gender;
 import com.huangtl.blogmgr.model.blog.dictionary.UserStatus;
 
@@ -18,7 +19,7 @@ public class UserSqlWhere extends SqlWhere {
 	 * @param userId
 	 */
 	public UserSqlWhere fIdEqual(String userId){
-		this.put("fId_eq", userId);
+		this.put(Operator.eq.eval("fId"), userId);
 		return this;
 	}
 	/**
@@ -28,7 +29,7 @@ public class UserSqlWhere extends SqlWhere {
 	 */
 	public UserSqlWhere fIdIn(String... userIds){
 		if(userIds.length==0){return this;}
-		this.put("fId_in", userIds);
+		this.put(Operator.in.eval("fId"), userIds);
 		return this;
 	}
 	
@@ -37,7 +38,7 @@ public class UserSqlWhere extends SqlWhere {
 	 * @param userName
 	 */
 	public UserSqlWhere fNameLike(String userName){
-		this.like("fName_like", userName);
+		this.like(Operator.like.eval("fName"), userName);
 		return this;
 	}
 	
@@ -47,7 +48,7 @@ public class UserSqlWhere extends SqlWhere {
 	 * @return
 	 */
 	public UserSqlWhere fPinYinLike(String pinYin ){
-		this.like("fPinYin_like", pinYin);
+		this.like(Operator.like.eval("fPinYin"), pinYin);
 		return this;
 	}
 	
@@ -56,7 +57,7 @@ public class UserSqlWhere extends SqlWhere {
 	 * @param account
 	 */
 	public UserSqlWhere fAccountEqual(String account){
-		this.put("fAccount_eq", account);
+		this.put(Operator.eq.eval("fAccount"), account);
 		return this;
 	}
 	/**
@@ -65,7 +66,7 @@ public class UserSqlWhere extends SqlWhere {
 	 * @return
 	 */
 	public UserSqlWhere fAccountLike(String account){
-		this.like("fAccount_like", account);
+		this.like(Operator.like.eval("fAccount"), account);
 		return this;
 	}
 	
@@ -75,7 +76,7 @@ public class UserSqlWhere extends SqlWhere {
 	 * @return
 	 */
 	public UserSqlWhere fPhoneEqual(String phone){
-		this.put("fPhone_eq", phone);
+		this.put(Operator.eq.eval("fPhone"), phone);
 		return this;
 	}
 	
@@ -85,7 +86,7 @@ public class UserSqlWhere extends SqlWhere {
 	 * @return
 	 */
 	public UserSqlWhere fPhoneLike(String phone){
-		this.like("fPhone_like", phone);
+		this.like(Operator.like.eval("fPhone"), phone);
 		return this;
 	}
 	
@@ -95,7 +96,7 @@ public class UserSqlWhere extends SqlWhere {
 	 * @return
 	 */
 	public UserSqlWhere fEmailEqual(String email){
-		this.put("fEmail_eq", email);
+		this.put(Operator.eq.eval("fEmail"), email);
 		return this;
 	}
 	
@@ -104,7 +105,7 @@ public class UserSqlWhere extends SqlWhere {
 	 * @param status
 	 */
 	public UserSqlWhere fStatusEqual(UserStatus status){
-		this.put("fStatus_eq", status);
+		this.put(Operator.eq.eval("fStatus"), status);
 		return this;
 	}
 	
@@ -113,7 +114,7 @@ public class UserSqlWhere extends SqlWhere {
 	 * @param status
 	 */
 	public UserSqlWhere fStatusNotEqual(UserStatus status){
-		this.put("fStatus_ne", status);
+		this.put(Operator.ne.eval("fStatus"), status);
 		return this;
 	}
 	
@@ -123,7 +124,7 @@ public class UserSqlWhere extends SqlWhere {
 	public UserSqlWhere fStatusIn(UserStatus... status){
 		if(status.length==0){return this;}
 		
-		this.put("fStatus_in", Arrays.asList(status));
+		this.put(Operator.in.eval("fStatus"), Arrays.asList(status));
 		return this;
 	}
 	
@@ -132,7 +133,7 @@ public class UserSqlWhere extends SqlWhere {
 	 * @param gender
 	 */
 	public UserSqlWhere fGenderEqual(Gender gender){
-		this.put("fGender_eq", gender);
+		this.put(Operator.eq.eval("fGender"), gender);
 		return this;
 	}
 	
@@ -142,7 +143,7 @@ public class UserSqlWhere extends SqlWhere {
 	 * @return
 	 */
 	public UserSqlWhere fCreateDateGreatThan(Date createDate){
-		this.put("fCreateDate_gt", createDate);
+		this.put(Operator.gt.eval("fCreateDate"), createDate);
 		return this;
 	}
 	
@@ -152,7 +153,7 @@ public class UserSqlWhere extends SqlWhere {
 	 * @return
 	 */
 	public UserSqlWhere fCreateDateLessThan(Date createDate){
-		this.put("fCreateDate_lt", createDate);
+		this.put(Operator.lt.eval("fCreateDate"), createDate);
 		return this;
 	}
 	/**
@@ -161,7 +162,7 @@ public class UserSqlWhere extends SqlWhere {
 	 * @return
 	 */
 	public UserSqlWhere fCreateDateEqual(Date createDate){
-		this.put("fCreateDate_eq", createDate);
+		this.put(Operator.eq.eval("fCreateDate"), createDate);
 		return this;
 	}
 }

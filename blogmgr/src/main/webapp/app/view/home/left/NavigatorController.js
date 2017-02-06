@@ -10,9 +10,9 @@ Ext.define('BlogMgr.view.home.left.NavigatorController',{
 		var expandId = null;	//要展开的面板
 		Ext.each(records,function(menu){
 			view.add({
-				itemId:menu.get('fId'),
-				title:menu.get('fName'),
-				authPriority:menu.get('authPriority'),
+				itemId:menu.get('fFunId'),
+				title:menu.get('funName'),
+				authPriority:menu.get('fPriority'),
 				xtype : 'navigatormenu'
 			});
 			//TODO 初始化选中时太生硬了,展开的顺序设置菜单的order值

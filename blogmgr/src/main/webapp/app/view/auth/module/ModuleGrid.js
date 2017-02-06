@@ -37,7 +37,7 @@ Ext.define('BlogMgr.view.auth.module.ModuleGrid',{
 		xtype : 'rownumberer',
 		width : 37
 	}, {
-		header : '组件编号',
+		header : '功能编号',
 		dataIndex : 'fFunId',
 		sortable:true,
 		width:'15%',
@@ -54,12 +54,12 @@ Ext.define('BlogMgr.view.auth.module.ModuleGrid',{
 			 return result.join('');
 		}
 	}, {
-		header : '组件名称',
+		header : '功能名称',
 		dataIndex : 'funName',
 		width:'15%',
 		sortable:false
-	},  {
-		header : '组件类型',
+	},  /*{
+		header : '功能类型',
 		dataIndex : 'fType',
 		sortable:true,
 		width:'11%',
@@ -70,8 +70,8 @@ Ext.define('BlogMgr.view.auth.module.ModuleGrid',{
 				return '功能'
 			}
 		}
-	},{
-		header : '组件状态',
+	},*/{
+		header : '功能状态',
 		dataIndex : 'fPriority',
 		sortable:true,
 		width:'11%',
@@ -96,7 +96,7 @@ Ext.define('BlogMgr.view.auth.module.ModuleGrid',{
 			}
 		}
 	},{
-		header : '组件描述',
+		header : '功能描述',
 		dataIndex : 'descr',
 		width:'31%',
 		sortable:false

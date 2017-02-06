@@ -113,7 +113,7 @@ Ext.define('BlogMgr.view.auth.module.ModuleTreeGrid',{
 	},
 	columns : [{
 		xtype: 'treecolumn',
-		text : '组件编号',
+		text : '功能编号',
 		dataIndex : 'fFunId',
 		flex:1.5,
 		tooltip:'双击展开或收起',
@@ -131,11 +131,11 @@ Ext.define('BlogMgr.view.auth.module.ModuleTreeGrid',{
 			 return result.join('');
 		}
 	}, {
-		text : '组件名称',
+		text : '功能名称',
 		dataIndex : 'funName',
 		flex:1,
 		sortable:false
-	},{
+	}/*,{
 		text : '组件类型',
 		dataIndex : 'fType',
 		flex:0.5,
@@ -147,8 +147,8 @@ Ext.define('BlogMgr.view.auth.module.ModuleTreeGrid',{
 				return '功能'
 			}
 		}
-	},{
-		text : '组件状态',
+	}*/,{
+		text : '功能状态',
 		dataIndex : 'fPriority',
 		flex:0.5,
 		sortable:false,

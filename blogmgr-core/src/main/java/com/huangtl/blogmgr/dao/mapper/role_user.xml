@@ -3,8 +3,6 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.huangtl.blogmgr.model.blog.RoleUser">
-
-	
 	
 	<sql id="role_field">
 		rol_Id ,rol_Name,rol_code,dic_status
@@ -12,8 +10,7 @@
 	</sql>
 	
 	
-	
-	<select id="selectRoles" parameterType="map" resultMap="com.huangtl.blogmgr.model.blog.Role.map">
+	<select id="selectRoles" parameterType="map" resultMap="com.huangtl.blogmgr.model.blog.Role.mapper">
 		select <include refid="role_field"></include>
 		 from (
 			select B.* from mgr_user_role A

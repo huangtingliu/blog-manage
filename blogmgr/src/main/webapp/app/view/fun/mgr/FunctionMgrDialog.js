@@ -1,18 +1,18 @@
 /**
- * 菜单添加对话窗口
+ * 系统功能添加对话窗口
  */
-Ext.define('BlogMgr.view.menu.mgr.MenuMgrDialog',{
-			id : 'menuMgrDialog',
+Ext.define('BlogMgr.view.fun.mgr.FunctionMgrDialog',{
+			id : 'functionMgrDialog',
 			uses:['Ext.ux.TreePicker',
-				  'BlogMgr.view.menu.mgr.MenuMgrForm',
-				  'BlogMgr.view.menu.mgr.MenuEditDialogModel',
-				  'BlogMgr.view.menu.mgr.MenuAddDialogModel',
-				  'BlogMgr.view.menu.mgr.MenuMgrDialogController'],
+				  'BlogMgr.view.fun.mgr.FunctionMgrForm',
+				  'BlogMgr.view.fun.mgr.FunctionEditDialogModel',
+				  'BlogMgr.view.fun.mgr.FunctionAddDialogModel',
+				  'BlogMgr.view.fun.mgr.FunctionMgrDialogController'],
 			extend : 'Ext.window.Window',
-			alias : ['widget.menumgr_dialog'],
-			controller:'menumgr_dialog',
+			alias : ['widget.functionmgr_dialog'],
+			controller:'functionmgr_dialog',
 			viewModel : {
-				type : 'menu_add_dialog'
+				type : 'function_add_dialog'
 			},
 			layout : 'fit',
 			bind:{
@@ -42,6 +42,6 @@ Ext.define('BlogMgr.view.menu.mgr.MenuMgrDialog',{
 				handler:'closeDialog'
 			}],
 			items : {
-						xtype : 'menumgr_form'
+						xtype : 'functionmgr_form'
 					}
 });

@@ -13,9 +13,9 @@ Ext.define('BlogMgr.view.home.left.NavigatorMenu', {
 				this.store = {
 					autoLoad : true,
 					autoLoadDelay : 0,
-					model : 'BlogMgr.model.Menu',
+					model : 'BlogMgr.model.Privilege',
 					proxy : {
-						type : 'menu_list',
+						type : 'union_privilege',
 						extraParams : {
 							parentId : parentMenu 
 						}
@@ -24,19 +24,19 @@ Ext.define('BlogMgr.view.home.left.NavigatorMenu', {
 				this.callParent(arguments);
 			},
 			columns : [{
-				text : '菜单名',
-				dataIndex : 'fName',
+				text : '功能名称',
+				dataIndex : 'funName',
 				sortable : false,
 				hideable : false,
 				width : '100%',
 				renderer : function(val, cell, model,rowIndex,colIndex,store,view) {
 					if(view.ownerCt.authPriority=='DISABLE'){
-						return '&nbsp;<a style="color:gray"><i class="iconfont">&#'+model.get('fGlyph')+'</i>&nbsp;<b>' + val + '</b></a>';
+						return '&nbsp;<a style="color:gray"><i class="iconfont">&#'+model.get('funGlyph')+'</i>&nbsp;<b>' + val + '</b></a>';
 					}
 					if(model.get('authPriority')=='DISABLE'){
-						return '&nbsp;<a style="color:gray"><i class="iconfont">&#'+model.get('fGlyph')+'</i>&nbsp;<b>' + val + '</b></a>';
+						return '&nbsp;<a style="color:gray"><i class="iconfont">&#'+model.get('funGlyph')+'</i>&nbsp;<b>' + val + '</b></a>';
 					}
-						return '&nbsp;<a><i class="iconfont">&#'+model.get('fGlyph')+'</i>&nbsp;<b>' + val + '</b></a>';
+						return '&nbsp;<a><i class="iconfont">&#'+model.get('funGlyph')+'</i>&nbsp;<b>' + val + '</b></a>';
 				}
 			}],
 			listeners : {

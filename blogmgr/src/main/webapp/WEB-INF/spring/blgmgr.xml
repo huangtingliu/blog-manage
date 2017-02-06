@@ -5,10 +5,10 @@
 	
 	
 	<!-- 菜单管理 -->
-	<bean id="menuService" class="com.huangtl.blogmgr.service.impl.MenuServiceImpl">
-		<property name="menuDao" ref="menuDao"></property>
+	<bean id="functionService" class="com.huangtl.blogmgr.service.impl.FunctionServiceImpl">
+		<property name="functionDao" ref="functionDao"></property>
 	</bean>
-	<bean id="menuDao" class="com.huangtl.blogmgr.dao.impl.MenuDaoImpl" parent="myBatisDao"></bean>
+	<bean id="functionDao" class="com.huangtl.blogmgr.dao.impl.FunctionDaoImpl" parent="myBatisDao"></bean>
 	<!-- 后台用户管理 -->
 	<bean id="userService" class="com.huangtl.blogmgr.service.impl.UserServiceImpl">
 		<property name="userDao" ref="userDao"></property>

@@ -16,8 +16,8 @@ Ext.onReady(function() {
 Ext.application({
 			name : 'BlogMgr',
 			appFolder : 'app',
-			models : ['Menu','User','Tree','BaseData','Role','Privilege','PrivilegeTree'],
-			stores : ['BaseDataStore','MenuListProxy','UserPagingStore','MenuTreeStore','MenuPagingStore',
+			models : ['Function','User','Tree','BaseData','Role','Privilege','PrivilegeTree'],
+			stores : ['BaseDataStore','UnionPrivilegeProxy','UserPagingStore','FunctionTreeStore','FunctionPagingStore',
 			          'RolePagingStore','PrivilegePagingStore','PrivilegeTreeStore','RoleListStore'],
 			controllers:['Main','Root'],
 			views:['BlogMgr.view.home.left.Navigator','BlogMgr.view.home.header.HomeHeader',
@@ -30,7 +30,7 @@ Ext.application({
 				 //设置字体
 				Ext.setGlyphFontFamily('iconfont');
 				Ext.require([
-					'BlogMgr.view.user.UserHome','BlogMgr.view.menu.MenuHome',
+					'BlogMgr.view.user.UserHome','BlogMgr.view.fun.FunctionHome',
 					'BlogMgr.view.auth.AuthHome']);
 			},
 			launch : function(profile) {

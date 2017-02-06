@@ -5,15 +5,16 @@ package com.huangtl.blogmgr.model.blog.dictionary;
  * @date 2016年8月10日
  * @author PraiseLord
  */
-public enum MenuType {
+public enum FunctionType {
 	NAVIGATOR(1,"导航菜单"),
-	TOOLBAR(2,"工具栏");
+	TOOLBAR(2,"工具栏"),
+	UNIT(3,"部件");
 	
 	
 	private String text;
 	private int code;
 	
-	private MenuType( int code,String text) {
+	private FunctionType( int code,String text) {
 		this.text = text;
 		this.code = code;
 	}

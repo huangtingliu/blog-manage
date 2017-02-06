@@ -1,11 +1,11 @@
 /**
- * 菜单添加表单
+ * 功能添加表单
  */
-Ext.define('BlogMgr.view.menu.mgr.MenuMgrForm', {
-			itemId : 'menuMgrForm',
+Ext.define('BlogMgr.view.fun.mgr.FunctionMgrForm', {
+			itemId : 'functionMgrForm',
 			extend : 'Ext.form.Panel',
-			alias : ['widget.menumgr_form'],
-			uses:['BlogMgr.store.MenuTreeStore'],
+			alias : ['widget.functionmgr_form'],
+			uses:['BlogMgr.store.FunctionTreeStore'],
 			waitTitle : '处理中...',
 			fileUpload : false,
 			defaults : {
@@ -23,7 +23,7 @@ Ext.define('BlogMgr.view.menu.mgr.MenuMgrForm', {
 							allowBlank : false
 						},
 						items : [{
-							fieldLabel : '上级菜单',
+							fieldLabel : '所属上级',
 							name:'fParentId',
 							bind:{
 								readOnly :'{form.fParentIdReadOnly}'
@@ -36,7 +36,7 @@ Ext.define('BlogMgr.view.menu.mgr.MenuMgrForm', {
 							},
 							allowBlank : true,
 							listeners:{
-								change:'parentMenuSelect'
+								change:'parentFunctionSelect'
 							}
 						},{
 							xtype : 'fieldcontainer',
@@ -47,20 +47,20 @@ Ext.define('BlogMgr.view.menu.mgr.MenuMgrForm', {
 								xtype : 'textfield'
 							},
 							items : [{
-								fieldLabel : '菜单代码',
+								fieldLabel : '功能代码',
 								width : '70%',
 								emptyText:'代码前缀',
-								reference: 'menuMgrFormPreCode',
+								reference: 'functionMgrFormPreCode',
 								editable : false,
 								submitValue:false
 							},{
 								name:'fId',
 								allowBlank : false,
-								width : '29.7%',
+								width : '29.9%',
 								bind:{
 									editable : '{form.fIdEditable}'
 								},
-								emptyText:'菜单代码',
+								emptyText:'代码',
 								maxLength:4,
 								vtype : 'alphanum',
 								getSubmitValue:function(){	
@@ -69,14 +69,14 @@ Ext.define('BlogMgr.view.menu.mgr.MenuMgrForm', {
 								}
 							}]
 						},{
-							fieldLabel : '菜单名称',
+							fieldLabel : '功能名称',
 							name:'fName',
 							emptyText:'必须是中文',
 							maxLength:10,
 							minLength:2,
 							vtype:'chinese'
 						},{
-							fieldLabel : '菜单排序',
+							fieldLabel : '功能排序',
 							name:'fOrder',
 							xtype:'numberfield',
 							value:0,
@@ -85,7 +85,7 @@ Ext.define('BlogMgr.view.menu.mgr.MenuMgrForm', {
 							allowDecimals:false,
 							emptyText:'0 - 100'
 						},{
-							fieldLabel : '菜单类型',
+							fieldLabel : '功能类型',
 							name:'fType',
 							xtype : 'combo',
 							store : {
@@ -96,6 +96,9 @@ Ext.define('BlogMgr.view.menu.mgr.MenuMgrForm', {
 										}, {
 											"value" : "TOOLBAR",
 											"name" : "工具栏"
+										}, {
+											"value" : "UNIT",
+											"name" : "单元"
 										}]
 							},
 							displayField : 'name',
@@ -124,14 +127,14 @@ Ext.define('BlogMgr.view.menu.mgr.MenuMgrForm', {
 							fieldLabel : '图标',
 							name:'fGlyph'
 						},{
-							fieldLabel : '视图类',
-							name:'fViewClass',
+							fieldLabel : '处理方式',
+							name:'fHandler',
 							vtype:'letter'
 						},{
-							fieldLabel : '链接',
-							name:'fUrl'
+							fieldLabel : '关联',
+							name:'fRelevance'
 						},{
-							fieldLabel : '菜单描述',
+							fieldLabel : '功能描述',
 							name : 'fDescr',
 							xtype : 'textarea',
 							maxLength:150,

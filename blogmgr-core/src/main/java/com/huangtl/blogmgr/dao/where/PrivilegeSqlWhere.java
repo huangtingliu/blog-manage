@@ -1,6 +1,8 @@
 package com.huangtl.blogmgr.dao.where;
 
+import com.huangtl.blogmgr.core.dao.Operator;
 import com.huangtl.blogmgr.model.blog.dictionary.AuthPriority;
+import com.huangtl.blogmgr.model.blog.dictionary.FunctionType;
 import com.huangtl.blogmgr.model.blog.dictionary.PrivilegeType;
 
 /**
@@ -17,7 +19,7 @@ public class PrivilegeSqlWhere extends SqlWhere {
 	 * @return
 	 */
 	public PrivilegeSqlWhere fIdEqual(String privilegeId){
-		this.put("fId_eq", privilegeId);
+		this.put(Operator.eq.eval("fId"), privilegeId);
 		return this;
 	}
 	
@@ -27,7 +29,7 @@ public class PrivilegeSqlWhere extends SqlWhere {
 	 * @return
 	 */
 	public PrivilegeSqlWhere fTypeEqual(PrivilegeType fType){
-		this.put("fType_eq", fType);
+		this.put(Operator.eq.eval("fType"), fType);
 		return this;
 	}
 	
@@ -37,7 +39,7 @@ public class PrivilegeSqlWhere extends SqlWhere {
 	 * @return
 	 */
 	public PrivilegeSqlWhere fFunIdEqual(String fFunId){
-		this.put("fFunId_eq", fFunId);
+		this.put(Operator.eq.eval("fFunId"), fFunId);
 		return this;
 	}
 	
@@ -47,7 +49,18 @@ public class PrivilegeSqlWhere extends SqlWhere {
 	 * @return
 	 */
 	public PrivilegeSqlWhere fRoleIdEqual(String fRoleId){
-		this.put("fRoleId_eq", fRoleId);
+		this.put(Operator.eq.eval("fRoleId"), fRoleId);
+		return this;
+	}
+	
+	/**
+	 * 角色id存在于
+	 * @param fRoleIds
+	 * @return
+	 */
+	public PrivilegeSqlWhere fRoleIdIn(String... fRoleIds){
+		if(fRoleIds.length==0){return this;}
+		this.put(Operator.in.eval("fRoleId"), fRoleIds);
 		return this;
 	}
 	
@@ -57,7 +70,33 @@ public class PrivilegeSqlWhere extends SqlWhere {
 	 * @return
 	 */
 	public PrivilegeSqlWhere fPriorityEqual(AuthPriority fPriority){
-		this.put("fPriority_eq", fPriority);
+		this.put(Operator.eq.eval("fPriority"), fPriority);
+		return this;
+	}
+	
+	/**
+	 * 权限级别 在
+	 * @param fPrioritys
+	 * @return
+	 */
+	public PrivilegeSqlWhere fPriorityIn(AuthPriority... fPrioritys){
+		if(fPrioritys.length==0){return this;}
+		this.put(Operator.in.eval("fPriority"), fPrioritys);
+		return this;
+	}
+	
+	public PrivilegeSqlWhere fPriorityNotEqual(AuthPriority fPriority){
+		this.put(Operator.ne.eval("fPriority"), fPriority);
+		return this;
+	}
+	
+	/**
+	 * 功能类型等于
+	 * @param funType
+	 * @return
+	 */
+	public PrivilegeSqlWhere funTypeEqual(FunctionType funType){
+		this.put(Operator.eq.eval("funType"), funType);
 		return this;
 	}
 	
@@ -67,7 +106,7 @@ public class PrivilegeSqlWhere extends SqlWhere {
 	 * @return
 	 */
 	public PrivilegeSqlWhere funParentIdEqual(String funParentId){
-		this.put("funParentId_eq", funParentId);
+		this.put(Operator.eq.eval("funParentId"), funParentId);
 		return this;
 	}
 }

@@ -3,11 +3,11 @@
  */
 Ext.define('BlogMgr.view.auth.AuthHomeModel', {
 			extend : 'Ext.app.ViewModel',
-			uses: ['BlogMgr.view.menu.MenuFactory'],
+			uses: ['BlogMgr.view.fun.MenuFactory'],
 			alias : 'viewmodel.authhome',
 			constructor : function() {  
 				this.callParent(arguments);  
-				var menus = BlogMgr.view.menu.MenuFactory.getToolBarMenu(null,'C0010005');
+				var menus = BlogMgr.view.fun.MenuFactory.getToolBarMenu(null,'C0010005');
 				Ext.apply(this.data, menus);
 			},
 			data:{}

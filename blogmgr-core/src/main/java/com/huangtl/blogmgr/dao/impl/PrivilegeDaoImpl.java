@@ -66,6 +66,16 @@ public class PrivilegeDaoImpl extends  MybatisDaoAdaptor<Privilege> implements P
 		
 		return childrens;
 	}
-	
 
+	@Override
+	public List<Privilege> selectUnionPrivilege(List<String> roleIds, PrivilegeSqlWhere where,String... fields) {
+			if(roleIds==null || roleIds.size()==0){
+				throw new IllegalArgumentException("roleIds 必须指定");
+			}
+			where.fRoleIdIn(roleIds.toArray(new String[roleIds.size()]));
+			where.putAll(packShowField(fields));
+			
+			return this.sqlSession.selectList(this.nameSpace+".selectUnionPrivilege", where);
+	}
+	
 }

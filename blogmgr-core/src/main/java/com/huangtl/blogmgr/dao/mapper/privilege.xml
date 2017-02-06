@@ -4,45 +4,58 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.huangtl.blogmgr.model.blog.Privilege">
 
-	<resultMap id="map" type="com.huangtl.blogmgr.model.blog.Privilege" >
+	<resultMap id="mapper" type="com.huangtl.blogmgr.model.blog.Privilege" >
 		<id property="fId" column="pri_id"/>
 		<result property="fPriority" column="dic_auth_priority"/>
-		<result property="fFunId" column="fun_id" />
+		<result property="fFunId" column="fn_id" />
 		<result property="fRoleId" column="rol_id"/>
 		<result property="fType" column="dic_type"/>
 		
-		<result property="funDescr" column="mu_Descr"/>
-		<result property="funName" column="mu_Name"/>
-		<result property="funParentId" column="mu_ParentId"/>
+		<result property="funDescr" column="fn_Descr"/>
+		<result property="funName" column="fn_Name"/>
+		<result property="funParentId" column="fn_ParentId"/>
+		<result property="funHandler" column="fn_Handler"/>
+		<result property="funRelevance" column="fn_Relevance"/>
+		<result property="funIcon" column="fn_Icon"/>
+		<result property="funOrder" column="fn_Order"/>
+		<result property="funGlyph" column="fn_Glyph"/>
+		<result property="funType" column="fn_Type"/>
+		<result property="funUsability" column="fn_Usability"/>
 	</resultMap>
 	
 	<sql id="field">
-		pri_id ,dic_auth_priority as fPriority ,fun_id as fFunId ,dic_type as fType,rol_id,
-		mu_Name as funName,mu_Descr as funDescr,mu_ParentId as funParentId
+		pri_id ,dic_auth_priority ,fn_id ,rol_id,
+		fn_Name ,fn_Descr ,fn_ParentId,fn_Handler,fn_Glyph,fn_Usability
+		<if test="fType_show != null">,dic_type</if>
+		<if test="funType_show != null">,fn_Type</if>
+		<if test="funOrder_show != null">,fn_Order</if>
+		<if test="funIcon_show != null">,fn_Icon</if>
+		<if test="funRelevance_show != null">,fn_Relevance</if>
+		<if test="funDescr_show != null">,fn_Descr</if>
 	</sql>
 	
 	<sql id="where">
 		 <trim prefix="where" prefixOverrides="and|or">
-		 	<if test="defaultWhere!=null and defaultWhere">
-		 		1=1
-		 	</if>
-			<if test="fType_eq !=null ">
-				and dic_type = #{fType_eq}
+		 	<if test="defaultWhere!=null and defaultWhere">1=1</if>
+			<if test="fType_eq !=null ">and dic_type = #{fType_eq}</if>
+			<if test="fPriority_eq != null">and dic_auth_priority = #{fPriority_eq}</if>
+			<if test="fPriority_ne != null">and dic_auth_priority != #{fPriority_ne}</if>
+			<if test="fId_eq != null">and pri_id = #{fId_eq}</if>
+			<if test="fRoleId_eq != null">and rol_id = #{fRoleId_eq}</if>
+			<if test="fFunId_eq != null">and fn_id= #{fFunId_eq}</if>
+			<if test="funParentId_eq != null">and fn_ParentId = #{funParentId_eq}</if>
+			<if test="funType_eq != null">and fn_Type = #{funType_eq}</if>
+			<if test="fRoleId_in != null">
+				and rol_id in
+				<foreach collection="fRoleId_in" open="(" item="roleIdItem" separator="," close=")">
+					#{roleIdItem}
+				</foreach>
 			</if>
-			<if test="fPriority_eq != null">
-				and dic_auth_priority = #{fPriority_eq}
-			</if>
-			<if test="fId_eq != null">
-				and pri_id = #{fId_eq}
-			</if>
-			<if test="fRoleId_eq != null">
-				and rol_id = #{fRoleId_eq}
-			</if>
-			<if test="fFunId_eq != null">
-				and fun_id= #{fFunId_eq}
-			</if>
-			<if test="funParentId_eq != null">
-				and mu_ParentId = #{funParentId_eq}
+			<if test="fPriority_in != null">
+				and dic_auth_priority in 
+				<foreach collection="fPriority_in" open="(" item="priorityItem" separator="," close=")">
+					#{priorityItem}
+				</foreach>
 			</if>
 		</trim>
 	</sql>
@@ -56,9 +69,71 @@
 		</if>
 	</sql>
 	
+	
+	<select id="selectList" resultMap="mapper" parameterType="map">
+		select 
+			<include refid="field"/>
+		from 
+			(select fn_Descr,fn_Name,fn_id as fnId,fn_ParentId,fn_Handler,fn_Glyph,dic_Usability as fn_Usability,
+			   dic_Type as fn_Type,fn_Order,fn_Icon,fn_Relevance
+			   from mgr_function where dic_Usability = 'ENABLE') a 
+			left join mgr_privilege b on a.fnId = b.fn_id
+			<include refid="where"/>
+	</select>
+	
+	<select id="selectCount"  resultType="long" parameterType="map">
+	  select count(pri_id) 
+	 	from mgr_privilege
+		<include refid="where"/>
+	</select>
+	
+	<select id="selectPaging" resultMap="mapper" parameterType="map">
+		select 
+			<include refid="field"/>
+		from 
+			(select fn_Descr,fn_Name,fn_id as fnId,fn_ParentId,fn_Handler,fn_Glyph,dic_Usability as fn_Usability,
+			   dic_Type as fn_Type,fn_Order,fn_Icon,fn_Relevance
+			   from mgr_function where dic_Usability = 'ENABLE') a 
+			left join mgr_privilege b on a.fn_Id = b.fn_id
+			<include refid="where"/>
+			<include refid="order"/>
+		limit #{startIndex},#{pageSize}
+	</select>
+	
+	
+	<select id="selectUnionPrivilege" resultMap="mapper" parameterType="map">
+			select 
+				<include refid="field"/>
+			from 
+				(select 
+					fn_Id as funId ,fn_Name,fn_ParentId,fn_Handler,fn_Glyph,fn_Order,dic_Usability as fn_Usability,fn_Descr,
+					dic_Type as fn_Type,fn_Icon,fn_Relevance
+				from mgr_function where dic_Usability = 'ENABLE') a
+				left join (
+					 select pri_id, fn_id,dic_auth_priority,rol_id from mgr_privilege a
+					 where 
+					 pri_id = (
+						select pri_id from  mgr_privilege b
+						left join (
+							select * from sys_dictionary
+							where dt_type = 'AuthPriority'
+						) c on b.dic_auth_priority = c.dic_id
+						where b.fn_id = a.fn_id
+						and b.rol_id in
+						<foreach collection="fRoleId_in" open="(" item="roleIdItem" separator="," close=")">
+							#{roleIdItem}
+						</foreach>
+						order by dic_code asc
+						limit 1
+					 )
+				)b on a.funId = b.fn_id
+			<include refid="where"/>
+			order by fn_Order
+	</select> 
+	
 	<insert id="insert" parameterType="com.huangtl.blogmgr.model.blog.Privilege">
 		insert into mgr_privilege(
-			pri_id,dic_auth_priority,fun_id,rol_id,dic_type
+			pri_id,dic_auth_priority,fn_id,rol_id,dic_type
 		) values(
 			#{fId},#{fPriority},#{fFunId},#{fRoleId},#{fType}
 		);
@@ -82,35 +157,5 @@
 			 where pri_id = #{privilege.fId}
 		</foreach>
 	</update> 
-	
-	<select id="selectList" resultMap="map" parameterType="map">
-		select 
-			<include refid="field"/>
-		from 
-			(select mu_Descr,mu_Name,mu_id,mu_ParentId
-			   from mgr_menu where dic_Usability = 'ENABLE') a 
-			left join mgr_privilege b on a.mu_Id = b.fun_id
-			<include refid="where"/>
-	</select>
-	
-	
-	
-	<select id="selectCount"  resultType="long" parameterType="map">
-	  select count(pri_id) 
-	 	from mgr_privilege
-		<include refid="where"/>
-	</select>
-	
-	<select id="selectPaging" resultMap="map" parameterType="map">
-		select 
-			<include refid="field"/>
-		from 
-			(select mu_Descr,mu_Name,mu_id,mu_ParentId
-			   from mgr_menu where dic_Usability = 'ENABLE') a 
-			left join mgr_privilege b on a.mu_Id = b.fun_id
-			<include refid="where"/>
-			<include refid="order"/>
-		limit #{startIndex},#{pageSize}
-	</select>
 	
 </mapper>

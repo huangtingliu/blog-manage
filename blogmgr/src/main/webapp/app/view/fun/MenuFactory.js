@@ -1,50 +1,49 @@
 /**
- * 菜单生成工厂，提供系统创建菜单时所要的数据
+ * 菜单工厂，提供系统创建功能菜单时所要的数据
  */
-Ext.define('BlogMgr.view.menu.MenuFactory', {
+Ext.define('BlogMgr.view.fun.MenuFactory', {
 	// 静态变量或函数
 	statics : {
 		
 		/**
-		 * 从服务器获取工具栏菜单,菜单已经带有权限控制了
-		 * @param menuId 菜单id
-		 * @param parentId 根据菜单的上级编号，获取其下所有的菜单
+		 * 创建一组工具栏按钮
+		 * @param funId 功能id
+		 * @param parentId 根据的上级编号，获取其下所有的功能
 		 * @return Object 
 		 * 例：{
 		 * 	toolBarMenus:[{},{}]
 		 * }
 		 */
-		getToolBarMenu:function(menuId,parentId){	
+		getToolBarMenu:function(funId,parentId){	
 			 var result = {
 				 toolBarMenus:[]         
 			 };
-			 if(!(menuId || parentId)){
+			 if(!(funId || parentId)){
 				 return result;
 			 }
 			 var extraParam ={};
-			 if(menuId){
-				 extraParam.menuId = menuId;
+			 if(funId){
+				 extraParam.funId = funId;
 			 }
 			 if(parentId){
 				 extraParam.parentId = parentId;
 			 }
 			 Ext.Ajax.request({  
-		            url : '/blogmgr/menu/authMenus.data',  
+		            url : '/blogmgr/privilege/union_privilege.data',  
 		            async : false, // 同步  
 		            params: extraParam,
 		            success : function(response) {  
 		                var text = response.responseText;  
 		                var data = Ext.decode(text, true);  // 将字段串转换成本地变量  
-		               
 		                if(data.success){
-		                	 Ext.each(data.menulist,function(value, index){
-									var disable = (value.authPriority=='DISABLE');
+		                	 Ext.each(data.privilegelist,function(value, index){
+									var disable = (value.fPriority=='DISABLE');
 									var item = {
-										itemId:value.fId,
-										text:value.fName,
-										glyph:value.fGlyph,
-										handler:value.fUrl,
-										tooltip:value.fDescr,
+										itemId:value.fFunId,
+										text:value.funName,
+										glyph:value.funGlyph,
+										handler:value.funHandler,
+										tooltip:value.funDescr,
 										disabled:disable,
 										xtype:'transparent_button'
 									};

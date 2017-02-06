@@ -7,9 +7,7 @@ package com.huangtl.blogmgr.model.blog.dictionary;
  *
  */
 public enum PrivilegeType {
-	VIEW(1,"视图权限"),
-	FUNCTION(2,"功能权限");
-	
+	FUNCTION(1,"功能权限");
 	
 	private int code;
 	private String text;

@@ -1,5 +1,6 @@
 package com.huangtl.blogmgr.action;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -8,6 +9,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,6 +18,10 @@ import com.alibaba.fastjson.JSONObject;
 import com.huangtl.blogmgr.core.spring.resolver.Json;
 import com.huangtl.blogmgr.dao.where.PrivilegeSqlWhere;
 import com.huangtl.blogmgr.model.blog.Privilege;
+import com.huangtl.blogmgr.model.blog.Role;
+import com.huangtl.blogmgr.model.blog.User;
+import com.huangtl.blogmgr.model.blog.dictionary.AuthPriority;
+import com.huangtl.blogmgr.model.blog.dictionary.FunctionType;
 import com.huangtl.blogmgr.model.common.Message;
 import com.huangtl.blogmgr.model.common.Page;
 import com.huangtl.blogmgr.model.common.Page.Direction;
@@ -125,6 +131,43 @@ public class PrivilegeAction extends BlogMgrAction {
 		
 	}
 	
+	/**
+	 * 根据当前用户的角色，将角色所持有的权限合并在一起
+	 * @param functionId 功能id
+	 * @param parentId   功能的父id
+	 * @param type
+	 * @return
+	 */
+	@RequestMapping("union_privilege.data")
+	@ResponseBody
+	public Object getExtractPrivilege(String functionId,String parentId,FunctionType type){
+		List<Privilege> privileges = null;
+		
+		//获取当前角色
+		@SuppressWarnings("unchecked")
+		List<Role> roles = (List<Role>) SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+		if(CollectionUtils.isEmpty(roles)){ //无权限处理
+			User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			logger.error("当前用户:{}无权限",user.toString());
+			privileges = new ArrayList<>();
+		}else{
+			List<String> roleIds = new ArrayList<>();
+			for (int i = 0; i < roles.size(); i++) {
+				roleIds.add(roles.get(i).getfId());
+			}
+			PrivilegeSqlWhere where = new PrivilegeSqlWhere().fPriorityNotEqual(AuthPriority.CLOSE);
+			where.funParentIdEqual(parentId);
+			where.fFunIdEqual(functionId);
+			where.funTypeEqual(type);
+			privileges = this.privilegeService.getDao().selectUnionPrivilege(roleIds, where,"funDescr");
+		}
+		
+		JSONObject data = new JSONObject();
+		data.put("privilegelist", privileges);
+		data.put("success", true);
+		data.put("message", "获取成功个数 "+privileges.size());
+		return data;
+	}
 	
 	
 }

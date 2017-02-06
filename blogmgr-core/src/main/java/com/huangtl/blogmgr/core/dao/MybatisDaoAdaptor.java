@@ -6,6 +6,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -13,7 +14,6 @@ import java.util.regex.Pattern;
 import org.apache.commons.beanutils.BeanIntrospector;
 import org.apache.commons.beanutils.IntrospectionContext;
 import org.apache.commons.beanutils.PropertyUtilsBean;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -161,11 +161,21 @@ public abstract class MybatisDaoAdaptor<T> implements MybatisDao<T> {
 	@Override
 	public List<T> selectList(SqlWhere param,String ... fields){
 		if(param==null){param = SqlWhere.blankWhere();}
-		for (String field : fields) {
-			param.put(field+"_show", true);
-		}
+		param.putAll(packShowField(fields));
 		List<T> lists = this.sqlSession.selectList(nameSpace+".selectList",param);
 		return lists;
+	}
+	
+	/**
+	 *  对要展示的字段做特殊的处理后，做为一组参数
+	 * @return
+	 */
+	protected Map<String, Object> packShowField(String... fields){
+		Map<String, Object> fieldParam = new HashMap<>();
+		for (String field : fields) {
+			fieldParam.put(field+"_show", true);
+		}
+		return fieldParam;
 	}
 	
 	//查询记录个数
@@ -184,11 +194,8 @@ public abstract class MybatisDaoAdaptor<T> implements MybatisDao<T> {
 		param.put("endIndex", page.getEndIndex()-1);
 		param.put("pageSize", page.getPageSize());
 		param.put("sorts", page.getSorts());
+		param.putAll(packShowField(fields));
 		
-		for (String field : fields) {
-			if(StringUtils.isBlank(field)){continue;}
-			param.put(field+"_show", true);
-		}
 		List<T> lists = this.sqlSession.selectList(nameSpace+".selectPaging",param);
 		page.setPageContent(lists);
 		return lists==null?0:lists.size();

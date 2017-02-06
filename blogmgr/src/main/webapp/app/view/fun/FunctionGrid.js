@@ -1,12 +1,12 @@
 /**
- * 菜单管理- 菜单列表
+ * 系统管理- 功能列表
  */
-Ext.define('BlogMgr.view.menu.MenuGrid', {
-	itemId : 'menuGrid',
+Ext.define('BlogMgr.view.fun.FunctionGrid', {
+	itemId : 'functionGrid',
 	extend : 'Ext.grid.Panel',
-	uses : ['Ux.button.TransparentButton', 'BlogMgr.view.menu.MenuListToolBar'],
-	alias : ['widget.menugrid'],
-	store : Ext.getStore('menuPagingStore'),
+	uses : ['Ux.button.TransparentButton', 'BlogMgr.view.fun.FunctionListToolBar'],
+	alias : ['widget.functiongrid'],
+	store : Ext.getStore('functionPagingStore'),
 	columnLines : true,
 	autoLoad : true,
 	scrollable : true,
@@ -27,7 +27,7 @@ Ext.define('BlogMgr.view.menu.MenuGrid', {
 				xtype : 'rownumberer',
 				width : 37
 			}, {
-				header : '编号',
+				header : '功能编号',
 				dataIndex : 'fId',
 				width:'14%',
 				sortable : true,
@@ -44,7 +44,7 @@ Ext.define('BlogMgr.view.menu.MenuGrid', {
 					 return result.join('');
 				}
 			}, {
-				header : '名称',
+				header : '功能名称',
 				dataIndex : 'fName',
 				width:'12%',
 				sortable : false
@@ -83,8 +83,8 @@ Ext.define('BlogMgr.view.menu.MenuGrid', {
 					}
 				}
 			},{
-				header : '视图类',
-				dataIndex : 'fViewClass',
+				header : '处理方式',
+				dataIndex : 'fHandler',
 				sortable : false,
 				width:'15%',
 				renderer:function(val){
@@ -92,8 +92,8 @@ Ext.define('BlogMgr.view.menu.MenuGrid', {
 					return '<span data-qtip="'+val+'" >'+val+'</span>';
 				}
 			}, {
-				header : '链接',
-				dataIndex : 'fUrl',
+				header : 'URL关联',
+				dataIndex : 'fRelevance',
 				//hidden : true,
 				width:'14%',
 				sortable : false,
@@ -102,12 +102,12 @@ Ext.define('BlogMgr.view.menu.MenuGrid', {
 					return '<span data-qtip="'+val+'">'+val+'</span>';
 				}
 			}, {
-				header : '序号',
+				header : '功能排序',
 				dataIndex : 'fOrder',
 				align : 'center',
 				width:'6%'
 			}, {
-				header : '类型',
+				header : '功能类型',
 				dataIndex : 'fType',
 				sortable : false,
 				align : 'center',
@@ -117,19 +117,21 @@ Ext.define('BlogMgr.view.menu.MenuGrid', {
 						return '导航菜单';
 					} else if (val == 'TOOLBAR') {
 						return '工具栏';
-					} else {
+					} else if(val == 'UNIT') {
+						return '单元';
+					}else{
 						return '未知';
 					}
 				}
 			}],
 	tbar : {
-		xtype : 'menulist_toolbar'
+		xtype : 'functionlist_toolbar'
 	},
 	dockedItems : [{
 				xtype : 'pagingtoolbar',
 				dock : 'bottom',
 				displayInfo : true,
-				store : Ext.getStore('menuPagingStore')
+				store : Ext.getStore('functionPagingStore')
 			/*	items : [{
 							tooltip : '数据打印',
 							xtype : 'splitbutton',

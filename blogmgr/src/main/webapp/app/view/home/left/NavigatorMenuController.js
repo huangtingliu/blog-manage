@@ -15,12 +15,11 @@ Ext.define('BlogMgr.view.home.left.NavigatorMenuController',{
     		return;
     	}
         this.onLink({
-        	id:record.get('fId'),
-        	icon:record.get('fIcon'),
-        	title:record.get('fName'),
-        	viewClass:record.get('fViewClass'),
-        	url:record.get('fUrl'),
-        	glyph:record.get('fGlyph')
+        	id:record.get('fFunId'),
+        	icon:record.get('funIcon'),
+        	title:record.get('funName'),
+        	viewClass:record.get('funHandler'),
+        	glyph:record.get('funGlyph')
         });
     },
     onLink:function(item){

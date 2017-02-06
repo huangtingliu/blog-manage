@@ -37,7 +37,7 @@
         	 <sec:access-denied-handler ref="accessDeniedHandlerImpl"/>
         	<sec:csrf disabled="true" /> 
 	        <sec:intercept-url  pattern="/**"  access="isAuthenticated()"/>
-	 	 	<sec:custom-filter after="FILTER_SECURITY_INTERCEPTOR" ref="resourceAuthorityFilter"/> 
+	 	 	<!--<sec:custom-filter after="FILTER_SECURITY_INTERCEPTOR" ref="resourceAuthorityFilter"/>  -->
 	    <!--  <sec:intercept-url  pattern="/**"  access="hasRole('ADMIN') or hasRole('USER')"/> -->
         <!-- <sec:session-management session-authentication-error-url="/frame.expired" >  
             max-sessions只容许一个账号登录，error-if-maximum-exceeded 后面账号登录后踢出前一个账号，expired-url session过期跳转界面  

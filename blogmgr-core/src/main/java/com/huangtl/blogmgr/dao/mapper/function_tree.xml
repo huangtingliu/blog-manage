@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huangtl.blogmgr.model.blog.tree.Function">
+
+	<resultMap id="mapper" type="com.huangtl.blogmgr.model.extjs.TreeNode" >
+		<id property="id" column="fn_Id"/>
+		<result property="text" column="fn_Name"/>
+		<result property="parentId" column="fn_ParentId" />
+		<result property="iconCls" column="fn_Icon"/>
+		<result property="qtip" column="fn_Descr"/>
+		<result property="childrenSize" column="childrenSize"/>
+		<result property="attr" column="fOrder" typeHandler="com.huangtl.blogmgr.core.mybatis.handler.MapTypeHandler"/>
+		<result property="attr" column="fType" typeHandler="com.huangtl.blogmgr.core.mybatis.handler.MapTypeHandler"/>
+	</resultMap>
+	
+	<select id="selectTreeNodes" resultMap="mapper" parameterType="map">
+		select fn_Id,fn_Name,fn_ParentId,fn_Icon,
+		       fn_Order as fOrder,
+		       dic_Type as fType,
+		       (select count(*) from mgr_function b where b.fn_ParentId =a.fn_Id ) as childrenSize
+		from mgr_function a
+		<include refid="com.huangtl.blogmgr.model.blog.Function.where"/>
+		order by fn_Order
+	</select>
+</mapper>

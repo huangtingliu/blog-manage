@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huangtl.blogmgr.model.blog.Function">
+
+	<resultMap id="mapper" type="com.huangtl.blogmgr.model.blog.Function" >
+		<id property="fId" column="fn_Id"/>
+		<result property="fName" column="fn_Name"/>
+		<result property="fParentId" column="fn_ParentId" />
+		<result property="fIcon" column="fn_Icon"/>
+		<result property="fHandler" column="fn_Handler"/>
+		<result property="fRelevance" column="fn_Relevance"/>
+		<result property="fOrder" column="fn_Order"/>
+		<result property="fDescr" column="fn_Descr"/>
+		<result property="fGlyph" column="fn_Glyph"/>
+		<result property="fType" column="dic_Type"/>
+		<result property="fUsability" column="dic_Usability"/>
+	</resultMap>
+	
+	<sql id="field">
+		fn_Id as fId,fn_Name,fn_ParentId,fn_Handler,fn_Relevance,fn_Glyph,fn_Order as fOrder,dic_Type
+		<if test="fUsability_show != null">,dic_Usability</if>
+		<if test="fIcon_show != null">,fn_Icon</if>
+		<if test="fDescr_show != null">,fn_Descr</if>
+	</sql>
+	
+	<sql id="where">
+		 <trim prefix="where" prefixOverrides="and|or">
+		 	<if test="defaultWhere!=null and defaultWhere">
+		 		1=1
+		 	</if>
+			<if test="fId_eq !=null ">
+				and fn_Id = #{fId_eq}
+			</if>
+			<if test="fParentId_eq != null">
+				and fn_ParentId = #{fParentId_eq}
+			</if>
+			<if test="fType_eq != null">
+				and dic_Type = #{fType_eq}
+			</if>
+			<if test="fUsability_eq != null">
+				and dic_Usability = #{fUsability_eq}
+			</if>
+			<if test="fId_in !=null ">
+				and fn_Id in
+				<foreach collection="fId_in" open="(" item="id" separator="," close=")">
+					#{id}
+				</foreach>
+			</if>
+		</trim>
+	</sql>
+	
+	<sql id="order">
+		<if test="sorts != null and sorts.size() != 0">
+			order by 
+			<foreach collection="sorts" separator="," index="key" item="val">
+				${key} ${val}
+			</foreach>
+		</if>
+	</sql>
+	
+	<insert id="insert" parameterType="com.huangtl.blogmgr.model.blog.Function">
+		insert into mgr_function(
+			fn_Id,fn_Name,dic_Type
+			<if test="fParentId !=null">,fn_ParentId</if>
+			<if test="fIcon !=null">,fn_Icon</if>
+			<if test="fRelevance != null">,fn_Relevance</if>
+			<if test="fHandler != null">,fn_Handler</if>
+			<if test="fOrder !=null">,fn_Order</if>
+			<if test="fDescr !=null">,fn_Descr</if>
+			<if test="fGlyph !=null">,fn_Glyph</if>
+			<if test="fUsability !=null">,dic_Usability</if>
+		) values(
+			#{fId},#{fName},#{fType}
+			<if test="fParentId !=null">,#{fParentId}</if>
+			<if test="fIcon !=null">,#{fIcon}</if>
+			<if test="fRelevance != null">,#{fRelevance}</if>
+			<if test="fHandler != null">,#{fHandler}</if>
+			<if test="fOrder !=null">,#{fOrder}</if>
+			<if test="fDescr !=null">,#{fDescr}</if>
+			<if test="fGlyph !=null">,#{fGlyph}</if>
+			<if test="fUsability !=null">,#{fUsability}</if>
+		);
+	</insert>
+	
+	<delete id="delete" parameterType="map">
+		delete from mgr_function
+		<include refid="where"/>
+	</delete>	
+	
+	<update id="update" parameterType="map" >
+		update mgr_function
+		<trim prefix="set" suffixOverrides=",">
+			<if test="fName !=null ">fn_Name = #{fName},</if>
+			<if test="fParentId !=null ">fn_ParentId = #{fParentId},</if>
+			<if test="fIcon !=null ">fn_Icon = #{fIcon},</if>
+			<if test="fRelevance !=null ">fn_Relevance = #{fRelevance},</if>
+			<if test="fHandler !=null ">fn_Handler = #{fHandler},</if>
+			<if test="fType !=null ">dic_Type = #{fType},</if>
+			<if test="fGlyph !=null ">fn_Glyph = #{fGlyph},</if>
+			<if test="fOrder !=null ">fn_Order = #{fOrder},</if>
+			<if test="fUsability !=null ">dic_Usability = #{fUsability},</if>
+			<if test="fDescr !=null "> fn_Descr = #{fDescr}</if>
+		</trim>
+		<include refid="where"/>
+	</update>
+	
+	<update id="updateBatch" parameterType="list">
+		 <foreach collection="list" item="function" index="index" open="" close="" separator=";">
+				update mgr_function 
+				<trim prefix="set" suffixOverrides=",">
+					<if test="function.fName !=null ">fn_Name = #{function.fName},</if>
+					<if test="function.fParentId !=null ">fn_ParentId = #{function.fParentId},</if>
+					<if test="function.fIcon !=null ">fn_Icon = #{function.fIcon},</if>
+					<if test="function.fHandler !=null ">fn_Handler = #{function.fHandler},</if>
+					<if test="function.fRelevance !=null ">fn_Relevance = #{function.fRelevance},</if>
+					<if test="function.fType !=null ">dic_Type = #{function.fType},</if>
+					<if test="function.fGlyph !=null ">fn_Glyph = #{function.fGlyph},</if>
+					<if test="function.fOrder !=null ">fn_Order = #{function.fOrder},</if>
+					<if test="function.fUsability !=null ">dic_Usability = #{function.fUsability},</if>
+					<if test="function.fDescr !=null "> fn_Descr = #{function.fDescr}</if>
+				</trim>
+				where fn_Id = #{function.fId}
+		 </foreach>
+	</update>
+	
+	<select id="selectCount"  resultType="long" parameterType="map">
+	  select count(fn_Id) from mgr_function
+		<include refid="where"/>
+	</select>
+	
+	<select id="selectList" resultMap="mapper" parameterType="map">
+		select 
+			<include refid="field"/>
+		from mgr_function
+			<include refid="where"/>
+		order by fn_Order
+	</select>
+	
+	<select id="selectPaging" resultMap="mapper" parameterType="map">
+		select 
+			<include refid="field"/>
+		from mgr_function
+			<include refid="where"/>
+			<include refid="order"/>
+		limit #{startIndex},#{pageSize}
+	</select>
+	
+</mapper>

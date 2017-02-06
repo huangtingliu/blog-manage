@@ -6,11 +6,12 @@ Ext.define('BlogMgr.view.home.left.NavigatorModel', {
 			alias : 'viewmodel.navigator',
 			stores : {
 				rootMenu:{	//顶级菜单数据
-					model : 'BlogMgr.model.Menu',
+					model : 'BlogMgr.model.Privilege',
 					proxy : {
-						type:'menu_list',
+						type:'union_privilege',
 						extraParams:{
-							parentId:''
+							parentId:'',
+							type:'NAVIGATOR'
 						}
 					},
 					listeners:{

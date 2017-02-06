@@ -8,50 +8,46 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
 
 import com.huangtl.blogmgr.model.blog.dictionary.CommonDictionary.Usability;
-import com.huangtl.blogmgr.model.blog.dictionary.AuthPriority;
-import com.huangtl.blogmgr.model.blog.dictionary.MenuType;
+import com.huangtl.blogmgr.model.blog.dictionary.FunctionType;
 import com.huangtl.blogmgr.model.common.ObjectValue;
 
 /**
- * 菜单
+ * 系统功能
  * @version 
  * @date 2016年6月30日
  * @author PraiseLord
  */
-public class Menu extends ObjectValue {
+public class Function extends ObjectValue {
 	private static final long serialVersionUID = 3798069904994355609L;
-	private String fId;				//
-	private String fName;			//
+	private String fId;				//id
+	private String fName;			//功能名称
 	private String fParentId;		//父id
 	private String fIcon;			//图标 iconClass
-	private String fViewClass;		//视图类
-	private String fUrl;			//链接
+	private String fRelevance;		//URL关联值
+	private String fHandler;		//处理方式
 	private Integer fOrder;			//排序 默认 0
     private String fDescr;			//描述
     private Integer fGlyph;			//glyph值 
-    private MenuType fType;			//菜单类型
-    private Integer fExpand;		//是否展开{0：不展开，1：展开},默认0
+    private FunctionType fType;		//功能类型
     private Usability fUsability;	//是否可用，默认 ENABLE
     
-    private AuthPriority authPriority;	//权限级别
-    
-    @NotBlank(message="菜单id为空")
+    @NotBlank(message="功能id为空")
 	public String getfId() {
 		return fId;
 	}
 	public void setfId(String fId) {
 		this.fId = fId;
 	}
-	@NotNull(message="菜单类型为空")
-	public MenuType getfType() {
+	@NotNull(message="功能类型为空")
+	public FunctionType getfType() {
 		return fType;
 	}
-	public void setfType(MenuType fType) {
+	public void setfType(FunctionType fType) {
 		this.fType = fType;
 	}
-	@NotBlank(message="菜单名为空")
-	@Length(message="菜单名长度2-10",min=2,max=10)
-	@Pattern(regexp="[\\u4e00-\\u9fa5]*",message="菜单名必须是中文")
+	@NotBlank(message="功能名为空")
+	@Length(message="功能名长度2-10",min=2,max=10)
+	@Pattern(regexp="[\\u4e00-\\u9fa5]*",message="功能名必须是中文")
 	public String getfName() {
 		return fName;
 	}
@@ -70,26 +66,26 @@ public class Menu extends ObjectValue {
 	public void setfIcon(String fIcon) {
 		this.fIcon = fIcon;
 	}
-	public String getfViewClass() {
-		return fViewClass;
+	public String getfRelevance() {
+		return fRelevance;
 	}
-	public void setfViewClass(String fViewClass) {
-		this.fViewClass = fViewClass;
+	public void setfRelevance(String fRelevance) {
+		this.fRelevance = fRelevance;
 	}
-	public String getfUrl() {
-		return fUrl;
+	public String getfHandler() {
+		return fHandler;
 	}
-	public void setfUrl(String fUrl) {
-		this.fUrl = fUrl;
+	public void setfHandler(String fHandler) {
+		this.fHandler = fHandler;
 	}
-	@Range(message="菜单序号0-100",min=0,max=100)
+	@Range(message="功能序号0-100",min=0,max=100)
 	public Integer getfOrder() {
 		return fOrder;
 	}
 	public void setfOrder(Integer fOrder) {
 		this.fOrder = fOrder;
 	}
-	@Length(message="菜单描述长度300",max=300)
+	@Length(message="功能描述长度300",max=300)
 	public String getfDescr() {
 		return fDescr;
 	}
@@ -102,22 +98,10 @@ public class Menu extends ObjectValue {
 	public void setfGlyph(Integer fGlyph) {
 		this.fGlyph = fGlyph;
 	}
-	public Integer getfExpand() {
-		return fExpand;
-	}
-	public void setfExpand(Integer fExpand) {
-		this.fExpand = fExpand;
-	}
 	public Usability getfUsability() {
 		return fUsability;
 	}
 	public void setfUsability(Usability fUsability) {
 		this.fUsability = fUsability;
-	}
-	public AuthPriority getAuthPriority() {
-		return authPriority;
-	}
-	public void setAuthPriority(AuthPriority authPriority) {
-		this.authPriority = authPriority;
 	}
 }

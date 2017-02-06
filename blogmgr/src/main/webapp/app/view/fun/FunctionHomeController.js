@@ -1,7 +1,10 @@
-Ext.define('BlogMgr.view.menu.MenuHomeController', {
+/**
+ * 系统功能管理控制器
+ */
+Ext.define('BlogMgr.view.fun.FunctionHomeController', {
 			extend : 'Ext.app.ViewController',
-			alias : 'controller.menuhome',
-			uses:['BlogMgr.view.menu.mgr.MenuMgrDialog'],
+			alias : 'controller.functionhome',
+			uses:['BlogMgr.view.fun.mgr.FunctionMgrDialog'],
 			init : function() {
 				this.mask = new Ext.LoadMask({
 							msg : '删除中...',
@@ -9,23 +12,23 @@ Ext.define('BlogMgr.view.menu.MenuHomeController', {
 						});
 			},
 			/**
-			 * 添加菜单
+			 * 添加功能
 			 */
-			addMenu:function(){
-				Ext.create('BlogMgr.view.menu.mgr.MenuMgrDialog',{
+			addFunction:function(){
+				Ext.create('BlogMgr.view.fun.mgr.FunctionMgrDialog',{
 					viewModel : {
-						type : 'menu_add_dialog'
+						type : 'function_add_dialog'
 					}
 				}).show();
 			},
 			/**
-			 * 修改菜单
+			 * 修改功能
 			 */
-			editMenu:function(){
+			editFunction:function(){
 				var me = this;
-				var menuGrid = this.lookupReference('menuGrid');
-				var menuPagingStore = menuGrid.getStore();
-				var selectedRows = menuGrid.getSelectionModel().getSelection();
+				var functionGrid = this.lookupReference('functionGrid');
+				var functionPagingStore = functionGrid.getStore();
+				var selectedRows = functionGrid.getSelectionModel().getSelection();
 				var ids = [];
 				Ext.each(selectedRows, function() {
 							ids.push(this.get("fId"));
@@ -42,21 +45,21 @@ Ext.define('BlogMgr.view.menu.MenuHomeController', {
 				me.mask.show();
 				
 				//表单数据回填
-				var editRecored = menuPagingStore.getById(ids[ids.length-1]);
+				var editRecored = functionPagingStore.getById(ids[ids.length-1]);
 				editRecored.load({
 					callback:function(record, operation, success){
 						me.mask.hide();
 						if(success){
-							var menuAddDialog = Ext.create('BlogMgr.view.menu.mgr.MenuMgrDialog',{
+							var functionAddDialog = Ext.create('BlogMgr.view.fun.mgr.FunctionMgrDialog',{
 								viewModel:{
-									type : 'menu_edit_dialog'
+									type : 'function_edit_dialog'
 								}
 							}).show();
-							var menuAddForm = menuAddDialog.getComponent('menuMgrForm');
-							menuAddForm.loadRecord(record);
-							var menufId = record.get("fId");
-							menuAddForm.getForm().setValues({
-								fId:menufId.substr(-4,4)
+							var functionAddForm = functionAddDialog.getComponent('functionMgrForm');
+							functionAddForm.loadRecord(record);
+							var functionfId = record.get("fId");
+							functionAddForm.getForm().setValues({
+								fId:functionfId.substr(-4,4)
 							});
 						}else{
 							Ext.toast({
@@ -68,15 +71,15 @@ Ext.define('BlogMgr.view.menu.MenuHomeController', {
 				});
 			},
 			/**
-			 * 删除菜单
+			 * 删除功能
 			 */
-			deleteMenu:function(){
-				Ext.toast("待修改"); 
+			deleteFunction:function(){
+				Ext.toast("待开发"); 
 				return;   
 				var me = this;
-				var menuGrid = this.lookupReference('menuGrid');
-				var menuPagingStore = menuGrid.getStore();
-				var selectedRows = menuGrid.getSelectionModel().getSelection();
+				var functionGrid = this.lookupReference('functionGrid');
+				var functionPagingStore = functionGrid.getStore();
+				var selectedRows = functionGrid.getSelectionModel().getSelection();
 				var ids = [];
 				Ext.each(selectedRows, function() {
 							ids.push(this.get("fId"));
@@ -94,7 +97,7 @@ Ext.define('BlogMgr.view.menu.MenuHomeController', {
 						me.mask.msg = "删除中...";
 						me.mask.show();
 						Ext.Ajax.request({
-									url : '/blogmgr/menu/delete.do',
+									url : '/blogmgr/function/delete.do',
 									method : 'POST',
 									params : {
 										id : ids.join(',')
@@ -105,8 +108,8 @@ Ext.define('BlogMgr.view.menu.MenuHomeController', {
 											var result = JSON.parse(response.responseText);
 											Ext.toast(result);
 											if (result.success) {
-												menuPagingStore.remove(selectedRows);
-												menuGrid.getSelectionModel().deselectAll();
+												functionPagingStore.remove(selectedRows);
+												functionGrid.getSelectionModel().deselectAll();
 												//TODO 界面刷新
 											}
 										} else {

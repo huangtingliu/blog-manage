@@ -1,9 +1,9 @@
 /**
- * 菜单管理对话窗口
+ * 系统功能管理对话窗口
  */
-Ext.define('BlogMgr.view.menu.mgr.MenuMgrDialogController', {
+Ext.define('BlogMgr.view.fun.mgr.FunctionMgrDialogController', {
 			extend : 'Ext.app.ViewController',
-			alias : 'controller.menumgr_dialog',
+			alias : 'controller.functionmgr_dialog',
 			init : function() {
 				this.mask = new Ext.LoadMask({
 							msg : '删除中...',
@@ -11,23 +11,23 @@ Ext.define('BlogMgr.view.menu.mgr.MenuMgrDialogController', {
 						});
 			},
 			/**
-			 * 用户信息提交
+			 * 功能信息提交
 			 */
-			userAddSubmit : function() { 
+			functionAddSubmit : function() { 
 				var me = this;
-				var form = this.getView().getComponent('menuMgrForm');
+				var form = this.getView().getComponent('functionMgrForm');
 				
 				form.submit({
-							url : '/blogmgr/menu/add.do',
+							url : '/blogmgr/function/add.do',
 							method : 'POST',
 							submitEmptyText:false,
 							success : function(form, action) {
 								Ext.toast(action.result);
-								var menuId = form.findField("fId").getSubmitData().fId;
+								var functionId = form.findField("fId").getSubmitData().fId;
 								
-								BlogMgr.model.Menu.load(menuId,{
+								BlogMgr.model.Function.load(functionId,{
 									callback:function(rec,opt,success){
-										Ext.getStore('menuPagingStore').add(rec);
+										Ext.getStore('functionPagingStore').add(rec);
 										//TODO 界面更新
 										//TODO 树型下拉选择器，与左边的数据冲突
 									}
@@ -44,14 +44,14 @@ Ext.define('BlogMgr.view.menu.mgr.MenuMgrDialogController', {
 						});
 			},
 			/**
-			 * 用户修改提交
+			 * 功能修改提交
 			 */
-			userEditSubmit:function(){
+			functionEditSubmit:function(){
 				var me = this;
-				var form = this.getView().getComponent('menuMgrForm');
+				var form = this.getView().getComponent('functionMgrForm');
 				//TODO 无法只提交修改的部分
 				form.submit({
-							url : '/blogmgr/menu/edit.do',
+							url : '/blogmgr/function/edit.do',
 							method : 'POST',
 							submitEmptyText:false,
 							success : function(form, action) {
@@ -75,17 +75,17 @@ Ext.define('BlogMgr.view.menu.mgr.MenuMgrDialogController', {
 				this.getView().close();
 			},
 			/**
-			 *  选择父级菜单后处理方法
+			 *  选择父级功能后处理方法
 			 */
-			parentMenuSelect:function( me , newValue , oldValue ){
-				var preCodeFile = this.lookupReference('menuMgrFormPreCode');
+			parentFunctionSelect:function( me , newValue , oldValue ){
+				var preCodeFile = this.lookupReference('functionMgrFormPreCode');
 				preCodeFile.setValue(newValue);
 			},
 			/**
-			 * 菜单代码值 提取规则
+			 * 功能代码值 提取规则
 			 */
 			fIdSubmitValue:function(fixVal){	
-				var preCodeFile = this.lookupReference('menuMgrFormPreCode');
+				var preCodeFile = this.lookupReference('functionMgrFormPreCode');
 				var preVal = preCodeFile.getValue();
 				return Ext.String.trim(preVal)+fixVal;
 			}

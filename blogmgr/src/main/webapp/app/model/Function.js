@@ -1,23 +1,21 @@
 /**
- * 导航栏菜单
+ * 系统功能
  */
-Ext.define('BlogMgr.model.Menu',{
+Ext.define('BlogMgr.model.Function',{
 	extend:'Ext.data.Model',
 	idProperty:'fId',	//主键标识
 	 fields: [
 	    {name: 'fId', type: 'string'},
         {name: 'fName',  type: 'string'},
         {name: 'fParentId',   type: 'string'},
-        {name: 'fViewClass', type: 'string'},
-        {name: 'fUrl', type: 'string'},
+        {name: 'fHandler', type: 'string'},
+        {name: 'fRelevance', type: 'string'},
         {name: 'fIcon', type: 'string'},
         {name: 'fGlyph', type: 'int'},
         {name: 'fOrder', type: 'int'},
         {name: 'fType', type: 'string'},
         {name: 'fUsability', type: 'string'},
-        {name: 'fDescr', type: 'string'},
-        {name: 'fExpand', type: 'int'},
-        {name: 'authPriority', type: 'string'}
+        {name: 'fDescr', type: 'string'}
         
     ],
     validators: {
@@ -26,6 +24,6 @@ Ext.define('BlogMgr.model.Menu',{
     },
     proxy:{
     	type:'ajax',
-    	url:'/blogmgr/menu/get.data'
+    	url:'/blogmgr/function/get.data'
     }
 });
