@@ -27,6 +27,8 @@ Version: 5.1.0.107 Build date: 2014-12-10 12:26:01 (2e9aed02ab6d3ef7b0ec406edea1
  * Will load ext-all.js (minified) otherwise
  */
 (function() {
+	 
+	 
     var scripts = document.getElementsByTagName('script'),
         localhostTests = [
             /^localhost$/,
@@ -41,7 +43,6 @@ Version: 5.1.0.107 Build date: 2014-12-10 12:26:01 (2e9aed02ab6d3ef7b0ec406edea1
         scriptSrc = scripts[i].src;
 
         match = scriptSrc.match(/bootstrap\.js$/);
-
         if (match) {
             path = scriptSrc.substring(0, scriptSrc.length - match[0].length);
             break;
@@ -69,6 +70,7 @@ Version: 5.1.0.107 Build date: 2014-12-10 12:26:01 (2e9aed02ab6d3ef7b0ec406edea1
     if (isDevelopment === null && window.location.protocol === 'file:') {
         isDevelopment = true;
     }
+   
 
     document.write('<script type="text/javascript" charset="UTF-8" src="' + 
         path + 'ext-all' + (isDevelopment ? '-debug' : '') + '.js"></script>');

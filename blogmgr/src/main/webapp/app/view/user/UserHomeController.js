@@ -129,9 +129,12 @@ Ext.define('BlogMgr.view.user.UserHomeController', {
 	 * 导出所有用户
 	 */
 	exportAllUser:function(){
-		window.location.href = "/blogmgr/user/export_user_list.data?type=ALL";
+	    Ext.downloadFile({
+	    	 url:'/blogmgr/user/export_user_list.data',
+		     method:'POST',
+		     params:{type:'ALL'}
+	    });
 	}
-	
 	
 	 
 });

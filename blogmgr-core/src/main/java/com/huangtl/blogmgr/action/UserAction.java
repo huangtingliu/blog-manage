@@ -1,8 +1,8 @@
 package com.huangtl.blogmgr.action;
 
 
+import java.io.IOException;
 import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -283,25 +283,33 @@ public class UserAction extends BlogMgrAction {
 	 * 导出用户
 	 * @param type
 	 * @param userIds 格式： ‘id,id,id’
+	 * @throws IOException 
 	 */
 	@RequestMapping("export_user_list.data")
-	public void exportExcel(ExportType type,String userIds,HttpServletResponse response){
-		response.setContentType("application/vnd.ms-excel;charset=utf-8");
-		String fileName = "用户清单";
-        try {
-			response.setHeader("Content-Disposition", "attachment;filename="+ new String((fileName + ".xlsx").getBytes(), "iso-8859-1"));
-		} catch (UnsupportedEncodingException e1) {
-			logger.error("用户导出excel",e1);
+	public Object exportExcel( ExportType type,String userIds,HttpServletResponse response) throws IOException{
+		if(type==null){
+			return Message.error("缺少参数：type");
 		}
-        
+		
+		OutputStream oStream =  response.getOutputStream();
+		String fileName = "用户清单";
+		response.setContentType("application/vnd.ms-excel;charset=utf-8");
+		response.setHeader("Content-Disposition", "attachment;filename="+ new String((fileName + ".xlsx").getBytes(), "iso-8859-1"));
+		
 		try {
-			OutputStream oStream =  response.getOutputStream();
 			Workbook book= this.userService.exportExcel(type, userIds);
 			book.save(oStream, SaveFormat.XLSX);
+			return null;
 		}  catch (Exception e) {
 			logger.error("用户导出excel失败",e);
 		}
 		
+		try {
+			Workbook book= new Workbook();
+			book.save(oStream, SaveFormat.XLSX);
+		} catch (Exception e) {}
+		
+		return Message.error("导出失败");
 	}
 	
 }

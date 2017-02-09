@@ -125,7 +125,8 @@ Ext.define('BlogMgr.view.fun.mgr.FunctionMgrForm', {
 						},
 						items : [{
 							fieldLabel : '图标',
-							name:'fGlyph'
+							name:'fGlyph',
+							value:58917
 						},{
 							fieldLabel : '处理方式',
 							name:'fHandler',

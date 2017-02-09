@@ -21,7 +21,9 @@ Ext.define('BlogMgr.view.fun.MenuFactory', {
 			 if(!(funId || parentId)){
 				 return result;
 			 }
-			 var extraParam ={};
+			 var extraParam ={
+				 type:'TOOLBAR'
+			 };
 			 if(funId){
 				 extraParam.funId = funId;
 			 }
@@ -31,6 +33,7 @@ Ext.define('BlogMgr.view.fun.MenuFactory', {
 			 Ext.Ajax.request({  
 		            url : '/blogmgr/privilege/union_privilege.data',  
 		            async : false, // 同步  
+		            method: 'POST',
 		            params: extraParam,
 		            success : function(response) {  
 		                var text = response.responseText;  

@@ -3,7 +3,6 @@ package com.huangtl.blogmgr.core.security;
 import java.io.IOException;
 import java.io.Writer;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -48,9 +47,8 @@ public class AccessDeniedHandlerImpl implements AccessDeniedHandler {
 		}else{ //其他的请求
 			// Set the 403 status code.
 			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-			// forward to error page.
-			RequestDispatcher dispatcher = request.getRequestDispatcher("noauth.htm");
-			dispatcher.forward(request, response);
+			// redirect to error page.
+			response.sendRedirect("/blogmgr/noauth.htm");
 		}
 	}
 	

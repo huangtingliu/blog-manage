@@ -9,7 +9,8 @@ Ext.onReady(function() {
 				 'Ux.button.TransparentButton'
 	]);
 	Ext.Loader.loadScript([
-		'/blogmgr/framework/Ux/VTypesPlus.js'
+		'/blogmgr/framework/Ux/VTypesPlus.js',
+		'/blogmgr/framework/Ux/CustomExtCmp.js'
 	]);
 });
 
