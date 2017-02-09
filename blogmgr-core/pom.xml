@@ -149,6 +149,16 @@
 		    <artifactId>commons-beanutils</artifactId>
 		    <version>1.9.2</version>
 		</dependency>
+		<dependency>
+			 <groupId>aspose</groupId>
+		    <artifactId>cells</artifactId>
+		    <version>8.3.1</version>
+		</dependency> 
+		<dependency>
+			 <groupId>aspose</groupId>
+		    <artifactId>word</artifactId>
+		    <version>14.9.0</version>
+		</dependency> 
 		
 	<!-- <dependency>
 			    <groupId>joda-time</groupId>

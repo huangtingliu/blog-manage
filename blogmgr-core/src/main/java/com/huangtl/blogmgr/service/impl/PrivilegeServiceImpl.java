@@ -47,11 +47,11 @@ public class PrivilegeServiceImpl implements PrivilegeService {
 	
 	@Cacheable(value="privilegeCache",key="#roleId") 
 	@Override
-	public List<Privilege> queryPrivilegesByRoleId(String roleId){
+	public List<Privilege> queryPrivilegesByRoleId(String roleId,String... fields){
 		if(StringUtils.isBlank(roleId)){return new ArrayList<>();}
 		
 		PrivilegeSqlWhere where = new PrivilegeSqlWhere().fRoleIdEqual(roleId);
-		return this.privilegeDao.selectList(where);
+		return this.privilegeDao.selectList(where,fields);
 	}
 
 	@Override

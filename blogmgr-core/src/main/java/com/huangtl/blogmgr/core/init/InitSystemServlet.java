@@ -20,6 +20,18 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 /**
  * 在系统启动后做些初始化的工作
+ 1.需要在web.xml配置如下
+  <servlet>
+  	<servlet-name>sysInit</servlet-name>
+  	<servlet-class>com.huangtl.blogmgr.core.init.InitSystemServlet</servlet-class>
+  	<init-param>
+      <param-name>config</param-name>
+      <param-value>/WEB-INF/system.properties</param-value>
+    </init-param>
+  	<load-on-startup>2</load-on-startup>
+  </servlet>
+
+ 2.然后在spring 容器中定义 实现 了 com.huangtl.blogmgr.core.init.Initializable 的bean
  * @version 
  * @date 2016年4月1日
  * @author PraiseLord
@@ -36,9 +48,9 @@ public class InitSystemServlet  implements Servlet {
 			ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(servletConfig.getServletContext());
 			Map<String, Initializable> initItems = context.getBeansOfType(Initializable.class);
 			for (String key : initItems.keySet()) {
-				logger.debug("{}开始初始化",key);
+				//logger.debug("{}开始初始化",key);
 				initItems.get(key).init();
-				logger.debug("{}完成初始化",key);
+				//logger.debug("{}完成初始化",key);
 			}
 		}
 	}

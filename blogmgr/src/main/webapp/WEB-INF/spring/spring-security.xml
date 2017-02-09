@@ -37,17 +37,15 @@
         	 <sec:access-denied-handler ref="accessDeniedHandlerImpl"/>
         	<sec:csrf disabled="true" /> 
 	        <sec:intercept-url  pattern="/**"  access="isAuthenticated()"/>
-	 	 	<!--<sec:custom-filter after="FILTER_SECURITY_INTERCEPTOR" ref="resourceAuthorityFilter"/>  -->
-	    <!--  <sec:intercept-url  pattern="/**"  access="hasRole('ADMIN') or hasRole('USER')"/> -->
-        <!-- <sec:session-management session-authentication-error-url="/frame.expired" >  
-            max-sessions只容许一个账号登录，error-if-maximum-exceeded 后面账号登录后踢出前一个账号，expired-url session过期跳转界面  
-            <sec:concurrency-control max-sessions="1" error-if-maximum-exceeded="false" expired-url="/frame.expired" session-registry-ref="sessionRegistry" />  
-       </sec:session-management>  -->
+	 	 	<sec:custom-filter after="FILTER_SECURITY_INTERCEPTOR" ref="resourceAuthorityFilter"/>
+          <sec:session-management >  
+            <sec:concurrency-control  max-sessions="1"  error-if-maximum-exceeded="false"   />  
+         </sec:session-management>  
     </sec:http>
       
- 	<bean id="loginStatusHandler" class="com.huangtl.blogmgr.handler.LoginStatusHandler"></bean>
- 	<bean id="logoutSuccessHandlerImpl" class="com.huangtl.blogmgr.handler.LogoutSuccessHandlerImpl"></bean>
- 	<bean id="accessDeniedHandlerImpl" class="com.huangtl.blogmgr.handler.AccessDeniedHandlerImpl"></bean>
+ 	<bean id="loginStatusHandler" class="com.huangtl.blogmgr.core.security.LoginStatusHandler"></bean>
+ 	<bean id="logoutSuccessHandlerImpl" class="com.huangtl.blogmgr.core.security.LogoutSuccessHandlerImpl"></bean>
+ 	<bean id="accessDeniedHandlerImpl" class="com.huangtl.blogmgr.core.security.AccessDeniedHandlerImpl"></bean>
  	
  	<bean id="resourceAuthorityFilter" class="com.huangtl.blogmgr.core.security.ResourceAuthorityFilter">
  		<property name="privilegeService" ref="privilegeService"></property>

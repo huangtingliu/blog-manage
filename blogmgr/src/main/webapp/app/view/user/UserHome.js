@@ -217,10 +217,11 @@ Ext.define('BlogMgr.view.user.UserHome', {
 										xtype : 'splitbutton',
 										glyph : 0xe63d,
 										menu : [{
-													text : '列表导出至excel',
-													glyph : 0xe63d
+													text : '导出所有用户',
+													glyph : 0xe63d,
+													handler:'exportAllUser'
 												}, '-', {
-													text : '选中记录导出至excel',
+													text : '导出选中用户',
 													glyph : 0xe63d
 												}]
 									}]

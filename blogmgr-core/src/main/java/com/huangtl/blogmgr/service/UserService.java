@@ -2,9 +2,11 @@ package com.huangtl.blogmgr.service;
 
 import java.util.List;
 
+import com.aspose.cells.Workbook;
 import com.huangtl.blogmgr.dao.UserDao;
 import com.huangtl.blogmgr.dao.where.UserSqlWhere;
 import com.huangtl.blogmgr.model.blog.User;
+import com.huangtl.blogmgr.model.blog.dictionary.ExportType;
 import com.huangtl.blogmgr.model.common.Message;
 
 /**
@@ -53,4 +55,12 @@ public interface UserService {
 	 * @return
 	 */
 	Message deleteUser(String... uids);
+	
+	/**
+	 * 用户数据导成excel文档
+	 * @param type     导出类型 必须
+	 * @param userIds  要导出的用户id
+	 * @return
+	 */
+	Workbook exportExcel(ExportType type,String userIds);
 }

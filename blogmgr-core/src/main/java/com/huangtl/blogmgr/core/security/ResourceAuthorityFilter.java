@@ -43,23 +43,25 @@ public class ResourceAuthorityFilter extends GenericFilterBean {
 	@Override
 	public void doFilter(ServletRequest _request, ServletResponse _response, FilterChain chain)
 			throws IOException, ServletException {
-		HttpServletRequest request = (HttpServletRequest) _request;
-		HttpServletResponse response = (HttpServletResponse) _response;
-		String _mgr_fucode = request.getParameter("_mgr_fucode");
-		
-		if(StringUtils.isNotBlank(_mgr_fucode)){
+			HttpServletRequest request = (HttpServletRequest) _request;
+			HttpServletResponse response = (HttpServletResponse) _response;
+			String url = request.getServletPath();
+			
 			User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			logger.debug("【权限验证 】功能代码为：{}，用户为：{},角色为：{}",_mgr_fucode,currentUser.getfAccount());
+			StringBuilder roleIds = new StringBuilder();
+			
 			boolean denied = true;
 			for(Role role : currentUser.getRoles()){
-				denied = !validate(role.getfId(),_mgr_fucode);
+				roleIds.append(role.getfId()).append(",");
+				denied = !validate(role.getfId(),url);
 				if(!denied){break;}
 			}
 			if(denied){
+				logger.debug("【权限验证 】failure 用户为：{},角色为：{}",currentUser.getfAccount(),roleIds.toString());
 				throw new AccessDeniedException("您无该功能的操作无权限");
 			}
-		}
-		
+			
+		logger.debug("【权限验证 】success 用户为：{},角色为：{}",currentUser.getfAccount(),roleIds.toString());
 		chain.doFilter(request, response);
 	}
 
@@ -67,18 +69,23 @@ public class ResourceAuthorityFilter extends GenericFilterBean {
 	 * 根据角色与功能编号。验证是否有权限
 	 * @return true 有权限，否则没有权限
 	 */
-	private boolean validate(String roleId,String funId){
-		List<Privilege> privileges = this.privilegeService.queryPrivilegesByRoleId(roleId);
+	private boolean validate(String roleId,String servletPath){
+		List<Privilege> privileges = this.privilegeService.queryPrivilegesByRoleId(roleId,"funRelevance");
 		if(CollectionUtils.isEmpty(privileges)){return false;}
 		
 		for (Privilege privilege : privileges) {
-			if(privilege.getfFunId().equals(funId)){
+			String relevanceUrl = privilege.getFunRelevance();
+			if(StringUtils.isBlank(relevanceUrl)){continue;}
+			if(!relevanceUrl.startsWith("/")){
+				relevanceUrl = "/"+relevanceUrl;
+			}
+			if(servletPath.equals(relevanceUrl)){
 				AuthPriority priority = privilege.getfPriority();
 				return priority == AuthPriority.ENABLE || priority == AuthPriority.LIMIT;
 			}
 		}
 		
-		return false;
+		return true;
 	}
 	
 	public void setPrivilegeService(PrivilegeService privilegeService) {

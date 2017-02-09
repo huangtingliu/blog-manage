@@ -2,16 +2,27 @@ package com.huangtl.blogmgr.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.joda.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ResourceLoaderAware;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 
+import com.aspose.cells.Workbook;
+import com.aspose.cells.WorkbookDesigner;
+import com.huangtl.blogmgr.core.aspose.AsposeCellUtils;
+import com.huangtl.blogmgr.core.aspose.MapDataSource;
 import com.huangtl.blogmgr.dao.RoleDao;
 import com.huangtl.blogmgr.dao.UserDao;
 import com.huangtl.blogmgr.dao.where.UserSqlWhere;
 import com.huangtl.blogmgr.model.blog.Role;
 import com.huangtl.blogmgr.model.blog.User;
+import com.huangtl.blogmgr.model.blog.dictionary.ExportType;
 import com.huangtl.blogmgr.model.blog.dictionary.UserStatus;
 import com.huangtl.blogmgr.model.common.Message;
 import com.huangtl.blogmgr.model.common.TwoTuple;
@@ -22,12 +33,14 @@ import com.huangtl.blogmgr.service.UserService;
  * @date 2016年7月4日
  * @author PraiseLord
  */
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService,ResourceLoaderAware {
 	private static Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+	private final String ExcelTemplate = "/WEB-INF/template/excel/user_list.xlsx";
 	
 	private UserDao userDao;
 	private RoleDao roleDao;
 	
+	private ResourceLoader resourceLoader;
 	@Override
 	public UserDao getDao() {
 		return userDao;
@@ -103,6 +116,55 @@ public class UserServiceImpl implements UserService {
 	}
 	public void setRoleDao(RoleDao roleDao) {
 		this.roleDao = roleDao;
+	}
+
+	@Override
+	public Workbook exportExcel(ExportType type, String userIds) {
+		if(type==null){throw new IllegalStateException("参数 ExportType 不能为空");}
+		
+		Resource templateResource = resourceLoader.getResource(this.ExcelTemplate);
+		Workbook book;
+		try {
+			 book = new Workbook(templateResource.getInputStream());
+		}  catch (Exception e) {
+			logger.error("用户导出excel 失败",e);
+			return new Workbook();
+		}
+		
+		List<User> users;
+		if (type == ExportType.ALL) {
+			users = this.userDao.selectList(null);
+		}else{
+			if(StringUtils.isBlank(userIds)){
+				return book;
+			}
+			UserSqlWhere where = new UserSqlWhere().fIdIn(userIds.split(","));
+			users = this.userDao.selectList(where);
+		}
+		List<Map<String, Object>> mapList = new ArrayList<>();
+		int rn = 0;
+		for (User user : users) {
+			rn++;
+			Map<String, Object> map = AsposeCellUtils.toMap(user);
+			map.put("rn", rn);
+			mapList.add(map);
+		}
+		
+		
+		try {
+			WorkbookDesigner designer = new WorkbookDesigner(book);
+			designer.setDataSource("user", new MapDataSource(mapList));
+			designer.setDataSource("date", new LocalDate().toString("yyyy-MM-dd"));
+			designer.process(true);
+		} catch (Exception e) {
+			logger.error("aspose WorkbookDesigner 绑定数据失败",e);
+		}
+		return book;
+	}
+
+	@Override
+	public void setResourceLoader(ResourceLoader resourceLoader) {
+		this.resourceLoader = resourceLoader;
 	}
 
 	

@@ -3,6 +3,10 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 	
+	<!-- 系统初始化管理 -->
+	<bean id="asposeLicenseInit" class="com.huangtl.blogmgr.core.init.impl.AsposeLicenseInit">
+		<property name="licenseResource" value="/WEB-INF/aspose/license.xml"></property>
+	</bean>
 	
 	<!-- 菜单管理 -->
 	<bean id="functionService" class="com.huangtl.blogmgr.service.impl.FunctionServiceImpl">

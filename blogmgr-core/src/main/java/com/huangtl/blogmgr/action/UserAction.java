@@ -1,11 +1,14 @@
 package com.huangtl.blogmgr.action;
 
 
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.collections4.CollectionUtils;
@@ -18,11 +21,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
+import com.aspose.cells.SaveFormat;
+import com.aspose.cells.Workbook;
 import com.huangtl.blogmgr.core.spring.resolver.Json;
 import com.huangtl.blogmgr.core.util.PinYinUtils;
 import com.huangtl.blogmgr.dao.where.UserSqlWhere;
 import com.huangtl.blogmgr.model.blog.Role;
 import com.huangtl.blogmgr.model.blog.User;
+import com.huangtl.blogmgr.model.blog.dictionary.ExportType;
 import com.huangtl.blogmgr.model.blog.dictionary.UserStatus;
 import com.huangtl.blogmgr.model.common.Message;
 import com.huangtl.blogmgr.model.common.Page;
@@ -271,6 +277,31 @@ public class UserAction extends BlogMgrAction {
 		}
 		
 		return message;
+	}
+	
+	/**
+	 * 导出用户
+	 * @param type
+	 * @param userIds 格式： ‘id,id,id’
+	 */
+	@RequestMapping("export_user_list.data")
+	public void exportExcel(ExportType type,String userIds,HttpServletResponse response){
+		response.setContentType("application/vnd.ms-excel;charset=utf-8");
+		String fileName = "用户清单";
+        try {
+			response.setHeader("Content-Disposition", "attachment;filename="+ new String((fileName + ".xlsx").getBytes(), "iso-8859-1"));
+		} catch (UnsupportedEncodingException e1) {
+			logger.error("用户导出excel",e1);
+		}
+        
+		try {
+			OutputStream oStream =  response.getOutputStream();
+			Workbook book= this.userService.exportExcel(type, userIds);
+			book.save(oStream, SaveFormat.XLSX);
+		}  catch (Exception e) {
+			logger.error("用户导出excel失败",e);
+		}
+		
 	}
 	
 }

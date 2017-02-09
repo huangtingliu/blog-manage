@@ -1,4 +1,4 @@
-package com.huangtl.blogmgr.handler;
+package com.huangtl.blogmgr.core.security;
 
 import java.io.IOException;
 

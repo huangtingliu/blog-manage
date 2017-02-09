@@ -52,8 +52,7 @@ Ext.define('BlogMgr.view.user.UserHomeController', {
 									url : '/blogmgr/user/delete.do',
 									method : 'POST',
 									params : {
-										id : ids.join(','),
-										_mgr_fucode:toolbarBtn.itemId
+										id : ids.join(',')
 									},
 									callback : function(options, isSuccess,response) {
 										_this.mask.hide();
@@ -125,7 +124,14 @@ Ext.define('BlogMgr.view.user.UserHomeController', {
 	//用户详情
 	userDetail:function(view,rowIndex,colIndex,item,e,record){
 		Ext.toast('待完成');
+	},
+	/**
+	 * 导出所有用户
+	 */
+	exportAllUser:function(){
+		window.location.href = "/blogmgr/user/export_user_list.data?type=ALL";
 	}
+	
 	
 	 
 });

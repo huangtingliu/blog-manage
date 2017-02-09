@@ -50,9 +50,12 @@ public interface PrivilegeService {
 	 */
 	Message editBatch(List<Privilege> privileges);
 	
+	
 	/**
 	 * 根据角色id查询权限
+	 * @param roleId  角色id
+	 * @param fields  额外展示的字段，默认字段参见 PrivilegeDao 注解
 	 * @return
 	 */
-	List<Privilege> queryPrivilegesByRoleId(String roleId);
+	List<Privilege> queryPrivilegesByRoleId(String roleId,String... fields);
 }

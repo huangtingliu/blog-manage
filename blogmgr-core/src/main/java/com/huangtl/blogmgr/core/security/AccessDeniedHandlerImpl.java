@@ -1,4 +1,4 @@
-package com.huangtl.blogmgr.handler;
+package com.huangtl.blogmgr.core.security;
 
 import java.io.IOException;
 import java.io.Writer;
@@ -33,6 +33,7 @@ public class AccessDeniedHandlerImpl implements AccessDeniedHandler {
 				accessDeniedException);
 		logger.debug("无权限");
 		
+		response.setCharacterEncoding("utf-8");
 		String requestType = request.getHeader("X-Requested-With");  
 		
 		if("XMLHttpRequest".equals(requestType)){ //此为ajax 请求
@@ -47,11 +48,10 @@ public class AccessDeniedHandlerImpl implements AccessDeniedHandler {
 		}else{ //其他的请求
 			// Set the 403 status code.
 			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-
 			// forward to error page.
 			RequestDispatcher dispatcher = request.getRequestDispatcher("noauth.htm");
 			dispatcher.forward(request, response);
 		}
 	}
-
+	
 }

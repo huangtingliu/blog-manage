@@ -35,6 +35,7 @@
 			<tx:method name="search*" propagation="REQUIRED" read-only="true" />
 			<tx:method name="select*" propagation="REQUIRED" read-only="true" />
 			<tx:method name="is*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="export*" propagation="REQUIRED" read-only="true" />
 			<tx:method name="*" propagation="REQUIRED" rollback-for="Exception"/>
 		</tx:attributes>
 	</tx:advice>
