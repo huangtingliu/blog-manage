@@ -36,6 +36,9 @@
 			<if test="fParentId_eq != null">
 				and fn_ParentId = #{fParentId_eq}
 			</if>
+			<if test="fParentId_like != null">
+				and fn_ParentId like #{fParentId_like}
+			</if>
 			<if test="fType_eq != null">
 				and dic_Type = #{fType_eq}
 			</if>

@@ -105,7 +105,42 @@ Ext.define('BlogMgr.view.fun.mgr.FunctionMgrForm', {
 							valueField : 'value',
 							value : 'NAVIGATOR',
 							editable : false
-							
+						},{
+							xtype : 'fieldcontainer',
+							fieldLabel : '按钮位置',
+							hidden:true,
+							disabled:true,
+							defaultType : 'radiofield',
+							defaults : {
+								flex : 1
+							},
+							layout : 'hbox',
+							items : [{
+										boxLabel : '顶部',
+										name : 'fGender',
+										inputValue : 'tbar',
+										checked:true
+									}, {
+										boxLabel : '左边',
+										name : 'fGender',
+										inputValue : 'lbar'
+									}, {
+										boxLabel : '底部',
+										name : 'fGender',
+										inputValue : 'bbar'
+									}, {
+										boxLabel : '右边',
+										name : 'fGender',
+										inputValue : 'rbar'
+									}, {
+										boxLabel : '页脚',
+										name : 'fGender',
+										inputValue : 'fbar'
+									}, {
+										boxLabel : '分页',
+										name : 'fGender',
+										inputValue : 'pbar'
+									}]
 						},{
 							fieldLabel : '是否可用',
 		                    xtype: 'checkboxfield',

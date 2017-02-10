@@ -14,5 +14,8 @@ Ext.define('BlogMgr.view.fun.FunctionTree',{
 				text:'功能树',
 				expanded : true //如果展开就会自动加载
 			},
-    store:Ext.getStore('functionHomeTreeStore')
+    store:Ext.getStore('functionHomeTreeStore'),
+    listeners:{
+    	itemclick :'funTreeNodeClick'		
+	}
 });

@@ -11,7 +11,31 @@ Ext.define('BlogMgr.view.user.UserHomeController', {
 					target : this.getView()
 				});
 	},
-
+	privates:{
+		/*
+		 * 获取选中的用户id,
+		 * @return 为一个字符串数组：如：['aaa','sss']
+		 */
+		getSelectedRowId:function(){
+			var _this = this;
+			var grid = this.getView();
+			var store = grid.getStore();
+			var selectedRows = grid.getSelectionModel().getSelection();
+			var ids = [];
+			Ext.each(selectedRows, function() {
+						ids.push(this.get("fId"));
+					})
+			if (ids.length == 0) {
+				Ext.toast({
+							type : 'info',
+							content : '请选择所要的记录'
+						});
+				return [];
+			}
+			return ids;
+		}
+	},
+	
 	/**
 	 * 新增用户,弹出对话框
 	 */
@@ -22,28 +46,16 @@ Ext.define('BlogMgr.view.user.UserHomeController', {
 	 * 修改用户
 	 */
 	editUser:function(){
-		 Ext.toast('UnSupport operater');
+		 Ext.toast('待实现');
 	},
 	
 	/**
 	 * 删除用户
 	 */
 	deleteUser : function(toolbarBtn) {
-		var _this = this;
-		var grid = this.getView();
-		var store = grid.getStore();
-		var selectedRows = grid.getSelectionModel().getSelection();
-		var ids = [];
-		Ext.each(selectedRows, function() {
-					ids.push(this.get("fId"));
-				})
-		if (ids.length == 0) {
-			Ext.toast({
-						type : 'info',
-						content : '请选择要删除的记录'
-					});
-			return;
-		}
+		var ids = this.getSelectedRowId();
+		if(ids.length==0){return;}
+		
 		Ext.Msg.confirm('系统提示', '确定要删除吗?', function(val) {
 					if (val == 'yes') {
 						_this.mask.msg = "删除中...";
@@ -134,7 +146,28 @@ Ext.define('BlogMgr.view.user.UserHomeController', {
 		     method:'POST',
 		     params:{type:'ALL'}
 	    });
+	},
+	/**
+	 * 导出所选用户
+	 */
+	exportSelectedUser:function(){
+		var ids = this.getSelectedRowId();
+		if(ids.length==0){return;}
+		 Ext.downloadFile({
+	    	 url:'/blogmgr/user/export_user_list.data',
+		     method:'POST',
+		     params:{
+			 	type:'SELECTED',
+			 	userIds:ids.join(',')
+			 }
+	    });
+	},
+	/**
+	 * 打印所有用户
+	 */
+	pringAllUser:function(){
+		window.print();	
 	}
-	
+	 
 	 
 });

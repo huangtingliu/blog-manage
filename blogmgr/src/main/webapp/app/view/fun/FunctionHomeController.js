@@ -11,6 +11,30 @@ Ext.define('BlogMgr.view.fun.FunctionHomeController', {
 							target : this.getView()
 						});
 			},
+			privates:{
+				/**
+				 * 返回选择记录的id
+				 * @return 为一个数组
+				 */
+				getSelectedRowId:function(){
+					var me = this;
+					var functionGrid = this.lookupReference('functionGrid');
+					var functionPagingStore = functionGrid.getStore();
+					var selectedRows = functionGrid.getSelectionModel().getSelection();
+					var ids = [];
+					Ext.each(selectedRows, function() {
+								ids.push(this.get("fId"));
+							})
+					if (ids.length == 0) {
+						Ext.toast({
+									type : 'info',
+									content : '请选择要修改的记录'
+								});
+						return [];
+					}
+					return ids;
+				}
+			},
 			/**
 			 * 添加功能
 			 */
@@ -25,21 +49,8 @@ Ext.define('BlogMgr.view.fun.FunctionHomeController', {
 			 * 修改功能
 			 */
 			editFunction:function(){
-				var me = this;
-				var functionGrid = this.lookupReference('functionGrid');
-				var functionPagingStore = functionGrid.getStore();
-				var selectedRows = functionGrid.getSelectionModel().getSelection();
-				var ids = [];
-				Ext.each(selectedRows, function() {
-							ids.push(this.get("fId"));
-						})
-				if (ids.length == 0) {
-					Ext.toast({
-								type : 'info',
-								content : '请选择要修改的记录'
-							});
-					return;
-				}
+				var ids = this.getSelectedRowId();
+				if(ids.length==0){return;}
 				
 				me.mask.msg='创建中...';
 				me.mask.show();
@@ -74,23 +85,10 @@ Ext.define('BlogMgr.view.fun.FunctionHomeController', {
 			 * 删除功能
 			 */
 			deleteFunction:function(){
-				Ext.toast("待开发"); 
-				return;   
-				var me = this;
-				var functionGrid = this.lookupReference('functionGrid');
-				var functionPagingStore = functionGrid.getStore();
-				var selectedRows = functionGrid.getSelectionModel().getSelection();
-				var ids = [];
-				Ext.each(selectedRows, function() {
-							ids.push(this.get("fId"));
-						})
-				if (ids.length == 0) {
-					Ext.toast({
-								type : 'info',
-								content : '请选择要删除的记录'
-							});
-					return;
-				}
+				Ext.toast("待开发"); return;
+				
+				var ids = this.getSelectedRowId();
+				if(ids.length==0){return;}
 				
 				Ext.Msg.confirm('系统提示', '确定要删除吗?', function(val) {
 					if (val == 'yes') {
@@ -123,13 +121,32 @@ Ext.define('BlogMgr.view.fun.FunctionHomeController', {
 								});
 					}
 				});
-				
-				
 			},
 			/**
 			 * 保存编辑
 			 */
 			saveRecord:function(){
-				Ext.toast('UnSupport operater');
+				Ext.toast('待实现');
+			},
+			/**
+			 * 功能树节点点击事件处理
+			 */
+			funTreeNodeClick:function(tree , node , element , rowIndex , e , eOpts){
+				 var store = Ext.getStore('functionPagingStore');
+				 
+				 if(node.isRoot()){
+					 store.clearFilter();
+				 }if(node.isLeaf()){
+					 return;
+				 }else{
+					 store.addFilter({
+						 property:'fParentId',
+						 value:node.id,
+						 operator:'like'
+					 });
+				 }
+				
+				 store.reload();
 			}
+			
 		});

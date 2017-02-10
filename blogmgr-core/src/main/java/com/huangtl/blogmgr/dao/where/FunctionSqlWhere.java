@@ -43,6 +43,16 @@ public class FunctionSqlWhere extends SqlWhere {
 	}
 	
 	/**
+	 * fParentId 匹配
+	 * @param parentId
+	 * @return
+	 */
+	public FunctionSqlWhere fParentIdLike(String parentId){
+		this.like(Operator.like.eval("fParentId"), parentId);
+		return this;
+	}
+	
+	/**
 	 * fType 等于
 	 * @param type
 	 * @return

@@ -210,19 +210,21 @@ Ext.define('BlogMgr.view.user.UserHome', {
 													glyph : 0xe6b6
 												}, {
 													text : '打印所有记录',
-													glyph : 0xe6b6
+													glyph : 0xe6b6,
+													handler:'pringAllUser'
 												}]
 									}, {
 										tooltip : '数据导出',
 										xtype : 'splitbutton',
 										glyph : 0xe63d,
 										menu : [{
+													text : '导出选中用户',
+													glyph : 0xe63d,
+													handler:'exportSelectedUser'
+												},'-',{
 													text : '导出所有用户',
 													glyph : 0xe63d,
 													handler:'exportAllUser'
-												}, '-', {
-													text : '导出选中用户',
-													glyph : 0xe63d
 												}]
 									}]
 						}],

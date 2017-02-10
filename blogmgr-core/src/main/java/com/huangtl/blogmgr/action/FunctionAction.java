@@ -16,7 +16,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.huangtl.blogmgr.core.spring.resolver.Json;
 import com.huangtl.blogmgr.dao.where.FunctionSqlWhere;
 import com.huangtl.blogmgr.dao.where.SqlWhere;
-import com.huangtl.blogmgr.dao.where.UserSqlWhere;
 import com.huangtl.blogmgr.model.blog.Function;
 import com.huangtl.blogmgr.model.common.Message;
 import com.huangtl.blogmgr.model.common.Page;
@@ -83,7 +82,7 @@ public class FunctionAction extends BlogMgrAction {
 			}
 		}
 		
-		UserSqlWhere whereParam = new UserSqlWhere();
+		FunctionSqlWhere whereParam = new FunctionSqlWhere();
 		if(filter!=null && !filter.isEmpty()){
 			for (Filter f : filter) {
 				whereParam.putFilter(f);
