@@ -17,9 +17,7 @@ Ext.define('BlogMgr.view.user.UserHomeController', {
 		 * @return 为一个字符串数组：如：['aaa','sss']
 		 */
 		getSelectedRowId:function(){
-			var _this = this;
 			var grid = this.getView();
-			var store = grid.getStore();
 			var selectedRows = grid.getSelectionModel().getSelection();
 			var ids = [];
 			Ext.each(selectedRows, function() {
@@ -56,6 +54,9 @@ Ext.define('BlogMgr.view.user.UserHomeController', {
 		var ids = this.getSelectedRowId();
 		if(ids.length==0){return;}
 		
+		var _this = this;
+		var grid = this.getView();
+		var store = grid.getStore();
 		Ext.Msg.confirm('系统提示', '确定要删除吗?', function(val) {
 					if (val == 'yes') {
 						_this.mask.msg = "删除中...";

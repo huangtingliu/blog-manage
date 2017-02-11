@@ -12,23 +12,29 @@
 	<bean id="functionService" class="com.huangtl.blogmgr.service.impl.FunctionServiceImpl">
 		<property name="functionDao" ref="functionDao"></property>
 	</bean>
-	<bean id="functionDao" class="com.huangtl.blogmgr.dao.impl.FunctionDaoImpl" parent="myBatisDao"></bean>
+	<bean id="functionDao" class="com.huangtl.blogmgr.dao.impl.FunctionDaoImpl" parent="myBatisDao"/>
 	<!-- 后台用户管理 -->
 	<bean id="userService" class="com.huangtl.blogmgr.service.impl.UserServiceImpl">
 		<property name="userDao" ref="userDao"></property>
 		<property name="roleDao" ref="roleDao"></property>
 	</bean>
-	<bean id="userDao" class="com.huangtl.blogmgr.dao.impl.UserDaoImpl" parent="myBatisDao"></bean>
+	<bean id="userDao" class="com.huangtl.blogmgr.dao.impl.UserDaoImpl" parent="myBatisDao"/>
 	
 	<!-- 角色管理 -->
 	<bean id="roleService" class="com.huangtl.blogmgr.service.impl.RoleServiceImpl">
 		<property name="roleDao" ref="roleDao"></property>
 	</bean>
-	<bean id="roleDao" class="com.huangtl.blogmgr.dao.impl.RoleDaoImpl"  parent="myBatisDao"></bean>
+	<bean id="roleDao" class="com.huangtl.blogmgr.dao.impl.RoleDaoImpl"  parent="myBatisDao"/>
 	
 	<!-- 权限管理 -->
 	<bean id="privilegeService" class="com.huangtl.blogmgr.service.impl.PrivilegeServiceImpl">
 		<property name="privilegeDao" ref="privilegeDao"></property>
 	</bean>
-	<bean id="privilegeDao" class="com.huangtl.blogmgr.dao.impl.PrivilegeDaoImpl" parent="myBatisDao"></bean>
+	<bean id="privilegeDao" class="com.huangtl.blogmgr.dao.impl.PrivilegeDaoImpl" parent="myBatisDao"/>
+	
+	<!-- 登录日志 -->
+	<bean id="loginLogService" class="com.huangtl.blogmgr.service.impl.LoginLogServiceImpl">
+		<property name="loginLogDao" ref="loginLogDao"></property>
+	</bean>
+	<bean id="loginLogDao" class="com.huangtl.blogmgr.dao.impl.LoginLogDaoImpl" parent="myBatisDao"/>
 </beans>

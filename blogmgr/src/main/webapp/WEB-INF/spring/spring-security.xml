@@ -43,7 +43,9 @@
          </sec:session-management>  
     </sec:http>
       
- 	<bean id="loginStatusHandler" class="com.huangtl.blogmgr.core.security.LoginStatusHandler"></bean>
+ 	<bean id="loginStatusHandler" class="com.huangtl.blogmgr.core.security.LoginStatusHandler">
+ 		<property name="loginLogService" ref="loginLogService"></property>
+ 	</bean>
  	<bean id="logoutSuccessHandlerImpl" class="com.huangtl.blogmgr.core.security.LogoutSuccessHandlerImpl"></bean>
  	<bean id="accessDeniedHandlerImpl" class="com.huangtl.blogmgr.core.security.AccessDeniedHandlerImpl"></bean>
  	

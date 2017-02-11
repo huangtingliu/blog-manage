@@ -159,7 +159,11 @@
 		    <artifactId>word</artifactId>
 		    <version>14.9.0</version>
 		</dependency> 
-		
+		<dependency>
+		    <groupId>user-agent-utils</groupId>
+		    <artifactId>user-agent-utils</artifactId>
+		    <version>1.2.3</version>
+		</dependency>
 	<!-- <dependency>
 			    <groupId>joda-time</groupId>
 			    <artifactId>joda-time</artifactId>

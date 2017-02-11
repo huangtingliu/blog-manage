@@ -16,9 +16,14 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import com.alibaba.fastjson.JSONObject;
+import com.huangtl.blogmgr.model.blog.LoginLog;
 import com.huangtl.blogmgr.model.blog.Role;
 import com.huangtl.blogmgr.model.blog.User;
 import com.huangtl.blogmgr.model.common.Message;
+import com.huangtl.blogmgr.service.LoginLogService;
+
+import nl.bitwalker.useragentutils.Browser;
+import nl.bitwalker.useragentutils.UserAgent;
 
 /**
  * @author PraiseLord
@@ -26,18 +31,33 @@ import com.huangtl.blogmgr.model.common.Message;
  */
 public class LoginStatusHandler implements AuthenticationSuccessHandler, AuthenticationFailureHandler {
 	private final Logger logger = LoggerFactory.getLogger(LoginStatusHandler.class);
-
-	// 用户登录成功处理：返回登录成功标识，并发送系统初始化使用的基础数据
+	
+	private LoginLogService loginLogService;
+	
+	/**
+	 * 1.用户登录成功处理：返回登录成功标识，并发送系统初始化使用的基础数据
+	 * 2.记录登录日志
+	 */
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
 		logger.debug("用户登录成功");
+		
+		
+		
 		response.setCharacterEncoding("utf-8");
 		Writer writer = response.getWriter();
 		
 		Message msg = Message.success("登录成功");
 		//base data
 		User user = (User) authentication.getPrincipal();
+		
+		try {
+			addLoginLog(request,user);
+		} catch (Exception e) {
+			logger.error("登录日志添加失败",e);
+		}
+		
 		JSONObject data = new JSONObject();
 		data.put("userId", user.getfId());
 		data.put("userName", user.getfName());
@@ -63,6 +83,24 @@ public class LoginStatusHandler implements AuthenticationSuccessHandler, Authent
 		writer.close();
 		writer = null;
 	}
+	
+	/**
+	 * 添加登录日志
+	 */
+	private void addLoginLog(HttpServletRequest request,User user){
+		UserAgent userAgent = UserAgent.parseUserAgentString(request.getHeader("User-Agent"));
+		Browser browser = userAgent.getBrowser();
+		LoginLog loginLog = new LoginLog();
+		loginLog.setfId(loginLog.newId());
+		loginLog.setfCreateDate(new Date());
+		//loginLog.setfIp(browser.);
+		loginLog.setfBrowser(browser.getName()+" "+userAgent.getBrowserVersion());
+		loginLog.setfUid(user.getfId());
+		loginLog.setfIp(request.getRemoteAddr());
+		loginLog.setfOperatingSystem(userAgent.getOperatingSystem().toString());
+		
+		this.loginLogService.addLoginLog(loginLog);
+	}
 
 	@Override
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
@@ -74,6 +112,10 @@ public class LoginStatusHandler implements AuthenticationSuccessHandler, Authent
 		writer.flush();
 		writer.close();
 		writer = null;
+	}
+	
+	public void setLoginLogService(LoginLogService loginLogService) {
+		this.loginLogService = loginLogService;
 	}
 
 }

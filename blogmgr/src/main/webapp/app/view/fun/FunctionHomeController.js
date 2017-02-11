@@ -17,9 +17,7 @@ Ext.define('BlogMgr.view.fun.FunctionHomeController', {
 				 * @return 为一个数组
 				 */
 				getSelectedRowId:function(){
-					var me = this;
 					var functionGrid = this.lookupReference('functionGrid');
-					var functionPagingStore = functionGrid.getStore();
 					var selectedRows = functionGrid.getSelectionModel().getSelection();
 					var ids = [];
 					Ext.each(selectedRows, function() {
@@ -52,6 +50,9 @@ Ext.define('BlogMgr.view.fun.FunctionHomeController', {
 				var ids = this.getSelectedRowId();
 				if(ids.length==0){return;}
 				
+				var me = this;
+				var functionGrid = this.lookupReference('functionGrid');
+				var functionPagingStore = functionGrid.getStore();
 				me.mask.msg='创建中...';
 				me.mask.show();
 				
