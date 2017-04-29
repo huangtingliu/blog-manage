@@ -55,7 +55,7 @@ public class LoginLogAction extends BlogMgrAction  {
 	@ResponseBody
 	public Object getPaging(Integer pageNo,Integer pageSize,
 			FilterCollection filter,SortCollection sort) {
-		
+		logger.debug("登录日志查询");
 		Page<LoginLog> page = new Page<>(pageNo, pageSize);
 		if(sort.isEmpty()){
 			page.addSort("fCreateDate", Direction.DESC);

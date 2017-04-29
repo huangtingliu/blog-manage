@@ -17,10 +17,11 @@ Ext.onReady(function() {
 Ext.application({
 			name : 'BlogMgr',
 			appFolder : 'app',
-			models : ['Function','User','Tree','BaseData','Role','Privilege','PrivilegeTree','LoginLog'],
+			models : ['Function','User','Tree','BaseData','Role','Privilege','PrivilegeTree','LoginLog',
+			          'debug.SystemMeno','debug.SystemMeno'],
 			stores : ['BaseDataStore','UnionPrivilegeProxy','UserPagingStore','FunctionTreeStore','FunctionPagingStore',
 			          'RolePagingStore','PrivilegePagingStore','PrivilegeTreeStore','RoleListStore',
-			          'LoginLogStore'],
+			          'LoginLogStore','SystemMenoPaginStore'],
 			controllers:['Main','Root'],
 			views:['BlogMgr.view.home.left.Navigator','BlogMgr.view.home.header.HomeHeader',
 			       'BlogMgr.view.home.center.HomeIndex'],
@@ -33,7 +34,8 @@ Ext.application({
 				Ext.setGlyphFontFamily('iconfont');
 				Ext.require([
 					'BlogMgr.view.user.UserHome','BlogMgr.view.fun.FunctionHome',
-					'BlogMgr.view.auth.AuthHome','BlogMgr.view.loginlog.LoginLogHome']);
+					'BlogMgr.view.auth.AuthHome','BlogMgr.view.loginlog.LoginLogHome',
+					'BlogMgr.view.debug.meno.SystemMenoHome']);
 			},
 			launch : function(profile) {
 				/**

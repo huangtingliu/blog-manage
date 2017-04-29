@@ -21,6 +21,7 @@ Ext.define('BlogMgr.view.login.LoginForm', {
      			 fieldLabel : '用户名',
      			 name:'account',
      			 enableKeyEvents:true,
+     			 value:'root',
 				 listeners:{
 					keydown:'enterDown'
 				 },
@@ -28,6 +29,7 @@ Ext.define('BlogMgr.view.login.LoginForm', {
 				fieldLabel : '密码',
 				inputType : 'password',
 				name:'password',
+				value:'123456',
 				enableKeyEvents:true,
 				listeners:{
 					keydown:'enterDown'

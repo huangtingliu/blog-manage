@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huangtl.blogmgr.model.blog.SystemMemo">
+
+	<resultMap id="mapper" type="com.huangtl.blogmgr.model.blog.SystemMemo" >
+		<id property="fId" column="meno_id"/>
+		<result property="fParentId" column="meno_pid"/>
+		<result property="fDescr" column="meno_descr" />
+		<result property="fUrl" column="meno_url"/>
+		<result property="fTitle" column="meno_title"/>
+		<result property="fHierarchy" column="meno_hierarchy"/>
+		<result property="fOrder" column="meno_order"/>
+	</resultMap>
+	
+	<sql id="field">
+		meno_id ,meno_pid ,meno_title ,meno_url, meno_order as fOrder
+		<if test="fDescr_show != null">,meno_descr</if>
+		<if test="fHierarchy_show != null">,meno_hierarchy</if>
+	</sql>
+	
+	<sql id="where">
+		 <trim prefix="where" prefixOverrides="and|or">
+		 	<if test="defaultWhere!=null and defaultWhere">
+		 		1=1
+		 	</if>
+			<if test="fId_eq !=null ">
+				and meno_id = #{fId_eq}
+			</if>
+			<if test="fId_in != null">
+				and meno_id in
+				<foreach collection="fId_in" open="(" item="id" separator="," close=")">
+					#{id}
+				</foreach>
+			</if>
+		</trim>
+	</sql>
+	
+	<sql id="order">
+		<if test="sorts != null and sorts.size() != 0">
+			order by 
+			<foreach collection="sorts" separator="," index="key" item="val">
+				${key} ${val}
+			</foreach>
+		</if>
+	</sql>
+	
+	<insert id="insert" parameterType="com.huangtl.blogmgr.model.blog.Role">
+		insert into sys_memo(
+			meno_id,meno_pid,meno_title,meno_url,meno_order,meno_hierarchy,meno_descr
+		) values(
+			#{fId},#{fParentId},#{fTitle},#{fUrl},#{fOrder},#{fHierarchy},#{fDescr}
+		);
+	</insert>
+	
+	<update id="update" parameterType="map">
+		update sys_memo 
+		<trim prefix="set" suffixOverrides=",">
+			<if test="fTitle !=null">meno_title = #{fTitle},</if>
+			<if test="fUrl !=null">meno_url = #{fUrl},</if>
+			<if test="fOrder !=null">meno_order = #{fOrder},</if>
+			<if test="fDescr !=null">meno_descr = #{fDescr},</if>
+		</trim>
+		<include refid="where"/>
+	</update>
+	
+	<update id="updateBatch" parameterType="list">
+		<foreach collection="list" item="meno" index="index" open="" close="" separator=";">
+			update sys_memo 
+			<trim prefix="set" suffixOverrides=",">
+				<if test="meno.fTitle !=null">meno_title = #{meno.fTitle},</if>
+				<if test="meno.fUrl !=null">meno_url = #{meno.fUrl},</if>
+				<if test="meno.fOrder !=null">meno_order = #{meno.fOrder},</if>
+				<if test="meno.fDescr !=null">meno_descr = #{meno.fDescr},</if>
+			</trim>
+			 where meno_id = #{meno.fId}
+		</foreach>
+	</update>
+	
+	<select id="selectList" resultMap="mapper" parameterType="map">
+		select 
+			<include refid="field"/>
+		from sys_memo
+			<include refid="where"/>
+	</select>
+	
+	<select id="selectCount"  resultType="long" parameterType="map">
+	  select count(meno_id) 
+	  from sys_memo
+		<include refid="where"/>
+	</select>
+	
+	<select id="selectPaging" resultMap="mapper" parameterType="map">
+		select 
+			<include refid="field"/>
+		from sys_memo
+			<include refid="where"/>
+			<include refid="order"/>
+		limit #{startIndex},#{pageSize}
+	</select>
+	
+</mapper>

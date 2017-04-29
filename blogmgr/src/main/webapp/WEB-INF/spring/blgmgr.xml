@@ -37,4 +37,10 @@
 		<property name="loginLogDao" ref="loginLogDao"></property>
 	</bean>
 	<bean id="loginLogDao" class="com.huangtl.blogmgr.dao.impl.LoginLogDaoImpl" parent="myBatisDao"/>
+	
+	<!-- 系统备忘录 -->
+	<bean id="systemMemoService" class="com.huangtl.blogmgr.service.impl.SystemMemoServiceImpl">
+		<property name="systemMemoDao" ref="systemMemoDao"/>
+	</bean>
+	<bean id="systemMemoDao" class="com.huangtl.blogmgr.dao.impl.SystemMemoDaoImpl" parent="myBatisDao"/>
 </beans>

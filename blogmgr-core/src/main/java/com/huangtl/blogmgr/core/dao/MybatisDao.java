@@ -36,7 +36,7 @@ public interface MybatisDao<T> extends Dao<T> {
 	int delete(SqlWhere where);
 	
 	/**
-	 * 更新,返回记录的影响数。如果查询参数为null或空，则不更新返回 0<br>
+	 * 只更新{@code entity}中不为空的域,返回记录的影响数。如果查询参数为null或空，则不更新返回 0<br>
 	 * 当更新条件不匹配时，将出抛出异常
 	 * @param entity 更新实体
 	 * @param where 更新条件
