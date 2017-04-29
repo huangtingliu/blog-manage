@@ -29,6 +29,17 @@ public abstract class ObjectValue implements Serializable {
 		return ValidationUtils.validate(this, false,ArrayUtils.EMPTY_STRING_ARRAY);
 	}
 	
+	/**
+	 * 验证字段的有效性，验证失败时就抛出异常
+	 */
+	public void checkValidityThrow(){
+		Message msg = this.checkValidity();
+		if(!msg.isSuccess()){
+			throw new IllegalArgumentException(msg.toJson());
+		}
+	}
+	
+	
 	public String newId(){
 		return UUID.randomUUID().toString().replaceAll("-", "");
 	}

@@ -1,6 +1,6 @@
 package com.huangtl.blogmgr.model.blog;
 
-import java.io.Serializable;
+import com.huangtl.blogmgr.model.common.ObjectValue;
 
 /**
  * 系统备忘录
@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @date 2017年4月29日
  *
  */
-public class SystemMemo implements Serializable {
+public class SystemMemo extends ObjectValue {
 	private static final long serialVersionUID = 1036876574138706523L;
 	private String fId;
 	private String fParentId;	//父id

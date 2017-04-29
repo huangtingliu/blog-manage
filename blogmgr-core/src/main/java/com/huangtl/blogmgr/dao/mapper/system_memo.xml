@@ -48,9 +48,13 @@
 	
 	<insert id="insert" parameterType="com.huangtl.blogmgr.model.blog.Role">
 		insert into sys_memo(
-			meno_id,meno_pid,meno_title,meno_url,meno_order,meno_hierarchy,meno_descr
+			meno_id,meno_title,meno_url,meno_order,meno_descr
+			<if test="fParentId != null">,meno_pid</if>
+			<if test="fHierarchy != null ">,meno_hierarchy</if>
 		) values(
-			#{fId},#{fParentId},#{fTitle},#{fUrl},#{fOrder},#{fHierarchy},#{fDescr}
+			#{fId},#{fTitle},#{fUrl},#{fOrder},#{fDescr}
+			<if test="fParentId !=null ">,#{fParentId}</if>
+			<if test="fHierarchy != null ">,#{fHierarchy}</if>
 		);
 	</insert>
 	

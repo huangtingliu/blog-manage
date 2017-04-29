@@ -74,6 +74,17 @@ public class SystemMemoAction extends BlogMgrAction {
 		return "";
 	}
 	
+	@RequestMapping("add.do")
+	@ResponseBody
+	public Object addMeno(SystemMemo systemMemo){
+		systemMemo.checkValidityThrow();
+		
+		systemMemo.setfId(systemMemo.newId());
+		
+		return this.systemMemoService.addMemo(systemMemo);
+		
+	}
+	
 	@RequestMapping("tree.data")
 	@ResponseBody
 	public Object getTree(){
