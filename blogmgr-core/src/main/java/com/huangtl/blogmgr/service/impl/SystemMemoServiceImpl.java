@@ -29,8 +29,10 @@ public class SystemMemoServiceImpl implements SystemMemoService {
 
 	@Override
 	public Message deleteMemo(String... ids) {
-		// TODO Auto-generated method stub
-		return null;
+		SystemMemoWhere where = new SystemMemoWhere()
+								.fIdIn(ids);
+		int effectRow = this.systemMemoDao.delete(where);
+		return Message.get(effectRow, "删除成功", "删除失败");
 	}
 	
 	public void setSystemMemoDao(SystemMemoDao systemMemoDao) {

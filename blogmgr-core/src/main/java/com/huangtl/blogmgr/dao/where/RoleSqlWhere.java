@@ -40,7 +40,6 @@ public class RoleSqlWhere extends SqlWhere {
 	 * @return
 	 */
 	public RoleSqlWhere fIdIn(String... roleIds){
-		if(roleIds.length==0){return this;}
 		this.put(Operator.in.eval("fId"), roleIds);
 		return this;
 	}

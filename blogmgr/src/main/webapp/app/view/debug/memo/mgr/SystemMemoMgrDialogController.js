@@ -1,6 +1,6 @@
-Ext.define('BlogMgr.view.debug.meno.mgr.SystemMenoMgrDialogController', {
+Ext.define('BlogMgr.view.debug.memo.mgr.SystemMemoMgrDialogController', {
 			extend : 'Ext.app.ViewController',
-			alias : 'controller.system_meno_dialog',
+			alias : 'controller.system_memo_dialog',
 			init : function() {
 				this.mask = new Ext.LoadMask({
 							msg : '删除中...',
@@ -10,26 +10,17 @@ Ext.define('BlogMgr.view.debug.meno.mgr.SystemMenoMgrDialogController', {
 			/**
 			 * 保存便签
 			 */
-			menoAddSubmit:function(){
+			memoAddSubmit:function(){
 				 var me = this;
-					var form = this.getView().getComponent('systemMenoMgrForm');
+					var form = this.getView().getComponent('systemMemoMgrForm');
 					
 					form.submit({
-								url : '/blogmgr/debug/meno/add.do',
+								url : '/blogmgr/debug/memo/add.do',
 								method : 'POST',
 								submitEmptyText:false,
 								success : function(form, action) {
 									Ext.toast(action.result);
-//									var functionId = form.findField("fId").getSubmitData().fId;
-//									
-//									BlogMgr.model.Function.load(functionId,{
-//										callback:function(rec,opt,success){
-//											Ext.getStore('functionPagingStore').add(rec);
-//											//TODO 界面更新
-//											//TODO 树型下拉选择器，与左边的数据冲突
-//										}
-//									});
-									
+									Ext.getStore('systemMemoPaginStore').reload();
 									me.closeDialog();
 								},
 								failure : function(form, action) {

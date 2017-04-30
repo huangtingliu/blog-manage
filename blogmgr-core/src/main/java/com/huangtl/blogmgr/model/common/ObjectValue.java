@@ -7,6 +7,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import com.huangtl.blogmgr.core.exception.ArgumentValidationFailureException;
 import com.huangtl.blogmgr.core.util.ValidationUtils;
 
 @SuppressWarnings("serial")
@@ -31,11 +32,12 @@ public abstract class ObjectValue implements Serializable {
 	
 	/**
 	 * 验证字段的有效性，验证失败时就抛出异常
+	 * @throws ArgumentValidationFailureException
 	 */
 	public void checkValidityThrow(){
 		Message msg = this.checkValidity();
 		if(!msg.isSuccess()){
-			throw new IllegalArgumentException(msg.toJson());
+			throw new ArgumentValidationFailureException(msg);
 		}
 	}
 	

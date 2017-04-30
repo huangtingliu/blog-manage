@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.annotation.JSONField;
-import com.huangtl.blogmgr.exceptoin.ServiceException;
+import com.huangtl.blogmgr.core.exception.ArgumentValidationFailureException;
 import com.huangtl.blogmgr.model.blog.dictionary.MessageType;
 
 
@@ -151,7 +151,7 @@ public class Message implements Serializable {
 	public void throwIfError(Object message){
 		if(isError() || isException()){
 			this.content = message;
-			throw new ServiceException(this);
+			throw new ArgumentValidationFailureException(this);
 		}
 	}
 	
@@ -159,7 +159,7 @@ public class Message implements Serializable {
 	 * 如果消息类型为error,或exception那么就抛出{@link ServiceException}
 	 */
 	public void throwIfError(){
-		if(isError()|| isException()){throw new ServiceException(this);}
+		if(isError()|| isException()){throw new ArgumentValidationFailureException(this);}
 	}
 	
 	/**

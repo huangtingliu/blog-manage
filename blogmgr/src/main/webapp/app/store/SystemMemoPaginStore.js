@@ -1,25 +1,25 @@
 /**
  * 系统备忘录stroe
  */
- Ext.define('BlogMgr.store.SystemMenoPaginStore', {
-			model : 'BlogMgr.model.debug.SystemMeno',
+ Ext.define('BlogMgr.store.SystemMemoPaginStore', {
+			model : 'BlogMgr.model.debug.SystemMemo',
 			extend:'Ext.data.Store',
-			alias:'store.system_meno_paging',
-			storeId : 'systemMenoPaginStore',
+			alias:'store.system_memo_paging',
+			storeId : 'systemMemoPaginStore',
 			pageSize:15,
 			remoteSort:true,
 			remoteFilter:true,
 			sorters:[],
 			proxy : {
 				type : 'ajax',
-				url : '/blogmgr/debug/meno/paging.data',
+				url : '/blogmgr/debug/memo/paging.data',
 				limitParam:'pageSize',
 				pageParam:'pageNo',
 				noCache:false,
 				paramsAsJson:true,
 				reader : {
 					type : 'json',
-					rootProperty : 'menolist',
+					rootProperty : 'memolist',
 					totalProperty : 'total',
 					messageProperty : 'message',
 					successProperty : 'success'
@@ -27,4 +27,4 @@
 			},
 			listeners:{}
 });
-Ext.create('BlogMgr.store.SystemMenoPaginStore');
+Ext.create('BlogMgr.store.SystemMemoPaginStore');

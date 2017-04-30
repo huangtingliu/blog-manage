@@ -1,6 +1,7 @@
 package com.huangtl.blogmgr.dao.where;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -19,32 +20,45 @@ import com.huangtl.blogmgr.model.extjs.Filter;
  */
 @SuppressWarnings("serial")
 public abstract class SqlWhere extends HashMap<String, Object> {
+	private final static String DEFAULT_WHERE_KEY = "defaultWhere"; //默认条件关键字
 	
 	public SqlWhere(){
-		defaultWhere(true);
+		this(true);
+	}
+	
+	/**
+	 *  是否有默认的查询条件（1=1），默认（有）可以不带任何查询条件。否则必须带查询参数
+	 * @param defaultWhere
+	 */
+	public SqlWhere(boolean defaultWhere){
+		super();
+		this.put(DEFAULT_WHERE_KEY, defaultWhere);
 	}
 	
 	/** 
-	 * 查询值不能为null，但允许为是一个空串
+	 * {@code value}为null,或长度为0的数组,或长度为0的集合,都将越过。
 	 */
 	@Override
 	public Object put(String key, Object value) {
 		if(StringUtils.isBlank(key)){return null;}
-		if(value==null){return null;}
+		if(value==null){
+			return null;
+		}else if(String.class.isInstance(value)){
+			//nothing to do ,just improve program effective
+		}else if(Collection.class.isInstance(value)){
+			Collection<?> col = (Collection<?>) value;
+			if(col.size()==0){return null;}
+		}else if(value.getClass().isArray()){
+			Object[] os = (Object[])value;
+			if(os.length==0){return null;}
+		}
 		
 		return super.put(key, value);
 	}
 	
-	/**
-	 * 是否有默认的查询条件（1=1），默认（有）可以不带任何查询条件。否则必须带查询参数
-	 * @param has{true:有，false:没有}
-	 * @return
-	 */
-	public SqlWhere defaultWhere(boolean has){
-		this.put("defaultWhere", has);
-		return this;
+	public void defaultWhere(boolean defaultWhere){
+		this.put(DEFAULT_WHERE_KEY, defaultWhere);
 	}
-	
 	
 	/**
 	 * 单边模糊查询<br>
@@ -53,10 +67,23 @@ public abstract class SqlWhere extends HashMap<String, Object> {
 	 * @param value
 	 * @return
 	 */
-	public SqlWhere like(String property,String value){
-		if(StringUtils.isBlank(value)){return this;}
+	protected void like(String property,String value){
+		if(StringUtils.isBlank(value)){return ;}
 		this.put(property, value+"%");
-		return this;
+	}
+	/**
+	 * 空字段判断
+	 * @param property
+	 */
+	protected void isNull(String property){
+		this.put(property, true);
+	}
+	/**
+	 * 非空字段判断
+	 * @param property
+	 */
+	protected void isNotNull(String property){
+		this.put(property, true);
 	}
 	
 	/**
@@ -66,10 +93,9 @@ public abstract class SqlWhere extends HashMap<String, Object> {
 	 * @param value
 	 * @return
 	 */
-	public SqlWhere likeIn(String property,String value){
-		if(StringUtils.isBlank(value)){return this;}
+	protected void likeIn(String property,String value){
+		if(StringUtils.isBlank(value)){return ;}
 		this.put(property, "%"+value+"%");
-		return this;
 	}
 	
 	/**
@@ -81,20 +107,17 @@ public abstract class SqlWhere extends HashMap<String, Object> {
 	 * @param separator 分割字符，默认为 ,(逗号)
 	 * @return
 	 */
-	public SqlWhere in(String property,String value,String separator){
-		if(StringUtils.isBlank(value)){return this;}
+	protected void in(String property,String value,String separator){
+		if(StringUtils.isBlank(value)){return ;}
 		
-		if(Pattern.matches("^\\[.*\\]$", value)){
+		if(Pattern.matches("^\\[.*\\]$", value)){ //json数组解析
 			List<String> values = JSON.parseArray(value, String.class);
 			this.put(property, values);
-			return this;
+		}else{
+			if(separator==null){separator=",";}
+			List<String> values = Arrays.asList(value.split(separator));
+			this.put(property, values);
 		}
-		
-		if(separator==null){separator=",";}
-		List<String> values = Arrays.asList(value.split(separator));
-		this.put(property, values);
-		
-		return this;
 	}
 	
 	
@@ -102,25 +125,22 @@ public abstract class SqlWhere extends HashMap<String, Object> {
 	 * 根据extjs filter模型提取出查询
 	 * @param filter 
 	 */
-	public SqlWhere putFilter(Filter filter){
-		if(filter.getValue()==null){return this;}
+	public void putFilter(Filter filter){
+		if(filter.getValue()==null){return ;}
 		Operator operator = (filter.getOperator()!=null?filter.getOperator():Operator.eq);
-		
 		switch (operator) {
 		case like:
-			this.like(filter.getProperty()+"_"+operator, filter.getValue());
+			this.like(operator.eval(filter.getProperty()), filter.getValue());
 			break;
 		case likein:
-			this.likeIn(filter.getProperty()+"_"+operator, filter.getValue());
+			this.likeIn(operator.eval(filter.getProperty()), filter.getValue());
 			break;
 		case in:
-			this.in(filter.getProperty()+"_"+operator, filter.getValue(), ",");
+			this.in(operator.eval(filter.getProperty()), filter.getValue(), ",");
 			break;
 		default:
-			this.put(filter.getProperty()+"_"+operator, filter.getValue());
+			this.put(operator.eval(filter.getProperty()), filter.getValue());
 		}
-		
-		return this;
 	}
 	
 	/**

@@ -37,7 +37,15 @@ public enum Operator{
 	/**
 	 * 不包含
 	 */
-	nin;
+	nin,
+	/**
+	 * 为空
+	 */
+	isnull,
+	/**
+	 * 不为空
+	 */
+	isnotnull;
 	
 	public String eval(String field){
 		if(field==null||field.trim().equals("")){

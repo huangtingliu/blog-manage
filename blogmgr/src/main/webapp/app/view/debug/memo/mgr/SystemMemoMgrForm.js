@@ -1,7 +1,7 @@
-Ext.define('BlogMgr.view.debug.meno.mgr.SystemMenoMgrForm', {
-	itemId : 'systemMenoMgrForm',
+Ext.define('BlogMgr.view.debug.memo.mgr.SystemMemoMgrForm', {
+	itemId : 'systemMemoMgrForm',
 	extend : 'Ext.form.Panel',
-	alias : [ 'widget.system_meno_mgr_form' ],
+	alias : [ 'widget.system_memo_mgr_form' ],
 	waitTitle : '处理中...',
 	fileUpload : false,
 	defaults : {
@@ -17,8 +17,7 @@ Ext.define('BlogMgr.view.debug.meno.mgr.SystemMenoMgrForm', {
 		xtype : 'textfield',
 		emptyText : '必须是中文',
 		maxLength : 10,
-		minLength : 2,
-		vtype : 'chinese'
+		minLength : 2
 	}, {
 		fieldLabel : '链接',
 		name : 'fUrl',

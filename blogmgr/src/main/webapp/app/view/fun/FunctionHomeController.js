@@ -26,7 +26,7 @@ Ext.define('BlogMgr.view.fun.FunctionHomeController', {
 					if (ids.length == 0) {
 						Ext.toast({
 									type : 'info',
-									content : '请选择要修改的记录'
+									content : '请选择操作的记录'
 								});
 						return [];
 					}

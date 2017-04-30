@@ -1,23 +1,23 @@
 /**
  * 系统备忘录主页 
  */
-Ext.define('BlogMgr.view.debug.meno.SystemMenoHome', {
-			id : 'systemMenoHome',
+Ext.define('BlogMgr.view.debug.memo.SystemMemoHome', {
+			id : 'systemMemoHome',
 			requires : ['Ux.button.TransparentButton',
-			            'BlogMgr.view.debug.meno.SystemMenoHomeController',
-			            'BlogMgr.view.debug.meno.SystemMenoHomeModel',
-			            'BlogMgr.view.debug.meno.SystemMenoHomeToolBar',
+			            'BlogMgr.view.debug.memo.SystemMemoHomeController',
+			            'BlogMgr.view.debug.memo.SystemMemoHomeModel',
+			            'BlogMgr.view.debug.memo.SystemMemoHomeToolBar',
 					   'Ext.grid.filters.Filters'],
 			extend : 'Ext.panel.Panel',
-			alias : ['widget.system_meno_home'],
+			alias : ['widget.system_memo_home'],
 			layout : 'fit',
 			items : {
-				controller : 'system_meno_home',
+				controller : 'system_memo_home',
 				viewModel : {
-					type : 'system_meno_home'
+					type : 'system_memo_home'
 				},
 				xtype : 'grid',
-				store : Ext.getStore('systemMenoPaginStore'),
+				store : Ext.getStore('systemMemoPaginStore'),
 				columnLines : true,
 				autoLoad : true,
 				scrollable : true,
@@ -49,11 +49,11 @@ Ext.define('BlogMgr.view.debug.meno.SystemMenoHome', {
 							width : '11%'
 						}],
 				tbar : {
-					xtype : 'system_meno_home_toolbar'
+					xtype : 'system_memo_home_toolbar'
 				},
 				dockedItems : [{
 							xtype : 'pagingtoolbar',
-							store : Ext.getStore('systemMenoPaginStore'),
+							store : Ext.getStore('systemMemoPaginStore'),
 							dock : 'bottom',
 							displayInfo : true,
 							items : []

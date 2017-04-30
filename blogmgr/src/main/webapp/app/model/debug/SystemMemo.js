@@ -1,7 +1,7 @@
 /**
  * 系统备忘录
  */
-Ext.define('BlogMgr.model.debug.SystemMeno',{
+Ext.define('BlogMgr.model.debug.SystemMemo',{
 	extend:'Ext.data.Model',
 	idProperty:'fId',	//当前用户的主键标识
 	fields:[
@@ -19,6 +19,6 @@ Ext.define('BlogMgr.model.debug.SystemMeno',{
 	},
 	proxy:{
 		type:'ajax',
-		url:'/blogmgr/debug/meno/get.data'
+		url:'/blogmgr/debug/memo/get.data'
 	}
 });

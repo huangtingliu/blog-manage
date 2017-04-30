@@ -10,5 +10,10 @@ import com.huangtl.blogmgr.model.blog.SystemMemo;
  *
  */
 public interface SystemMemoDao extends MybatisDao<SystemMemo> {
-	
+	/**
+	 * 根据id查询备忘录
+	 * @param id
+	 * @return
+	 */
+	SystemMemo selectById(String id );
 }

@@ -1,7 +1,7 @@
 /**
  * 系统备忘录树
  */
-Ext.define('BlogMgr.model.SystemMenoTree',{
+Ext.define('BlogMgr.model.SystemMemoTree',{
 	extend:'Ext.data.TreeModel',
 	idProperty:'fId',	//主键标识
 	 fields: [

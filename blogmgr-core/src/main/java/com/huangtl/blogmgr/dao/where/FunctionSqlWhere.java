@@ -26,8 +26,6 @@ public class FunctionSqlWhere extends SqlWhere {
 	 * fId 存在于
 	 */
 	public FunctionSqlWhere fIdIn(String... functionIds){
-		if(functionIds.length==0){return this;}
-		
 		this.put(Operator.in.eval("fId"), functionIds);
 		return this;
 	}

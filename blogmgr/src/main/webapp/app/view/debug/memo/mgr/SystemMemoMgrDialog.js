@@ -1,22 +1,22 @@
 /**
  * 添加后台用户对话窗口
  */
-Ext.define('BlogMgr.view.debug.meno.mgr.SystemMenoMgrDialog', {
-	id : 'systemMenoMgrDialog',
-	alias : [ 'widget.system_meno_dialog' ],
-	requires : [ 'BlogMgr.view.debug.meno.mgr.SystemMenoAddDialogModel',
-			'BlogMgr.view.debug.meno.mgr.SystemMenoMgrForm',
-			'BlogMgr.view.debug.meno.mgr.SystemMenoMgrDialogController' ],
+Ext.define('BlogMgr.view.debug.memo.mgr.SystemMemoMgrDialog', {
+	id : 'systemMemoMgrDialog',
+	alias : [ 'widget.system_memo_dialog' ],
+	requires : [ 'BlogMgr.view.debug.memo.mgr.SystemMemoAddDialogModel',
+			'BlogMgr.view.debug.memo.mgr.SystemMemoMgrForm',
+			'BlogMgr.view.debug.memo.mgr.SystemMemoMgrDialogController' ],
 	extend : 'Ext.window.Window',
 	layout : 'fit',
 	viewModel : {
-		type : 'system_meno_add_dialog'
+		type : 'system_memo_add_dialog'
 	},
 	bind : {
 		title : '{title}'
 	},
 	maximizable : true, // 最大化
-	controller : 'system_meno_dialog',
+	controller : 'system_memo_dialog',
 	bodyStyle : 'padding : 2px 2px 0',
 	shadowOffset : 30, // 投影效果
 	modal : true, // 模态
@@ -46,6 +46,6 @@ Ext.define('BlogMgr.view.debug.meno.mgr.SystemMenoMgrDialog', {
 		handler : 'closeDialog'
 	} ],
 	items :  {
-		xtype : 'system_meno_mgr_form'
+		xtype : 'system_memo_mgr_form'
 	} 
 });

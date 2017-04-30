@@ -18,10 +18,10 @@ Ext.application({
 			name : 'BlogMgr',
 			appFolder : 'app',
 			models : ['Function','User','Tree','BaseData','Role','Privilege','PrivilegeTree','LoginLog',
-			          'debug.SystemMeno','debug.SystemMeno'],
+			          'debug.SystemMemo','debug.SystemMemo'],
 			stores : ['BaseDataStore','UnionPrivilegeProxy','UserPagingStore','FunctionTreeStore','FunctionPagingStore',
 			          'RolePagingStore','PrivilegePagingStore','PrivilegeTreeStore','RoleListStore',
-			          'LoginLogStore','SystemMenoPaginStore'],
+			          'LoginLogStore','SystemMemoPaginStore'],
 			controllers:['Main','Root'],
 			views:['BlogMgr.view.home.left.Navigator','BlogMgr.view.home.header.HomeHeader',
 			       'BlogMgr.view.home.center.HomeIndex'],
@@ -35,7 +35,7 @@ Ext.application({
 				Ext.require([
 					'BlogMgr.view.user.UserHome','BlogMgr.view.fun.FunctionHome',
 					'BlogMgr.view.auth.AuthHome','BlogMgr.view.loginlog.LoginLogHome',
-					'BlogMgr.view.debug.meno.SystemMenoHome']);
+					'BlogMgr.view.debug.memo.SystemMemoHome']);
 			},
 			launch : function(profile) {
 				/**

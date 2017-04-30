@@ -5,31 +5,31 @@
 <mapper namespace="com.huangtl.blogmgr.model.blog.SystemMemo">
 
 	<resultMap id="mapper" type="com.huangtl.blogmgr.model.blog.SystemMemo" >
-		<id property="fId" column="meno_id"/>
-		<result property="fParentId" column="meno_pid"/>
-		<result property="fDescr" column="meno_descr" />
-		<result property="fUrl" column="meno_url"/>
-		<result property="fTitle" column="meno_title"/>
-		<result property="fHierarchy" column="meno_hierarchy"/>
-		<result property="fOrder" column="meno_order"/>
+		<id property="fId" column="memo_id"/>
+		<result property="fParentId" column="memo_pid"/>
+		<result property="fDescr" column="memo_descr" />
+		<result property="fUrl" column="memo_url"/>
+		<result property="fTitle" column="memo_title"/>
+		<result property="fHierarchy" column="memo_hierarchy"/>
+		<result property="fOrder" column="memo_order"/>
 	</resultMap>
 	
 	<sql id="field">
-		meno_id ,meno_pid ,meno_title ,meno_url, meno_order as fOrder
-		<if test="fDescr_show != null">,meno_descr</if>
-		<if test="fHierarchy_show != null">,meno_hierarchy</if>
+		memo_id ,memo_pid ,memo_title ,memo_url, memo_order as fOrder
+		<if test="fDescr_show != null">,memo_descr</if>
+		<if test="fHierarchy_show != null">,memo_hierarchy</if>
 	</sql>
 	
 	<sql id="where">
 		 <trim prefix="where" prefixOverrides="and|or">
-		 	<if test="defaultWhere!=null and defaultWhere">
+		 	<if test="defaultWhere != null and defaultWhere">
 		 		1=1
 		 	</if>
 			<if test="fId_eq !=null ">
-				and meno_id = #{fId_eq}
+				and memo_id = #{fId_eq}
 			</if>
 			<if test="fId_in != null">
-				and meno_id in
+				and memo_id in
 				<foreach collection="fId_in" open="(" item="id" separator="," close=")">
 					#{id}
 				</foreach>
@@ -47,10 +47,10 @@
 	</sql>
 	
 	<insert id="insert" parameterType="com.huangtl.blogmgr.model.blog.Role">
-		insert into sys_memo(
-			meno_id,meno_title,meno_url,meno_order,meno_descr
-			<if test="fParentId != null">,meno_pid</if>
-			<if test="fHierarchy != null ">,meno_hierarchy</if>
+		insert into debug_system_memo(
+			memo_id,memo_title,memo_url,memo_order,memo_descr
+			<if test="fParentId != null">,memo_pid</if>
+			<if test="fHierarchy != null ">,memo_hierarchy</if>
 		) values(
 			#{fId},#{fTitle},#{fUrl},#{fOrder},#{fDescr}
 			<if test="fParentId !=null ">,#{fParentId}</if>
@@ -58,47 +58,52 @@
 		);
 	</insert>
 	
+	<delete id="delete" parameterType="map">
+		delete from debug_system_memo
+		<include refid="where"></include>
+	</delete>
+	
 	<update id="update" parameterType="map">
-		update sys_memo 
+		update debug_system_memo 
 		<trim prefix="set" suffixOverrides=",">
-			<if test="fTitle !=null">meno_title = #{fTitle},</if>
-			<if test="fUrl !=null">meno_url = #{fUrl},</if>
-			<if test="fOrder !=null">meno_order = #{fOrder},</if>
-			<if test="fDescr !=null">meno_descr = #{fDescr},</if>
+			<if test="fTitle !=null">memo_title = #{fTitle},</if>
+			<if test="fUrl !=null">memo_url = #{fUrl},</if>
+			<if test="fOrder !=null">memo_order = #{fOrder},</if>
+			<if test="fDescr !=null">memo_descr = #{fDescr},</if>
 		</trim>
 		<include refid="where"/>
 	</update>
 	
 	<update id="updateBatch" parameterType="list">
-		<foreach collection="list" item="meno" index="index" open="" close="" separator=";">
-			update sys_memo 
+		<foreach collection="list" item="memo" index="index" open="" close="" separator=";">
+			update debug_system_memo 
 			<trim prefix="set" suffixOverrides=",">
-				<if test="meno.fTitle !=null">meno_title = #{meno.fTitle},</if>
-				<if test="meno.fUrl !=null">meno_url = #{meno.fUrl},</if>
-				<if test="meno.fOrder !=null">meno_order = #{meno.fOrder},</if>
-				<if test="meno.fDescr !=null">meno_descr = #{meno.fDescr},</if>
+				<if test="memo.fTitle !=null">memo_title = #{memo.fTitle},</if>
+				<if test="memo.fUrl !=null">memo_url = #{memo.fUrl},</if>
+				<if test="memo.fOrder !=null">memo_order = #{memo.fOrder},</if>
+				<if test="memo.fDescr !=null">memo_descr = #{memo.fDescr},</if>
 			</trim>
-			 where meno_id = #{meno.fId}
+			 where memo_id = #{memo.fId}
 		</foreach>
 	</update>
 	
 	<select id="selectList" resultMap="mapper" parameterType="map">
 		select 
 			<include refid="field"/>
-		from sys_memo
+		from debug_system_memo
 			<include refid="where"/>
 	</select>
 	
 	<select id="selectCount"  resultType="long" parameterType="map">
-	  select count(meno_id) 
-	  from sys_memo
+	  select count(memo_id) 
+	  from debug_system_memo
 		<include refid="where"/>
 	</select>
 	
 	<select id="selectPaging" resultMap="mapper" parameterType="map">
 		select 
 			<include refid="field"/>
-		from sys_memo
+		from debug_system_memo
 			<include refid="where"/>
 			<include refid="order"/>
 		limit #{startIndex},#{pageSize}

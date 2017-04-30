@@ -80,7 +80,6 @@ public class PrivilegeSqlWhere extends SqlWhere {
 	 * @return
 	 */
 	public PrivilegeSqlWhere fPriorityIn(AuthPriority... fPrioritys){
-		if(fPrioritys.length==0){return this;}
 		this.put(Operator.in.eval("fPriority"), fPrioritys);
 		return this;
 	}

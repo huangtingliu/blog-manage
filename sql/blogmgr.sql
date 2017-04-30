@@ -10,10 +10,31 @@ Target Server Type    : MYSQL
 Target Server Version : 50519
 File Encoding         : 65001
 
-Date: 2017-04-29 17:26:04
+Date: 2017-04-30 11:04:09
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for debug_system_memo
+-- ----------------------------
+DROP TABLE IF EXISTS `debug_system_memo`;
+CREATE TABLE `debug_system_memo` (
+  `memo_id` varchar(64) NOT NULL COMMENT '标识',
+  `memo_pid` varchar(64) NOT NULL DEFAULT '' COMMENT '上级',
+  `memo_hierarchy` varchar(1024) NOT NULL DEFAULT '' COMMENT '层级关系',
+  `memo_order` int(255) NOT NULL DEFAULT '0' COMMENT '排序',
+  `memo_title` varchar(255) NOT NULL COMMENT '标题',
+  `memo_descr` text COMMENT '描述',
+  `memo_url` varchar(255) DEFAULT NULL COMMENT '链接',
+  PRIMARY KEY (`memo_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='系统备忘录';
+
+-- ----------------------------
+-- Records of debug_system_memo
+-- ----------------------------
+INSERT INTO `debug_system_memo` VALUES ('65487689789', '', '', '0', 'test', 'sssdfa', '');
+INSERT INTO `debug_system_memo` VALUES ('ad317ace24f741978c9574c1f32764f2', '', '', '0', '阿里font', '密码：', '');
 
 -- ----------------------------
 -- Table structure for mgr_function
@@ -65,10 +86,10 @@ INSERT INTO `mgr_function` VALUES ('C0010010', '系统配置', 'C001', '', '', '
 INSERT INTO `mgr_function` VALUES ('D001', '个人中心', '', '', '', '9', '', 'NAVIGATOR', '当前用户管理', '58902', 'ENABLE');
 INSERT INTO `mgr_function` VALUES ('D0010001', '本人信息', 'D001', '', '', '1', '', 'NAVIGATOR', '当前用户', '58919', 'ENABLE');
 INSERT INTO `mgr_function` VALUES ('Z001', '开发者中心', '', '', '', '10', '', 'NAVIGATOR', '开发者调式工具', '58974', 'ENABLE');
-INSERT INTO `mgr_function` VALUES ('Z0010001', '便签', 'Z001', '', 'BlogMgr.view.debug.meno.SystemMenoHome', '0', '/debug/meno/paging.data', 'NAVIGATOR', '', '58917', 'ENABLE');
-INSERT INTO `mgr_function` VALUES ('Z00100010001', '新增便签', 'Z0010001', '', '', '1', '', 'TOOLBAR', '', '58917', 'ENABLE');
-INSERT INTO `mgr_function` VALUES ('Z00100010002', '修改便签', 'Z0010001', '', '', '2', '', 'TOOLBAR', '', '58917', 'ENABLE');
-INSERT INTO `mgr_function` VALUES ('Z00100010003', '删除便签', 'Z0010001', '', '', '3', '', 'TOOLBAR', '', '58917', 'ENABLE');
+INSERT INTO `mgr_function` VALUES ('Z0010001', '便签', 'Z001', '', 'BlogMgr.view.debug.memo.SystemMemoHome', '0', '/debug/meno/paging.data', 'NAVIGATOR', '', '58917', 'ENABLE');
+INSERT INTO `mgr_function` VALUES ('Z00100010001', '新增便签', 'Z0010001', '', 'addMemo', '1', '', 'TOOLBAR', '', '58917', 'ENABLE');
+INSERT INTO `mgr_function` VALUES ('Z00100010002', '修改便签', 'Z0010001', '', 'editMemo', '2', '', 'TOOLBAR', '', '58917', 'ENABLE');
+INSERT INTO `mgr_function` VALUES ('Z00100010003', '删除便签', 'Z0010001', '', 'deleteMemo', '3', '', 'TOOLBAR', '', '58917', 'ENABLE');
 INSERT INTO `mgr_function` VALUES ('Z0010002', '功能进度', 'Z001', '', '', '2', '', 'NAVIGATOR', '', '58917', 'ENABLE');
 INSERT INTO `mgr_function` VALUES ('Z0010008', '异常日志', 'Z001', '', '', '8', '', 'NAVIGATOR', '前后台异常日志', '58926', 'ENABLE');
 INSERT INTO `mgr_function` VALUES ('Z0010009', 'jdbc日志', 'Z001', '', '', '9', '', 'NAVIGATOR', '数据库操作日志', '58881', 'ENABLE');
@@ -441,38 +462,25 @@ CREATE TABLE `sys_loginlog` (
 -- ----------------------------
 -- Records of sys_loginlog
 -- ----------------------------
+INSERT INTO `sys_loginlog` VALUES ('092bd972ea2045bfae4ac6916a7b3e37', '3c498ad2a8c24e7887b6f85316b5e746', '0:0:0:0:0:0:0:1', 'Chrome 56.0.2924.87', '2017-04-29 19:13:28', 'WINDOWS_7');
 INSERT INTO `sys_loginlog` VALUES ('0d721dcf2df64bdfbe726c178227c029', '3c498ad2a8c24e7887b6f85316b5e746', '0:0:0:0:0:0:0:1', 'Chrome 55.0.2883.87', '2017-02-11 19:20:00', 'WINDOWS_7');
 INSERT INTO `sys_loginlog` VALUES ('0d8e6533706a44808dee48731257abba', '3c498ad2a8c24e7887b6f85316b5e746', '0:0:0:0:0:0:0:1', 'Chrome 55.0.2883.87', '2017-02-11 19:07:12', 'WINDOWS_7');
+INSERT INTO `sys_loginlog` VALUES ('0e10b907ce8d448692b74da819b2a632', '3c498ad2a8c24e7887b6f85316b5e746', '0:0:0:0:0:0:0:1', 'Chrome 56.0.2924.87', '2017-04-30 10:52:49', 'WINDOWS_7');
 INSERT INTO `sys_loginlog` VALUES ('0ef0a64fff914a82a21d7a87ff6ab22d', '3c498ad2a8c24e7887b6f85316b5e746', null, 'Chrome 55.0.2883.87', '2017-02-11 18:37:09', null);
 INSERT INTO `sys_loginlog` VALUES ('278e9967306741f2be65da054dd9bcc1', '3c498ad2a8c24e7887b6f85316b5e746', '0:0:0:0:0:0:0:1', 'Chrome 56.0.2924.87', '2017-04-29 10:23:48', 'WINDOWS_7');
+INSERT INTO `sys_loginlog` VALUES ('2f108645739e42b48233892b64c4e86c', '3c498ad2a8c24e7887b6f85316b5e746', '0:0:0:0:0:0:0:1', 'Chrome 56.0.2924.87', '2017-04-30 10:09:52', 'WINDOWS_7');
 INSERT INTO `sys_loginlog` VALUES ('35edbc53b2a04e41b444c114625414ab', '3c498ad2a8c24e7887b6f85316b5e746', '0:0:0:0:0:0:0:1', 'Chrome 56.0.2924.87', '2017-04-29 16:06:37', 'WINDOWS_7');
 INSERT INTO `sys_loginlog` VALUES ('4658e9f3a62f4ebdb86948a2e621a5cf', '3c498ad2a8c24e7887b6f85316b5e746', null, 'Chrome 55.0.2883.87', '2017-02-11 18:36:12', null);
 INSERT INTO `sys_loginlog` VALUES ('46d96f214e03423c9538f626744d7982', '3c498ad2a8c24e7887b6f85316b5e746', '0:0:0:0:0:0:0:1', 'Chrome 56.0.2924.87', '2017-04-29 17:21:18', 'WINDOWS_7');
 INSERT INTO `sys_loginlog` VALUES ('4e0a33f413eb4113874931e88e0fb311', '3c498ad2a8c24e7887b6f85316b5e746', '0:0:0:0:0:0:0:1', 'Chrome 56.0.2924.87', '2017-04-29 17:06:30', 'WINDOWS_7');
+INSERT INTO `sys_loginlog` VALUES ('6019cba83fcf47c992f60835cb9d7748', '3c498ad2a8c24e7887b6f85316b5e746', '0:0:0:0:0:0:0:1', 'Chrome 56.0.2924.87', '2017-04-30 07:17:30', 'WINDOWS_7');
 INSERT INTO `sys_loginlog` VALUES ('6b593a851ccd4dff9a8504d11ca1fe69', '3c498ad2a8c24e7887b6f85316b5e746', '0:0:0:0:0:0:0:1', 'Chrome 55.0.2883.87', '2017-02-11 19:24:51', 'WINDOWS_7');
+INSERT INTO `sys_loginlog` VALUES ('740749ec299444b48a069ef9e416dc99', '3c498ad2a8c24e7887b6f85316b5e746', '0:0:0:0:0:0:0:1', 'Chrome 56.0.2924.87', '2017-04-30 10:37:43', 'WINDOWS_7');
 INSERT INTO `sys_loginlog` VALUES ('8e0db123a20d486ca0c037791cdc51b3', '3c498ad2a8c24e7887b6f85316b5e746', '0:0:0:0:0:0:0:1', 'Chrome 55.0.2883.87', '2017-02-11 19:26:41', 'WINDOWS_7');
 INSERT INTO `sys_loginlog` VALUES ('98248e3a8a63482c8feb244353896ae2', '3c498ad2a8c24e7887b6f85316b5e746', '0:0:0:0:0:0:0:1', 'Chrome 55.0.2883.87', '2017-02-11 19:03:43', 'WINDOWS_7');
 INSERT INTO `sys_loginlog` VALUES ('bc9b4cff0fd8451f811f23ecf6b8d8ef', '3c498ad2a8c24e7887b6f85316b5e746', '0:0:0:0:0:0:0:1', 'Chrome 56.0.2924.87', '2017-04-29 16:40:24', 'WINDOWS_7');
-
--- ----------------------------
--- Table structure for sys_memo
--- ----------------------------
-DROP TABLE IF EXISTS `sys_memo`;
-CREATE TABLE `sys_memo` (
-  `meno_id` varchar(64) NOT NULL COMMENT '标识',
-  `meno_pid` varchar(64) NOT NULL DEFAULT '' COMMENT '上级',
-  `meno_hierarchy` varchar(1024) NOT NULL DEFAULT '' COMMENT '层级关系',
-  `meno_order` int(255) NOT NULL DEFAULT '0' COMMENT '排序',
-  `meno_title` varchar(255) NOT NULL COMMENT '标题',
-  `meno_descr` text COMMENT '描述',
-  `meno_url` varchar(255) DEFAULT NULL COMMENT '链接',
-  PRIMARY KEY (`meno_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='系统备忘录';
-
--- ----------------------------
--- Records of sys_memo
--- ----------------------------
-INSERT INTO `sys_memo` VALUES ('65487689789', '', '', '0', 'test', 'sssdfa', '');
+INSERT INTO `sys_loginlog` VALUES ('d38fefa9d13b4b15a40d5e46d4c98654', '3c498ad2a8c24e7887b6f85316b5e746', '0:0:0:0:0:0:0:1', 'Chrome 56.0.2924.87', '2017-04-29 19:00:28', 'WINDOWS_7');
+INSERT INTO `sys_loginlog` VALUES ('f2f9c8a6e14d4ff18f5f77342214426c', '3c498ad2a8c24e7887b6f85316b5e746', '0:0:0:0:0:0:0:1', 'Chrome 56.0.2924.87', '2017-04-29 19:03:05', 'WINDOWS_7');
 DROP TRIGGER IF EXISTS `mgr_menu_trigger`;
 DELIMITER ;;
 CREATE TRIGGER `mgr_menu_trigger` AFTER INSERT ON `mgr_function` FOR EACH ROW begin

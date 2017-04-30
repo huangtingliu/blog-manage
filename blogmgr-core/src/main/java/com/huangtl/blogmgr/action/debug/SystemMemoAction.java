@@ -3,6 +3,7 @@ package com.huangtl.blogmgr.action.debug;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -25,7 +26,7 @@ import com.huangtl.blogmgr.service.SystemMemoService;
  *
  */
 @Controller
-@RequestMapping("/debug/meno")
+@RequestMapping("/debug/memo")
 public class SystemMemoAction extends BlogMgrAction {
 	
 	@Resource
@@ -61,7 +62,7 @@ public class SystemMemoAction extends BlogMgrAction {
 		this.systemMemoService.getDao().selectPaging(whereParam, page);
 		
 		JSONObject data = new JSONObject();
-		data.put("menolist", page.getPageContent());
+		data.put("memolist", page.getPageContent());
 		data.put("total", page.getTotal());
 		data.put("success", true);
 		data.put("message", "获取成功个数 "+page.getPageSize());
@@ -70,24 +71,31 @@ public class SystemMemoAction extends BlogMgrAction {
 	
 	@RequestMapping("get.data")
 	@ResponseBody
-	public Object getMeno(){
-		return "";
+	public Object getMemo(String id){
+		Assert.hasLength(id, "参数id不能为空");
+		SystemMemo memo = this.systemMemoService.getDao().selectById(id);
+		return memo;
+	}
+	
+	@RequestMapping("delete.do")
+	@ResponseBody
+	public Object deleteMemo(String id){
+		Assert.hasLength(id, "参数id未指定");
+		return this.systemMemoService.deleteMemo(id.split(","));
 	}
 	
 	@RequestMapping("add.do")
 	@ResponseBody
-	public Object addMeno(SystemMemo systemMemo){
+	public Object addMemo(SystemMemo systemMemo){
 		systemMemo.checkValidityThrow();
-		
 		systemMemo.setfId(systemMemo.newId());
-		
 		return this.systemMemoService.addMemo(systemMemo);
-		
 	}
 	
 	@RequestMapping("tree.data")
 	@ResponseBody
 	public Object getTree(){
+		//TODO
 		return "";
 	}
 	

@@ -28,7 +28,6 @@ public class UserSqlWhere extends SqlWhere {
 	 * @return
 	 */
 	public UserSqlWhere fIdIn(String... userIds){
-		if(userIds.length==0){return this;}
 		this.put(Operator.in.eval("fId"), userIds);
 		return this;
 	}
