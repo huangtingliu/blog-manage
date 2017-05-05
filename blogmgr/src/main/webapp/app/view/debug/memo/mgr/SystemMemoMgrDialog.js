@@ -5,8 +5,9 @@ Ext.define('BlogMgr.view.debug.memo.mgr.SystemMemoMgrDialog', {
 	id : 'systemMemoMgrDialog',
 	alias : [ 'widget.system_memo_dialog' ],
 	requires : [ 'BlogMgr.view.debug.memo.mgr.SystemMemoAddDialogModel',
-			'BlogMgr.view.debug.memo.mgr.SystemMemoMgrForm',
-			'BlogMgr.view.debug.memo.mgr.SystemMemoMgrDialogController' ],
+	           'BlogMgr.view.debug.memo.mgr.SystemMemoEditDialogModel',
+	           'BlogMgr.view.debug.memo.mgr.SystemMemoMgrForm',
+	           'BlogMgr.view.debug.memo.mgr.SystemMemoMgrDialogController' ],
 	extend : 'Ext.window.Window',
 	layout : 'fit',
 	viewModel : {

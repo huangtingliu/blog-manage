@@ -12,6 +12,9 @@ Ext.define('BlogMgr.view.debug.memo.mgr.SystemMemoMgrForm', {
 		labelWidth : 100
 	},
 	items : [ {
+        xtype: 'hiddenfield',
+        name: 'fId',
+	},{
 		fieldLabel : '标题',
 		name : 'fTitle',
 		xtype : 'textfield',

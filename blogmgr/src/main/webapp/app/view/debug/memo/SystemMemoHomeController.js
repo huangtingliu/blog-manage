@@ -49,9 +49,38 @@ Ext.define('BlogMgr.view.debug.memo.SystemMemoHomeController', {
 	 * 修改便签,侍开发
 	 */
 	editMemo : function() {
-		Ext.toast({
-			content : '修改便签,侍开发'
+		var ids = this.getSelectedRowId();
+		if(ids.length==0){return;}
+		
+		var me = this;
+		var grid = me.getView().items.first();
+		var store =  grid.getStore();
+		me.mask.msg='创建中...';
+		me.mask.show();
+		
+		//表单数据回填
+		var editRecored = store.getById(ids[ids.length-1]);
+		editRecored.load({
+			callback:function(record, operation, success){
+				me.mask.hide();
+				if(success){
+					var dialog = Ext.create('BlogMgr.view.debug.memo.mgr.SystemMemoMgrDialog',{
+						viewModel:{
+							type : 'system_memo_edit_dialog'
+						}
+					}).show();
+					var form = dialog.getComponent('systemMemoMgrForm');
+					form.loadRecord(record);
+				}else{
+					Ext.toast({
+						type : 'exception',
+						content : '服务器请求失败'
+					});
+				}
+			}
 		});
+	
+		
 	},
 	/**
 	 * 删除便签
@@ -62,6 +91,11 @@ Ext.define('BlogMgr.view.debug.memo.SystemMemoHomeController', {
 			return;
 		}
 		var me = this;
+		
+		var grid = me.getView().items.first();
+		var store =  grid.getStore();
+		var selectedRows = grid.getSelectionModel().getSelection();
+
 		Ext.Msg.confirm('系统提示', '确定要删除吗?', function(val) {
 			if (val == 'yes') {
 				me.mask.msg = "删除中...";
@@ -78,10 +112,8 @@ Ext.define('BlogMgr.view.debug.memo.SystemMemoHomeController', {
 							var result = JSON.parse(response.responseText);
 							Ext.toast(result);
 							if (result.success) {
-								var grid = me.getView().items.first();
-								grid.getStore().remove(ids);
+								store.remove(selectedRows);
 								grid.getSelectionModel().deselectAll();
-								// TODO 界面刷新
 							}
 						} else {
 							Ext.toast({

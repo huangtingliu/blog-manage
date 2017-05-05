@@ -87,9 +87,19 @@ public class SystemMemoAction extends BlogMgrAction {
 	@RequestMapping("add.do")
 	@ResponseBody
 	public Object addMemo(SystemMemo systemMemo){
-		systemMemo.checkValidityThrow();
 		systemMemo.setfId(systemMemo.newId());
+		systemMemo.checkValidityThrow();
 		return this.systemMemoService.addMemo(systemMemo);
+	}
+	
+	@RequestMapping("edit.do")
+	@ResponseBody
+	public Object eidtMemoById(SystemMemo systemMemo){
+		Assert.hasLength(systemMemo.getfId(), "参数id未指定");
+		systemMemo.checkValidityThrow();
+		SystemMemoWhere where = new SystemMemoWhere()
+				.fIdEqual(systemMemo.getfId());
+		return this.systemMemoService.editMemo(systemMemo, where);
 	}
 	
 	@RequestMapping("tree.data")

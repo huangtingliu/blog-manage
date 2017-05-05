@@ -31,7 +31,32 @@ Ext.define('BlogMgr.view.debug.memo.mgr.SystemMemoMgrDialogController', {
 								waitMsg:' '
 							});
 			},
-			 
+			
+			/**
+			 * 修改便签
+			 */
+			memoEditSubmit:function(){
+				 var me = this;
+					var form = this.getView().getComponent('systemMemoMgrForm');
+					
+					form.submit({
+								url : '/blogmgr/debug/memo/edit.do',
+								method : 'POST',
+								submitEmptyText:false,
+								success : function(form, action) {
+									Ext.toast(action.result);
+									Ext.getStore('systemMemoPaginStore').reload();
+									me.closeDialog();
+								},
+								failure : function(form, action) {
+									if(action.result){
+										Ext.toast(action.result);
+									}
+								},
+								waitMsg:' '
+							});
+			},
+			
 			closeDialog:function(){
 				this.getView().close();
 			}

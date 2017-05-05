@@ -57,6 +57,7 @@ Ext.define('BlogMgr.view.user.UserHomeController', {
 		var _this = this;
 		var grid = this.getView();
 		var store = grid.getStore();
+		var selectedRows = grid.getSelectionModel().getSelection();
 		Ext.Msg.confirm('系统提示', '确定要删除吗?', function(val) {
 					if (val == 'yes') {
 						_this.mask.msg = "删除中...";

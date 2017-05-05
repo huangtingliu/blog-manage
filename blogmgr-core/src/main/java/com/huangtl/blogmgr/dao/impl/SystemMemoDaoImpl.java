@@ -19,7 +19,7 @@ public class SystemMemoDaoImpl extends MybatisDaoAdaptor<SystemMemo> implements 
 	public SystemMemo selectById(String id) {
 		SystemMemoWhere where = new SystemMemoWhere()
 								.fIdEqual(id);
-		List<SystemMemo> list = this.selectList(where);
+		List<SystemMemo> list = this.selectList(where,"fDescr","fHierarchy");
 		if(list==null){
 			return null;
 		}else if(list.isEmpty()){

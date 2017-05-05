@@ -1,5 +1,5 @@
 /**
- * 功能添加viewModel
+ * 便签添加添加viewModel
  */
 Ext.define('BlogMgr.view.debug.memo.mgr.SystemMemoAddDialogModel', {
 	extend : 'Ext.app.ViewModel',
@@ -7,9 +7,5 @@ Ext.define('BlogMgr.view.debug.memo.mgr.SystemMemoAddDialogModel', {
 	data : {
 		title : '便签添加',
 		saveHandler : 'memoAddSubmit',
-		form : {
-			fIdEditable : true,
-			fParentIdReadOnly : false
-		}
 	}
 });

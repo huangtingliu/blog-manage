@@ -23,8 +23,8 @@ public class SystemMemoServiceImpl implements SystemMemoService {
 	
 	@Override
 	public Message editMemo(SystemMemo memo,SystemMemoWhere where) {
-		systemMemoDao.update(memo, where);
-		return null;
+	  int effectRow = 	systemMemoDao.update(memo, where);
+	  return Message.get(effectRow, "修改成功", "修改失败");
 	}
 
 	@Override
