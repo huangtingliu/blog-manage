@@ -35,7 +35,7 @@ Ext.application({
 				Ext.require([
 					'BlogMgr.view.user.UserHome','BlogMgr.view.fun.FunctionHome',
 					'BlogMgr.view.auth.AuthHome','BlogMgr.view.loginlog.LoginLogHome',
-					'BlogMgr.view.debug.memo.SystemMemoHome']);
+					'BlogMgr.view.debug.memo.SystemMemoHome','BlogMgr.view.debug.monitor.MonitorHome']);
 			},
 			launch : function(profile) {
 				/**
