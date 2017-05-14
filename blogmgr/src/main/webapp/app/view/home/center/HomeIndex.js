@@ -6,6 +6,7 @@ Ext.define('BlogMgr.view.home.center.HomeIndex',{
 	id : 'homeIndex',
 	alias : ['widget.home_index'],
 	requires:['BlogMgr.view.home.center.HomeIndexController','BlogMgr.view.home.center.HomeIndexModel'],
+	uses:['BlogMgr.component.picker.user.UserMultiSelector'],
 	title : '首页',
 	controller : 'home_index',
 	viewModel : {
@@ -58,5 +59,7 @@ Ext.define('BlogMgr.view.home.center.HomeIndex',{
         height: 100,
         margin: '0 0 10 0',
         html: 'height: 100'
+    },{
+    	 xtype: 'userselector'
     }]
 });

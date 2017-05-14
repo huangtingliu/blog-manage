@@ -89,7 +89,7 @@ public class UserAction extends BlogMgrAction {
 	 */
 	@RequestMapping("paging.data")
 	@ResponseBody
-	public Object getPaging(Integer pageNo,Integer pageSize,
+	public Object getPaging( Integer pageNo, Integer pageSize,
 			FilterCollection filter,SortCollection sort) {
 		
 		Page<User> page = new Page<>(pageNo, pageSize);
@@ -106,6 +106,43 @@ public class UserAction extends BlogMgrAction {
 		for (Filter f : filter) {
 			whereParam.putFilter(f);
 		}
+		
+		this.userService.getDao().selectPaging(whereParam, page,"fCreateDate","fGender","fCreater");
+		
+		JSONObject data = new JSONObject();
+		data.put("userlist", page.getPageContent());
+		data.put("total", page.getTotal());
+		data.put("success", true);
+		data.put("message", "获取成功个数 "+page.getPageSize());
+		return data;
+	}
+	
+	/**
+	 * 获取常用用户
+	 * @param userName
+	 * @param pageNo
+	 * @param pageSize
+	 * @param sort
+	 * @return
+	 */
+	@RequestMapping("useful_user.data")
+	@ResponseBody
+	public Object getUsefulUser(
+			String userName,
+			Integer pageNo,Integer pageSize,
+			SortCollection sort){
+		Page<User> page = new Page<>(pageNo, pageSize);
+		if(sort.isEmpty()){
+			page.addSort("fCreateDate", Direction.DESC);
+		}else{
+			for (Sort s : sort) {
+				page.addSort(s.getProperty(), s.getDirection());
+			}
+		}
+		
+		UserSqlWhere whereParam = new UserSqlWhere();
+		whereParam.fStatusNotEqual(UserStatus.DELETE);
+		whereParam.fNameLike(userName);
 		
 		this.userService.getDao().selectPaging(whereParam, page,"fCreateDate","fGender","fCreater");
 		

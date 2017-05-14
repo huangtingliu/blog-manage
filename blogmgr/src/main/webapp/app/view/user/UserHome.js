@@ -227,6 +227,6 @@ Ext.define('BlogMgr.view.user.UserHome', {
 													handler:'exportAllUser'
 												}]
 									}]
-						}],
+						}]
 			}
 		})

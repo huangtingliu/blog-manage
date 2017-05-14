@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.Type;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.http.HttpInputMessage;
 import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.MediaType;
@@ -31,19 +32,19 @@ public class MappingFastJson2HttpMessageConverter extends AbstractGenericHttpMes
 		JSON.writeJSONStringTo(t, new PrintWriter(outputMessage.getBody()),SerializerFeature.WriteEnumUsingToString,
 				SerializerFeature.WriteDateUseDateFormat);
 	}
-	
-	@Override
-	protected Object readInternal(Class<? extends Object> clazz, HttpInputMessage inputMessage)
-			throws IOException, HttpMessageNotReadableException {
-		// TODO 未知的方法，先不做处理
-		throw new UnsupportedOperationException();
-	}
-	
 	@Override
 	public Object read(Type type, Class<?> contextClass, HttpInputMessage inputMessage)
 			throws IOException, HttpMessageNotReadableException {
-		// TODO 未知的方法，先不做处理
-		throw new UnsupportedOperationException();
+		String text = IOUtils.toString(inputMessage.getBody());
+		return JSON.parseObject(text, type);
+	}
+	@Override
+	protected Object readInternal(Class<? extends Object> clazz, HttpInputMessage inputMessage)
+			throws IOException, HttpMessageNotReadableException {
+		String text = IOUtils.toString(inputMessage.getBody());
+		return JSON.parseObject(text, clazz);
 	}
 	
+	
+
 }

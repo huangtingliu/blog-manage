@@ -61,44 +61,57 @@
 		</property>
 	</bean>
 	
-	<!-- 博客数据源 -->
+	<!-- 数据源
+	    ==================常用==============
+		name : 代号
+		maxActive :最大并发连接数
+		initialSize: 初始化连接数量
+		maxWait: 配置获取连接等待超时的时间
+		minIdle:最小连接数
+		timeBetweenEvictionRunsMillis: 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+		minEvictableIdleTimeMillis: 配置一个连接在池中最小生存的时间，单位是毫秒
+		poolPreparedStatements: false
+		maxOpenPreparedStatements: 20
+		================测试===================
+		validationQuery : 如：select 'sql connect'
+		testWhileIdle :true
+		testOnBorrow: false
+		testOnReturn:false
+		=====================监控配置=====================
+		filters :扩展插件 [监控统计用的filter:stat][日志用的filter:log4j ][防御sql注入的filter:wall]
+		proxyFilters:自定义filter
+		timeBetweenLogStatsMillis:每隔10分钟把监控数据输出到日志中
+	 -->
 	<bean id="blogDataSource"  class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method = "close">
-		 <!-- 数据库基本信息配置 -->
+		 <!-- =================数据库基本信息配置 ====================-->
 		 <property name="name" value="pld-blog"></property>
          <property name = "url" value = "${blog.mysql.url}" />  
          <property name = "username" value = "${blog.mysql.username}" />  
          <property name = "password" value = "${blog.mysql.password}" />  
          <property name = "driverClassName" value = "${blog.mysql.driver}" />  
-          <!-- 最大并发连接数 -->
          <property name = "maxActive" value = "${jdbc.maxConnectionCount}" />
-         <!-- 初始化连接数量 -->
          <property name = "initialSize" value = "${jdbc.minConnectionCount}" />
-         <!-- 配置获取连接等待超时的时间 -->
          <property name = "maxWait" value = "${jdbc.maxActiveTime}" />
-         <!-- 最小连接数  -->
          <property name = "minIdle" value = "${jdbc.minConnectionCount}" /> 
-         <!-- 属性类型是字符串，通过别名的方式配置扩展插件， 
-				常用的插件有： 
-				监控统计用的filter:stat  
-				日志用的filter:log4j 
-				防御sql注入的filter:wall -->
-          <property name = "filters" value = "stat,wall" />  
-          <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
-         <property name = "timeBetweenEvictionRunsMillis" value ="${timeBetweenEvictionRunsMillis}" /> -->
-         <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
-         <!-- <property name = "minEvictableIdleTimeMillis" value ="${minEvictableIdleTimeMillis}" />   
-         <property name = "validationQuery" value = "select 'sql connect' " />  
-         <property name = "testWhileIdle" value = "true" />  
-         <property name = "testOnBorrow" value = "false" />  
-         <property name = "testOnReturn" value = "false" />  
-           <property name="poolPreparedStatements" value="false" />
-         <property name = "maxOpenPreparedStatements" value ="20" />  -->
-         <!-- 打开 removeAbandoned 功能 
-         <property name = "removeAbandoned" value = "${removeAbandoned}" />-->
-         <!-- 1800 秒，也就是 30 分钟
-         <property name = "removeAbandonedTimeout" value ="${removeAbandonedTimeout}" /> -->
-         <!-- 关闭 abanded 连接时输出错误日志   
-         <property name = "logAbandoned" value = "${logAbandoned}" />	--> 	
+         <!--=====================监控配置=====================  -->
+          <property name = "filters" value = "wall" /> 
+          <property name="proxyFilters">
+          	<list>
+          		<ref bean="mergeStat"/>
+          	</list>
+          </property>
+          <property name ="statLogger" ref ="localStatLogger" />
+         <property name ="timeBetweenLogStatsMillis" value ="100000" />
+         
+	</bean>
+	<bean id="mergeStat" class="com.alibaba.druid.filter.stat.MergeStatFilter">
+    	<property name="logSlowSql" value="true" />
+	</bean>
+	<bean id ="localStatLogger" class ="com.alibaba.druid.pool.DruidDataSourceStatLoggerImpl" >
+		<property name="logger" ref="sLF4JImpl"></property>
+	</bean>
+	<bean id="sLF4JImpl" class="com.alibaba.druid.support.logging.SLF4JImpl">
+		<constructor-arg  value="druid.statlog"></constructor-arg>
 	</bean>
 	
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">

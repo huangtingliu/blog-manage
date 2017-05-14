@@ -1,12 +1,9 @@
-/**
- * 后台用户stroe
- */
- Ext.define('BlogMgr.store.UserPagingStore', {
+ Ext.define('BlogMgr.component.picker.user.unit.UserSelectorStore', {
 			model : 'BlogMgr.model.User',
 			extend:'Ext.data.Store',
-			alias:'store.user_paging',
-			storeId : 'userPagingStore',
-			pageSize:5,
+			alias:'store.user_selector_store',
+			storeId : 'userSelectorStore',
+			pageSize:20,
 			remoteSort:true,
 			remoteFilter:true,
 			sorters:[],
@@ -18,8 +15,7 @@
 //	                update : 'POST',
 //	                destroy: 'POST'
 //	            },
-			//	headers: {'Content-Type': "application/x-www-form-urlencoded; charset=UTF-8" },
-				url : '/blogmgr/user/paging.data',
+				url : '/blogmgr/user/useful_user.data',
 				limitParam:'pageSize',
 				pageParam:'pageNo',
 				noCache:false,
@@ -34,4 +30,3 @@
 			},
 			listeners:{}
 });
-Ext.create('BlogMgr.store.UserPagingStore');
