@@ -2,7 +2,7 @@ Ext.define('BlogMgr.component.picker.user.UserMultiSelector', {
 	extend : 'Ext.form.field.Tag',
 	requires:['BlogMgr.component.picker.user.unit.UserSelectorStore',
 	          'BlogMgr.component.picker.user.unit.UserSelectorDialog'],
-	alias : 'widget.userselector',
+	alias : 'widget.user_multi_selector',
 	store: {
 	    type: 'user_selector_store'
 	},
@@ -48,7 +48,16 @@ Ext.define('BlogMgr.component.picker.user.UserMultiSelector', {
 	onClearClick : function() {},
 	onSearchClick : function() {
 		var me = this;
+		
 		Ext.create('BlogMgr.component.picker.user.unit.UserSelectorDialog', {
+			callback:function(selectUsers){
+				Ext.each(selectUsers,function(value,index){
+					var _store = me.getStore();
+					_store.add(value);
+					me.addValue(value.data.fAccount);
+				});
+				
+			}
 		}).show();
 	}
 });

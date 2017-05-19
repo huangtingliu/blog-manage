@@ -130,6 +130,7 @@ public class UserAction extends BlogMgrAction {
 	public Object getUsefulUser(
 			String userName,
 			Integer pageNo,Integer pageSize,
+			FilterCollection filter,
 			SortCollection sort){
 		Page<User> page = new Page<>(pageNo, pageSize);
 		if(sort.isEmpty()){
@@ -143,6 +144,9 @@ public class UserAction extends BlogMgrAction {
 		UserSqlWhere whereParam = new UserSqlWhere();
 		whereParam.fStatusNotEqual(UserStatus.DELETE);
 		whereParam.fNameLike(userName);
+		for (Filter f : filter) {
+			whereParam.putFilter(f);
+		}
 		
 		this.userService.getDao().selectPaging(whereParam, page,"fCreateDate","fGender","fCreater");
 		
