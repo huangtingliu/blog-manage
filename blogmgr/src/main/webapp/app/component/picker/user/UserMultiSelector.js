@@ -1,7 +1,7 @@
 Ext.define('BlogMgr.component.picker.user.UserMultiSelector', {
 	extend : 'Ext.form.field.Tag',
-	requires:['BlogMgr.component.picker.user.unit.UserSelectorStore',
-	          'BlogMgr.component.picker.user.unit.UserSelectorDialog'],
+	requires:['BlogMgr.component.picker.user.unit.UserSelectorStore','Ext.ux.SlidingPager'],
+	uses:['BlogMgr.component.picker.user.unit.UserSelectorDialog'],
 	alias : 'widget.user_multi_selector',
 	store: {
 	    type: 'user_selector_store'
@@ -17,7 +17,6 @@ Ext.define('BlogMgr.component.picker.user.UserMultiSelector', {
 	//pageSize:3,
 	//emptyText:'请选择用户',
 	//editable:true,
-	//selectOnFocus:true,
 	//hiddenName:'users', //真正提交时的字段名称
 	listConfig:{
 		maxHeight:150,

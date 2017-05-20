@@ -6,5 +6,8 @@ Ext.define('BlogMgr.view.home.center.HomeIndexController',{
 	alias:'controller.home_index',
 	logout:function(){
 		window.location.href = '/blogmgr/logout.do';
+	},
+	ckEditor:function(){
+		Ext.create('BlogMgr.view.home.center.demo.CkeditorDemo').show();
 	}
 });

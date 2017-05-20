@@ -5,7 +5,8 @@ Ext.define('BlogMgr.view.home.center.HomeIndex',{
 	extend : 'Ext.panel.Panel',
 	id : 'homeIndex',
 	alias : ['widget.home_index'],
-	requires:['BlogMgr.view.home.center.HomeIndexController','BlogMgr.view.home.center.HomeIndexModel'],
+	requires:['BlogMgr.view.home.center.HomeIndexController','BlogMgr.view.home.center.HomeIndexModel',
+	          'BlogMgr.view.home.center.demo.CkeditorDemo'],
 	uses:['BlogMgr.component.picker.user.UserMultiSelector'],
 	title : '首页',
 	controller : 'home_index',
@@ -60,6 +61,16 @@ Ext.define('BlogMgr.view.home.center.HomeIndex',{
         margin: '0 0 10 0',
         html: 'height: 100'
     },{
-    	 xtype: 'user_multi_selector'
+    	xtype: 'panel',  
+    	items:{
+    	  xtype: 'user_multi_selector'
+    	}
+    },{
+    	  xtype: 'panel',  
+    	  items:{
+	    	 xtype: 'button',  
+	    	  text: '编辑', 
+	    	  handler:'ckEditor'
+    	  }
     }]
 });

@@ -11,7 +11,8 @@
 Ext.define('BlogMgr.component.picker.user.unit.UserSelectorDialog',{
 		alias : [ 'widget.user_selector_dialog' ],
 		requires : ['BlogMgr.component.picker.user.unit.UserSelectorDialogController',
-		            'BlogMgr.component.picker.user.unit.UserSelectorStore'],
+		            'BlogMgr.component.picker.user.unit.UserSelectorStore',
+		            'Ext.ux.SlidingPager'],
 		extend : 'Ext.window.Window',
 		layout : 'fit',
 		title : '请选择用户',
@@ -205,19 +206,19 @@ Ext.define('BlogMgr.component.picker.user.unit.UserSelectorDialog',{
 						width : '30%'
 					},{
 						header : '状态',
-					dataIndex : 'fStatus',
-					align : 'center',
-					sortable:false,
-					width : '30%',
-					renderer : function(val) {
-						if (val == 'ENABLE') {
-							return '<b style="color:green">可用</b>';
-						} else if (val == 'DISABLE') {
-							return '<b style="color:red">不可用</b>';
-						} else {
-							return '未知';
+						dataIndex : 'fStatus',
+						align : 'center',
+						sortable:false,
+						width : '30%',
+						renderer : function(val) {
+							if (val == 'ENABLE') {
+								return '<b style="color:green">可用</b>';
+							} else if (val == 'DISABLE') {
+								return '<b style="color:red">不可用</b>';
+							} else {
+								return '未知';
+							}
 						}
-					}
 				}],
 	        }]
 		}

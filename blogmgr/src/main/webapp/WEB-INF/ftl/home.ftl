@@ -14,6 +14,9 @@
 	<script type="text/javascript" src="framework/Ext/ext-theme-neptune/ext-theme-neptune.js"></script>
 	<script type="text/javascript" src="framework/Ext/ext-locale-zh_CN.js"></script>
 	<script type="text/javascript" src="app/Application.js?a=1"></script>  
+	
+	<!--ckeditor-->
+	<script type="text/javascript" src="plugin/ckeditor/ckeditor.js"></script> 
 </head>
 	<body></body>
 </html>
