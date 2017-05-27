@@ -6,7 +6,7 @@ Ext.define('BlogMgr.view.fun.FunctionHomeModel', {
 	alias : 'viewmodel.functionhome',
 	constructor : function() {  
 		this.callParent(arguments);  
-		var menus = BlogMgr.view.fun.MenuFactory.getToolBarMenu(null,'C0010006');
+		var menus = BlogMgr.factory.FunctionFactory.getToolBar(null,this.viewParentId);
 		Ext.apply(this.data, menus);
 	},
 	data:{}

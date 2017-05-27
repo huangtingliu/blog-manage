@@ -1,24 +1,23 @@
 /**
- * 菜单工厂，提供系统创建功能菜单时所要的数据
- * 
- * 弃用该类,请使用BlogMgr.factory.FunctionFactory代替
+ * extjs 组件创建工厂
  */
-Ext.define('BlogMgr.view.fun.MenuFactory', {
+Ext.define('BlogMgr.factory.FunctionFactory', {
 	// 静态变量或函数
 	statics : {
 		
 		/**
-		 * 创建一组工具栏按钮
+		 * 根据模块功能，创建一组工具栏按钮
 		 * @param funId 功能id
 		 * @param parentId 根据的上级编号，获取其下所有的功能
 		 * @return Object 
 		 * 例：{
-		 * 	toolBarMenus:[{},{}]
+		 * 	toolBar:[{},{}]
 		 * }
 		 */
-		getToolBarMenu:function(funId,parentId){	
+	    KEY_TOOLBAR:'toolBar', 
+		getToolBar:function(funId,parentId){	
 			 var result = {
-				 toolBarMenus:[]         
+				 toolBar:[]         
 			 };
 			 if(!(funId || parentId)){
 				 return result;
@@ -52,7 +51,7 @@ Ext.define('BlogMgr.view.fun.MenuFactory', {
 										disabled:disable,
 										xtype:'transparent_button'
 									};
-									result.toolBarMenus.push(item);
+									result.toolBar.push(item);
 				                });
 		                }
 		            },

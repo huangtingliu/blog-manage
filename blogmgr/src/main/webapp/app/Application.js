@@ -1,9 +1,11 @@
 /**
  * 博客后台管理应用启动配置
  */
+//资源加载 
 Ext.onReady(function() {
 	Ext.require([
 	             'BlogMgr.store.BaseDataStore',
+	             'BlogMgr.factory.FunctionFactory',
 	             'Ux.tabs.ReorderableTabs',
 				 'Ux.toast.ColorfulToast',
 				 'Ux.button.TransparentButton'
@@ -35,12 +37,16 @@ Ext.application({
 				Ext.require([
 					'BlogMgr.view.user.UserHome','BlogMgr.view.fun.FunctionHome',
 					'BlogMgr.view.auth.AuthHome','BlogMgr.view.loginlog.LoginLogHome',
-					'BlogMgr.view.debug.memo.SystemMemoHome','BlogMgr.view.debug.monitor.MonitorHome']);
+					'BlogMgr.view.debug.memo.SystemMemoHome','BlogMgr.view.debug.monitor.MonitorHome',
+					'BlogMgr.view.debug.developplan.DevelopPlanHome']);
 			},
 			launch : function(profile) {
+				
 				/**
+				 * 自定义静态方法
 				 * 获取完整路径
 				 * BlogMgr.url(url,param);
+				 * BlogMgr.baseData(property);
 				 */
 				Ext.applyIf(BlogMgr, {
 							url : function(url, param) {

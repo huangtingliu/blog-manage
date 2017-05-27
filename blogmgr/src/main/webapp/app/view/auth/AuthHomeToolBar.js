@@ -7,7 +7,8 @@ Ext.define('BlogMgr.view.auth.AuthHomeToolBar', {
 			alias : 'widget.authhome_toolbar',
 			initComponent : function() {
 				var viewModel = this.up('authhome').getViewModel();// 把ViewModel中生成的菜单items加到此toolbar的items中
-				this.items = viewModel.get('toolBarMenus').concat(this.items);
+				var key = BlogMgr.factory.FunctionFactory.KEY_TOOLBAR;
+				this.items = viewModel.get(key).concat(this.items);
 				this.callParent();
 			},
 			items : [{

@@ -9,5 +9,15 @@ Ext.define('BlogMgr.view.home.center.HomeIndexController',{
 	},
 	ckEditor:function(){
 		Ext.create('BlogMgr.view.home.center.demo.CkeditorDemo').show();
+	},
+	closeLastTab:function(){
+		var tabPanel = Ext.getCmp('home-center');
+		var tabTotal = tabPanel.items.length;
+		if(tabTotal != 1){
+			var lastTab = tabPanel.items.get(tabTotal-1);
+			tabPanel.remove(lastTab);
+		}
+		
 	}
+	
 });

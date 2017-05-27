@@ -9,11 +9,15 @@ Ext.define('BlogMgr.view.loginlog.LoginLogHome', {
 			extend : 'Ext.panel.Panel',
 			alias : ['widget.login_log_home'],
 			layout : 'fit',
+			initComponent:function(){
+				this.items.viewModel = {
+					type : 'login_log_home',
+					viewParentId:this.parentId
+				}
+				this.callParent(arguments); 
+			},
 			items : {
 				controller : 'login_log_home',
-				viewModel : {
-					type : 'login_log_home'
-				},
 				xtype : 'grid',
 				store : Ext.getStore('loginLogPagingStore'),
 				columnLines : true,

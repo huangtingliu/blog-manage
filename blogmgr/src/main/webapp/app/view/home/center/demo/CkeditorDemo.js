@@ -13,6 +13,9 @@ Ext.define('BlogMgr.view.home.center.demo.CkeditorDemo', {
 	items:{ 
 	   xtype:'form',
 	   layout:'anchor',  
+	   itemId : 'ckeditorDemoForm',
+	   url : '/blogmgr/debug/test/send.do',
+	   method : 'POST',
 	   defaults:{  
 	     margin:'10 10 10 10',  
 	 	},  
@@ -36,11 +39,19 @@ Ext.define('BlogMgr.view.home.center.demo.CkeditorDemo', {
 	buttons: [{  
         text: '保存',  
         name: 'newsSubmitBtn',  
+        handler:function(){
+			var form = this.ownerCt.ownerCt.getComponent("ckeditorDemoForm"); 
+			form.submit({
+				success : function(form, action) {},
+				failure : function(form, action) {},
+				waitMsg:' '
+			});
+		}
     }],
     listeners:{
 		resize:function(){
     		//当窗口的大小调整时，可以通知ckeditor来调整高度
-    		console.info("window resize ........");
+    		//console.info("window resize ........");
     	}
     
 	}

@@ -6,5 +6,16 @@ Ext.define('BlogMgr.view.debug.monitor.MonitorHome', {
 			extend : 'Ext.panel.Panel',
 			alias : ['widget.monitor_home'],
 			layout : 'fit',
-			html:'<a  href="/blogmgr/druid/sql.html" target="_blank">点击跳转</a>'
+			html:'',
+			listeners:{
+				afterrender  :function(){
+					window.open("/blogmgr/druid/sql.html");
+					setTimeout(function(){
+						var tabPanel = Ext.getCmp('home-center');
+						var tab = tabPanel.getActiveTab();
+						tabPanel.remove(tab);
+					},400);
+				}
+			
+			}
 		})

@@ -15,7 +15,9 @@ Ext.define('Ux.tabs.ReorderableTabsController', {
 									glyph : config.glyph,
 									layout : 'fit',
 									bodyPadding:0,
-									items : Ext.create(config.viewClass)
+									items : Ext.create(config.viewClass,{
+										parentId:config.id
+									})
 								});
 					} else {
 						tab = tabPanel.add({
@@ -30,9 +32,6 @@ Ext.define('Ux.tabs.ReorderableTabsController', {
 				}
 				tabPanel.setActiveTab(tab);
 			},
-			onClick : function() {
-			},
-			onRightClick : function() {
-
-			}
+			onClick : function() {},
+			onRightClick : function() {}
 		});

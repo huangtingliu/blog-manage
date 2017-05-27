@@ -11,11 +11,15 @@ Ext.define('BlogMgr.view.user.UserHome', {
 			extend : 'Ext.panel.Panel',
 			alias : ['widget.userhome'],
 			layout : 'fit',
+			initComponent:function(){
+				this.items.viewModel = {
+					type : 'userhome',
+					viewParentId:this.parentId
+				}
+				this.callParent(arguments); 
+			},
 			items : {
 				controller : 'userhome',
-				viewModel : {
-					type : 'userhome'
-				},
 				xtype : 'grid',
 				store : Ext.getStore('userPagingStore'),
 				columnLines : true,

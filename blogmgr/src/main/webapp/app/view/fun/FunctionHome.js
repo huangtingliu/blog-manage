@@ -11,8 +11,11 @@ Ext.define('BlogMgr.view.fun.FunctionHome', {
 					'BlogMgr.view.fun.FunctionHomeModel'],
 			layout : 'border',
 			controller : 'functionhome',
-			viewModel : {
-				type : 'functionhome'
+			initComponent:function(){
+			this.viewModel =Ext.create('BlogMgr.view.fun.FunctionHomeModel',{
+				viewParentId:this.parentId
+			});
+				this.callParent(arguments); 
 			},
 			items : [{
 						region : 'west',

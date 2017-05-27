@@ -11,11 +11,15 @@ Ext.define('BlogMgr.view.debug.memo.SystemMemoHome', {
 			extend : 'Ext.panel.Panel',
 			alias : ['widget.system_memo_home'],
 			layout : 'fit',
+			initComponent:function(){
+				this.items.viewModel = {
+					type : 'system_memo_home',
+					viewParentId:this.parentId
+				}
+				this.callParent(arguments); 
+			},
 			items : {
 				controller : 'system_memo_home',
-				viewModel : {
-					type : 'system_memo_home'
-				},
 				xtype : 'grid',
 				store : Ext.getStore('systemMemoPaginStore'),
 				columnLines : true,

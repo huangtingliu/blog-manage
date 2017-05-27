@@ -11,11 +11,16 @@ Ext.define('BlogMgr.view.auth.AuthHome',{
 	extend : 'Ext.panel.Panel',
 	alias:'widget.authhome',
 	controller:'authhome',
-	viewModel:'authhome',
 	layout : 'border',
 	height:'100%',
 	defaults:{
 		layout : 'fit'
+	},
+	initComponent:function(){
+		this.viewModel =Ext.create('BlogMgr.view.auth.AuthHomeModel',{
+			viewParentId:this.parentId
+		});
+		this.callParent(arguments); 
 	},
 	items:[
 	     {
