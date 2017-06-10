@@ -7,7 +7,8 @@ Ext.define('BlogMgr.view.home.center.HomeIndex', {
 	alias : [ 'widget.home_index' ],
 	requires : [ 'BlogMgr.view.home.center.HomeIndexController',
 			'BlogMgr.view.home.center.HomeIndexModel',
-			'BlogMgr.view.home.center.demo.CkeditorDemo' ],
+			'BlogMgr.view.home.center.demo.CkeditorDemo',
+			'Ext.ux.rating.Picker'],
 	uses : [ 'BlogMgr.component.picker.user.UserMultiSelector' ],
 	title : '首页',
 	controller : 'home_index',
@@ -20,7 +21,11 @@ Ext.define('BlogMgr.view.home.center.HomeIndex', {
 		pack : 'start',
 		align : 'stretch'
 	},
-	items : [ {
+	items : [{
+		xtype: 'rating',
+		selectedStyle: 'color: rgb(96, 169, 23);',
+		overStyle: 'color: rgb(23, 23, 189);'
+	}, {
 		xtype:'panel',
 		margin:10,
 		items:[{

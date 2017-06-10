@@ -1,0 +1,46 @@
+.ux-rating-picker {
+	overflow:hidden;
+	color:#ccc;
+	filter:alpha(opacity=80);
+	opacity:.8;
+	display:inline-block;
+	vertical-align:top;
+	line-height:1
+}
+.ux-rating-picker-inner {
+	position:relative;
+	overflow:hidden;
+	display:inline-block;
+	vertical-align:top;
+	cursor:pointer;
+	white-space:nowrap
+}
+.ux-rating-picker-over.ux-rating-picker-track-over {
+	color:#ccc
+}
+.ux-rating-picker-over.ux-rating-picker-track-over>*>.ux-rating-picker-value {
+	display:none;
+	width:0
+}
+.ux-rating-picker-over.ux-rating-picker-track-over>*>.ux-rating-picker-value:hover {
+	color:inherit
+}
+.ux-rating-picker-over.ux-rating-picker-track-over>*>.ux-rating-picker-tracker {
+	display:inline-block
+}
+.ux-rating-picker-value,.ux-rating-picker-tracker {
+	overflow:hidden;
+	position:absolute;
+	white-space:nowrap;
+	top:0;
+	width:0;
+	height:100%;
+	color:#ffe850
+}
+.ux-rating-picker-tracker {
+	display:none
+}
+.ux-rating-picker-over {
+	filter:alpha(opacity=100);
+	opacity:1
+}
