@@ -33,7 +33,10 @@ Ext.define('BlogMgr.view.home.center.demo.CkeditorDemo', {
             name: 'content', 
             height:300,
             anchor: '90% 85%',
-            id:'newsckeditor'
+            id:'newsckeditor',
+		   CKConfig:{
+		     	filebrowserUploadUrl:'/blogmgr/ckeditor/upload.do'
+		   }
 	   }]
 	},
 	buttons: [{  
