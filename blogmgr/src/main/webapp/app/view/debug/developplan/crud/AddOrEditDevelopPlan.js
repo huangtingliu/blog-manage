@@ -51,7 +51,10 @@ Ext.define('BlogMgr.view.debug.developplan.crud.AddOrEditDevelopPlan', {
 		            fieldLabel: '描述', 
 		            name: 'content', 
 		            height:200,
-		            anchor: '100%'
+		            anchor: '100%',
+					CKConfig:{
+				     	filebrowserUploadUrl:'/blogmgr/ckeditor/upload.do'
+				   }
 				}]
 			},{
 				title : '可添信息',

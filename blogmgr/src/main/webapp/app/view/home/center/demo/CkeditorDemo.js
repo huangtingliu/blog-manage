@@ -23,9 +23,15 @@ Ext.define('BlogMgr.view.home.center.demo.CkeditorDemo', {
 		   xtype: 'textfield',  
 	       name: 'title',  
 	       fieldLabel: '标题',  
-	       anchor:'90% 13%', 
+	       anchor:'90%', 
 	       labelAlign: 'right',  
 	       labelWidth: 100  
+	   },{
+		   xtype:'ratingfield',
+		   name:'ratingfield',
+		   fieldLabel: '等级', 
+		   anchor:'90%',
+		   labelAlign: 'right', 
 	   },{
 	   		xtype: 'ckeditor', 
             fieldLabel: '内容', 

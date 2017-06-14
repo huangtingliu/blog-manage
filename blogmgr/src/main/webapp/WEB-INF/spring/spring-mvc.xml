@@ -6,8 +6,11 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
 
-	<!-- <mvc:resources location="/,classpath:/META-INF/" mapping="/framework/**" 
-		/> -->
+	
+	<mvc:resources mapping="/framework/**" location="/framework/" />
+	<mvc:resources mapping="/app/**" location="/app/" /> 
+	<mvc:resources mapping="/plugin/**" location="/plugin/" /> 
+	<mvc:resources mapping="/resource/**" location="/resource/" />   
 
 	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
 

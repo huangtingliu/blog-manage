@@ -12,6 +12,7 @@
     <sec:http pattern="/**/*.gif" security="none"></sec:http>
     <sec:http pattern="/**/*.png" security="none"></sec:http> 
     <sec:http pattern="/**/*.js" security="none"></sec:http>
+    <sec:http pattern="/**/*.bmp" security="none"></sec:http>
     <sec:http pattern="/getCode" security="none" /><!-- 不过滤验证码 -->
     <sec:http pattern="/test/**" security="none"></sec:http><!-- 不过滤测试内容 -->
     <sec:http pattern="/login.htm" security="none" />  
@@ -25,6 +26,9 @@
      	always-use-default-target="true" 不管是直接请求登录页面，还是通过Spring Security引导过来的，登录之后都跳转到指定的页面
      -->
     <sec:http auto-config="true" use-expressions="true"  > 
+	    <sec:headers>
+	    	<sec:frame-options policy="SAMEORIGIN"/>
+	    </sec:headers>
     	<!-- 登录 --> 
 	        <sec:form-login login-page="/login.htm" 
 	        	password-parameter="password" username-parameter="account"
