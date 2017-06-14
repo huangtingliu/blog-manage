@@ -1,10 +1,15 @@
-Ext.define('BlogMgr.view.debug.developplan.crud.AddOrEditDevelopPlan', {
+Ext.define('BlogMgr.view.debug.developplan.crud.AddOrEditDevelopPlanForm', {
 			//id : 'AddOrEditDevelopPlan',
 			uses:['Ux.form.field.CKEditor',
+			      'BlogMgr.view.debug.developplan.crud.AddOrEditDevelopPlanFormController',
+			      'BlogMgr.view.debug.developplan.crud.EditDevelopPlanFormModel',
+			      'BlogMgr.view.debug.developplan.crud.AddDevelopPlanFormModel',
 			      'Ext.ux.rating.Picker'],
 			extend : 'Ext.form.Panel',
-			//alias : ['widget.add_or_edit_develop_plan'],
+			alias : ['widget.add_or_edit_develop_plan_form'],
 			//layout : 'fit',
+			controller:'add_or_edit_develop_plan_form',
+			//viewModel:'add_develop_plan_form', //根据状态来选择视图模型,add 或eidt
 			itemId:'developPlanForm',
 			url : '/blogmgr/user/add.do',
 			method : 'POST',
@@ -16,8 +21,9 @@ Ext.define('BlogMgr.view.debug.developplan.crud.AddOrEditDevelopPlan', {
 				defaultType : 'textfield'
 			},
 			items : [{
-				title : '必填信息',
+				//title : '必填信息',
 				xtype : 'fieldset',
+				border:false,
 				defaults : {
 					labelAlign : 'right',
 					labelWidth : 70,
@@ -29,7 +35,8 @@ Ext.define('BlogMgr.view.debug.developplan.crud.AddOrEditDevelopPlan', {
 					defaults : {
 						labelAlign : 'right',
 						labelWidth : 70,
-						width : '25%'
+						width : '30%',
+						padding:'10px 40px 10px 0px'
 					},
 					items : [{
 						fieldLabel : '计划名称',
@@ -41,7 +48,7 @@ Ext.define('BlogMgr.view.debug.developplan.crud.AddOrEditDevelopPlan', {
 						name:'accountType'
 					},{
 						fieldLabel : '任务级别',
-						xtype:'rating',
+						xtype:'ratingfield',
 						selectedStyle: 'color: rgb(96, 169, 23);',
 	                    overStyle: 'color: rgb(23, 23, 189);',
 						name:'accountType'
@@ -57,31 +64,36 @@ Ext.define('BlogMgr.view.debug.developplan.crud.AddOrEditDevelopPlan', {
 				   }
 				}]
 			},{
-				title : '可添信息',
+				//title : '可添信息',
 				xtype : 'fieldset',
+				border:false,
 				defaults : {
 					labelAlign : 'right',
 					labelWidth : 70,
-					allowBlank : false
+					allowBlank : true
 				},
 				items : [{
-					fieldLabel : '完成日期',
+					xtype:'datefield',
 					name:'accountType',
-					xtype:'datefield'
+					fieldLabel : '完成日期',
+					anchor: '20%',
 				},{
+					xtype:'filefield',
 					fieldLabel : '附件',
-					xtype:'filefield'
+					anchor: '25%'
 				}]
 			}],
 			buttons : [{
 				itemId : 'save',
-				text : '保存',
 				glyph : 0xe650,
-				handler:'userMgrDialogSubmit'
+				bind:{
+					text : '{handlerText}',
+					handler:'{saveHandler}'
+				}
 			}, {
 				itemId : 'close',
 				text : '关闭',
 				glyph : 0xe6af,
-				handler:'closeDialog'
+				handler:'{closeTab}'
 			}]
 		})

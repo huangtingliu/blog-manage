@@ -23,12 +23,12 @@ Ext.define('BlogMgr.view.debug.developplan.DevelopPlanHome',{
 			glyph:56484,
 			xtype : 'transparent_button',
 			text : '修改计划',
-			handler : 'ckEditor'
+			handler : 'editDevelopPlan'
 		},{
 			glyph:56484,
 			xtype : 'transparent_button',
 			text : '删除计划',
-			handler : 'ckEditor'
+			handler : 'deleteDevelopPlan'
 		},{
 			glyph:56484,
 			xtype : 'transparent_button',
