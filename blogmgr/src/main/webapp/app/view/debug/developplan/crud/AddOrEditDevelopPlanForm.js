@@ -11,7 +11,8 @@ Ext.define('BlogMgr.view.debug.developplan.crud.AddOrEditDevelopPlanForm', {
 			controller:'add_or_edit_develop_plan_form',
 			//viewModel:'add_develop_plan_form', //根据状态来选择视图模型,add 或eidt
 			itemId:'developPlanForm',
-			url : '/blogmgr/user/add.do',
+			fileUpload : false,
+			url : '/blogmgr/debug/developplan/add.do',
 			method : 'POST',
 			waitTitle:'处理中...',
 			buttonAlign:'center',
@@ -41,22 +42,22 @@ Ext.define('BlogMgr.view.debug.developplan.crud.AddOrEditDevelopPlanForm', {
 					items : [{
 						fieldLabel : '计划名称',
 						xtype:'textfield',
-						name:'accountType'
+						name:'fName'
 					},{
-						fieldLabel : '计划名称',
-						xtype:'textfield',
-						name:'accountType'
+						fieldLabel : '承接人',
+						xtype:'user_multi_selector',
+						name:'fAccptor'
 					},{
 						fieldLabel : '任务级别',
 						xtype:'ratingfield',
 						selectedStyle: 'color: rgb(96, 169, 23);',
 	                    overStyle: 'color: rgb(23, 23, 189);',
-						name:'accountType'
+						name:'fPriority'
 					}]
 				},{
 					xtype: 'ckeditor', 
 		            fieldLabel: '描述', 
-		            name: 'content', 
+		            name: 'fDescr', 
 		            height:200,
 		            anchor: '100%',
 					CKConfig:{
@@ -74,14 +75,17 @@ Ext.define('BlogMgr.view.debug.developplan.crud.AddOrEditDevelopPlanForm', {
 				},
 				items : [{
 					xtype:'datefield',
-					name:'accountType',
-					fieldLabel : '完成日期',
+					//name:'fEstimatedDate',
+					fieldLabel : '预计时间',
+					format:'Y-m-d H:i:s',
 					anchor: '20%',
-				},{
-					xtype:'filefield',
-					fieldLabel : '附件',
-					anchor: '25%'
-				}]
+				}
+//				,{
+//					xtype:'filefield',
+//					fieldLabel : '附件',
+//					anchor: '25%'
+//				}
+				]
 			}],
 			buttons : [{
 				itemId : 'save',
@@ -94,6 +98,6 @@ Ext.define('BlogMgr.view.debug.developplan.crud.AddOrEditDevelopPlanForm', {
 				itemId : 'close',
 				text : '关闭',
 				glyph : 0xe6af,
-				handler:'{closeTab}'
+				handler:'closeTab'
 			}]
 		})

@@ -43,4 +43,10 @@
 		<property name="systemMemoDao" ref="systemMemoDao"/>
 	</bean>
 	<bean id="systemMemoDao" class="com.huangtl.blogmgr.dao.impl.SystemMemoDaoImpl" parent="myBatisDao"/>
+	
+	<!-- 开发计划 -->
+	<bean id="developPlanService" class="com.huangtl.blogmgr.service.impl.DevelopPlanServiceImpl">
+		<property name="developPlanDao" ref="developPlanDao"></property>
+	</bean>
+	<bean id="developPlanDao" class="com.huangtl.blogmgr.dao.impl.DevelopPlanDaoImpl" parent="myBatisDao"/>
 </beans>

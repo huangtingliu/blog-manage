@@ -8,12 +8,30 @@ Ext.define('BlogMgr.view.debug.developplan.crud.AddOrEditDevelopPlanFormControll
 						});
 			},
 			addPlanSubmit:function(){
-				Ext.toast("新增开发计划，未开发");
+				 var me = this;
+					var form = this.getView();
+					
+					form.submit({
+								submitEmptyText:false,
+								success : function(form, action) {
+									Ext.toast(action.result);
+									//Ext.getStore('systemMemoPaginStore').reload();
+									me.closeTab();
+								},
+								failure : function(form, action) {
+									if(action.result){
+										Ext.toast(action.result);
+									}
+								},
+								waitMsg:' '
+							});
 			},
 			editPlanSubmit:function(){
 				Ext.toast("修改开发计划，未开发");
 			},
 			closeTab:function(){
-				Ext.toast("关闭表单，未开发");
+				var tabpanel = this.getView().findParentByType("tabpanel");
+				var activeTab = tabpanel.getActiveTab();
+				tabpanel.remove(activeTab);
 			}
 });

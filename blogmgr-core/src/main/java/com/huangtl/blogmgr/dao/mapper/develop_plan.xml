@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huangtl.blogmgr.model.blog.DevelopPlan">
+
+	<resultMap id="mapper" type="com.huangtl.blogmgr.model.blog.DevelopPlan" >
+		<id property="fId" column="dplan_id"/>
+		<result property="fName" column="dplan_name"/>
+		<result property="fPriority" column="dplan_priority" />
+		<result property="fDescr" column="dplan_descr"/>
+		<result property="fFinishDate" column="dplan_finish_date"/>
+		<result property="fProgress" column="dplan_progress"/>
+		<result property="fPlanStauts" column="dplan_status"/>
+		<result property="fCreateDate" column="dplan_create_date"/>
+		<result property="fEstimatedDate" column="dplan_estimated_date"/>
+		<result property="fCreateUser" column="uid_create_user"/>
+		<result property="fPlanTerminator" column="uid_plan_terminator"/>
+	</resultMap>
+	
+	<sql id="field">
+		dplan_id ,dplan_name ,dplan_priority,dplan_descr,dplan_finish_date,dplan_progress,dplan_status,
+		dplan_create_date,dplan_estimated_date,uid_create_user,uid_plan_terminator
+	</sql>
+	
+	<sql id="where">
+		 <trim prefix="where" prefixOverrides="and|or">
+		 	<if test="defaultWhere!=null and defaultWhere">
+		 		1=1
+		 	</if>
+		</trim>
+	</sql>
+	
+	<sql id="order">
+		<if test="sorts != null and sorts.size() != 0">
+			order by 
+			<foreach collection="sorts" separator="," index="key" item="val">
+				${key} ${val}
+			</foreach>
+		</if>
+	</sql>
+	
+	<insert id="insert" parameterType="com.huangtl.blogmgr.model.blog.DevelopPlan">
+		insert into debug_develop_plan(
+			dplan_id ,dplan_name ,dplan_priority,dplan_descr,dplan_finish_date,dplan_progress,dplan_status,
+			dplan_create_date,dplan_estimated_date,uid_create_user,uid_plan_terminator
+		) values(
+			#{fId},#{fName},#{fPriority},#{fDescr},#{fFinishDate},#{fProgress},#{fPlanStauts},#{fCreateDate},
+			#{fEstimatedDate},#{fCreateUser},#{fPlanTerminator}
+		);
+	</insert>
+	
+	<!-- <select id="selectList" resultMap="mapper" parameterType="map">
+		select 
+			<include refid="field"/>
+		from sys_LoginLog
+			<include refid="where"/>
+	</select>
+	
+	<select id="selectCount"  resultType="long" parameterType="map">
+	  select count(login_id)
+	  from sys_LoginLog
+		<include refid="where"/>
+	</select>
+	
+	<select id="selectPaging" resultMap="mapper" parameterType="map">
+		select 
+			<include refid="field"/>
+		from sys_LoginLog a
+		left join (
+			select ui_Id as uid, ui_Name, ui_Account  from mgr_userinfo
+		)b on a.ui_id = b.uid
+			<include refid="where"/>
+			<include refid="order"/>
+		limit #{startIndex},#{pageSize}
+	</select> -->
+	
+</mapper>

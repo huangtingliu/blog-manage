@@ -41,8 +41,8 @@
 		<property name="maxUploadSizePerFile" value="10000000"></property> <!-- 单个文件大小不超过5M -->
 		<property name="maxInMemorySize" value="40960"></property>
 	</bean>
-	<bean
-		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
+	</bean>
 
 	<!-- 
 	  1.如果返回String             就不变
@@ -70,6 +70,14 @@
 			</list>
 		</property>
 	</bean>
+	<!--   <mvc:annotation-driven conversion-service="conversionService"/>
+	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">    
+        <property name="converters">    
+             <list>    
+                <bean class="com.huangtl.blogmgr.core.spring.DateConverter" />    
+            </list>   
+        </property>    
+    </bean>   -->
 
 	<!-- 拦截器 -->
 	<mvc:interceptors>

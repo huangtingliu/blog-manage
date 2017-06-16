@@ -24,7 +24,7 @@ public interface FunctionService {
 	 * @param function
 	 * @return Message
 	 */
-	public Message addFunction(Function function);
+	 Message addFunction(Function function);
 	
 	/**
 	 * 修改一个系统功能<br>
@@ -33,7 +33,7 @@ public interface FunctionService {
 	 * @param where 更新条件
 	 * @return Message
 	 */
-	public Message editFunction(Function function,FunctionSqlWhere where);
+	 Message editFunction(Function function,FunctionSqlWhere where);
 	
 	/**
 	 * 根据fId批量的修改系统功能
@@ -41,13 +41,13 @@ public interface FunctionService {
 	 * @param functions
 	 * @return 影响的记录数
 	 */
-	public Message editBatchFunction(List<Function> functions);
+	 Message editBatchFunction(List<Function> functions);
 	
 	/**
 	 * 根据fId删除系统功能
 	 * @param fId
 	 * @return
 	 */
-	public Message deleteFunction(String... fId);
+	 Message deleteFunction(String... fId);
 	
 }
