@@ -3,30 +3,57 @@
  */
 Ext.define('BlogMgr.view.debug.developplan.view.GroupingGridView', {
 	requires : ['Ux.button.TransparentButton',
-	            'Ext.grid.filters.Filters'],
+	            'Ext.grid.filters.Filters',
+	            'Ext.ux.rating.Picker',
+	            'Ext.grid.feature.Grouping'],
 	extend : 'Ext.grid.Panel',
 	alias : ['widget.developplan_grouping_grid'],
 	layout : 'fit',
-//	constructor:function(){
-//		this.callParent(arguments); 
-//	},
-//	initComponent:function(){
-//		this.callParent();
-//	},
-	store: Ext.getStore('DevelopPlanPagingStore'),
+
+	initComponent:function(){
+		var store = Ext.create('BlogMgr.store.DevelopPlanPagingStore',{
+			groupField: 'groupingDate'
+		});
+		Ext.apply(this, {
+			store:store,
+			dockedItems : [{
+				xtype : 'pagingtoolbar',
+				store : store,
+				dock : 'bottom',
+				displayInfo : true
+			}]
+	 	});
+		this.callParent();
+	},
 	autoLoad : true,
 	rowLines : true,
+	columnLines : true,
 	scrollable : true,
+	features: [{
+	    ftype: 'grouping',
+	  //  groupHeaderTpl: '{columnName}: {name} ({rows.length} Item{[values.rows.length > 1 ? "s" : ""]})',
+	    groupHeaderTpl: '{name} ( {rows.length} 个)',
+	    hideGroupedHeader: true,
+	    startCollapsed: false,
+	    enableGroupingMenu:false
+	}],
 	columns : [{
 		header : '计划名称',
 		dataIndex : 'fName',
 		sortable:false,
+		hideable:false,
 		width : '15%'
 	}, {
 		header : '任务级别',
+		xtype: 'widgetcolumn',
 		dataIndex : 'fPriority',
-		sortable:false,
-		width : '14%'
+		hideable:false,
+		sortable:true,
+		width : '14%',
+		widget: {
+		  xtype: 'rating',
+		  scale:'170%',
+		}
 	}, {
 		header : '预计时间',
 		dataIndex : 'fEstimatedDate',
@@ -50,6 +77,7 @@ Ext.define('BlogMgr.view.debug.developplan.view.GroupingGridView', {
 		xtype: 'actioncolumn',
 		width : '10%',
 		sortable: false,
+		hideable:false,
 		align:'center',
 		menuDisabled: true,
 		items: [{
@@ -61,11 +89,5 @@ Ext.define('BlogMgr.view.debug.developplan.view.GroupingGridView', {
 	    	 iconCls:'img-icon-detail',
 	    	 scope: this
 	    }]
-	}],
-	dockedItems : [{
-		xtype : 'pagingtoolbar',
-		store : Ext.getStore('DevelopPlanPagingStore'),
-		dock : 'bottom',
-		displayInfo : true
-	}],
+	}]
 });

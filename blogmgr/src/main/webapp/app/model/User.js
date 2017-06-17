@@ -14,6 +14,7 @@ Ext.define('BlogMgr.model.User',{
 		{name:'fEmail',type:'string'},
 		{name:'fCreater',type:'string'},
 		{name:'fCreateDate',type:'date',convert:function(val){
+			if(Ext.isEmpty(val)){return'';}
 			return Ext.Date.format(new Date(val),'Y-m-d H:i:s');
 		}}
 	],

@@ -9,15 +9,29 @@ Ext.define('BlogMgr.model.debug.DevelopPlan',{
 		{name:'fName',type:'string'},
 		{name:'fPriority',type:'int'},
 		{name:'fDescr',type:'string'},
-		{name:'fFinishDate',type:'date'},
+		{name:'fFinishDate',type:'date',convert:function(val){
+			if(Ext.isEmpty(val)){return'';}
+			return Ext.Date.format(new Date(val),'Y-m-d H:i:s');
+		}},
 		{name:'fCreateUser',type:'string'},
-		{name:'fCreateDate',type:'date'},
+		{name:'fCreateDate',type:'date',convert:function(val){
+			if(Ext.isEmpty(val)){return'';}
+			return Ext.Date.format(new Date(val),'Y-m-d H:i:s');
+		}},
 		{name:'fProgress',type:'int'},
 		{name:'fPlanStauts',type:'string'},
-		{name:'fEstimatedDate',type:'date'},  //预计时间
+		{name:'fEstimatedDate',type:'date',convert:function(val){
+			if(Ext.isEmpty(val)){return'';}
+			return Ext.Date.format(new Date(val),'Y-m-d');
+		}},  //预计时间
 		{name:'fPlanTerminator',type:'string'},
 		{name:'planTerminatorName',type:'string'},
-		{name:'createUserName',type:'string'}
+		{name:'createUserName',type:'string'},
+		{name:'groupingDate',type:'string',convert:function(val,record){
+			var groupingDate = record.data.fCreateDate;
+			if(Ext.isEmpty(groupingDate)){return'';}
+			return Ext.Date.format(new Date(groupingDate),'Y-m-d');
+		}}
 	],
 	validators: {
 		fId: 'presence',
