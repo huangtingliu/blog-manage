@@ -51,6 +51,19 @@
 	  5.如果返回 Object(其于的类型)  就转成json
 	 -->
 	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		 <property name="webBindingInitializer">
+			 <bean class="org.springframework.web.bind.support.ConfigurableWebBindingInitializer">  
+			  	 <property name="conversionService" >
+			  	 	<bean class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+				  	 	<property name="converters">    
+				             <list>    
+				                <bean class="com.huangtl.blogmgr.core.spring.StringToDateConverter" />    
+				            </list>   
+				        </property> 
+			  	 	</bean>
+			  	 </property>
+			  </bean>  
+		</property>  
 		<property name="messageConverters">
 			<list>
 				<bean class="org.springframework.http.converter.StringHttpMessageConverter">
@@ -67,18 +80,11 @@
 				<bean class="com.huangtl.blogmgr.core.spring.resolver.JsonArgumentResolver"/>
 				<bean class="com.huangtl.blogmgr.core.spring.resolver.FiltersArgumentResolver"/>
 				<bean class="com.huangtl.blogmgr.core.spring.resolver.SortArgumentResolver"/>
+				<bean class="com.huangtl.blogmgr.core.spring.resolver.DateArgumentResolver"/>
 			</list>
 		</property>
 	</bean>
-	<!--   <mvc:annotation-driven conversion-service="conversionService"/>
-	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">    
-        <property name="converters">    
-             <list>    
-                <bean class="com.huangtl.blogmgr.core.spring.DateConverter" />    
-            </list>   
-        </property>    
-    </bean>   -->
-
+	  
 	<!-- 拦截器 -->
 	<mvc:interceptors>
 		<!-- 多数据源切换拦截器 -->

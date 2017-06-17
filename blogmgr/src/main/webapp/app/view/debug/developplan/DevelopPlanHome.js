@@ -3,7 +3,10 @@
  */
 Ext.define('BlogMgr.view.debug.developplan.DevelopPlanHome',{
 	id : 'developPlanHome',
-	uses:['BlogMgr.view.debug.developplan.DevelopPlanHomeController'],
+	uses:['BlogMgr.view.debug.developplan.DevelopPlanHomeController',
+	      'BlogMgr.view.debug.developplan.view.GroupingGridView',
+	      'BlogMgr.view.debug.developplan.view.ScheduleView',
+	      'BlogMgr.view.debug.developplan.view.DataView'],
 	requires : ['Ux.button.TransparentButton'],
 	extend : 'Ext.panel.Panel',
 	alias : ['widget.develop_plan_home'],
@@ -32,14 +35,17 @@ Ext.define('BlogMgr.view.debug.developplan.DevelopPlanHome',{
 		},{
 			glyph:56484,
 			xtype : 'transparent_button',
-			text : '显示',
-			 menu: [{
-	             text:'普通'
-	         },{
-	             text:'按日期'
-	         },{
-	             text:'按人员'
-	         }]
+			text:'视图',
+			menu: [{
+	             text:'分组表',
+	             handler:'selectGroupingGridView'
+	        },{
+	             text:'日程表',
+	             handler:'selectScheduleView'
+	        },{
+	             text:'数据表',
+	             handler:'selectDataView'
+	        }]
 		}]
 	}, {
 		region : 'center',
@@ -57,7 +63,18 @@ Ext.define('BlogMgr.view.debug.developplan.DevelopPlanHome',{
 		items:[{
 			title:'我的计划',
 			closable : false,
-			html:"侍开发"
+			layout: 'card',
+			bodyPadding:0,
+			defaults:{
+				border:false
+			},
+			items:[{
+				xtype:'developplan_grouping_grid'
+			},{
+				xtype:'developplan_schedule'
+			},{
+				xtype:'developplan_dataview'
+			}]
 		}]
 	}]
 });

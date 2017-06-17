@@ -75,7 +75,7 @@ Ext.define('BlogMgr.view.debug.developplan.crud.AddOrEditDevelopPlanForm', {
 				},
 				items : [{
 					xtype:'datefield',
-					//name:'fEstimatedDate',
+					name:'fEstimatedDate',
 					fieldLabel : '预计时间',
 					format:'Y-m-d H:i:s',
 					anchor: '20%',

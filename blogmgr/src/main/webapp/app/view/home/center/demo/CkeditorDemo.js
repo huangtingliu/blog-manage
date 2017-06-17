@@ -33,6 +33,12 @@ Ext.define('BlogMgr.view.home.center.demo.CkeditorDemo', {
 		   anchor:'90%',
 		   labelAlign: 'right', 
 	   },{
+		   xtype:'datefield',
+			name:'fEstimatedDate',
+			fieldLabel : '预计时间',
+			format:'Y-m-d H:i:s',
+			anchor: '90%',
+	   },{
 	   		xtype: 'ckeditor', 
             fieldLabel: '内容', 
             labelAlign: 'right',

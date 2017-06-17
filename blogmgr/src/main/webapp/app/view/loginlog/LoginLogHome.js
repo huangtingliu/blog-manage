@@ -84,10 +84,10 @@ Ext.define('BlogMgr.view.loginlog.LoginLogHome', {
 					//xtype : 'userhome_toolbar'
 				},
 				dockedItems : [{
-							xtype : 'pagingtoolbar',
-							store : Ext.getStore('loginLogPagingStore'),
-							dock : 'bottom',
-							displayInfo : true
-						}],
+					xtype : 'pagingtoolbar',
+					store : Ext.getStore('loginLogPagingStore'),
+					dock : 'bottom',
+					displayInfo : true
+				}],
 			}
 		})

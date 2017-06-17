@@ -52,7 +52,7 @@
     <logger name="com.huangtl.blogmgr.dao" level="debug" ></logger>
     <logger name="com.huangtl.blogmgr.model" level="debug" ></logger>
     <logger name="com.huangtl.blogmgr.handler" level="debug" ></logger> 
-    <logger name="com.huangtl.blogmgr.core" level="debug" ></logger>
+    <!-- <logger name="com.huangtl.blogmgr.core" level="debug" ></logger> -->
     <!--<logger name="druid.statlog" level="info" ></logger>-->
     
     <!-- level: TRACE, DEBUG, INFO, WARN, ERROR, ALL , OFF .默认是DEBUG -->

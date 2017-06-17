@@ -50,5 +50,35 @@ Ext.define('BlogMgr.view.debug.developplan.DevelopPlanHomeController', {
 	 */
 	deleteDevelopPlan:function(){
 		Ext.toast("删除开发计划未开发");
+	},
+	/**
+	 * 切换到视图表
+	 */
+	selectGroupingGridView:function(){
+		this.doSelectView(0);
+	},
+	/**
+	 * 切换到日程表视图
+	 */
+	selectScheduleView:function(){
+		 this.doSelectView(1);
+	},
+	/**
+	 * 切换到数据图
+	 */
+	selectDataView:function(){
+		 this.doSelectView(2);
+	},
+	privates:{
+		/*
+		 * 做切换视图的动作
+		 */
+		doSelectView: function (incr) {
+	        var me = this;
+	       var developPlanHome =  this.getView();
+	       var developPlanTab = developPlanHome.down('tabpanel');
+	       var cardPanel = developPlanTab.items.first(); 
+	       cardPanel.setActiveItem(incr);
+    	}
 	}
 });

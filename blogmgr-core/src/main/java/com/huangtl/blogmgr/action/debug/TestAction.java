@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
 @Controller
 @RequestMapping("/debug/test")
 public class TestAction {
@@ -16,7 +15,7 @@ public class TestAction {
 	@RequestMapping("send.do")
 	@ResponseBody
 	public Object getMemo(String content){
-		logger.debug(content);
+		logger.debug("{}",content);
 		return "{}";
 	}
 	

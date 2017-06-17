@@ -14,12 +14,17 @@ Ext.define('BlogMgr.view.home.left.NavigatorMenuController',{
     		//Ext.toast("当前功能被禁用了！");
     		return;
     	}
+    	var funGlyph = record.get('funGlyph')?record.get('funGlyph'): 58917;
+    	
         this.onLink({
         	id:record.get('fFunId'),
         	icon:record.get('funIcon'),
         	title:record.get('funName'),
         	viewClass:record.get('funHandler'),
-        	glyph:record.get('funGlyph')
+        	glyph:funGlyph,
+	        html:'<div style="position: absolute;top: 41%;left: 45%;">'+
+	        		'<i style="font-size:150px;color:gray" class="iconfont ">&#'+funGlyph+
+	        	'<br><span style="font-size:60px">未开发</span></i><div>'
         });
     },
     onLink:function(item){
