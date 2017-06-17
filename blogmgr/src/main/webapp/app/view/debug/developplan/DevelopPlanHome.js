@@ -61,7 +61,7 @@ Ext.define('BlogMgr.view.debug.developplan.DevelopPlanHome',{
 	        border: false
 	    },
 		items:[{
-			title:'我的计划',
+			title:'计划查看',
 			closable : false,
 			layout: 'card',
 			bodyPadding:0,

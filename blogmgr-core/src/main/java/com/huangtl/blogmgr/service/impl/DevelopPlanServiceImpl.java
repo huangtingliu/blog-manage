@@ -20,4 +20,9 @@ public class DevelopPlanServiceImpl implements DevelopPlanService {
 	public void setDevelopPlanDao(DevelopPlanDao developPlanDao) {
 		this.developPlanDao = developPlanDao;
 	}
+
+	@Override
+	public DevelopPlanDao getDao() {
+		return developPlanDao;
+	}
 }

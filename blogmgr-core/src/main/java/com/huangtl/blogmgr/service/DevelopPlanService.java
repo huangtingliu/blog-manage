@@ -1,5 +1,6 @@
 package com.huangtl.blogmgr.service;
 
+import com.huangtl.blogmgr.dao.DevelopPlanDao;
 import com.huangtl.blogmgr.model.blog.DevelopPlan;
 import com.huangtl.blogmgr.model.common.Message;
 
@@ -16,4 +17,6 @@ public interface DevelopPlanService {
 	 * @return
 	 */
 	Message addDevelopPlan(DevelopPlan plan);
+	
+	DevelopPlanDao getDao();
 }

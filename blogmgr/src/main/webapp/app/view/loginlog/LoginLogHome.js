@@ -3,6 +3,7 @@
  */
 Ext.define('BlogMgr.view.loginlog.LoginLogHome', {
 			id : 'loginLogHome',
+			uses:['BlogMgr.view.loginlog.LoginLogHomeModel'],
 			requires : ['Ux.button.TransparentButton',
 			           'BlogMgr.view.loginlog.LoginLogHomeController',
 			           'Ext.grid.filters.Filters'],
@@ -80,9 +81,9 @@ Ext.define('BlogMgr.view.loginlog.LoginLogHome', {
 //								dateFormat : 'Y-m-d'
 //							}
 						}],
-				tbar : {
-					//xtype : 'userhome_toolbar'
-				},
+//				tbar : {
+//					//xtype : 'userhome_toolbar'
+//				},
 				dockedItems : [{
 					xtype : 'pagingtoolbar',
 					store : Ext.getStore('loginLogPagingStore'),

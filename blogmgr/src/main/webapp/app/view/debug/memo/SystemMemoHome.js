@@ -21,7 +21,7 @@ Ext.define('BlogMgr.view.debug.memo.SystemMemoHome', {
 			items : {
 				controller : 'system_memo_home',
 				xtype : 'grid',
-				store : Ext.getStore('systemMemoPaginStore'),
+				store : Ext.getStore('SystemMemoPaginStore'),
 				columnLines : true,
 				autoLoad : true,
 				scrollable : true,
@@ -57,7 +57,7 @@ Ext.define('BlogMgr.view.debug.memo.SystemMemoHome', {
 				},
 				dockedItems : [{
 							xtype : 'pagingtoolbar',
-							store : Ext.getStore('systemMemoPaginStore'),
+							store : Ext.getStore('SystemMemoPaginStore'),
 							dock : 'bottom',
 							displayInfo : true,
 							items : []

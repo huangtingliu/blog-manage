@@ -20,7 +20,7 @@ Ext.define('BlogMgr.view.debug.memo.mgr.SystemMemoMgrDialogController', {
 								submitEmptyText:false,
 								success : function(form, action) {
 									Ext.toast(action.result);
-									Ext.getStore('systemMemoPaginStore').reload();
+									Ext.getStore('SystemMemoPaginStore').reload();
 									me.closeDialog();
 								},
 								failure : function(form, action) {

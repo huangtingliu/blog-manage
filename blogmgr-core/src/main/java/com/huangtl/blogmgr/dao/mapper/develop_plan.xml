@@ -16,11 +16,15 @@
 		<result property="fEstimatedDate" column="dplan_estimated_date"/>
 		<result property="fCreateUser" column="uid_create_user"/>
 		<result property="fPlanTerminator" column="uid_plan_terminator"/>
+		
+		<result property="planTerminatorName" column="planTerminatorName"/>
+		<result property="createUserName" column="createUserName"/>
 	</resultMap>
 	
 	<sql id="field">
-		dplan_id ,dplan_name ,dplan_priority,dplan_descr,dplan_finish_date,dplan_progress,dplan_status,
-		dplan_create_date,dplan_estimated_date,uid_create_user,uid_plan_terminator
+		dplan_id ,dplan_name ,dplan_priority,dplan_finish_date,dplan_progress,dplan_status,
+		dplan_create_date as fCreateDate,dplan_estimated_date,uid_create_user,uid_plan_terminator
+		<if test="fDescr_show">,dplan_descr</if>
 	</sql>
 	
 	<sql id="where">
@@ -55,24 +59,27 @@
 			<include refid="field"/>
 		from sys_LoginLog
 			<include refid="where"/>
-	</select>
+	</select> -->
 	
 	<select id="selectCount"  resultType="long" parameterType="map">
-	  select count(login_id)
-	  from sys_LoginLog
+	  select count(dplan_id)
+	  from debug_develop_plan
 		<include refid="where"/>
 	</select>
 	
 	<select id="selectPaging" resultMap="mapper" parameterType="map">
 		select 
 			<include refid="field"/>
-		from sys_LoginLog a
+		from debug_develop_plan a
 		left join (
-			select ui_Id as uid, ui_Name, ui_Account  from mgr_userinfo
-		)b on a.ui_id = b.uid
+			select ui_Id as buid, ui_Name as createUserName  from mgr_userinfo
+		)b on a.uid_create_user = b.buid
+		left join(
+			select ui_Id as cuid, ui_Name as planTerminatorName  from mgr_userinfo
+		)c on a.uid_plan_terminator = c.cuid
 			<include refid="where"/>
 			<include refid="order"/>
 		limit #{startIndex},#{pageSize}
-	</select> -->
+	</select> 
 	
 </mapper>
