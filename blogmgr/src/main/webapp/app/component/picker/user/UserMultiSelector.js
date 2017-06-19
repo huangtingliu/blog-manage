@@ -14,7 +14,7 @@ Ext.define('BlogMgr.component.picker.user.UserMultiSelector', {
 	multiSelect:true,
 	minChars:1, //输出1个字后就开始查询
 	delimiter:',', //分割符
-	//pageSize:3,
+	//pageSize:6,
 	//emptyText:'请选择用户',
 	//editable:true,
 	//hiddenName:'users', //真正提交时的字段名称

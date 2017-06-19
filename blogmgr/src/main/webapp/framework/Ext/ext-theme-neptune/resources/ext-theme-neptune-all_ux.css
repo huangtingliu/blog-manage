@@ -1,3 +1,4 @@
+/*------------------------------------------------rating组件*/
 .ux-rating-picker {
 	overflow:hidden;
 	color:#ccc;
@@ -43,4 +44,91 @@
 .ux-rating-picker-over {
 	filter:alpha(opacity=100);
 	opacity:1
+}
+
+/*------------------------------------------------操作消息提示*/
+/*toast-info */
+.overrides-toast-info{}
+.overrides-toast-info.x-window-body-default{
+	background-color:rgba(183, 227, 256, 0.4);
+}
+.overrides-toast-info .x-autocontainer-outerCt{
+	letter-spacing:0.5px;
+	font-weight:bold;
+}
+/*toast-success */
+.overrides-toast-success{}
+.overrides-toast-success.x-window-default{
+	border-color:rgba(38, 185, 154, 0.88)
+}
+.overrides-toast-success.x-window-header-default{
+	border-color:rgba(38, 200, 154, 0.88)
+}
+.overrides-toast-success.x-window-header-default-top{
+	background-color:rgba(38, 185, 154, 0.88)
+}
+.overrides-toast-success.x-window-body-default{
+	border-color:rgba(38, 185, 154, 0.88);
+	background-color:rgba(90, 200, 150, 0.2);
+}
+.overrides-toast-success .x-autocontainer-outerCt{
+	letter-spacing:0.5px;
+	font-weight:bold;
+}
+/*toast-warn */
+.overrides-toast-warn{}
+.overrides-toast-warn.x-window-default{
+	border-color:rgba(243, 156, 18, 0.88)
+}
+.overrides-toast-warn.x-window-header-default{
+	border-color:rgba(243, 171, 18, 0.88)
+}
+.overrides-toast-warn.x-window-header-default-top{
+	background-color:rgba(243, 156, 18, 0.88)
+}
+.overrides-toast-warn.x-window-body-default{
+	border-color:rgba(243, 156, 18, 0.88);
+	background-color:rgba(243, 156, 18, 0.1);
+}
+.overrides-toast-warn .x-autocontainer-outerCt{
+	letter-spacing:0.5px;
+	font-weight:bold;
+}
+/*toast-error */
+.overrides-toast-error{}
+.overrides-toast-error.x-window-default{
+	border-color:rgba(231, 76, 60, 0.88)
+}
+.overrides-toast-error.x-window-header-default{
+	border-color:rgba(231, 103, 60, 0.88)
+}
+.overrides-toast-error.x-window-header-default-top{
+	background-color:rgba(231, 76, 60, 0.88)
+}
+.overrides-toast-error.x-window-body-default{
+	border-color:rgba(231, 76, 60, 0.88);
+	background-color:rgba(231, 76, 60, 0.1);
+}
+.overrides-toast-error .x-autocontainer-outerCt{
+	letter-spacing:0.5px;
+	font-weight:bold;
+}
+/*toast-exception */
+.overrides-toast-exception{}
+.overrides-toast-exception.x-window-default{
+	border-color:rgba(52, 73, 94, 0.88)
+}
+.overrides-toast-exception.x-window-header-default{
+	border-color:rgba(66, 96, 116, 0.88)
+}
+.overrides-toast-exception.x-window-header-default-top{
+	background-color:rgba(52, 73, 94, 0.88)
+}
+.overrides-toast-exception.x-window-body-default{
+	border-color:rgba(52, 73, 94, 0.88);
+	background-color:rgba(52, 73, 94, 0.1);
+}
+.overrides-toast-exception .x-autocontainer-outerCt{
+	letter-spacing:0.5px;
+	font-weight:bold;
 }

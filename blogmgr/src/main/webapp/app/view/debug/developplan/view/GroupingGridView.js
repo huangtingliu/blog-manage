@@ -5,11 +5,12 @@ Ext.define('BlogMgr.view.debug.developplan.view.GroupingGridView', {
 	requires : ['Ux.button.TransparentButton',
 	            'Ext.grid.filters.Filters',
 	            'Ext.ux.rating.Picker',
+	            'BlogMgr.view.debug.developplan.view.GroupingGridViewController',
 	            'Ext.grid.feature.Grouping'],
 	extend : 'Ext.grid.Panel',
 	alias : ['widget.developplan_grouping_grid'],
 	layout : 'fit',
-
+	controller:'dph_grouping_grid_view',
 	initComponent:function(){
 		var store = Ext.create('BlogMgr.store.DevelopPlanPagingStore',{
 			storeId:'groupingGridViewStore',
@@ -53,17 +54,18 @@ Ext.define('BlogMgr.view.debug.developplan.view.GroupingGridView', {
 	    enableGroupingMenu:false
 	}],
 	columns : [{
-		xtype: "actioncolumn",
-	    dataIndex: "done",
+	    dataIndex: "fPlanStauts",
 	    cls: "ux-icon-column-header tasks-done-column-header",
 	    width: 24,
 	    menuDisabled: true,
 	    sortable: false,
-		items: [{
-	        tooltip: '点击完成',
-	        iconCls:'img-icon-task-start',
-	        scope: this
-	    }]
+	    renderer:function(val){
+			if('ENABLE'==val){
+				return '<div style="width:16px;height:16px;margin:3px 0px 0px -6px" class="img-icon-task-start"></div>'
+			}else{
+				return '<div style="width:16px;height:16px;margin:3px 0px 0px -6px" class="img-icon-task-finished"></div>'
+			}
+		}
 	},{
 		text : '计划名称',
 		dataIndex : 'fName',
@@ -101,5 +103,8 @@ Ext.define('BlogMgr.view.debug.developplan.view.GroupingGridView', {
 		align : 'center',
 		sortable:false,
 		width : '15%'
-	}]
+	}],
+	listeners:{
+		cellclick:'gridViewTaskFinished'
+	}
 });

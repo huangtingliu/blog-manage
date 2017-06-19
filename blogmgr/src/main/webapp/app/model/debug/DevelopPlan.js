@@ -37,7 +37,7 @@ Ext.define('BlogMgr.model.debug.DevelopPlan',{
 		fId: 'presence',
 		fPriority: {type:'range',min:1,max:5},
 		fName: 'presence',
-		fPlanStauts: {type:'inclusion',list:['ENABLE','DISABLE','DELETE']},
+		fPlanStauts: {type:'inclusion',list:['ENABLE','DISABLE','DELETE','FINISHED']},
 	},
 	proxy:{
 		type:'ajax',
