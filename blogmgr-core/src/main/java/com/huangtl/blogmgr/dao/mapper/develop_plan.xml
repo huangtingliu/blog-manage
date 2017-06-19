@@ -25,6 +25,8 @@
 		dplan_id ,dplan_name ,dplan_priority,dplan_finish_date,dplan_progress,dplan_status,
 		dplan_create_date as fCreateDate,dplan_estimated_date,uid_create_user,uid_plan_terminator
 		<if test="fDescr_show">,dplan_descr</if>
+		<if test="planTerminatorName_show">,planTerminatorName</if>
+		<if test="createUserName_show">,createUserName</if>
 	</sql>
 	
 	<sql id="where">

@@ -12,10 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSONObject;
 import com.huangtl.blogmgr.action.BlogMgrAction;
 import com.huangtl.blogmgr.dao.where.DevelopPlanSqlWhere;
-import com.huangtl.blogmgr.dao.where.UserSqlWhere;
 import com.huangtl.blogmgr.model.blog.DevelopPlan;
-import com.huangtl.blogmgr.model.blog.User;
-import com.huangtl.blogmgr.model.blog.dictionary.UserStatus;
 import com.huangtl.blogmgr.model.common.Message;
 import com.huangtl.blogmgr.model.common.Page;
 import com.huangtl.blogmgr.model.common.Page.Direction;
@@ -63,7 +60,7 @@ public class DevelopPlanAction extends BlogMgrAction {
 		for (Filter f : filter) {
 			whereParam.putFilter(f);
 		}
-		this.developPlanService.getDao().selectPaging(whereParam, page);
+		this.developPlanService.getDao().selectPaging(whereParam, page,"createUserName");
 		
 		JSONObject data = new JSONObject();
 		data.put("planlist", page.getPageContent());

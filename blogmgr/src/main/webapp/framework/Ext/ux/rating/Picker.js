@@ -72,7 +72,7 @@ Ext.define('Ext.ux.rating.Picker', {
          * enabled.
          */
         overStyle: null,
-
+        
         /**
          * @cfg {Number} [rounding=1]
          * The rounding to apply to values. Common choices are 0.5 (for half-steps) or
@@ -152,10 +152,15 @@ Ext.define('Ext.ux.rating.Picker', {
          * need to be set directly by user code.
          * @private
          */
-        trackingValue: null
+        trackingValue: null,
+    	 /**
+	      * 是否请允许rating wegit 的值发生改变
+	      */
+	    changeable:true
     },
 
     config: {
+	        
         /**
          * @cfg {Boolean/Object} [animate=false]
          * Specifies an animation to use when changing the `{@link #value}`. When setting
@@ -269,11 +274,15 @@ Ext.define('Ext.ux.rating.Picker', {
     // Event Handlers
 
     onClick: function (event) {
+    	var me = this;
+    	if(!me.getChangeable()){return;}
         var value = this.valueFromEvent(event);
         this.setValue(value);
     },
 
     onMouseEnter: function () {
+		var me = this;
+		if(!me.getChangeable()){return;}
         this.element.addCls(this.overCls);
     },
 
@@ -282,6 +291,8 @@ Ext.define('Ext.ux.rating.Picker', {
     },
 
     onMouseMove: function (event) {
+		var me = this;
+		if(!me.getChangeable()){return;}
         var value = this.valueFromEvent(event);
         this.setTrackingValue(value);
     },
@@ -344,12 +355,17 @@ Ext.define('Ext.ux.rating.Picker', {
     },
 
     updateValue: function (value, oldValue) {
+    	
         var me = this,
             animate = me.getAnimate(),
             valueEl = me.valueEl,
             newWidth = me.valueToPercent(value),
             column, record;
-
+        
+        if(!me.getChangeable() && typeof oldValue == "number"){
+        	return ;
+        }
+        
         if (me.isConfiguring || !animate) {
             valueEl.setStyle('width', newWidth);
         } else {
@@ -412,7 +428,7 @@ Ext.define('Ext.ux.rating.Picker', {
         // for one or more configs that affect the DOM (such as "glyphs" and "limit").
         this.refresh();
     },
-
+    
     setConfig: function () {
         var me = this;
 
@@ -429,7 +445,6 @@ Ext.define('Ext.ux.rating.Picker', {
 
         return me;
     },
-
     //-------------------------------------------------------------------------
 
     destroy: function () {

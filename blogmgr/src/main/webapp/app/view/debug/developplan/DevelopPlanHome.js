@@ -75,6 +75,6 @@ Ext.define('BlogMgr.view.debug.developplan.DevelopPlanHome',{
 			},{
 				xtype:'developplan_dataview'
 			}]
-		}]
+		}],
 	}]
 });

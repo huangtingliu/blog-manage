@@ -12,7 +12,9 @@ Ext.define('BlogMgr.view.debug.developplan.view.GroupingGridView', {
 
 	initComponent:function(){
 		var store = Ext.create('BlogMgr.store.DevelopPlanPagingStore',{
-			groupField: 'groupingDate'
+			storeId:'groupingGridViewStore',
+			groupField: 'groupingDate',
+			groupDir : 'DESC'
 		});
 		Ext.apply(this, {
 			store:store,
@@ -38,42 +40,44 @@ Ext.define('BlogMgr.view.debug.developplan.view.GroupingGridView', {
 	    enableGroupingMenu:false
 	}],
 	columns : [{
-		header : '计划名称',
+		text : '计划名称',
 		dataIndex : 'fName',
 		sortable:false,
 		hideable:false,
-		width : '15%'
+		width : '17%'
 	}, {
-		header : '任务级别',
+		text : '任务级别',
 		xtype: 'widgetcolumn',
 		dataIndex : 'fPriority',
 		hideable:false,
+		align : 'center',
 		sortable:true,
 		width : '14%',
 		widget: {
 		  xtype: 'rating',
 		  scale:'170%',
+		  changeable:false
 		}
 	}, {
-		header : '预计时间',
+		text : '预计时间',
 		dataIndex : 'fEstimatedDate',
 		align : 'center',
 		sortable:false,
 		width : '14%'
 	},{
-		header : '创建时间',
+		text : '创建时间',
 		dataIndex : 'fCreateDate',
 		align : 'center',
 		sortable:false,
 		width : '14%'
 	},{
-		header : '创建人',
+		text : '创建人',
 		dataIndex : 'createUserName',
 		align : 'center',
 		sortable:false,
 		width : '14%'
 	},{
-		header : '操作',
+		text : '操作',
 		xtype: 'actioncolumn',
 		width : '10%',
 		sortable: false,
@@ -84,10 +88,6 @@ Ext.define('BlogMgr.view.debug.developplan.view.GroupingGridView', {
 	        tooltip: '计划详情',
 	        iconCls:'img-icon-detail',
 	        scope: this
-	    },{
-	    	 tooltip: '是否完成',
-	    	 iconCls:'img-icon-detail',
-	    	 scope: this
 	    }]
 	}]
 });

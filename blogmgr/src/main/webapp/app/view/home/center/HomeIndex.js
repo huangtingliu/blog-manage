@@ -54,15 +54,7 @@ Ext.define('BlogMgr.view.home.center.HomeIndex', {
 		        }
 		    }
 		]
-	},{
-		xtype: 'rating',
-		selectedStyle: 'color: rgb(96, 169, 23);',
-		overStyle: 'color: rgb(23, 23, 189);',
-		limit:10,
-		scale:'250%',
-		trackOver:false
-	}
-	, {
+	}, {
 		xtype:'panel',
 		margin:10,
 		items:[{

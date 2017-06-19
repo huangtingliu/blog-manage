@@ -15,7 +15,7 @@ Ext.define('BlogMgr.view.debug.developplan.crud.AddOrEditDevelopPlanFormControll
 								submitEmptyText:false,
 								success : function(form, action) {
 									Ext.toast(action.result);
-									//Ext.getStore('systemMemoPaginStore').reload();
+									Ext.getStore('groupingGridViewStore').reload();
 									me.closeTab();
 								},
 								failure : function(form, action) {

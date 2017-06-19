@@ -10,7 +10,7 @@ Ext.define('BlogMgr.view.debug.developplan.crud.AddOrEditDevelopPlanForm', {
 			//layout : 'fit',
 			controller:'add_or_edit_develop_plan_form',
 			//viewModel:'add_develop_plan_form', //根据状态来选择视图模型,add 或eidt
-			itemId:'developPlanForm',
+			//itemId:'developPlanForm',
 			fileUpload : false,
 			url : '/blogmgr/debug/developplan/add.do',
 			method : 'POST',
@@ -54,7 +54,8 @@ Ext.define('BlogMgr.view.debug.developplan.crud.AddOrEditDevelopPlanForm', {
 	                    overStyle: 'color: rgb(23, 23, 189);',
 						name:'fPriority'
 					}]
-				},{
+				}
+				,{
 					xtype: 'ckeditor', 
 		            fieldLabel: '描述', 
 		            name: 'fDescr', 
@@ -63,7 +64,8 @@ Ext.define('BlogMgr.view.debug.developplan.crud.AddOrEditDevelopPlanForm', {
 					CKConfig:{
 				     	filebrowserUploadUrl:'/blogmgr/ckeditor/upload.do'
 				   }
-				}]
+				}
+				]
 			},{
 				//title : '可添信息',
 				xtype : 'fieldset',
@@ -88,14 +90,12 @@ Ext.define('BlogMgr.view.debug.developplan.crud.AddOrEditDevelopPlanForm', {
 				]
 			}],
 			buttons : [{
-				itemId : 'save',
 				glyph : 0xe650,
 				bind:{
 					text : '{handlerText}',
 					handler:'{saveHandler}'
 				}
 			}, {
-				itemId : 'close',
 				text : '关闭',
 				glyph : 0xe6af,
 				handler:'closeTab'
