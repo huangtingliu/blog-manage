@@ -22,7 +22,20 @@ Ext.define('BlogMgr.view.debug.developplan.view.GroupingGridView', {
 				xtype : 'pagingtoolbar',
 				store : store,
 				dock : 'bottom',
-				displayInfo : true
+				displayInfo : true,
+				items:[{
+					tooltip : '显示所有任务',
+					xtype : 'button',
+					iconCls:'img-icon-show-task-all'
+				},{
+					tooltip : '显示完成任务',
+					xtype : 'button',
+					iconCls:'img-icon-show-task-complete'
+				},{
+					tooltip : '显示活动任务',
+					xtype : 'button',
+					iconCls:'img-icon-show-task-active'
+				}]
 			}]
 	 	});
 		this.callParent();
@@ -40,11 +53,23 @@ Ext.define('BlogMgr.view.debug.developplan.view.GroupingGridView', {
 	    enableGroupingMenu:false
 	}],
 	columns : [{
+		xtype: "actioncolumn",
+	    dataIndex: "done",
+	    cls: "ux-icon-column-header tasks-done-column-header",
+	    width: 24,
+	    menuDisabled: true,
+	    sortable: false,
+		items: [{
+	        tooltip: '点击完成',
+	        iconCls:'img-icon-task-start',
+	        scope: this
+	    }]
+	},{
 		text : '计划名称',
 		dataIndex : 'fName',
 		sortable:false,
 		hideable:false,
-		width : '17%'
+		width : '25%'
 	}, {
 		text : '任务级别',
 		xtype: 'widgetcolumn',
@@ -52,7 +77,7 @@ Ext.define('BlogMgr.view.debug.developplan.view.GroupingGridView', {
 		hideable:false,
 		align : 'center',
 		sortable:true,
-		width : '14%',
+		width : '15%',
 		widget: {
 		  xtype: 'rating',
 		  scale:'170%',
@@ -63,31 +88,18 @@ Ext.define('BlogMgr.view.debug.developplan.view.GroupingGridView', {
 		dataIndex : 'fEstimatedDate',
 		align : 'center',
 		sortable:false,
-		width : '14%'
+		width : '15%'
 	},{
 		text : '创建时间',
 		dataIndex : 'fCreateDate',
 		align : 'center',
 		sortable:false,
-		width : '14%'
+		width : '15%'
 	},{
 		text : '创建人',
 		dataIndex : 'createUserName',
 		align : 'center',
 		sortable:false,
-		width : '14%'
-	},{
-		text : '操作',
-		xtype: 'actioncolumn',
-		width : '10%',
-		sortable: false,
-		hideable:false,
-		align:'center',
-		menuDisabled: true,
-		items: [{
-	        tooltip: '计划详情',
-	        iconCls:'img-icon-detail',
-	        scope: this
-	    }]
+		width : '15%'
 	}]
 });

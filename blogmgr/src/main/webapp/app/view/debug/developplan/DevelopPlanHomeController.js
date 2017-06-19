@@ -39,9 +39,11 @@ Ext.define('BlogMgr.view.debug.developplan.DevelopPlanHomeController', {
 					//glyph : 59041,
 					layout : 'fit',
 					bodyPadding:0,
-					items : Ext.create('BlogMgr.view.debug.developplan.crud.AddOrEditDevelopPlanForm',{
-						viewModel : 'edit_develop_plan_form'
-					})
+					html:'<div style="position: absolute;top: 41%;left: 45%;"><i style="font-size:150px;color:gray" class="iconfont icon-gongju">'+
+					'<br><span style="font-size:60px">未开发</span></i><div>'
+//					items : Ext.create('BlogMgr.view.debug.developplan.crud.AddOrEditDevelopPlanForm',{
+//						viewModel : 'edit_develop_plan_form'
+//					})
 				});
 			tabPanel.setActiveTab(tab);
 	},

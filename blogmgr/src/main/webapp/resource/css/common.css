@@ -84,3 +84,24 @@
 	letter-spacing:0.5px;
 	font-weight:bold;
 }
+
+
+/* 表格头使用图片展示 ext grid column header icon*/
+.ux-icon-column-header .x-column-header-text {
+	display: block;
+	height: 22px;
+	width: 16px;
+	background-repeat: no-repeat;
+	background-position: 0 3px
+}
+.ux-icon-column-header .x-column-header-inner {
+	padding: 0 4px
+}
+
+.tasks-done-column-header .x-column-header-inner {
+	padding: 0 6px
+}
+.tasks-done-column-header .x-column-header-text {
+	/*background: url("../images/icons/check_header.png") no-repeat 0 7px*/
+	background:url(../images/icons/check_header.png) no-repeat 0 7px;
+}
