@@ -8,7 +8,7 @@
 			<pattern><![CDATA[
 		       %d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36}-%msg%n
             ]]></pattern>
-            <charset>utf-8</charset>
+            <!--<charset>utf-8</charset>-->
 		</encoder>
 		<filter class="com.huangtl.blogmgr.core.log.LogLevelFilter">
 			<lessThan>WARN</lessThan>
@@ -22,7 +22,6 @@
 			<pattern><![CDATA[
 				%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36}-%msg%n
             ]]></pattern>
-			<charset>utf-8</charset>
 		</encoder>
 		<filter class="com.huangtl.blogmgr.core.log.LogLevelFilter">
 			<greaterThan>INFO</greaterThan>
@@ -41,21 +40,20 @@
 			<pattern><![CDATA[
 				%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36}-%msg%n
             ]]></pattern>
-			<charset>utf-8</charset>
 		</encoder>
 	</appender> 
 	
 	<!-- %n%-4r [%d{yyyy-MM-dd HH:mm:ss} %X{productionMode}] - %X{method} %X{requestURIWithQueryString} [ip=%X{remoteAddr}, ref=%X{referrer}, ua=%X{userAgent}, sid=%X{cookie.JSESSIONID}]%n  %-5level %logger{35} - %m%n -->
 	<logger name="com.huangtl.blogmgr.service" level="debug"></logger>
-	<logger name="com.huangtl.blogmgr.action" level="debug"></logger>
+	<!--<logger name="com.huangtl.blogmgr.action" level="debug"></logger>
 	<logger name="com.huangtl.blogmgr.dao" level="debug"></logger>
 	<logger name="com.huangtl.blogmgr.model" level="debug"></logger>
 	<logger name="com.huangtl.blogmgr.handler" level="debug"></logger>
-	<logger name="com.huangtl.blogmgr.core" level="debug"></logger>
+	<logger name="com.huangtl.blogmgr.core" level="debug"></logger>-->
 	
 	<!-- level: trace,debug,info,warn,error -->
 	<root>
-		<level value="warn" />
+		<level value="debug" />
 		<appender-ref ref="STDERR" />
 		<appender-ref ref="STDOUT" />
 	</root>

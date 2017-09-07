@@ -47,17 +47,17 @@
     <!-- %n%-4r [%d{yyyy-MM-dd HH:mm:ss} %X{productionMode}] - %X{method} %X{requestURIWithQueryString} [ip=%X{remoteAddr}, ref=%X{referrer}, ua=%X{userAgent}, sid=%X{cookie.JSESSIONID}]%n  %-5level %logger{35} - %m%n -->
     
     <!-- additivity 是否向上级传递，默认为true -->
-    <logger name="com.huangtl.blogmgr.service" level="debug" ></logger>
-     <logger name="com.huangtl.blogmgr.action" level="debug" ></logger>
+   <!-- <logger name="com.huangtl.blogmgr.service" level="debug" ></logger>-->
+   <!--  <logger name="com.huangtl.blogmgr.action" level="debug" ></logger>
     <logger name="com.huangtl.blogmgr.dao" level="debug" ></logger>
     <logger name="com.huangtl.blogmgr.model" level="debug" ></logger>
-    <logger name="com.huangtl.blogmgr.handler" level="debug" ></logger> 
+    <logger name="com.huangtl.blogmgr.handler" level="debug" ></logger> -->
     <!-- <logger name="com.huangtl.blogmgr.core" level="debug" ></logger> -->
     <!--<logger name="druid.statlog" level="info" ></logger>-->
     
     <!-- level: TRACE, DEBUG, INFO, WARN, ERROR, ALL , OFF .默认是DEBUG -->
     <root>
-        <level value="warn" />
+        <level value="debug" />
         <appender-ref ref="STDERR" />
         <appender-ref ref="STDOUT" />
     </root>
